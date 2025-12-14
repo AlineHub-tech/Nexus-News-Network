@@ -1,0 +1,14 @@
+:root{
+  --dark:#0a2a66;
+  --accent:#d60000; /* for trending and highlights */
+  --muted:#6b7280;
+  --bg:#f7f7f8;
+}
+
+/* Global */
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:var(--dark);padding-top:78px}
+.container{max-width:2000px;margin:0 auto;padding:10px}
+.popular-row{display:flex;overflow-x:auto;padding-bottom:10px;gap:12px}
+.popular-row::-webkit-scrollbar{height:8px}
+.popular-row::-webkit-scrollbar-thumb{background:var(--dark);border-radius:6px}

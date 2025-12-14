@@ -1,0 +1,131 @@
+/* ==== GLOBAL NAVBAR WRAPPER ==== */
+.navbar {
+  width: 100%;
+  background: #002B5B; /* Dark blue */
+  color: #fff;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  margin-top:-10%;
+  z-index: 999;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.navvv{
+  display: flex;
+  gap:8%;
+}
+/* ==== TOP NAV (Home, Author, Admin) ==== */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.2s ease-in-out;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover {
+  border-color: #FF0000; /* small red underline like Inyarwanda */
+}
+
+/* ==== LOGO STYLE ==== */
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.navbar img {
+  height: 45px;
+  border-radius:50%;
+}
+
+/* ==== RIGHT SIDE: SEARCH + LANGUAGE ==== */
+.nav-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* ==== SECOND BAR (CATEGORIES NAVBAR) ==== */
+.explorer-navbar {
+  margin-top: 12px;
+  background: #0056A5; /* bright blue like inyarwanda */
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  border-radius: 8px;
+}
+
+/* ==== CATEGORIES WRAPPER ==== */
+.categories {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* ==== CATEGORY LINKS ==== */
+.category-link {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  padding-bottom: 2px;
+  transition: 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+.category-link:hover {
+  border-color: #FF0000;
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 900px) {
+  .explorer-navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .navbar{
+margin-top:-18%;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* hide top small nav like inyarwanda */
+  }
+  .navbar{
+margin-top:-18%;
+  }
+  .categories {
+    gap: 10px;
+  }
+
+  .category-link {
+    font-size: 13px;
+  }
+
+  .nav-actions {
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .explorer-navbar img {
+    height: 35px;
+  }
+    .navbar{
+margin-top:-18%;
+  }
+}

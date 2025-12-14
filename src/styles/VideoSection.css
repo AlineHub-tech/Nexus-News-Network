@@ -1,0 +1,12 @@
+:root{
+  --dark:#0a2a66;
+  --accent:#d60000; /* for trending and highlights */
+  --muted:#6b7280;
+  --bg:#f7f7f8;
+}
+
+/* Global */
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:var(--dark);padding-top:78px}
+.container{max-width:2000px;margin:0 auto;padding:10px}
+.tv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}

@@ -1,0 +1,283 @@
+/* Dashboard Layout */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.sidebar nav a:hover {
+  background-color: #e0f0ff;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 40px 30px;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 28px;
+}
+
+/* Form Inputs */
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Checkbox */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.checkbox-label input {
+  width: 18px;
+  height: 18px;
+}
+
+/* File input */
+.file-label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.file-label input {
+  margin-top: 8px;
+  display: block;
+}
+
+/* Submit Button */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0077cc;
+  color: #fff;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+
+
+.admin-dashboard {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.section-title {
+  font-size: 24px;
+  margin: 25px 0 15px 0;
+  font-weight: bold;
+}
+
+/* COLOR VARIANTS */
+.pending-title {
+  color: #d97706; /* yellow-orange */
+}
+
+.approved-title {
+  color: #15803d; /* green */
+}
+
+.ads-title {
+  color: #1d4ed8; /* blue */
+}
+
+/* NEWS GRID */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* NEWS CARD */
+.news-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-image {
+  height: 180px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.news-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+}
+
+.news-meta {
+  font-size: 14px;
+  color: #555;
+}
+
+.news-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* BUTTONS */
+.btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.approve-btn {
+  background-color: #16a34a;
+}
+
+.approve-btn:hover {
+  background-color: #15803d;
+}
+
+.reject-btn {
+  background-color: #dc2626;
+}
+
+.reject-btn:hover {
+  background-color: #b91c1c;
+}
+
+.delete-btn {
+  background-color: #b91c1c;
+}
+
+.delete-btn:hover {
+  background-color: #7f1d1d;
+}
+
+.upload-btn {
+  background-color: #1e40af;
+}
+
+.upload-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* ADS FORM */
+.ad-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  max-width: 400px;
+}
+
+.ad-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* ADS GRID */
+.ads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* ADS CARD */
+.ad-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 10px;
+  text-align: center;
+}
+
+.ad-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.ad-title {
+  font-weight: bold;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
