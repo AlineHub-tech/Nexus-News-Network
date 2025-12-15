@@ -1,3 +1,5 @@
 import React, { useContext } from "react";
+import "../styles/search.css"
 import { NewsContext } from "../context/NewsContext";
-export default function SearchBar(){ const { searchQuery, setSearchQuery } = useContext(NewsContext); return <input value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} placeholder="Search..." />; }
+export default function SearchBar(){ const { searchQuery, setSearchQuery }
+ = useContext(NewsContext); return <input value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} placeholder="Search..." />; }
