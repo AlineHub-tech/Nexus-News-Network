@@ -6,8 +6,8 @@ const Footer = () => {
       <div className="footer-container">
         {/* Logo & Info */}
         <div className="footer-info">
-          <h2>Nexus News Network</h2>
-          <p>© 2025 Nexus News Network. All rights reserved.</p>
+          <h2>Nexus New Network</h2>
+          <p>© 2025 Nexus New Network. All rights reserved.</p>
           <p>Contact: info@nnnrwanda.rw</p>
         </div>
 
@@ -22,9 +22,9 @@ const Footer = () => {
         <a href="https://www.instagram.com/nnnrwanda?utm_source=ig_web_button_share_sheet&igsh=MXBoa2E1bXFnb3N2MA==" target="_blank">
           <i className="fab fa-instagram"></i>
         </a>
-        <a href="https://whatsapp.com/channel/0029VbAMorYCxoAzT2hmP53h" target="_blank">
+        {/* <a href="https://whatsapp.com/channel/0029VbAMorYCxoAzT2hmP53h" target="_blank">
           <i className="fab fa-message"></i>
-        </a>
+        </a> */}
          <a href=" https://www.tiktok.com/@nexus.news.network?_t=ZM-8xy3htvIVbp&_r=1" target="_blank">
           <i className="fab fa-tiktok"></i>
         </a>
