@@ -211,18 +211,10 @@
       color: white;
     }
 
-    .dark-mode .card {
-      background: #1f1f1f;
-      color: #fff;
-    }
+   
 
-    .dark-mode .card p {
-      color: #bbb;
-    }
 
-    .dark-mode footer {
-     background: #696767;
-      /* color: #aaa; */
-    }
+
+
 
 
