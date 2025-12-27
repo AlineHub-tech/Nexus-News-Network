@@ -180,20 +180,7 @@
       margin: 20px;
     }
 
-    .badge {
-      background: #0077cc;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .badge i {
-      font-size: 16px;
-    }
+   
 
   
     
