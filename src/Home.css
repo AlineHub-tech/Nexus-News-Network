@@ -125,19 +125,7 @@
       transition: transform 0.3s;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
 
-    .card i {
-      font-size: 35px;
-      margin-bottom: 10px;
-      color: #0077cc;
-    }
-
-    .card h3 {
-      margin: 10px 0;
-    }
 
  
 
