@@ -139,21 +139,7 @@
       margin: 10px 0;
     }
 
-    .card p {
-      font-size: 14px;
-      color: gray;
-    }
-
-    .card button {
-      margin-top: 10px;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 20px;
-      background: #0077cc;
-      color: white;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+ 
 
 
 
