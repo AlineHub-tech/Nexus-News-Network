@@ -168,17 +168,7 @@
 .terms p { line-height:1.6; }
 
 
-.info { padding:2rem; max-width:900px;  background:white; border-radius:12px; }
-.info h2 { color:#1976d2; }
-.info p { line-height:1.6; }
-    
-    .badges {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin: 20px;
-    }
+
 
    
 
