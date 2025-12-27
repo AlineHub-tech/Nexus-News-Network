@@ -155,11 +155,7 @@
       transition: background 0.3s;
     }
 
-    .card button:hover {
-      background: #005fa3;
-    }
-.top-goals { padding:2rem; background:rgb(255, 255, 255);margin-left:5%; max-width:600px; border-radius:12px; }
-.top-goals h2 { color:#1976d2; }
+
 
 
 
