@@ -102,9 +102,6 @@
 .animated-slogan span:nth-child(10){ animation-delay:45s; background:#865569;}
 
 @keyframes slideSlogan {
-  0% { opacity:0; transform:translateY(100%);}
-  5% { opacity:1; transform:translateY(0);}
-  20% { opacity:1; transform:translateY(0);}
 
   
    
