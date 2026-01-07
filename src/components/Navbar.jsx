@@ -15,7 +15,7 @@ export default function Navbar(){
     return (
     <header className="navbar">
       <div className="navvv">
-      <div className="log">Nexus New Network</div>
+      <div className="log">Nexus News Network</div>
 
       <nav className="nav-links">
         <Link to="/">{language==="en" ? "Home" : "Ahabanza"}</Link>
@@ -89,4 +89,5 @@ export default function Navbar(){
 //     </header>
 //   );
 // }
+
 
