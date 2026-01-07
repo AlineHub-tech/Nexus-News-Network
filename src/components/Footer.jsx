@@ -6,8 +6,8 @@ const Footer = () => {
       <div className="footer-container">
         {/* Logo & Info */}
         <div className="footer-info">
-          <h2>Nexus New Network</h2>
-          <p>© 2025 Nexus New Network. All rights reserved.</p>
+          <h2>Nexus News Network</h2>
+          <p>© 2025 Nexus News Network. All rights reserved.</p>
           <p>Contact: info@nnnrwanda.rw</p>
         </div>
 
@@ -38,4 +38,5 @@ const Footer = () => {
 };
 
 export default Footer;
+
 
