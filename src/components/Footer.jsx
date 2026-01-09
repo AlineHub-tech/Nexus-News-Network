@@ -102,11 +102,7 @@ const Footer = () => {
         <div className="footer-info">
           <h2>Nexus News Network</h2>
           <p>
-            {/* Use the getCurrentYear function here */}
-            © {getCurrentYear()} Nexus News Network. {getTranslation("allRightsReserved")}
-          </p>
-          <p>
-            {getTranslation("contactUs")}: nexusnewsnetwork1@gmail.com
+            © 2026 Nexus News Network. {getTranslation("allRightsReserved")}
           </p>
         </div>
 
@@ -170,6 +166,9 @@ const Footer = () => {
           >
             <i className="fab fa-youtube"></i>
           </a>
+            <p>
+            {getTranslation("email us")}: nexusnewsnetwork1@gmail.com
+          </p>
         </div>
       </div>
     </footer>
@@ -180,6 +179,7 @@ export default Footer;
 
 
 // export default Footer;
+
 
 
 
