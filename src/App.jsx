@@ -1,9 +1,10 @@
 import React from "react";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Landing from "./pages/Landing";
 import ArticlePage from "./pages/ArticlePage";
 import CategoryPage from "./pages/CategoryPage";
+
 import AdsSection from "./components/AdsSection";
 import TV from "./components/TV";
 
@@ -20,15 +21,13 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
 
-export default function App() {
+function App() {
   return (
     <Router>
       <AuthProvider>
         <Routes>
+          {/* Public pages */}
           <Route path="/" element={<Landing />} />
-          <Route path="/category/:name" element={<CategoryPage />} />
-          <Route path="/article/:id" element={<ArticlePage />} />
-
           <Route path="/login" element={<Login />} />
 
           <Route path="/about" element={<AboutUs />} />
@@ -37,6 +36,13 @@ export default function App() {
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
 
+          <Route path="/category/:name" element={<CategoryPage />} />
+          <Route path="/article/:id" element={<ArticlePage />} />
+
+          <Route path="/tv" element={<TV />} />
+          <Route path="/ads" element={<AdsSection />} />
+
+          {/* Protected pages */}
           <Route
             path="/admin"
             element={
@@ -54,11 +60,10 @@ export default function App() {
               </PrivateRoute>
             }
           />
-
-          <Route path="/tv" element={<TV />} />
-          <Route path="/ads" element={<AdsSection />} />
         </Routes>
       </AuthProvider>
     </Router>
   );
-  }
+}
+
+export default App;
