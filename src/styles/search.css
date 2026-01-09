@@ -15,8 +15,8 @@ border-radius:10px;
 
 /* DEFAULT (Mobile first) */
 .lang-flag {
-  width: 18px;        /* nto cyane */
-  height: 13px;
+  width: 15px;        /* nto cyane */
+  height: 10px;
   object-fit: cover;
   cursor: pointer;
   border-radius: 1.5px; /* nto cyane */
@@ -36,26 +36,27 @@ border-radius:10px;
 /* 📱 Mobile small (phones nto cyane) */
 @media (max-width: 480px) {
   .lang-flag {
-    width: 16px;
-    height: 12px;
+    width: 13px;
+    height: 9px;
   }
 }
 
 /* 📲 Tablet */
 @media (min-width: 481px) and (max-width: 768px) {
   .lang-flag {
-    width: 18px;
-    height: 13px;
+    width: 15px;
+    height: 10px;
   }
 }
 
 /* 💻 Desktop */
 @media (min-width: 769px) {
   .lang-flag {
-    width: 20px;
-    height: 14px;
+    width: 17px;
+    height: 11px;
   }
 }
+
 
 
 
