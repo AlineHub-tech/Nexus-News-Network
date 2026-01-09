@@ -1,1 +1,55 @@
+.main-title {
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
 
+.about-highlights,
+.vision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.highlight-card,
+.vision-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.highlight-card:hover,
+.vision-card:hover {
+  transform: translateY(-8px);
+}
+
+.highlight-card h4,
+.vision-card h4 {
+  margin-top: 15px;
+}
+
+.mission-list {
+  max-width: 700px;
+  margin: 30px auto;
+}
+
+.mission-item {
+  background: #fff;
+  margin-bottom: 12px;
+  padding: 15px 20px;
+  border-left: 6px solid #222;
+  font-size: 17px;
+}
+
+.mission-icons {
+  text-align: center;
+  font-size: 28px;
+  margin-top: 20px;
+}
+
+.mission-icons span {
+  margin: 0 10px;
+  }
