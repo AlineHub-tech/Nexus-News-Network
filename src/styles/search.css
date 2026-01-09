@@ -15,7 +15,7 @@ border-radius:10px;
 
 .lang-flag {
   width: 28px;
-  height: 20px;
+  height: 15px;
   object-fit: cover;
   cursor: pointer;
   border-radius: 3px;
@@ -31,3 +31,4 @@ border-radius:10px;
 .lang-flag.active {
   border: 2px solid #007bff;
 }
+
