@@ -31,3 +31,4 @@ const SloganAnimation = () => {
             </section>
   );
 };
+export default SloganAnimation;
