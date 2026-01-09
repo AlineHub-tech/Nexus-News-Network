@@ -1,7 +1,8 @@
 
 import React, { useContext } from 'react';
 import { NewsContext } from '../context/NewsContext';
-
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 // SHYIRA TRANSLATIONS HANZE YA FUNCTION NYAMUKURU
 const translations = {
   title: { en: "Privacy Policy", rw: "Politiki Y'ibanga", fr: "Politique de Confidentialité" },
@@ -34,6 +35,7 @@ const PrivacyPolicy = () => {
   return (
     <div className="page-content" style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
       <h1>{t('title')}</h1>
+      <Navbar/>
       <p><em>{t('lastUpdated')}</em></p>
       
       <h2>{t('sec1Title')}</h2>
@@ -49,6 +51,7 @@ const PrivacyPolicy = () => {
       <p>{t('sec4P1')}</p>
     </div>
   );
+  <Footer/>
 };
 
 export default PrivacyPolicy; 
