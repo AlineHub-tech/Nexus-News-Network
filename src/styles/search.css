@@ -9,28 +9,54 @@ border-radius:10px;
 } */
 .lang-switch {
   display: flex;
-   gap:8px;
   align-items: center;
+  gap: 6px;
 }
 
-.lang-flag img {
-    width: 22%;
-     height:5px;
+/* DEFAULT (Mobile first) */
+.lang-flag {
+  width: 18px;        /* nto cyane */
+  height: 13px;
   object-fit: cover;
   cursor: pointer;
-  /* border-radius: 10%;  */
-   border: 1px solid #e0e0e0;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border-radius: 1.5px; /* nto cyane */
+  border: 1px solid #ddd;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
-.lang-flag img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+.lang-flag:hover {
+  transform: scale(1.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
-.lang-flag img.active {
+.lang-flag.active {
   border: 1.5px solid #007bff;
 }
+
+/* 📱 Mobile small (phones nto cyane) */
+@media (max-width: 480px) {
+  .lang-flag {
+    width: 16px;
+    height: 12px;
+  }
+}
+
+/* 📲 Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  .lang-flag {
+    width: 18px;
+    height: 13px;
+  }
+}
+
+/* 💻 Desktop */
+@media (min-width: 769px) {
+  .lang-flag {
+    width: 20px;
+    height: 14px;
+  }
+}
+
 
 
 
