@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ukflag from "../assets/ukflag.jpeg";
 import rwflag from "../assets/rwflag.jpeg";
+import frflag from "../assets/frflag.jpeg";
 import { NewsContext } from "../context/NewsContext";
 
 export default function LangSwitch() {
@@ -30,7 +31,14 @@ export default function LangSwitch() {
         style={flagStyle}
         onClick={() => switchLanguage("rw")}
       />
+      
+      {/* Add the French flag switch */}
+      <img
+        src={frflag}
+        alt="FR"
+        style={flagStyle}
+        onClick={() => switchLanguage("fr")}
+      />
     </div>
   );
-    }
-
+}
