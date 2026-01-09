@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import ukflag from "../assets/ukflag.jpeg";
-import rwflag from "../assets/rwflag.jpeg";
+import { ReactCountryFlag } from "@fadi-ui/react-country-flag";
 import "../styles/search.css";
 import { NewsContext } from "../context/NewsContext";
 
@@ -9,19 +8,21 @@ export default function LangSwitch() {
 
   return (
     <div className="lang-switch">
-      <img
-        src={ukflag}
-        alt="English"
-        className={`lang-flag ${language === "en" ? "active" : ""}`}
+      <ReactCountryFlag
+        countryCode="GB"
+        svg
+        style={{ width: "18px", height: "14px" }}
+        className={`flag-icon ${language === "en" ? "active" : ""}`}
         onClick={() => switchLanguage("en")}
       />
 
-      <img
-        src={rwflag}
-        alt="Kinyarwanda"
-        className={`lang-flag ${language === "rw" ? "active" : ""}`}
+      <ReactCountryFlag
+        countryCode="RW"
+        svg
+        style={{ width: "18px", height: "14px" }}
+        className={`flag-icon ${language === "rw" ? "active" : ""}`}
         onClick={() => switchLanguage("rw")}
       />
     </div>
   );
-          }
+        }
