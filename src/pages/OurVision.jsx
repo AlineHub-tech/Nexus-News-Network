@@ -1,56 +1,77 @@
-import React from "react";
-import "../styles/About.css";
+import React, { useContext } from "react";
+import { NewsContext } from "../context/NewsContext";
+import "../styles/Vision.css"; // Create a new CSS file for this page
+
+const translations = {
+  title: { en: "Our Vision", rw: "Icyerekezo Cyacu", fr: "Notre Vision" },
+  introText: {
+    en: "We envision a future where Nexus News Network becomes a trusted, influential, and transformative media institution shaping informed, united, and progressive societies in Rwanda, Africa, and beyond.",
+    rw: "Dutekereza ejo hazaza aho Nexus News Network izaba ikigo cy'itangazamakuru cyizewe, gifite imbaraga, kandi gihindura imibereho, cyubaka sosiyete ifite amakuru, yunze ubumwe, kandi itera imbere mu Rwanda, Afurika, n'ahandi hose ku isi.",
+    fr: "Nous envisageons un avenir où Nexus News Network deviendra une institution médiatique de confiance, influente et transformatrice, façonnant des sociétés informées, unies et progressistes au Rwanda, en Afrique et au-delà.",
+  },
+  
+  // Vision Card Items
+  item1Title: { en: "Unity & Inclusion", rw: "Ubumwe & Kudasiga Inyuma", fr: "Unité & Inclusion" },
+  item1Text: { en: "Foster unity by promoting inclusive narratives that respect diversity.", rw: "Duteza imbere ubumwe binyuze mu inkuru zidafata uruhande kandi zubahiriza amoko atandukanye.", fr: "Favoriser l'unité en promouvant des récits inclusifs qui respectent la diversité." },
+  
+  item2Title: { en: "Informed Society", rw: "Sosiyete Ifite Amakuru", fr: "Société Informée" },
+  item2Text: { en: "Enable citizens to make informed decisions through access to credible information.", rw: "Duha abaturage ubushobozi bwo gufata ibyemezo bifite ishingiro binyuze mu kubona amakuru yizewe.", fr: "Permettre aux citoyens de prendre des décisions éclairées grâce à l'accès à des informations crédibles." },
+  
+  item3Title: { en: "Regional Influence", rw: "Ingaruka mu Karere", fr: "Influence Régionale" },
+  item3Text: { en: "Expand our presence across East Africa and the global media space.", rw: "Kwagura imikorere yacu muri Afurika y'Uburasirazuba no mu itangazamakuru ry'isi yose.", fr: "Étendre notre présence en Afrique de l'Est et dans l'espace médiatique mondial." },
+  
+  item4Title: { en: "Sustainable Media", rw: "Itangazamakuru Rirambye", fr: "Médias Durables" },
+  item4Text: { en: "Build a financially and ethically sustainable media organization.", rw: "Kubaka ikigo cy'itangazamakuru kirambye mu bijyanye n'ubukungu n'umuco.", fr: "Construire une organisation médiatique financièrement et éthiquement durable." },
+};
 
 const OurVision = () => {
+  const { language } = useContext(NewsContext);
+
+
+
+  const t = (key) => translations[key]?.[language] || translations[key]?.en;
+
   return (
-    <section className="vision-section zoom-in">
+    <section className="vision-section">
+      <div className="vision-container">
+        <h2 className="section-title">{t("title")}</h2>
 
-      <h2 className="section-title">Our Vision</h2>
+        <p className="section-text">{t("introText")}</p>
 
-      <p className="section-text">
-        We envision a future where Nexus News Network becomes a trusted,
-        influential, and transformative media institution shaping informed,
-        united, and progressive societies in Rwanda, Africa, and beyond.
-      </p>
+        <div className="vision-grid">
+          {/* Card 1 */}
+          <div className="vision-card">
+            <i className="fas fa-handshake icon-large"></i>
+            <h4>{t("item1Title")}</h4>
+            <p>{t("item1Text")}</p>
+          </div>
 
-      <div className="vision-grid">
-        <div className="vision-card">
-          🤝
-          <h4>Unity & Inclusion</h4>
-          <p>
-            Foster unity by promoting inclusive narratives that respect
-            diversity.
-          </p>
-        </div>
+          {/* Card 2 */}
+          <div className="vision-card">
+            <i className="fas fa-book-open icon-large"></i>
+            <h4>{t("item2Title")}</h4>
+            <p>{t("item2Text")}</p>
+          </div>
 
-        <div className="vision-card">
-          📚
-          <h4>Informed Society</h4>
-          <p>
-            Enable citizens to make informed decisions through access to
-            credible information.
-          </p>
-        </div>
+          {/* Card 3 */}
+          <div className="vision-card">
+            <i className="fas fa-map-marked-alt icon-large"></i>
+            <h4>{t("item3Title")}</h4>
+            <p>{t("item3Text")}</p>
+          </div>
 
-        <div className="vision-card">
-          🌍
-          <h4>Regional Influence</h4>
-          <p>
-            Expand our presence across East Africa and the global media space.
-          </p>
-        </div>
-
-        <div className="vision-card">
-          🌱
-          <h4>Sustainable Media</h4>
-          <p>
-            Build a financially and ethically sustainable media organization.
-          </p>
+          <!-- Card 4 -->
+          <div className="vision-card">
+            <i className="fas fa-seedling icon-large"></i>
+            <h4>{t("item4Title")}</h4>
+            <p>{t("item4Text")}</p>
+          </div>
         </div>
       </div>
-
     </section>
   );
 };
 
 export default OurVision;
+
+
