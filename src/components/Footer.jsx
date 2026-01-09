@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="footer-info">
           <h2>Nexus News Network</h2>
           <p>© 2025 Nexus News Network. All rights reserved.</p>
-          <p>Contact: info@nnnrwanda.rw</p>
+          <p>Email Us: nexusnewsnetwork1@gmail.com</p>
         </div>
 
         {/* Social Media */}
@@ -38,5 +38,6 @@ const Footer = () => {
 };
 
 export default Footer;
+
 
 
