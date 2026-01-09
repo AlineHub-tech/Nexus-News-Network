@@ -13,7 +13,7 @@ border-radius:10px;
   align-items: center;
 }
 
-.lang-flag {
+.lang-flag img {
   width: 20%;
   height:5%;
   object-fit: cover;
@@ -23,14 +23,15 @@ border-radius:10px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.lang-flag:hover {
+.lang-flag img:hover {
   transform: scale(1.08);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
-.lang-flag.active {
+.lang-flag img.active {
   border: 1.5px solid #007bff;
 }
+
 
 
 
