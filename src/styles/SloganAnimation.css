@@ -1,6 +1,5 @@
-/* .slogan {
+.slogan {
 padding:28px 12px;text-align:center;background:rgb(10, 10, 68);margin-top:2%;}
-
 
 .animated-slogan {
   display:block;
@@ -48,11 +47,11 @@ padding:28px 12px;text-align:center;background:rgb(10, 10, 68);margin-top:2%;}
   20% { opacity:1; transform:translateY(0);}
   25% { opacity:0; transform:translateY(-100%);}
   100% { opacity:0; transform:translateY(-100%);}
-} */
+} 
 /* @media (max-width:1024px){
   .slogan{
     margin-top:1%;
-  } */
+  } 
 /* @media (max-width:900px){
   .slogan{
     margin-top:3%;
@@ -68,41 +67,7 @@ padding:28px 12px;text-align:center;background:rgb(10, 10, 68);margin-top:2%;}
     margin-top:3%;
   } 
 
-} */
+} 
 
 
-/* src/styles/SloganAnimation.css */
 
-.slogan {
-  text-align: center;
-  padding: 20px 0;
-  overflow: hidden;
-  background-color: #f4f4f4; /* Cyangwa ibara iryo ariryo ryose ukoresha */
-}
-
-.animated-slogan span {
-  /* Hano niho animation itangirira */
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInOut 2.2s ease-in-out forwards;
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  20% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  80% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-}
