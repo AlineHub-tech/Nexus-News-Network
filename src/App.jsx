@@ -18,7 +18,7 @@ import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 export default function App(){
   return (
-    <BrowserRouter>
+    <Router>
      <AuthProvider>
      <Routes>
   <Route path="/" element={<Landing/>} />
@@ -51,6 +51,6 @@ export default function App(){
   
 </Routes>
  </AuthProvider>
-    </BrowserRouter>
+    </Router>
   );
 }
