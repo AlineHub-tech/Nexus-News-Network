@@ -14,11 +14,11 @@ border-radius:10px;
 }
 
 .lang-flag img {
-  width: 20%;
+  width: 10%;
   height:5%;
-  object-fit: cover;
+  /* object-fit: cover; */
   cursor: pointer;
-  border-radius: 10%; 
+  /* border-radius: 10%;  */
    border: 1px solid #e0e0e0;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -31,6 +31,7 @@ border-radius:10px;
 .lang-flag img.active {
   border: 1.5px solid #007bff;
 }
+
 
 
 
