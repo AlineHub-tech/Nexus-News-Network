@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from "./pages/Landing";
 import ArticlePage from "./pages/ArticlePage";
 import AddNews from "./pages/AuthorDashboard";
