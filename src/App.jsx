@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Landing from "./pages/Landing";
 import ArticlePage from "./pages/ArticlePage";
 import AddNews from "./pages/AuthorDashboard";
@@ -18,7 +18,7 @@ import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 export default function App(){
   return (
-    <Router>
+    <BrowserRouter >
      <AuthProvider>
      <Routes>
   <Route path="/" element={<Landing/>} />
@@ -49,7 +49,7 @@ export default function App(){
   <Route path="/tv" element={<TV/>} />
   <Route path="/ads" element={<AdsSection/>} />
   
-</Routes>
+</BrowserRouter >
  </AuthProvider>
     </Router>
   );
