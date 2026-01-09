@@ -12,13 +12,11 @@ border-radius:10px;
    gap:8px;
   align-items: center;
 }
-img{
-  width: 10%;
-  height:5%;
-}
+
 .lang-flag img {
-  
-  /* object-fit: cover; */
+    width: 10%;
+     height:5%;
+  object-fit: cover;
   cursor: pointer;
   /* border-radius: 10%;  */
    border: 1px solid #e0e0e0;
