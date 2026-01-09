@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { ReactCountryFlag } from "@fadi-ui/react-country-flag";
 import "../styles/search.css";
 import { NewsContext } from "../context/NewsContext";
 
@@ -8,21 +7,19 @@ export default function LangSwitch() {
 
   return (
     <div className="lang-switch">
-      <ReactCountryFlag
-        countryCode="GB"
-        svg
-        style={{ width: "18px", height: "14px" }}
-        className={`flag-icon ${language === "en" ? "active" : ""}`}
+      <span
+        className={`flag-emoji ${language === "en" ? "active" : ""}`}
         onClick={() => switchLanguage("en")}
-      />
+      >
+        🇬🇧
+      </span>
 
-      <ReactCountryFlag
-        countryCode="RW"
-        svg
-        style={{ width: "18px", height: "14px" }}
-        className={`flag-icon ${language === "rw" ? "active" : ""}`}
+      <span
+        className={`flag-emoji ${language === "rw" ? "active" : ""}`}
         onClick={() => switchLanguage("rw")}
-      />
+      >
+        🇷🇼
+      </span>
     </div>
   );
-        }
+                                 }
