@@ -9,51 +9,46 @@ border-radius:10px;
 } */
 .lang-switch {
   display: flex;
+  gap: 8px;
   align-items: center;
-  gap: 6px;
+  font-size: 0; /* remove font spacing */
 }
 
-/* DEFAULT (Mobile first) */
-.lang-flag {
-  width: 15px;        /* nto cyane */
-  height: 10px;
-  object-fit: cover;
+.flag-icon {
   cursor: pointer;
-  border-radius: 1.5px; /* nto cyane */
-  border: 1px solid #ddd;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  transition: transform 0.15s ease;
+  opacity: 0.7;
 }
 
-.lang-flag:hover {
-  transform: scale(1.05);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+.flag-icon:hover {
+  transform: scale(1.1);
+  opacity: 1;
 }
 
-.lang-flag.active {
-  border: 1.5px solid #007bff;
+.flag-icon.active {
+  opacity: 1;
+  border-bottom: 2px solid #007bff;
 }
 
-/* 📱 Mobile small (phones nto cyane) */
+/* Responsive sizes */
 @media (max-width: 480px) {
-  .lang-flag {
-    width: 13px;
-    height: 9px;
+  .flag-icon {
+    width: 16px !important;
+    height: 12px !important;
   }
 }
 
-/* 📲 Tablet */
 @media (min-width: 481px) and (max-width: 768px) {
-  .lang-flag {
-    width: 15px;
-    height: 10px;
+  .flag-icon {
+    width: 18px !important;
+    height: 14px !important;
   }
 }
 
-/* 💻 Desktop */
 @media (min-width: 769px) {
-  .lang-flag {
-    width: 17px;
-    height: 11px;
+  .flag-icon {
+    width: 20px !important;
+    height: 16px !important;
   }
 }
 
