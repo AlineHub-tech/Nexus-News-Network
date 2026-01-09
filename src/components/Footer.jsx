@@ -102,7 +102,8 @@ const Footer = () => {
         <div className="footer-info">
           <h2>Nexus News Network</h2>
           <p>
-            © 2025 Nexus News Network. {getTranslation("allRightsReserved")}
+            {/* Use the getCurrentYear function here */}
+            © {getCurrentYear()} Nexus News Network. {getTranslation("allRightsReserved")}
           </p>
           <p>
             {getTranslation("contactUs")}: nexusnewsnetwork1@gmail.com
@@ -179,6 +180,7 @@ export default Footer;
 
 
 // export default Footer;
+
 
 
 
