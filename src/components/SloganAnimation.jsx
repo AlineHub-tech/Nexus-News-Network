@@ -31,4 +31,33 @@ const SloganAnimation = () => {
             </section>
   );
 };
+
 export default SloganAnimation;
+
+// import React, { useEffect, useState } from "react";
+// import "../styles.css";
+// const slogans = [
+//   "Trusted News",
+//   "Breaking Stories",
+//   "Your Daily Update",
+//   "Voice of Rwanda",
+//   "Trending Now",
+//   "Community Focus",
+//   "Insightful Reports",
+//   "Reliable Information",
+//   "The Truth Matters",
+//   "Stay Informed"
+// ];
+
+// export default function SloganAnimation(){
+//   const [i, setI] = useState(0);
+//   useEffect(()=> {
+//     const t = setInterval(()=> setI(j => (j+1) % slogans.length), 2200);
+//     return ()=> clearInterval(t);
+//   }, []);
+//   return (
+//     <div className="slogan-wrap primary-bg" style={{padding:"22px 0", textAlign:"center"}}>
+//       <h1 style={{margin:0, color:"#fff"}}>{slogans[i]}</h1>
+//     </div>
+//   );
+// }
