@@ -9,48 +9,47 @@ border-radius:10px;
 } */
 .lang-switch {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
-  font-size: 0; /* remove font spacing */
 }
 
-.flag-icon {
+.flag-emoji {
+  font-size: 18px; /* default duto */
   cursor: pointer;
-  transition: transform 0.15s ease;
   opacity: 0.7;
+  transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-.flag-icon:hover {
-  transform: scale(1.1);
+.flag-emoji:hover {
+  transform: scale(1.15);
   opacity: 1;
 }
 
-.flag-icon.active {
+.flag-emoji.active {
   opacity: 1;
-  border-bottom: 2px solid #007bff;
+  transform: scale(1.2);
 }
 
-/* Responsive sizes */
+/* Responsive */
 @media (max-width: 480px) {
-  .flag-icon {
-    width: 16px !important;
-    height: 12px !important;
+  .flag-emoji {
+    font-size: 16px;
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-  .flag-icon {
-    width: 18px !important;
-    height: 14px !important;
+  .flag-emoji {
+    font-size: 18px;
   }
 }
 
 @media (min-width: 769px) {
-  .flag-icon {
-    width: 20px !important;
-    height: 16px !important;
+  .flag-emoji {
+    font-size: 20px;
   }
 }
+
+
 
 
 
