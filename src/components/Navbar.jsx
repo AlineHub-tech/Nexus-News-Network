@@ -8,18 +8,22 @@ import "../styles/ExplorerCard.css";
 import "../styles/Navbar.css";
 
 export default function Navbar() {
-  // Define a mapping for English to Kinyarwanda translation for categories
-  const categoryTranslations = {
-    Politics: "Politiki",
-    Sport: "Imikino",
-    Community: "Umuryango",
-    Life: "Ubuzima",
-    Culture: "Umuco",
-    Entertainment: "imyidagaduro",
-    TV: "Televiziyo",
-    Opinion: "Ibyiciro",
-    Business: "Ubucuruzi",
-    Education: "Uburezi",
+  // Define a comprehensive translation mapping
+  const translations = {
+    Politics: { en: "Politics", rw: "Politiki", fr: "Politique" },
+    Sport: { en: "Sport", rw: "Imikino", fr: "Sport" },
+    Community: { en: "Community", rw: "Umuryango", fr: "Communauté" },
+    Life: { en: "Life", rw: "Ubuzima", fr: "Vie" },
+    Culture: { en: "Culture", rw: "Umuco", fr: "Culture" },
+    Entertainment: { en: "Entertainment", rw: "imyidagaduro", fr: "Divertissement" },
+    TV: { en: "TV", rw: "Televiziyo", fr: "Télévision" },
+    Opinion: { en: "Opinion", rw: "Ibyiciro", fr: "Opinion" },
+    Business: { en: "Business", rw: "Ubucuruzi", fr: "Affaires" },
+    Education: { en: "Education", rw: "Uburezi", fr: "Éducation" },
+    Home: { en: "Home", rw: "Ahabanza", fr: "Accueil" },
+    Author: { en: "Author", rw: "Uwanditse", fr: "Auteur" },
+    Admin: { en: "Admin", rw: "Umuyobozi", fr: "Admin" },
+    LogoText: { en: "Nexus News Network", rw: "Nexus News Network", fr: "Nexus News Network" }, // Logo text typically stays the same
   };
 
   const categories = [
@@ -37,27 +41,22 @@ export default function Navbar() {
 
   const { language } = useContext(NewsContext);
 
-  // Function to get the translated category name
-  const getCategoryName = (categoryKey) => {
-    if (language === "rw" && categoryTranslations[categoryKey]) {
-      return categoryTranslations[categoryKey];
-    }
-    return categoryKey; // Default to English if language is "en" or translation not found
+  // Helper function to get the translated string
+  const getTranslation = (key) => {
+    // Default to English if the requested language isn't available for that key
+
+    return translations[key]?.[language] || translations[key]?.en || key;
   };
 
   return (
     <header className="navbar">
       <div className="navvv">
-        <div className="log">Nexus News Network</div>
+        <div className="log">{getTranslation("LogoText")}</div>
 
         <nav className="nav-links">
-          <Link to="/">{language === "en" ? "Home" : "Ahabanza"}</Link>
-          <Link to="/author">
-            {language === "en" ? "Author" : "Uwastitse"}
-          </Link>
-          <Link to="/admin">
-            {language === "en" ? "Admin" : "Umuyobozi"}
-          </Link>
+          <Link to="/">{getTranslation("Home")}</Link>
+          <Link to="/author">{getTranslation("Author")}</Link>
+          <Link to="/admin">{getTranslation("Admin")}</Link>
         </nav>
 
         <div className="nav-actions">
@@ -72,7 +71,7 @@ export default function Navbar() {
         <div className="categories">
           {categories.map((c) => (
             <Link key={c} to={`/category/${c}`} className="category-link">
-              {getCategoryName(c)}
+              {getTranslation(c)}
             </Link>
           ))}
         </div>
