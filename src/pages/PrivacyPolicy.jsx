@@ -1,6 +1,8 @@
+
 import React, { useContext } from 'react';
 import { NewsContext } from '../context/NewsContext';
 
+// SHYIRA TRANSLATIONS HANZE YA FUNCTION NYAMUKURU
 const translations = {
   title: { en: "Privacy Policy", rw: "Politiki Y'ibanga", fr: "Politique de Confidentialité" },
   lastUpdated: { en: "Last Updated: January 9, 2026", rw: "Byavuguruwe bwa nyuma: Mutarama 9, 2026", fr: "Dernière mise à jour : 9 janvier 2026" },
@@ -15,15 +17,17 @@ const translations = {
 
   // Section 3: Data Disclosure & Security
   sec3Title: { en: "3. Disclosure & Security of Data", rw: "3. Gutanga Amakuru n'Umutekano", fr: "3. Divulgation et Sécurité des Données" },
-  sec3P1: { en: "We may share your information with trusted third-party service providers (like analytics partners) to facilitate our Service. We take reasonable steps to protect your data, but remember no method is 100% secure.", rw: "Dushobora gusangiza amakuru yawe abafatanyabikorwa bizewe (nk'abasesengura imikoreshereze) kugirango Serivisi zacu zikore neza. Dufata ingamba zikwiye zo kurinda amakuru yawe, ariko menya ko nta buryo bwizewe 100%.", fr: "Nous pouvons partager vos informations avec des fournisseurs de services tiers de confiance (comme des partenaires d'analyse) pour faciliter notre Service. Nous prenons des mesures raisonnables pour protéger vos données, mais rappelez-vous qu'aucune méthode n'est sécurisée à 100 %." },
+  sec3P1: { en: "We may share your information with trusted third-party service providers (like analytics partners) to facilitate our Service. We take reasonable steps to protect your data, but remember no method is 100% secure.", rw: "Dushobora gusangiza amakuru yawe abafatanyabikorwa bizewe (nk'abasesengura imikoreshereze) kugirango Serivisi zacu zikore neza. Dufata ingamba zikwiye zo kurinda amakuru yawe, ariko menya ko nta buryo bwizewe 100%.", fr: "Nous pouvons partager vos informations avec des fournisseurs de services tiers de confiance (comme des partenaires d'analyse) pour faciliter notre Service. Dufata ingamba zikwiye zo kurinda amakuru yawe, ariko menya ko nta buryo bwizewe 100%.", fr: "Nous pouvons partager vos informations avec des fournisseurs de services tiers de confiance (comme des partenaires d'analyse) pour faciliter notre Service. Nous prenons des mesures raisonnables pour protéger vos données, mais rappelez-vous qu'aucune méthode n'est sécurisée à 100 %." },
 
   // Section 4: User Rights
   sec4Title: { en: "4. Your Data Protection Rights", rw: "4. Uburenganzira bwawe ku Makuru", fr: "4. Vos Droits en Matière de Protection des Données" },
   sec4P1: { en: "Depending on your location (e.g., Rwanda DPP Law, GDPR), you may have the right to access, update, or delete the information we have on you. Contact us to exercise these rights.", rw: "Bitewe n'aho uherereye (urugero, itegeko ryo mu Rwanda ryerekeye DPP), ushobora kugira uburenganzira bwo kubona, kuvugurura, cyangwa gusiba amakuru tugufiteho. Twandikire kugirango ukoreshe ubwo burenganzira.", fr: "Selon votre localisation (par exemple, la loi rwandaise sur la PPD, le RGPD), vous pouvez avoir le droit d'accéder, de mettre à jour ou de supprimer les informations que nous détenons sur vous. Contactez-nous pour exercer ces droits." },
 };
 
+
 const PrivacyPolicy = () => {
   const { language } = useContext(NewsContext);
+
 
   const t = (key) => translations[key]?.[language] || translations[key]?.en;
 
@@ -47,6 +51,4 @@ const PrivacyPolicy = () => {
   );
 };
 
-export default PrivacyPolicy;
-
-
+export default PrivacyPolicy; 
