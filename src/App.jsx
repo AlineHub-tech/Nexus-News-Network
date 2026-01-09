@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 import Landing from "./pages/Landing";
 import ArticlePage from "./pages/ArticlePage";
@@ -26,23 +26,20 @@ function App() {
     <Router>
       <AuthProvider>
         <Routes>
-          {/* Public pages */}
+          {/* Public Pages */}
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
-
           <Route path="/about" element={<AboutUs />} />
           <Route path="/mission" element={<OurMission />} />
           <Route path="/vision" element={<OurVision />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
-
           <Route path="/category/:name" element={<CategoryPage />} />
           <Route path="/article/:id" element={<ArticlePage />} />
-
           <Route path="/tv" element={<TV />} />
           <Route path="/ads" element={<AdsSection />} />
 
-          {/* Protected pages */}
+          {/* Protected Pages */}
           <Route
             path="/admin"
             element={
@@ -51,7 +48,6 @@ function App() {
               </PrivateRoute>
             }
           />
-
           <Route
             path="/author"
             element={
@@ -67,8 +63,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
