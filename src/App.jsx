@@ -11,6 +11,11 @@ import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import AuthorDashboard from "./pages/AuthorDashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import AboutUs from './pages/AboutUs';
+import OurMission from './pages/OurMission';
+import OurVision from './pages/OurVision';
+import TermsOfService from './pages/TermsOfService';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 export default function App(){
   return (
     <BrowserRouter>
@@ -20,6 +25,11 @@ export default function App(){
   <Route path="/category/:name" element={<CategoryPage/>} />
   <Route path="/article/:id" element={<ArticlePage/>} />
  <Route path="/login" element={<Login />} />
+ <Route path="/about" element={<AboutUs />} />
+ <Route path="/mission" element={<OurMission />} />
+ <Route path="/vision" element={<OurVision />} />
+ <Route path="/terms" element={<TermsOfService />} />
+ <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route
             path="/admin"
             element={
