@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { NewsContext } from "../context/NewsContext"; // Import the context
+import { NewsContext } from "../context/NewsContext";
+import LangSwitch from "./LangSwitch";
+import { Link } from "react-router-dom";// Import the context
 import "../styles/SloganAnimation.css";
 
 // Define all slogans with English (en), Kinyarwanda (rw), and French (fr) translations
@@ -83,3 +85,4 @@ const SloganAnimation = () => {
 };
 
 export default SloganAnimation;
+
