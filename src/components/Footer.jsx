@@ -166,9 +166,8 @@ const Footer = () => {
           >
             <i className="fab fa-youtube"></i>
           </a>
-            <p>
-           nexusnewsnetwork1@gmail.com
-          </p>
+            <href="nexusnewsnetwork1@gmail.com">
+          </a>
         </div>
       </div>
     </footer>
@@ -179,6 +178,7 @@ export default Footer;
 
 
 // export default Footer;
+
 
 
 
