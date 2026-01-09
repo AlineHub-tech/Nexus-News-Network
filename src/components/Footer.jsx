@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import AboutUs from './pages/AboutUs';
+import OurMission from './pages/OurMission';
+import OurVision from './pages/OurVision';
 import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import { NewsContext } from "../context/NewsContext"; // Import the context
@@ -141,6 +144,7 @@ export default Footer;
 
 
 // export default Footer;
+
 
 
 
