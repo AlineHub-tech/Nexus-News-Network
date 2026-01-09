@@ -1,17 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import AboutUs from './pages/AboutUs';
-import OurMission from './pages/OurMission';
-import OurVision from './pages/OurVision';
-import TermsOfService from './pages/TermsOfService';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import { NewsContext } from "../context/NewsContext"; // Import the context
+import { NewsContext } from "../context/NewsContext";
 import "../styles/footer.css";
 
 const Footer = () => {
-  const { language } = useContext(NewsContext);
+  const { language } = useContext(NewsContext) || { language: "en" };
 
-  // Define translations for footer text
   const translations = {
     allRightsReserved: {
       en: "All rights reserved.",
@@ -25,7 +19,7 @@ const Footer = () => {
     },
     quickLinks: {
       en: "Quick Links",
-      rw: "Imikoreshereze Yihuse",
+      rw: "Imiyoboro Yihuse",
       fr: "Liens Rapides",
     },
     aboutUs: {
@@ -45,112 +39,72 @@ const Footer = () => {
     },
     terms: {
       en: "Terms of Service",
-      rw: "Amabwiriza Agenga Serivisi",
+      rw: "Amabwiriza ya Serivisi",
       fr: "Conditions d'Utilisation",
     },
     privacy: {
       en: "Privacy Policy",
-      rw: "Politiki Y'ibanga",
+      rw: "Politiki y'Ibanga",
       fr: "Politique de Confidentialité",
     },
   };
 
-  // Helper function to get the translated string
-  const getTranslation = (key) => {
-
-    return translations[key]?.[language] || translations[key]?.en || key;
-  };
+  const t = (key) => translations[key]?.[language] || translations[key]?.en;
 
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* Logo & Info */}
+
+        {/* INFO */}
         <div className="footer-info">
           <h2>Nexus News Network</h2>
-          <p>
-            © 2026 Nexus News Network. {getTranslation("allRightsReserved")}
-          </p>
+          <p>© 2026 Nexus News Network. {t("allRightsReserved")}</p>
         </div>
 
-        {/* Quick Links Section */}
+        {/* LINKS */}
         <div className="footer-links">
-          <h3>{getTranslation("quickLinks")}</h3>
+          <h3>{t("quickLinks")}</h3>
           <ul>
-            <li>
-              <Link to="/about">{getTranslation("aboutUs")}</Link>
-            </li>
-            <li>
-              <Link to="/mission">{getTranslation("ourMission")}</Link>
-            </li>
-            <li>
-              <Link to="/vision">{getTranslation("ourVision")}</Link>
-            </li>
-            <li>
-              <Link to="/terms">{getTranslation("terms")}</Link>
-            </li>
-            <li>
-              <Link to="/privacy">{getTranslation("privacy")}</Link>
-            </li>
+            <li><Link to="/about">{t("aboutUs")}</Link></li>
+            <li><Link to="/mission">{t("ourMission")}</Link></li>
+            <li><Link to="/vision">{t("ourVision")}</Link></li>
+            <li><Link to="/terms">{t("terms")}</Link></li>
+            <li><Link to="/privacy">{t("privacy")}</Link></li>
           </ul>
         </div>
 
-        {/* Social Media (Kept as is) */}
+        {/* SOCIALS */}
         <div className="footer-socials">
-          <h3>{getTranslation("contactUs")}</h3> {/* Use Contact Us title here */}
-          <a
-            href="https://www.facebook.com/profile.php?id=61566301534848&mibextid=ZbWKwL"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <h3>{t("contactUs")}</h3>
+
+          <a href="https://www.facebook.com/profile.php?id=61566301534848" target="_blank" rel="noreferrer">
             <i className="fab fa-facebook"></i>
           </a>
-          <a
-            href="https://x.com/NEXUSNEWSNETWAK?t=PvqTyUXF3XBBmADoGwdg_w&s=09"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fab fa-x-twitter"></i> {/* Changed to fa-x-twitter for clarity */}
+
+          <a href="https://x.com/NEXUSNEWSNETWAK" target="_blank" rel="noreferrer">
+            <i className="fab fa-x-twitter"></i>
           </a>
-          <a
-            href="https://www.instagram.com/nnnrwanda?utm_source=ig_web_button_share_sheet&igsh=MXBoa2E1bXFnb3N2MA=="
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+
+          <a href="https://www.instagram.com/nnnrwanda" target="_blank" rel="noreferrer">
             <i className="fab fa-instagram"></i>
           </a>
-          <a
-            href=" https://www.tiktok.com/@nexus.news.network?_t=ZM-8xy3htvIVbp&_r=1"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+
+          <a href="https://www.tiktok.com/@nexus.news.network" target="_blank" rel="noreferrer">
             <i className="fab fa-tiktok"></i>
           </a>
-          <a
-            href="youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+
+          <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
             <i className="fab fa-youtube"></i>
           </a>
-            <href="nexusnewsnetwork1@gmail.com">
+
+          <a href="mailto:nexusnewsnetwork1@gmail.com">
+            <i className="fas fa-envelope"></i>
           </a>
         </div>
+
       </div>
     </footer>
   );
 };
 
 export default Footer;
-
-
-// export default Footer;
-
-
-
-
-
-
-
-
-
-
