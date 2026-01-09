@@ -10,26 +10,26 @@ border-radius:10px;
 .lang-switch {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .lang-flag {
-  width: 28px;
-  height: 15px;
+  width: 22px;        /* yagabanutse */
+  height: 16px;       /* yagabanutse */
   object-fit: cover;
   cursor: pointer;
-  border-radius: 3px;
-  border: 1px solid #ddd;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 2px; /* yagabanutse */
+  border: 1px solid #e0e0e0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .lang-flag:hover {
-  transform: scale(1.1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transform: scale(1.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 .lang-flag.active {
-  border: 2px solid #007bff;
+  border: 1.5px solid #007bff;
 }
 
 
