@@ -167,7 +167,7 @@ const Footer = () => {
             <i className="fab fa-youtube"></i>
           </a>
             <p>
-            {getTranslation("email us")}: nexusnewsnetwork1@gmail.com
+           nexusnewsnetwork1@gmail.com
           </p>
         </div>
       </div>
@@ -179,6 +179,7 @@ export default Footer;
 
 
 // export default Footer;
+
 
 
 
