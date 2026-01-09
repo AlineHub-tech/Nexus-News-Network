@@ -7,8 +7,8 @@ export default function LangSwitch() {
   const { switchLanguage } = useContext(NewsContext);
 
   const flagStyle = {
-    width: "14px",
-    height: "10px",
+    width: "16px",
+    height: "12px",
     objectFit: "cover",
     cursor: "pointer",
     borderRadius: "1px",
@@ -33,3 +33,4 @@ export default function LangSwitch() {
     </div>
   );
     }
+
