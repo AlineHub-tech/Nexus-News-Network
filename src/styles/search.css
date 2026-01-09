@@ -9,16 +9,16 @@ border-radius:10px;
 } */
 .lang-switch {
   display: flex;
+   gap:8px;
   align-items: center;
 }
 
 .lang-flag {
-  width: 20px;             
+  width: 20%;             
   object-fit: cover;
   cursor: pointer;
   border-radius: 50%; 
-  gap:8px;
-  border: 1px solid #e0e0e0;
+   border: 1px solid #e0e0e0;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -30,6 +30,7 @@ border-radius:10px;
 .lang-flag.active {
   border: 1.5px solid #007bff;
 }
+
 
 
 
