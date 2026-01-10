@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
-import { NewsContext }from "../context/NewsContext";
-import "../styles/Mission.css"; // We'll use a specific CSS file for Mission for unique styling
+import { NewsContext } from "../context/NewsContext";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import "../styles/Mission.css"; 
 
 const translations = {
   title: { en: "Our Mission", rw: "Intego Yacu", fr: "Notre Mission" },
@@ -10,7 +12,7 @@ const translations = {
     fr: "Notre mission est de fournir un contenu médiatique précis, éthique et inclusif qui informe le public, renforce l'engagement communautaire et donne aux jeunes les moyens de participer activement au développement social, économique et culturel.",
   },
   
-  // Mission List Items
+
   item1: { en: "Promote truthful and balanced journalism", rw: " guteza imbere itangazamakuru ry'ukuri kandi ringana", fr: "Promouvoir un journalisme véridique et équilibré" },
   item2: { en: "Amplify community voices and untold stories", rw: "Gutanga ijwi ry'abaturage n'inkuru zitaravugwa", fr: "Amplifier les voix de la communauté et les histoires inédites" },
   item3: { en: "Educate citizens through informative content", rw: "Kw educatinga abaturage binyuze mu bikubiyemo by'amakuru", fr: "Éduquer les citoyens grâce à un contenu informatif" },
@@ -26,6 +28,7 @@ const OurMission = () => {
 
   return (
     <section className="mission-section">
+      <Navbar/>
       <div className="mission-container">
         <h2 className="section-title">{t("title")}</h2>
 
@@ -49,9 +52,10 @@ const OurMission = () => {
           </div>
         </div>
 
-        {/* Removed the separate icons div as they are now inline with text items */}
       </div>
+        <Footer/>
     </section>
+  
   );
 };
 

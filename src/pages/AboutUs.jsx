@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { NewsContext } from "../context/NewsContext";
-import "../styles/About.css"; // Ensure this link is correct
+import "../styles/About.css"; 
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const translations = {
   mainTitle: {
@@ -23,8 +25,7 @@ const translations = {
     fr: "Chez Nexus News Network, nous combinons journalisme responsable, innovation numérique et narration créative pour informer, éduquer et inspirer les communautés. Nous pensons que les médias jouent un rôle essentiel dans la formation de sociétés informées, le renforcement de la démocratie et la promotion d'une transformation sociale positive.",
   },
   
-  // Highlight Cards Translations
-  hl1Title: { en: "Credible Journalism", rw: "Itangazamakuru Ryizewe", fr: "Journalisme Crédible" },
+   hl1Title: { en: "Credible Journalism", rw: "Itangazamakuru Ryizewe", fr: "Journalisme Crédible" },
   hl1Text: { en: "We prioritize accuracy, fact-checking, and ethical reporting in every story we publish.", rw: "Duhuliza imbere ukuri, kugenzura amakuru, no gutangaza inkuru mu buryo bw'umuco mu nkuru zose dutangaza.", fr: "Nous privilégions l'exactitude, la vérification des faits et le reportage éthique dans chaque histoire que nous publions." },
   
   hl2Title: { en: "Community Impact", rw: "Ingaruka ku Baturage", fr: "Impact Communautaire" },
@@ -45,6 +46,7 @@ const AboutUs = () => {
 
   return (
     <section className="about-section">
+      <Navbar/>
       <div className="about-container fade-in">
         <h1 className="main-title">{t("mainTitle")}</h1>
 
@@ -76,14 +78,14 @@ const AboutUs = () => {
             <p>{t("hl2Text")}</p>
           </div>
 
-          <!-- Card 3 -->
+    
           <div className="highlight-card">
             <i className="fas fa-lightbulb icon-large"></i> {/* Real Icon */}
             <h4>{t("hl3Title")}</h4>
             <p>{t("hl3Text")}</p>
           </div>
 
-          <!-- Card 4 -->
+       
           <div className="highlight-card">
             <i className="fas fa-globe-africa icon-large"></i> {/* Real Icon */}
             <h4>{t("hl4Title")}</h4>
@@ -91,9 +93,9 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </section>
   );
 };
 
 export default AboutUs;
-

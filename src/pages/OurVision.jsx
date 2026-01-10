@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { NewsContext } from "../context/NewsContext";
-import "../styles/Vision.css"; // Create a new CSS file for this page
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import "../styles/Vision.css"; 
 
 const translations = {
   title: { en: "Our Vision", rw: "Icyerekezo Cyacu", fr: "Notre Vision" },
@@ -10,7 +12,7 @@ const translations = {
     fr: "Nous envisageons un avenir où Nexus News Network deviendra une institution médiatique de confiance, influente et transformatrice, façonnant des sociétés informées, unies et progressistes au Rwanda, en Afrique et au-delà.",
   },
   
-  // Vision Card Items
+
   item1Title: { en: "Unity & Inclusion", rw: "Ubumwe & Kudasiga Inyuma", fr: "Unité & Inclusion" },
   item1Text: { en: "Foster unity by promoting inclusive narratives that respect diversity.", rw: "Duteza imbere ubumwe binyuze mu inkuru zidafata uruhande kandi zubahiriza amoko atandukanye.", fr: "Favoriser l'unité en promouvant des récits inclusifs qui respectent la diversité." },
   
@@ -33,45 +35,44 @@ const OurVision = () => {
 
   return (
     <section className="vision-section">
+      <Navbar/>
       <div className="vision-container">
         <h2 className="section-title">{t("title")}</h2>
 
         <p className="section-text">{t("introText")}</p>
 
         <div className="vision-grid">
-          {/* Card 1 */}
+        
           <div className="vision-card">
             <i className="fas fa-handshake icon-large"></i>
             <h4>{t("item1Title")}</h4>
             <p>{t("item1Text")}</p>
           </div>
 
-          {/* Card 2 */}
+        
           <div className="vision-card">
             <i className="fas fa-book-open icon-large"></i>
             <h4>{t("item2Title")}</h4>
             <p>{t("item2Text")}</p>
           </div>
 
-          {/* Card 3 */}
+        
           <div className="vision-card">
             <i className="fas fa-map-marked-alt icon-large"></i>
             <h4>{t("item3Title")}</h4>
             <p>{t("item3Text")}</p>
           </div>
 
-          <!-- Card 4 -->
-          <div className="vision-card">
+                 <div className="vision-card">
             <i className="fas fa-seedling icon-large"></i>
             <h4>{t("item4Title")}</h4>
             <p>{t("item4Text")}</p>
           </div>
         </div>
-      </div>
+        
+      </div><Footer/>
     </section>
   );
 };
 
 export default OurVision;
-
-
