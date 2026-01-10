@@ -1,0 +1,78 @@
+
+/* Styling rusange (Global/Base styles) */
+.app-container {
+    min-height: 100vh;
+    background-color: #f9fafb; /* Igihe cy'ibururu kidakabije */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.privacy-policy-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.content-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Titles and Typography */
+.policy-title {
+    font-size: 2.5rem; /* 40px */
+    font-weight: 800;
+    color: #1a202c; /* Umukara ugaragara */
+    margin-bottom: 15px;
+    border-bottom: 2px solid #3b82f6; /* Ubururu bwa Nexus News Network */
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.last-updated {
+    font-size: 0.875rem; /* 14px */
+    color: #6b7280;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    color: #2563eb; /* Ubururu bwiza */
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border-left: 4px solid #2563eb;
+    padding-left: 10px;
+}
+
+.section-content {
+    font-size: 1rem; /* 16px */
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Responsiveness (Kugaragara neza kuri telefoni) */
+@media (max-width: 768px) {
+    .privacy-policy-container {
+        padding: 10px;
+    }
+
+    .content-card {
+        padding: 20px;
+    }
+
+    .policy-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.25rem;
+    }
+}
+

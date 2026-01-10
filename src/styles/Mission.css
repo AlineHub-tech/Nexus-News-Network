@@ -1,58 +1,99 @@
 .mission-section {
-  padding: 40px 20px;
-  background-color: #ffffff; /* White background */
+    background-color: #e3f2fd; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+   
 }
 
 .mission-container {
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.6;
-  color: #333;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 40px;
 }
 
+
 .section-title {
-  color: rgb(10, 10, 68);
-  border-bottom: 2px solid #00bfff;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  text-align: center;
+    font-size: 2.2rem; 
+    font-weight: 700;
+    color: #0d47a1; 
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #1e88e5;
+    border-radius: 2px;
 }
 
 .section-text {
-  margin-bottom: 30px;
-  font-size: 1.1rem;
-  text-align: center;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #4b5563;
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+
 .mission-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .mission-item {
-  background: #f4f4f4;
-  padding: 15px;
-  border-radius: 5px;
-  border-left: 5px solid #00bfff;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.mission-item:hover {
+    background-color: #f1f8ff;
 }
 
 .icon-small {
-  color: rgb(10, 10, 68);
-  margin-right: 15px;
-  font-size: 1.2rem;
+    color: #2563eb; 
+    margin-right: 15px;
+    font-size: 1.2rem;
 }
 
-/* Responsiveness */
-@media (max-width: 600px) {
-  .section-text {
-    font-size: 1rem;
-  }
-  .mission-item {
-    padding: 10px;
-  }
+
+@media (max-width: 768px) {
+    .mission-container {
+        padding: 20px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-text {
+        font-size: 0.95rem;
+    }
+    
+    .mission-item {
+        font-size: 0.9rem;
+    }
 }
+
