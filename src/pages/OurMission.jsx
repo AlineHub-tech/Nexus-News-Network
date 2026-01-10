@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NewsContext } = "../context/NewsContext";
+import { NewsContext }from "../context/NewsContext";
 import "../styles/Mission.css"; // We'll use a specific CSS file for Mission for unique styling
 
 const translations = {
