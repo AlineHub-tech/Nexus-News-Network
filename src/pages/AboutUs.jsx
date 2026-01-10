@@ -21,12 +21,12 @@ const translations = {
   p2_part2: { en: ", ensuring accessibility to the wider population, while also producing content in English and French to engage regional and international audiences.", rw: ", bigatuma abantu benshi bayabona, ariko tugakora n'ibikubiyemo mu Cyongereza n'Igifaransa kugira ngo tugere ku banywanyi bo mu karere no ku rwego mpuzamahanga.", fr: ", assurant l'accessibilité à la population au sens large, tout en produisant du contenu en anglais et en français pour engager les publics régionaux et internationaux." },
   p3: {
     en: "At Nexus News Network, we combine responsible journalism, digital innovation, and creative storytelling to inform, educate, and inspire communities. We believe that media plays a vital role in shaping informed societies, strengthening democracy, and promoting positive social transformation.",
-    rw: "Kuri Nexus News Network, duhuza itangazamakuru ribereye, udushya twa digitale, n'inkuru zicuranze neza kugira ngo tumenye, twigishe, kandi duhure imiryango. Twizera ko itangazamakuru rifite uruhare runini mu kubaka sosiyete ifite amakuru, gushimangira demokarasi, no guteza imbere impinduka nziza mu mibereho.",
+    rw: "Kuri Nexus News Network, duhuza itangazamakuru ribereye, udushya twa digitale, n'inkuru zimeze neza kugira ngo tumenye, twigishe, kandi duhuze imiryango. Twizera ko itangazamakuru rifite uruhare runini mu kubaka sosiyete ifite amakuru, gushimangira demokarasi, no guteza imbere impinduka nziza mu mibereho.",
     fr: "Chez Nexus News Network, nous combinons journalisme responsable, innovation numérique et narration créative pour informer, éduquer et inspirer les communautés. Nous pensons que les médias jouent un rôle essentiel dans la formation de sociétés informées, le renforcement de la démocratie et la promotion d'une transformation sociale positive.",
   },
   
    hl1Title: { en: "Credible Journalism", rw: "Itangazamakuru Ryizewe", fr: "Journalisme Crédible" },
-  hl1Text: { en: "We prioritize accuracy, fact-checking, and ethical reporting in every story we publish.", rw: "Duhuliza imbere ukuri, kugenzura amakuru, no gutangaza inkuru mu buryo bw'umuco mu nkuru zose dutangaza.", fr: "Nous privilégions l'exactitude, la vérification des faits et le reportage éthique dans chaque histoire que nous publions." },
+  hl1Text: { en: "We prioritize accuracy, fact-checking, and ethical reporting in every story we publish.", rw: "Duhuriza imbere ukuri, kugenzura amakuru, no gutangaza inkuru mu buryo bw'umuco mu nkuru zose dutangaza.", fr: "Nous privilégions l'exactitude, la vérification des faits et le reportage éthique dans chaque histoire que nous publions." },
   
   hl2Title: { en: "Community Impact", rw: "Ingaruka ku Baturage", fr: "Impact Communautaire" },
   hl2Text: { en: "Our stories amplify grassroots voices and highlight issues that matter to local communities.", rw: "Inkuru zacu zitanga ijwi ry'abaturage kandi zigaragaza ibibazo by'ingenzi ku miryango y'ibanze.", fr: "Nos histoires amplifient les voix locales et mettent en évidence les problèmes qui comptent pour les communautés locales." },
@@ -35,7 +35,7 @@ const translations = {
   hl3Text: { en: "We embrace modern media tools including video, data journalism, and interactive storytelling.", rw: "Twakira ibikoresho bigezweho by'itangazamakuru birimo videwo, itangazamakuru ry'amakuru, n'inkuru zo kuganira.", fr: "Nous adoptons des outils médiatiques modernes, notamment la vidéo, le journalisme de données et la narration interactive." },
   
   hl4Title: { en: "Regional & Global Reach", rw: "Kugera Hose mu Karere n'Isi", fr: "Portée Régionale et Mondiale" },
-  hl4Text: { en: "Our multilingual approach allows us to reach audiences beyond Rwanda.", rw: "Uburyo bwacu bwo gukoresha indimi nyinshi butuma tugera ku banywanyi hanze y'u Rwanda.", fr: "Notre approche multilingue nous permet d'atteindre des publics au-delà du Rwanda." },
+  hl4Text: { en: "Our multilingual approach allows us to reach audiences beyond Rwanda.", rw: "Uburyo bwacu bwo gukoresha indimi nyinshi bituma tugera no hanze y'u Rwanda.", fr: "Notre approche multilingue nous permet d'atteindre des publics au-delà du Rwanda." },
 };
 
 const AboutUs = () => {
@@ -97,5 +97,6 @@ const AboutUs = () => {
     </section>
   );
 };
+
 
 export default AboutUs;
