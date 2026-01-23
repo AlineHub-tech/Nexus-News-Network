@@ -1,82 +1,151 @@
-
-/* src/styles/footer.css */
-
 .footer {
-  background: rgb(10, 10, 68);
-  color: white;
-  padding: 40px 20px;
-  margin-top: 2%; /* Byakomeza nka mbere */
+    background: #002B5B;
+    color: #ffffff; 
+    padding-top: 50px; 
+    border-top: 6px solid #007bff; 
+    font-family: 'Poppins', sans-serif; 
 }
 
 .footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap; /* Gutuma bishobora kujya munsi iyo screen ntoya */
-  max-width: 1200px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 40px; 
+    max-width: 1200px;
+    margin: 0 auto 40px auto; 
 }
 
-.footer-info,
-.footer-links,
-.footer-socials {
-  flex: 1;
-  min-width: 200px; /* Gutuma bidafatana cyane */
-  margin: 10px;
+.footer-section h2,
+.footer-section h3 {
+    color: #007bff; 
+    margin-bottom: 18px;
+    font-weight: 700; 
+     border-bottom: 1px solid rgba(0, 123, 255, 0.4); 
+    padding-bottom: 12px;
 }
 
-.footer-info h2 {
-  color: #00bfff; /* Icyangugu gito cy'ibara */
+.footer-section p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #f3f3f3; 
+    font-weight: 300;
 }
 
-.footer-info p {
-  margin: 5px 0;
-  font-size: 0.9rem;
+/* Developer Name Styling (Bolder, Green color) */
+.developer-name {
+    font-weight: bold;
+    color: #ff380b; 
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a{
+text-decoration: none;
 }
 
-.footer-links h3,
-.footer-socials h3 {
-  margin-bottom: 15px;
-  color: #ddd;
+.developer-name:hover {
+    color:white;
+    text-decoration: underline;
 }
 
+/* Quick Links Styling */
 .footer-links ul {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .footer-links li a {
-  color: white;
-  text-decoration: none;
-  display: block;
-  margin-bottom: 8px;
-  transition: color 0.3s;
+    color: #e9e9e9;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 8px 0;
+    font-weight: 400;
+    /* Faint line between links */
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05); 
+}
+
+.footer-links li:last-child a {
+    border-bottom: none; /* Remove border from the last link */
 }
 
 .footer-links li a:hover {
-  color: #00bfff;
+    color: #ffffff;
+    padding-left: 8px; /* Clear visual feedback on hover */
 }
 
-.footer-socials a {
-  color: white;
-  font-size: 24px;
-  margin-right: 15px;
-  text-decoration: none;
-  transition: color 0.3s;
+/* Social Icons Styling */
+.social-icons a {
+    color: #ffffff;
+    font-size: 26px;
+    margin-right: 20px;
+    transition: color 0.3s ease;
 }
 
-.footer-socials a:hover {
-  color: #00bfff;
+.social-icons a:hover {
+    color: #007bff;
 }
 
-
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-  .footer-container {
+/* Subscribe Form Styling */
+.subscribe-form {
+    display: flex;
     flex-direction: column;
-    text-align: center;
-  }
-  .footer-socials a {
-    margin: 0 10px;
-  }
+    gap: 12px;
 }
 
+.subscribe-form input {
+    padding: 14px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #0a192a; /* Slightly lighter input background */
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+.subscribe-form button {
+    padding: 14px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.subscribe-form button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.footer-bottom-bar {
+    background-color: #000000; 
+    padding: 20px 20px;
+    width: 100%; 
+    box-sizing: border-box; 
+    text-align: center; 
+    border-top: 1px solid #333;
+}
+
+.footer-copyright {
+    margin: 0; 
+    font-size: 0.85rem;
+    color: #ececec;
+}
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+    .subscribe-form input, .subscribe-form button {
+      width: 90%;
+      margin: 0 auto;
+    }
+    .footer-links li a {
+        text-align: center;
+    }
+}
