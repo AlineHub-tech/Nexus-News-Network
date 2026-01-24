@@ -1,0 +1,19 @@
+.category-page-container {
+  margin: 0 auto; 
+  background-color: #fff;
+}
+
+.category-page-container h1 {
+  font-size: 2rem;
+  margin-top: 7%;
+  margin-left: 5%;
+  color: #333;
+  text-transform: capitalize; 
+}
+
+.category-page-container p {
+  font-size: 1.1rem;
+  color: #555;
+  padding: 20px 0;
+  text-align: center;
+}

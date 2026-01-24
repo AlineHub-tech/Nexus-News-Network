@@ -1,0 +1,52 @@
+/* src/styles/SingleArticlePage.css */
+
+.single-article-container {
+  margin: 0 auto; /* Gushyira urupapuro hagati */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.article-content-wrapper {
+  padding: 20px 0;
+}
+
+.article-content-wrapper h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-top: 5%;
+   margin-left: 17%;
+   border-bottom: 2px solid #eee; /* Gutandukanya umutwe n'ibindi */
+  padding-bottom: 10px;
+}
+
+.article-meta {
+  font-size: 0.9rem;
+  margin-left: 17%;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.article-media {
+  width: 70%; /* Ifoto yuzura umwanya wose */
+  height: auto;
+  margin-left: 10%;
+  max-height: 500px; /* Ntibe ndende cyane */
+  object-fit: cover;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.article-body {
+  font-size: 1.1rem;
+  margin-left: 15%;
+  color: #444;
+  line-height: 1.6; /* Gutuma inyandiko isomeka neza */
+  margin-top: -2%;
+}
+
+/* Style y'uburyo umuntu akanda kuri NewsCard */
+.news-card-link {
+  text-decoration: none; /* Gukuraho uturongo tumanura kuri links */
+  color: inherit;
+}

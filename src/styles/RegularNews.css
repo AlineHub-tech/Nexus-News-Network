@@ -1,13 +1,89 @@
-:root{
-  --dark:#0a2a66;
-  --accent:#d60000; /* for trending and highlights */
-  --muted:#6b7280;
-  --bg:#f7f7f8;
+/* Styling rusange y'umutwe wa section */
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #000000; /* Black color */
+  border-bottom: 3px solid #00008b; /* Blue color kuri underline */
+  padding-bottom: 10px;
+  margin-top: 40px; 
+  margin-bottom: 20px;
+  padding-left: 10px;
 }
 
-/* Global */
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:var(--dark);padding-top:78px}
-.container{max-width:2000px;margin:0 auto;padding:10px}
-.section-title{font-size:20px;color:var(--dark);margin:18px 0 12px;border-left:4px solid var(--accent);padding-left:12px}
-.regular-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+/* Container nyamukuru ya Regular News (Grid View style) */
+.regular-news-grid {
+  display: grid;
+  gap: 25px; /* Umwanya mwiza hagati ya buri nkuru */
+  padding: 10px;
+}
+
+/* 1. Mobile Styles (Default: 1 Column) */
+.regular-news-grid {
+  grid-template-columns: 1fr; 
+}
+
+/* 2. Tablet Styles (min-width: 600px): 2 Columns */
+@media (min-width: 600px) {
+  .regular-news-grid {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+/* 3. Desktop Styles (min-width: 1024px): 3 Columns */
+@media (min-width: 1024px) {
+  .regular-news-grid {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
+
+/* --- Styles for Pagination Controls (Prev/Next) --- */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  gap: 15px;
+}
+
+.pagination-controls button {
+  padding: 10px 24px;
+  background-color: #00008b; /* Blue color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #00005f;
+}
+
+.pagination-controls button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination-controls span {
+  font-size: 1.1rem;
+  color: #000000;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  padding-bottom: 10px; /* Umwanya hagati y'umutwe na umurongo */
+  border-bottom: 3px solid #007bff; /* Umurongo w'ubururu munsi y'umutwe */
+  margin-bottom: 20px; /* Umwanya munsi ya umurongo */
+  display: inline-block; /* Bituma umurongo ukingana n'amagambo gusa */
+  width: auto;
+}
+
+/* Style ihuza neza n'ubururu bwa Latest News */
+.latest-news-section .section-title {
+    border-bottom: 3px solid #fff;
+    color: white;
+}

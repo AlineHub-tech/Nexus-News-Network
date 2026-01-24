@@ -1,5 +1,5 @@
 .slogan {
-padding:28px 12px;text-align:center;background:rgb(10, 10, 68);margin-top:2%;}
+padding:26px 10px;text-align:center;background:rgb(10, 10, 68);margin-top:2%;margin-top:-0%;}
 
 
 .animated-slogan {
@@ -56,15 +56,18 @@ padding:28px 12px;text-align:center;background:rgb(10, 10, 68);margin-top:2%;}
 @media (max-width:900px){
   .slogan{
     margin-top:3%;
+    margin-top:-0%;
   }
 }
 @media (max-width:480px){
   .slogan{
     margin-top:3%;
+    margin-top:-0%;
   }
 }
 @media (max-width:768px){
   .slogan{
     margin-top:3%;
+    margin-top:-0%;
   }
 }

@@ -1,0 +1,118 @@
+
+/* ... styles from previous message (.hero-section-container, .posts-grid, nibindi) ... */
+
+/* Main Grid Layout for Regular News and Sidebar */
+.main-grid-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Main content 66%, Sidebar 33% */
+    gap: 30px;
+    margin-top: 40px;
+}
+
+
+/* Regular News Item (List View) */
+.regular-news-item {
+    display: flex;
+    background: #fff;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.regular-news-image {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.regular-news-content {
+    padding: 10px;
+}
+
+/* Popular News */
+.popular-news-section h3 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+.popular-news-section ul {
+    list-style: none;
+}
+
+.popular-news-section li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.popular-rank {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #2980b9;
+}
+
+/* TV Section */
+.tv-section {
+    margin-top: 40px;
+    background: #000;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.video-player-placeholder {
+    width: 100%;
+    height: 300px;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Ads Section */
+.ad-section {
+    background: #ecf0f1;
+    border: 1px dashed #95a5a6;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.ad-section.horizontal {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Dashboard Styles (Simple) */
+.dashboard-container {
+    padding: 40px;
+    max-width: 900px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .main-grid-layout {
+        grid-template-columns: 1fr; /* Sidebar ijya munsi kuri mobile/tablet */
+    }
+
+    .regular-news-item {
+        flex-direction: column;
+    }
+    
+    .regular-news-image {
+        width: 100%;
+        height: 150px;
+    }
+}
+

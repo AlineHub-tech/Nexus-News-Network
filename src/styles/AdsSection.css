@@ -1,13 +1,79 @@
-:root{
-  --dark:#0a2a66;
-  --accent:#d60000; /* for trending and highlights */
-  --muted:#6b7280;
-  --bg:#f7f7f8;
+/* src/styles/AdsSection.css */
+
+.ads-section {
+  padding: 20px;
+  background-color: #e9ecef; /* Umuhengeri woroheje wo gutandukanya n'izindi sections */
+  display: grid;
+  gap: 20px; 
+  /* Responsive grid: Kuri desktop columns 3, kuri mobile 1 */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
 }
 
-/* Global */
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:var(--dark);padding-top:78px}
-.container{max-width:2000px;margin:0 auto;padding:10px}
-.ad-banner{width:100%;height:120px;border-radius:8px;overflow:hidden;background:#eee;display:block;margin-bottom:10px}
-.ad-card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+.ad-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  text-align: center;
+  /* Animation yo kwinjira (fade-in up) */
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0; /* Ubika ads zihishe kugeza animation itangiye */
+  transform: translateY(20px); /* Zizamuka gatoya */
+}
+
+/* Animation definition */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ad-card img, .ad-card video {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Ads nyinshi zikoresha ishusho ya kare (square) */
+  object-fit: cover; 
+  display: block;
+}
+
+.ad-card p {
+  padding: 10px 15px;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Hover effect: Uburyo bwa kinyamwuga bwo kwerekana ko ari interactive */
+.ad-card:hover {
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+/* src/styles/AdsSection.css */
+
+/* Style ya buri mutwe wa Section (h2) */
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  padding-bottom: 10px; 
+  border-bottom: 3px solid #007bff; /* Umurongo w'ubururu munsi y'umutwe */
+  margin-bottom: 20px; 
+  display: inline-block; 
+  width: auto;
+  margin-left: 20px; /* Bihusha na padding ya container */
+}
+
+/* Noneho ubugari bugomba kuba hejuru muri AdsSection.css */
+.ads-section-container {
+    padding: 20px 0; /* Twakuye padding ibumoso/iburyo hano kugira ngo section title ibone uko ihumeka */
+}
+
+/* ... izindi style zose za .ad-section twatanze mbere ... */
+.ads-section {
+    padding: 0 20px; /* Twashyize padding kuri grid container */
+    /* ... izindi style za grid, animation, etc ... */
+}

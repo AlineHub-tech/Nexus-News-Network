@@ -1,19 +1,67 @@
-:root{
-  --dark:#0a2a66;
-  --accent:#d60000; /* for trending and highlights */
-  --muted:#6b7280;
-  --bg:#f7f7f8;
+/* Styling rusange yo kuva mu isoko no ku ngingo ya link */
+.news-card-link {
+  text-decoration: none; /* Kuraho imirongo munsi ya links */
+  color: inherit; /* Gukomeza amabara asanzwe */
 }
 
-/* Global */
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:var(--dark);padding-top:78px}
-.container{max-width:2000px;margin:0 auto;padding:10px}
-.news-card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(2,6,23,0.06);transition:transform .18s}
-.news-card:hover{transform:translateY(-6px)}
-.news-card img{width:100%;height:170px;object-fit:cover;display:block}
-.news-content{padding:12px}
-.news-title{font-size:16px;color:var(--dark);font-weight:700;margin-bottom:8px}
-.news-author{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:8px}
-.news-snippet{font-size:14px;color:#333;margin-bottom:10px}
-.news-meta{display:flex;justify-content:space-between;color:var(--accent);font-weight:700}
+.news-card {
+  /* Irimure: Iguma kuri block imwe */
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff; /* Umweru mwiza */
+  border-radius: 8px; /* Corners zoroheje */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Igicucu cyiza */
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-5px); /* Kugira animation nziza iyo umuntu ayikozaho */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Igicucu cyongereye ingufu */
+}
+
+.news-media-container {
+  width: 100%;
+  /* Ifoto izakoresha 'object-fit: cover' muri Landing.css cyangwa hano niba ihari */
+}
+
+/* Amafoto agaragara neza cyane muri card */
+.news-card-image,
+.news-card-video {
+  width: 100%;
+  height: 180px; /* Uburebure buhoraho bw'ifoto/video */
+  object-fit: cover; /* **Ibi nibyo bituma ifoto i-fit neza cyane** */
+  display: block;
+}
+
+.news-info {
+  padding: 15px;
+  flex-grow: 1; /* Kugira ngo amakuru yuzure neza umwanya */
+}
+
+.news-info h3 {
+  font-size: 1.2rem; /* Font size nziza */
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #000000; /* Black color ku mutwe w'inkuru */
+  line-height: 1.4;
+  /* Kugabanya umurongo w'inkuru iyo muremure cyane (optional) */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-meta {
+  font-size: 0.85rem;
+  color: #00008b; /* Blue color kuri meta data (author, category, date) */
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Styles kuri 'extraClass' nini cyane (Urugero: Kuri desktop ishobora kuba nini) */
+.news-card.large-card .news-card-image,
+.news-card.large-card .news-card-video {
+    height: 250px; /* Uburebure bwikubye kuri large card */
+}

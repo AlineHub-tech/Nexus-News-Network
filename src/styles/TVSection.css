@@ -1,0 +1,74 @@
+/* src/styles/TVSection.css */
+
+.tv-section {
+  padding: 20px;
+  background-color: #f0f4f8; /* Agace k'ubururu bworoheje */
+  display: grid;
+  gap: 20px; /* Intera hagati ya buri video */
+  
+  /* By default kuri mobile: column imwe gusa */
+  grid-template-columns: 1fr; 
+}
+
+/* Kuri screen za Tablet (min-width: 600px), columns 2 */
+@media (min-width: 600px) {
+  .tv-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Kuri screen za Desktop (min-width: 1000px), columns 3 */
+@media (min-width: 1000px) {
+  .tv-section {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tv-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.tv-card:hover {
+    transform: scale(1.02); /* Video irongeraho gatoya iyo bayikoresheje */
+}
+
+.tv-card video {
+  width: 100%;
+  /* Ituma buri video igira ishusho imwe (aspect ratio 16:9) */
+  aspect-ratio: 16 / 9; 
+  display: block;
+}
+
+.tv-card h4 {
+  padding: 10px 15px;
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+/* Style ya buri mutwe wa Section (h2) */
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  padding-bottom: 10px; 
+  border-bottom: 3px solid #007bff; /* Umurongo w'ubururu munsi y'umutwe */
+  margin-bottom: 20px; 
+  display: inline-block; 
+  width: auto;
+  margin-left: 20px; /* Bihusha na padding ya container */
+}
+
+/* Noneho ubugari bugomba kuba hejuru muri TVSection.css */
+.tv-section-container {
+    padding: 20px 0; /* Twakuye padding ibumoso/iburyo hano kugira ngo section title ibone uko ihumeka */
+}
+
+/* ... izindi style zose za .tv-section twatanze mbere ... */
+.tv-section {
+    padding: 0 20px; /* Twashyize padding kuri grid container */
+    /* ... izindi style za grid ... */
+}

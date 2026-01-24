@@ -1,14 +1,67 @@
-:root{
-  --dark:#0a2a66;
-  --accent:#d60000; /* for trending and highlights */
-  --muted:#6b7280;
-  --bg:#f7f7f8;
+/* src/styles/PopularNews.css */
+
+/* Style ya buri mutwe wa Section (h2) */
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  padding-bottom: 10px; 
+  border-bottom: 3px solid #007bff; /* Umurongo w'ubururu munsi y'umutwe */
+  margin-bottom: 20px; 
+  display: inline-block; 
+  width: auto;
+  margin-left: 20px;
 }
 
-/* Global */
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:var(--dark);padding-top:78px}
-.container{max-width:2000px;margin:0 auto;padding:10px}
-.popular-row{display:flex;overflow-x:auto;padding-bottom:10px;gap:12px}
-.popular-row::-webkit-scrollbar{height:8px}
-.popular-row::-webkit-scrollbar-thumb{background:var(--dark);border-radius:6px}
+.popular-news-container {
+    padding: 20px 0;
+    background-color: #f8f9fa;
+    overflow: hidden; /* Bihisha igice cy'inkuru cyarenzeho */
+}
+
+.popular-news-ticker-wrap {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.popular-news-ticker-move {
+    display: flex;
+    /* Dushyizeho animation */
+    animation: tickerMove 30s linear infinite; /* 30s, iteka, nta mpagarara */
+}
+
+/* Definition ya animation yo gutambuka */
+@keyframes tickerMove {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Izinga ryose ry'inkuru 8 rigenda */
+        transform: translateX(-50%); 
+    }
+}
+
+/* Gukosora style ya NewsCard mu buryo bwa ticker */
+.popular-news-ticker-move .news-card-link {
+    /* Burikard igomba kugira ubugari butazwi kugirango bitambuke neza */
+    width: 300px; 
+    flex-shrink: 0; /* Irinda ko buri card yigabanyamo kabiri */
+    margin-right: 15px;
+}
+
+.popular-news-ticker-move .news-card {
+    /* Style ntoya kuri ticker */
+    box-shadow: none;
+    border-radius: 0;
+    border-right: 1px solid #eee;
+}
+
+.popular-news-ticker-move .news-title {
+    font-size: 0.9rem; /* Font ntoya ariko isomeka */
+    white-space: nowrap; /* Amagambo ntajya munsi y'umurongo */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Utudomo iyo byarenze */
+}
