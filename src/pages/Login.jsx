@@ -1,48 +1,74 @@
 import React, { useState, useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom"; 
+import "../styles/Auth.css";
+import { AuthContext } from "../context/AuthContext"; 
+import { jwtDecode } from 'jwt-decode'; // Dukeneye jwt-decode hano kugenzura role vuba
 
-export default function Login() {
-  const { login } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const [form, setForm] = useState({ username: "", password: "" });
+const API_LOGIN_URL = "http://localhost:5000/api/auth/login";
+
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const navigate = useNavigate(); 
+  const { login } = useContext(AuthContext); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = login(form);
-    if (!result.success) {
-      setError(result.message);
-    } else {
-      setError("");
-      // redirect based on role
-      if (result.role === "admin") navigate("/admin");
-      else if (result.role === "author") navigate("/author");
+    setError(""); 
+    setIsLoggingIn(true); 
+
+    try {
+      const res = await axios.post(API_LOGIN_URL, { email, password });
+      const { token } = res.data;
+
+      // 1. Bika Token muri LocalStorage
+      localStorage.setItem("token", token);
+      
+      // 2. Decode Token vuba kugira ngo umenye role
+      const decoded = jwtDecode(token);
+      const userRole = decoded.user.role; // Tuvuga ko structure ya token ari user.role
+
+      // 3. Update Global Auth Context State
+      login(token); 
+      
+      // 4. Erekereza umukoresha aho akwiriye kujya
+      if (userRole === 'admin') {
+        alert("Mwinjiye neza nk'Admin! Uri kwererezwa kuri Admin Dashboard.");
+        navigate("/admin");
+      } else if (userRole === 'writer') {
+        alert("Mwinjiye neza nka Author! Uri kwererezwa kuri Author Dashboard.");
+        navigate("/author");
+      } else {
+        // Iyo role itazwi
+        navigate("/");
+      }
+
+    } catch (err) {
+      console.error(err.response?.data || err);
+      setError(err.response?.data?.msg || "Habaye ikibazo mu kwinjira.");
+      setIsLoggingIn(false); 
     }
   };
 
   return (
-    <div style={{ display:"flex", justifyContent:"center", alignItems:"center", minHeight:"100vh", background:"#f0f2f5" }}>
-      <form onSubmit={handleSubmit} style={{ background:"#fff", padding:"40px", borderRadius:"8px", boxShadow:"0 4px 12px rgba(0,0,0,0.1)", width:"300px" }}>
-        <h2 style={{ marginBottom:"20px", textAlign:"center" }}>Login</h2>
-        {error && <p style={{ color:"red", marginBottom:"10px" }}>{error}</p>}
-        <input
-          type="text"
-          placeholder="Username"
-          value={form.username}
-          onChange={(e) => setForm({ ...form, username: e.target.value })}
-          style={{ width:"100%", padding:"10px", marginBottom:"15px", borderRadius:"6px", border:"1px solid #ccc" }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          style={{ width:"100%", padding:"10px", marginBottom:"15px", borderRadius:"6px", border:"1px solid #ccc" }}
-        />
-        <button type="submit" style={{ width:"100%", padding:"10px", background:"#0077cc", color:"#fff", border:"none", borderRadius:"6px", cursor:"pointer" }}>Login</button>
+    <div className="auth-container">
+      <h2>Kwinjira (Login)</h2>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+        {error && <p className="error">{error}</p>}
+        <button type="submit" disabled={isLoggingIn}>
+            {isLoggingIn ? 'Iri kwinjira...' : 'Injira'}
+        </button>
       </form>
+      <p style={{textAlign: 'center', marginTop: '10px'}}>
+        Nta account ufite? <Link to="/register">Kanda hano wiyandikishe</Link>
+      </p>
     </div>
   );
-}
+};
 
+export default Login;

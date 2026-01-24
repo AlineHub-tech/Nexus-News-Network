@@ -15,7 +15,7 @@ const translations = {
 
   item1: { en: "Promote truthful and balanced journalism", rw: " guteza imbere itangazamakuru ry'ukuri kandi ringana", fr: "Promouvoir un journalisme véridique et équilibré" },
   item2: { en: "Amplify community voices and untold stories", rw: "Gutanga ijwi ry'abaturage n'inkuru zitaravugwa", fr: "Amplifier les voix de la communauté et les histoires inédites" },
-  item3: { en: "Educate citizens through informative content", rw: "Uburezi Ku baturage binyuze mu bikubiyemo mu makuru", fr: "Éduquer les citoyens grâce à un contenu informatif" },
+  item3: { en: "Educate citizens through informative content", rw: "Kw educatinga abaturage binyuze mu bikubiyemo by'amakuru", fr: "Éduquer les citoyens grâce à un contenu informatif" },
   item4: { en: "Encourage civic responsibility and dialogue", rw: "Gushishikariza inshingano za kirere n'ibiganiro", fr: "Encourager la responsabilité civique et le dialogue" },
   item5: { en: "Empower youth through media and technology", rw: "Guha urubyiruko imbaraga binyuze mu itangazamakuru n'ikoranabuhanga", fr: "Autonomiser les jeunes grâce aux médias et à la technologie" },
 };
@@ -58,6 +58,5 @@ const OurMission = () => {
   
   );
 };
-
 
 export default OurMission;

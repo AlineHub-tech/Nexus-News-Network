@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react';
 import { NewsContext } from '../context/NewsContext';
 import Navbar from '../components/Navbar'; 
@@ -18,7 +17,7 @@ const translations = {
   sec4Title: { en: "4. Limitation of Liability", rw: "4. Kubera Ibishobora Kuba Bikwangiza", fr: "4. Limitation de Responsabilité" },
   sec4P1: { en: "Nexus News Network shall not be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of the Service.", rw: "Nexus News Network ntabwo izagira uruhare ku byangiritse bitaziguye, bitewe n'impanuka, bidasanzwe, byakurikiyeho cyangwa byo guhana, harimo, ariko ntibigarukira gusa, igihombo cy'inyungu, amakuru, ikoreshwa, izina ryiza, cyangwa ibindi bitagaragara, biturutse ku ikoreshwa rya Serivisi.", fr: "Nexus News Network ne sera pas responsable des dommages indirects, accessoires, spéciaux, consécutifs ou punitifs, y compris, sans limitation, la perte de profits, de données, d'utilisation, de clientèle ou d'autres pertes intangibles, résultant de votre accès ou de votre utilisation du Service." },
   sec5Title: { en: "5. Governing Law", rw: "5. Amategeko Agenga", fr: "5. Droit Applicable" },
-  sec5P1: { en: "These Terms shall be governed and construed in accordance with the laws of the Republic of Rwanda, without regard to its conflict of law provisions.", rw: "Aya mabwiriza azagengwa kandi asobanurwe hakurikijwe amategeko ya Repubulika y'u Rwanda, hatarebwe amategeko ahana ayandi.", fr: "Les présentes Conditions seront régies et interprétées conformément aux lois de la République du Rwanda, hatarebwe amategeko ahana ayandi.", fr: "Les présentes Conditions seront régies et interprétées conformément aux lois de la République du Rwanda, without regard to its conflict of law provisions." },
+  sec5P1: { en: "These Terms shall be governed and construed in accordance with the laws of the Republic of Rwanda, without regard to its conflict of law provisions.", rw: "Aya mabwiriza azagengwa kandi asobanurwe hakurikijwe amategeko ya Repubulika y'u Rwanda, hatarebwe amategeko ahana ayandi.",fr: "Les présentes Conditions seront régies et interprétées conformément aux lois de la République du Rwanda, without regard to its conflict of law provisions." },
 };
 
 const TermsOfService = () => {
