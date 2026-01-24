@@ -1,18 +1,12 @@
-// vite.config.js (cyangwa .ts)
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev
 export default defineConfig({
   plugins: [react()],
-  // Ongeramo iki gice cyose kugira ngo ushiremo modules
   resolve: {
-    extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json'],
+    alias: {
+      'axios': 'axios/dist/axios.min.js', // Ibi bihatira Vite gukoresha file nyayo
+    },
   },
-  // Iyi ni Alternative niba iriya yo hejuru yanze
-  // build: {
-  //   rollupOptions: {
-  //     external: ['axios'], 
-  //   },
-  // },
 });
