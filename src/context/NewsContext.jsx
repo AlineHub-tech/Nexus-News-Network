@@ -9,10 +9,12 @@ export const NewsProvider = ({ children }) => {
   const [allMedia, setAllMedia] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
-  const [currentPage, setCurrentPage] = useState(1); // Page iriho ubu
-  const [articlesPerPage] = useState(30); // Inkuru 30 kuri buri page (nkuko wabisabye umubare munini)
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [articlesPerPage] = useState(30); 
 
-  const API_URL = "http://localhost:5000/api"; 
+  // UKO WANOGEJE URL MURI VITE: Koresha import.meta.env.VITE_APP_[IZINA_RYAWE]
+  // Genzura ko muri Vercel Environment Variables wishyuye 'VITE_APP_API_URL'
+  const API_URL = import.meta.env.VITE_APP_API_URL || "http://localhost:5000/api"; 
 
   const switchLanguage = (lng) => {
     setLanguage(lng);
@@ -23,8 +25,10 @@ export const NewsProvider = ({ children }) => {
     const fetchArticles = async () => {
       try {
         setLoading(true);
-        // API ikigarura byose. Tugabanya mu Context.
+        // Console log igufasha kumenya URL ikoreshwa muri Vercel Logs
+        console.log(`Fetching articles from: ${API_URL}/public/articles`); 
         const res = await axios.get(`${API_URL}/public/articles`); 
+        
         if (Array.isArray(res.data)) {
             setAllMedia(res.data);
         } else {
@@ -35,12 +39,12 @@ export const NewsProvider = ({ children }) => {
         setLoading(false);
       } catch (err) {
         console.error("Error fetching articles in context:", err);
-        setError("Habaye ikibazo cyo guhuza na server (CORS/Connection refused).");
+        setError(`Habaye ikibazo: ${err.message}`); 
         setLoading(false);
       }
     };
     fetchArticles();
-  }, []); 
+  }, [API_URL]); // Ongeyeho API_URL muri dependencies bya useEffect
 
   // LOGIC NSESHA: Kugabanyamo ibice bibiri: Inkuru gusa (images) n'Amashusho gusa (videos)
   const articlesOnly = useMemo(() => 
@@ -53,10 +57,8 @@ export const NewsProvider = ({ children }) => {
   // Logic ya Search ikora kuri 'articlesOnly' (Inkuru gusa)
   const filteredArticles = useMemo(() => {
     if (!searchQuery) {
-      // Niba nta search, garura articles zose (tugabanya nyuma)
       return articlesOnly; 
     }
-    // ... (Logic ya Search) ...
     const lowercasedQuery = searchQuery.toLowerCase();
     return articlesOnly.filter(article => { 
       const title = article.title || "";
@@ -71,30 +73,26 @@ export const NewsProvider = ({ children }) => {
   }, [articlesOnly, searchQuery]); 
   
   // LOGIC YA PAGINATION:
-  // Kugabanya filteredArticles muri page ntoya kugirango zijye muri RegularNews
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
   
-  // newsList izaba inkuru ziri kuri page iriho ubu GUSA
   const paginatedNewsList = useMemo(() => 
     filteredArticles.slice(indexOfFirstArticle, indexOfLastArticle), 
     [filteredArticles, indexOfFirstArticle, indexOfLastArticle]
   );
 
-  // Function yoherejwe hanze kugira ngo component zihindure page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 
   return (
     <NewsContext.Provider value={{
       searchQuery, setSearchQuery, language, switchLanguage,
-      newsList: paginatedNewsList, // Hano niho haba impinduka ikomeye
+      newsList: paginatedNewsList, 
       videosList: videosOnly,
       loading, error,
-      // Ongeyeho ibya Pagination kugira ngo RegularNews ibone buttons
       currentPage,
       articlesPerPage,
-      totalArticles: filteredArticles.length, // Umubare w'inkuru zose (nyuma ya search)
+      totalArticles: filteredArticles.length, 
       paginate
     }}>
       {children}
