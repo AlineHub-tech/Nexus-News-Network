@@ -55,8 +55,8 @@ export default function Navbar() {
 
         <nav className="nav-links">
           <Link to="/">{getTranslation("Home")}</Link>
-          <Link to="/author">{getTranslation("Author")}</Link>
-          <Link to="/admin">{getTranslation("Admin")}</Link>
+          <Link to="/register">{getTranslation("Author")}</Link>
+          <Link to="/register">{getTranslation("Admin")}</Link>
         </nav>
 
         <div className="nav-actions">
@@ -70,6 +70,7 @@ export default function Navbar() {
         </div>
         <div className="categories">
           {categories.map((c) => (
+            // >>>>> HANO TWAKOSOYE LINK KUGIRA NGO IJYE KURI /category/CategoryName <<<<<
             <Link key={c} to={`/category/${c}`} className="category-link">
               {getTranslation(c)}
             </Link>

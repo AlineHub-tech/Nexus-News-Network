@@ -2,7 +2,7 @@
 // import { NewsContext } from "../context/NewsContext";
 // import { Link } from "react-router-dom";
 // import "../styles.css";
-// export default function HeroSection(){
+// export defaultc
 //   const { latestNews, regularNews } = useContext(NewsContext);
 
 //   // hero main = most recent latestNews[0]

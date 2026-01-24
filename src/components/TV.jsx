@@ -1,28 +1,39 @@
-import React, { useContext } from "react";
-import { NewsContext } from "../context/NewsContext";
+import React from "react";
+import "../styles/TVSection.css";
 
-export default function TV(){
-  const { videoNews } = useContext(NewsContext);
+const TV = ({ videos }) => { // Yakira 'videos' props
+  if (!videos || videos.length === 0) {
+    // Nabishize muri div ikikije byose kugira ngo style y'umutwe igaragare
+    return (
+        <div className="tv-section-container">
+            <h2 className="section-title">TV Section</h2> 
+            <div className="tv-section">Nta mashusho ya TV aboneka ubu.</div>;
+        </div>
+    );
+  }
 
-  if (!videoNews || videoNews.length === 0) return null;
+  // URL yuzuye ya server (Root URL)
+  const BASE_SERVER_URL = 'http://localhost:5000';
 
   return (
-    <div className="container page">
-      <h2>Nexus TV</h2>
-      <div className="grid cards">
-        {videoNews.map(v => (
-          <div key={v.id} className="card">
-            {v.videoUrl ? (
-              <iframe title={v.title} src={v.videoUrl} frameBorder="0" allowFullScreen className="tv-iframe" />
-            ) : (
-              <video src={v.image} controls className="tv-video" />
-            )}
-            <div className="card-body">
-              <h3>{v.title}</h3>
-            </div>
+    // Nongeyeho container div ikikije byose kugira ngo umutwe ube hejuru ya grid
+    <div className="tv-section-container"> 
+      {/* Umutwe wa section hamwe na style twumvikanyeho */}
+      <h2 className="section-title">AMASHUSHO(TV)</h2> 
+
+      <div className="tv-section">
+        {videos.map((videoItem) => (
+          <div key={videoItem._id} className="tv-card">
+            <video controls>
+              <source src={`${BASE_SERVER_URL}${videoItem.mediaUrl}`} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <h4>{videoItem.title}</h4>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default TV;

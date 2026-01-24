@@ -1,36 +1,58 @@
-// import React, { useContext } from "react";
-// import { NewsContext } from "../context/NewsContext";
-// import NewsCard from "./NewsCard";
-
-// export default function RegularNews(){
-//   const { regularNews, incrementView, incrementLike } = useContext(NewsContext);
-//   if (!regularNews || regularNews.length===0) return null;
-
-//   return (
-//     <section className="regular-section container">
-//       <h2>Regular News</h2>
-//       <div className="regular-grid">
-//         {regularNews.map(n => <NewsCard key={n.id} item={n} onView={incrementView} onLike={incrementLike} />)}
-//       </div>
-//     </section>
-//   );
-// }
 import React, { useContext } from "react";
-import { NewsContext } from "../context/NewsContext";
 import NewsCard from "./NewsCard";
-import "../styles.css";
-export default function RegularNews({ customData=null, title="Regular News" }){
-  const { regularNews, incrementView, incrementLike } = useContext(NewsContext);
-  const data = customData || regularNews || [];
+import "../styles/RegularNews.css";
+import { NewsContext } from '../context/NewsContext'; // Import Context yo kubona pagination
 
-  if (!data || data.length === 0) return null;
+const RegularNews = ({ newsList }) => { 
+  // Dukuye amakuru ya pagination muri Context
+  const { paginate, currentPage, totalArticles, articlesPerPage } = useContext(NewsContext);
+
+  if (!newsList || newsList.length === 0) {
+    return <p className="regular-news">Nta nkuru zisanzwe zibonetse ubu.</p>;
+  }
+
+  // Kumenya umubare wa pages zose (total pages)
+  const totalPages = Math.ceil(totalArticles / articlesPerPage);
+  
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+        paginate(currentPage + 1);
+        window.scrollTo(0, 0); // Gusikurira hejuru page ihindutse
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) {
+        paginate(currentPage - 1);
+        window.scrollTo(0, 0); // Gusikurira hejuru page ihindutse
+    }
+  };
 
   return (
-    <section className="regular-section container">
-      <h2 className="section-title">{title}</h2>
-      <div className="regular-grid">
-        {data.map(n => <NewsCard key={n.id} item={n} onView={incrementView} onLike={incrementLike} />)}
+    <div className="regular-news-section-container">
+      {/* Hano niho wongeye umutwe na style ya section-title */}
+      <h2 className="section-title">Latest Articles</h2> 
+
+      <div className="regular-news-grid">
+        {newsList.map((post) => (
+          <NewsCard key={post._id} post={post} />
+        ))}
       </div>
-    </section>
+
+      {/* SECTION YA PAGINATION BUTTONS */}
+      {totalPages > 1 && (
+        <div className="pagination-controls">
+          <button onClick={handlePrev} disabled={currentPage === 1}>
+            Prev
+          </button>
+          <span> Page {currentPage} of {totalPages} </span>
+          <button onClick={handleNext} disabled={currentPage === totalPages}>
+            Next
+          </button>
+        </div>
+      )}
+    </div>
   );
-}
+};
+
+export default RegularNews;

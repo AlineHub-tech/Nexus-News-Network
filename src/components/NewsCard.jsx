@@ -1,28 +1,38 @@
+// src/components/NewsCard.jsx
 import React from "react";
-import { Link } from "react-router-dom";
-import "../styles.css";
-export default function NewsCard({ item, onView=()=>{}, onLike=()=>{} }){
-  const src = (typeof item.image === "string" && item.image.trim()!=="") ? item.image : "/placeholder.png";
+import { Link } from "react-router-dom"; 
+import "../styles/NewsCard.css";
+
+const BASE_SERVER_URL = 'http://localhost:5000';
+
+// Hano twongereye props nshya yitwa 'extraClass'
+const NewsCard = ({ post, extraClass = '' }) => { 
+  if (!post) return <div className="news-card">Loading...</div>;
+  
   return (
-    <article className="news-card" onClick={()=>onView(item.id)}>
-      <Link to={`/article/${item.id}`}>
-        <img src={src} alt={item.title||"news"} onError={(e)=>e.target.src="/placeholder.png"} />
-      </Link>
-
-      <div className="news-content">
-        <Link to={`/article/${item.id}`} style={{textDecoration:"none", color:"inherit"}}>
-          <div className="news-title">{item.title}</div>
-        </Link>
-
-        <div className="news-author">✍ {item.author || "Unknown"}</div>
-        <div className="news-snippet">{(item.body||"").slice(0,120)}{(item.body&&item.body.length>120)?"...":""}</div>
-
-        <div className="news-meta">
-          <span>👁 {item.views || 0}</span>
-          <span onClick={(e)=>{ e.stopPropagation(); onLike(item.id); }} style={{cursor:"pointer"}}>❤ {item.likes || 0}</span>
+    <Link to={`/article/${post._id}`} className="news-card-link">
+      {/* Hano twashyize extraClass muri className ya div */}
+      <div className={`news-card ${extraClass}`}> 
+        <div className="news-media-container">
+          {post.mediaUrl && post.mediaType === 'image' && (
+            <img src={`${BASE_SERVER_URL}${post.mediaUrl}`} alt={post.title} className="news-card-image" />
+          )}
+          {post.mediaUrl && post.mediaType === 'video' && (
+            <video src={`${BASE_SERVER_URL}${post.mediaUrl}`} controls className="news-card-video">
+                Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
+        
+        <div className="news-info">
+          <h3>{post.title}</h3>
+          <p className="news-meta">
+            By <strong>{post.author}</strong> | {post.category} | {new Date(post.createdAt).toLocaleString()} 
+          </p>
         </div>
       </div>
-    </article>
+    </Link>
   );
-}
+};
 
+export default NewsCard;
