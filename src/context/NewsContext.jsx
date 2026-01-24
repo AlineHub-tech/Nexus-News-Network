@@ -1,124 +1,103 @@
-import React, { createContext, useEffect, useState } from "react";
-import { API_BASE } from "../config";
+import React, { createContext, useEffect, useState, useMemo } from "react";
+import axios from 'axios'; 
+
 export const NewsContext = createContext();
 
-// const API_BASE = process.env.REACT_APP_API || "http://localhost/nexus_api";
-
 export const NewsProvider = ({ children }) => {
-  const [news, setNews] = useState([]);
-  const [pending, setPending] = useState([]);
-  const [ads, setAds] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [language, setLanguage] = useState(localStorage.getItem("lang") || "en");
+  const [allMedia, setAllMedia] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
+  const [currentPage, setCurrentPage] = useState(1); // Page iriho ubu
+  const [articlesPerPage] = useState(30); // Inkuru 30 kuri buri page (nkuko wabisabye umubare munini)
 
-  useEffect(() => {
-    fetchApproved();
-    fetchPending();
-    fetchAds();
-  }, []);
-
-  const fetchApproved = async () => {
-    const res = await fetch(`${API_BASE}/get_approved_news.php`);
-    const data = await res.json();
-    setNews(data);
-  };
-
-  const fetchPending = async () => {
-    const res = await fetch(`${API_BASE}/get_pending_news.php`);
-    const data = await res.json();
-    setPending(data);
-  };
-
-  const fetchAds = async () => {
-    const res = await fetch(`${API_BASE}/get_ads.php`);
-    const data = await res.json();
-    setAds(data);
-  };
-
-  // Author/Admin add news (FormData with file)
-  const addNews = async (form, file=null) => {
-    const fd = new FormData();
-    fd.append("title", form.title);
-    fd.append("body", form.body);
-    fd.append("category", form.category);
-    fd.append("author", form.author || "Admin");
-    fd.append("type", form.isVideo ? "video" : "image");
-    if (form.isVideo && form.videoUrl) fd.append("video_url", form.videoUrl);
-    if (!form.isVideo && file) fd.append("image", file);
-
-    const res = await fetch(`${API_BASE}/add_news.php, { method: "POST", body: fd }`);
-    const json = await res.json();
-    if (json.success) {
-      await fetchPending();
-      return true;
-    }
-    return false;
-  };
-
-  const approveNews = async (id) => {
-    const res = await fetch(`${API_BASE}/approve_news.php, { method: "POST", body: new URLSearchParams({ id }) }`);
-    await fetchPending();
-    await fetchApproved();
-  };
-
-  const rejectNews = async (id) => {
-    await fetch(`${API_BASE}/reject_news.php, { method: "POST", body: new URLSearchParams({ id }) }`);
-    await fetchPending();
-  };
-
-  const deleteNews = async (id) => {
-    await fetch(`${API_BASE}/delete_news.php, { method: "POST", body: new URLSearchParams({ id }) }`);
-    await fetchApproved();
-    await fetchPending();
-  };
-
-  // Ads
-  const addAd = async (form, file=null) => {
-    const fd = new FormData();
-    fd.append("title", form.title);
-    fd.append("description", form.description || "");
-    fd.append("type", form.isVideo ? "video" : "image");
-    if (form.isVideo && form.videoUrl) fd.append("video_url", form.videoUrl);
-    if (!form.isVideo && file) fd.append("image", file);
-
-    const res = await fetch(`${API_BASE}/add_ad.php, { method: "POST", body: fd }`);
-    const json = await res.json();
-    if (json.success) {
-      await fetchAds();
-      return true;
-    }
-    return false;
-  };
-
-  const deleteAd = async (id) => {
-    await fetch(`${API_BASE}/delete_ad.php, { method: "POST", body: new URLSearchParams({ id }) }`);
-    await fetchAds();
-  };
+  const API_URL = "http://localhost:5000/api"; 
 
   const switchLanguage = (lng) => {
     setLanguage(lng);
     localStorage.setItem("lang", lng);
   };
 
-  const filteredNews = news.filter(n => {
-    const q = (searchQuery || "").toLowerCase();
-    return !q || n.title.toLowerCase().includes(q) || n.author.toLowerCase().includes(q) || n.category.toLowerCase().includes(q);
-  });
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        setLoading(true);
+        // API ikigarura byose. Tugabanya mu Context.
+        const res = await axios.get(`${API_URL}/public/articles`); 
+        if (Array.isArray(res.data)) {
+            setAllMedia(res.data);
+        } else {
+            console.error("API did not return an array of articles.");
+            setAllMedia([]);
+            setError("API ntiyatanze amakuru ateye neza.");
+        }
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching articles in context:", err);
+        setError("Habaye ikibazo cyo guhuza na server (CORS/Connection refused).");
+        setLoading(false);
+      }
+    };
+    fetchArticles();
+  }, []); 
+
+  // LOGIC NSESHA: Kugabanyamo ibice bibiri: Inkuru gusa (images) n'Amashusho gusa (videos)
+  const articlesOnly = useMemo(() => 
+    allMedia.filter(item => item.mediaType === 'image'), [allMedia]
+  );
+  const videosOnly = useMemo(() => 
+    allMedia.filter(item => item.mediaType === 'video'), [allMedia]
+  );
+  
+  // Logic ya Search ikora kuri 'articlesOnly' (Inkuru gusa)
+  const filteredArticles = useMemo(() => {
+    if (!searchQuery) {
+      // Niba nta search, garura articles zose (tugabanya nyuma)
+      return articlesOnly; 
+    }
+    // ... (Logic ya Search) ...
+    const lowercasedQuery = searchQuery.toLowerCase();
+    return articlesOnly.filter(article => { 
+      const title = article.title || "";
+      const summary = article.summary || "";
+      const category = article.category || "";
+      return (
+        title.toLowerCase().includes(lowercasedQuery) ||
+        summary.toLowerCase().includes(lowercasedQuery) ||
+        category.toLowerCase().includes(lowercasedQuery)
+      );
+    });
+  }, [articlesOnly, searchQuery]); 
+  
+  // LOGIC YA PAGINATION:
+  // Kugabanya filteredArticles muri page ntoya kugirango zijye muri RegularNews
+  const indexOfLastArticle = currentPage * articlesPerPage;
+  const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+  
+  // newsList izaba inkuru ziri kuri page iriho ubu GUSA
+  const paginatedNewsList = useMemo(() => 
+    filteredArticles.slice(indexOfFirstArticle, indexOfLastArticle), 
+    [filteredArticles, indexOfFirstArticle, indexOfLastArticle]
+  );
+
+  // Function yoherejwe hanze kugira ngo component zihindure page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 
   return (
     <NewsContext.Provider value={{
-      news: filteredNews,
-      rawNews: news,
-      pending,
-      ads,
-      addNews, approveNews, rejectNews, deleteNews,
-      addAd, deleteAd,
-      fetchApproved, fetchPending, fetchAds,
-      searchQuery, setSearchQuery,
-      language, switchLanguage
+      searchQuery, setSearchQuery, language, switchLanguage,
+      newsList: paginatedNewsList, // Hano niho haba impinduka ikomeye
+      videosList: videosOnly,
+      loading, error,
+      // Ongeyeho ibya Pagination kugira ngo RegularNews ibone buttons
+      currentPage,
+      articlesPerPage,
+      totalArticles: filteredArticles.length, // Umubare w'inkuru zose (nyuma ya search)
+      paginate
     }}>
       {children}
     </NewsContext.Provider>
   );
 };
-
