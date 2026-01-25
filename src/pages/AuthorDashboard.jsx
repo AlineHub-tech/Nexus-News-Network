@@ -85,4 +85,3 @@ const AuthorDashboard = () => {
 };
 
 export default AuthorDashboard;
-
