@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../styles/Dashboard.css"; 
+import "../styles/dashboard.css"; 
 
 const API_ADMIN_URL = "http://localhost:5000/api/admin";
 
@@ -184,3 +184,4 @@ const AdsUpload = ({ fetchApprovedNews, fetchPendingNews }) => {
 
 
 export default AdminDashboard;
+
