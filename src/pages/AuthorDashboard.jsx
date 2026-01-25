@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../styles/Dashboard.css"; 
+import "../styles/dashboard.css"; 
 
 const API_SUBMIT_URL = "http://localhost:5000/api/writer/articles"; 
 
@@ -85,3 +85,4 @@ const AuthorDashboard = () => {
 };
 
 export default AuthorDashboard;
+
