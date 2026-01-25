@@ -184,3 +184,4 @@ const AdsUpload = ({ fetchApprovedNews, fetchPendingNews }) => {
 
 
 export default AdminDashboard;
+
