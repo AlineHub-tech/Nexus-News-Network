@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../styles/dashboard.css"; 
+import "../styles/dashboard.css";
 
-// --- UMURONGO W'INGENZI WAKOSOWE HANO ---
-// Koresha Environment Variable VITE_API_URL iri muri Vercel Settings (https://url-ya-render.com)
-// Niba uri local development, ukoresha http://localhost:5000/api gusa (HTTP)
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-const API_ADMIN_URL = `${API_BASE_URL}/admin`;
-// ----------------------------------------
+// Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // Yakosowe hano
+
+// Hano API_ADMIN_URL yakosowe kugira ngo ihuze neza na server.js:
+// Adiresi yuzuye ubu ni: https://
+const API_ADMIN_URL = `${API_BASE_URL}/api/admin`; 
 
 
-const getToken = () => localStorage.getItem("token"); 
+const getToken = () => localStorage.getItem("token");
 
 const AdminDashboard = () => {
-  const [pendingNews, setPendingNews] = useState([]); 
-  const [approvedNews, setApprovedNews] = useState([]); 
+  const [pendingNews, setPendingNews] = useState([]);
+  const [approvedNews, setApprovedNews] = useState([]);
 
   // Function igarura inkuru zitarasuzumwa
   const fetchPendingNews = async () => {
@@ -30,7 +30,7 @@ const AdminDashboard = () => {
       console.error("Error fetching pending news:", err.response?.data?.msg || err.message);
     }
   };
-  
+
   // FUNCTION IGARURA INKURU ZEMEJWE
   const fetchApprovedNews = async () => {
     try {
@@ -81,6 +81,13 @@ const AdminDashboard = () => {
     fetchApprovedNews(); // Guhamagara approved news iyo page ifungutse
   }, []);
 
+  // Function ifasha kubona URL y'ifoto cyangwa video neza
+  const getMediaUrl = (mediaUrl) => {
+    // MediaUrl iba itangira na /uploads/... 
+    // Dushyiraho API_BASE_URL imbere kugira ngo URL yuzure neza: https://...
+    return `${API_BASE_URL}${mediaUrl}`;
+  };
+
   return (
     <div className="dashboard-container">
       <h2>Inkuru Zitarasuzumwa (Pending Approval)</h2>
@@ -91,9 +98,9 @@ const AdminDashboard = () => {
               <div>
                 <h3>{n.title}</h3>
                 <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
-                {/* --- Hano twakosoye URL y'amafoto --- */}
-                {n.mediaUrl && n.mediaType === 'image' && <img src={`${API_BASE_URL}${n.mediaUrl}`} alt="Media" style={{maxWidth: '100px'}} />}
-                {n.mediaUrl && n.mediaType === 'video' && <video src={`${API_BASE_URL}${n.mediaUrl}`} controls style={{maxWidth: '100px'}} />}
+                {/* --- Hano twakosoye URL y'amafoto dukoresheje function nshya --- */}
+                {n.mediaUrl && n.mediaType === 'image' && <img src={getMediaUrl(n.mediaUrl)} alt="Media" style={{maxWidth: '100px'}} />}
+                {n.mediaUrl && n.mediaType === 'video' && <video src={getMediaUrl(n.mediaUrl)} controls style={{maxWidth: '100px'}} />}
               </div>
               <div>
                 <button onClick={() => handleApprove(n._id)}>Emeza</button>
@@ -105,7 +112,7 @@ const AdminDashboard = () => {
       </div>
 
       <hr />
-      
+
       <h2>Inkuru Zemejwe (Approved News)</h2>
       <div className="admin-news-list">
       {approvedNews.length === 0 ? (<p>Nta nkuru zemejwe zihari.</p>) : (
@@ -114,9 +121,9 @@ const AdminDashboard = () => {
               <div>
                 <h3>{n.title}</h3>
                 <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
-                 {/* --- Hano twakosoye URL y'amafoto --- */}
-                {n.mediaUrl && n.mediaType === 'image' && <img src={`${API_BASE_URL}${n.mediaUrl}`} alt="Media" style={{maxWidth: '100px'}} />}
-                {n.mediaUrl && n.mediaType === 'video' && <video src={`${API_BASE_URL}${n.mediaUrl}`} controls style={{maxWidth: '100px'}} />}
+                 {/* --- Hano twakosoye URL y'amafoto dukoresheje function nshya --- */}
+                {n.mediaUrl && n.mediaType === 'image' && <img src={getMediaUrl(n.mediaUrl)} alt="Media" style={{maxWidth: '100px'}} />}
+                {n.mediaUrl && n.mediaType === 'video' && <video src={getMediaUrl(n.mediaUrl)} controls style={{maxWidth: '100px'}} />}
               </div>
               <div>
                 <button onClick={() => handleDelete(n._id)} className="delete-btn">Siba Burundu</button>
@@ -135,29 +142,32 @@ const AdminDashboard = () => {
 
 // Component ya AdsUpload
 const AdsUpload = ({ fetchApprovedNews, fetchPendingNews }) => {
+  // ... (State declaration ziracyari zimwe)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [mediaFile, setMediaFile] = useState(null); 
+  const [mediaFile, setMediaFile] = useState(null);
   const [mediaType, setMediaType] = useState("image");
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
     formData.append("mediaType", mediaType);
     if (mediaFile) {
-        formData.append("mediaFile", mediaFile); 
+        formData.append("mediaFile", mediaFile);
     }
 
     try {
       const token = getToken();
-      await axios.post(`${API_ADMIN_URL}/ads`, formData, { // API_ADMIN_URL irakora neza hano
+      // Guhamagara API_ADMIN_URL byarakosowe neza ubu: /api/admin/ads
+      await axios.post(`${API_ADMIN_URL}/ads`, formData, {
         headers: { "x-auth-token": token },
       });
       alert("Ad yoherejwe kandi irakora");
-      setTitle(""); setDescription(""); setMediaFile(null); 
+      setTitle(""); setDescription(""); setMediaFile(null);
       if (fetchApprovedNews) fetchApprovedNews();
       if (fetchPendingNews) fetchPendingNews();
     } catch (err) {
@@ -170,16 +180,16 @@ const AdsUpload = ({ fetchApprovedNews, fetchPendingNews }) => {
     <form onSubmit={handleSubmit} className="dashboard-form">
       <input placeholder="Title y'Ad" value={title} onChange={e=>setTitle(e.target.value)} required/>
       <textarea placeholder="Description" value={description} onChange={e=>setDescription(e.target.value)} required/>
-      
+
       <select value={mediaType} onChange={e => setMediaType(e.target.value)}>
           <option value="image">Image</option>
           <option value="video">Video</option>
       </select>
 
-      <input 
-          type="file" 
+      <input
+          type="file"
           accept={mediaType === 'image' ? 'image/*' : 'video/*'}
-          onChange={e => setMediaFile(e.target.files[0])} 
+          onChange={e => setMediaFile(e.target.files[0])}
       />
 
       <button type="submit">Shyiraho Ad</button>
