@@ -9,10 +9,14 @@ export const NewsProvider = ({ children }) => {
   const [allMedia, setAllMedia] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
-  const [currentPage, setCurrentPage] = useState(1); // Page iriho ubu
-  const [articlesPerPage] = useState(30); // Inkuru 30 kuri buri page (nkuko wabisabye umubare munini)
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [articlesPerPage] = useState(30); 
 
-  const API_URL = "http://localhost:5000/api"; 
+  // --- UMURONGO W'INGENZI WAKOSOWE HANO ---
+  // Dukoresha Environment Variable VITE_API_URL, itangira na https:// kuri Vercel (Production)
+  // Niba uri local development, dukoresha http://localhost:5000/api gusa (HTTP)
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+  // ----------------------------------------
 
   const switchLanguage = (lng) => {
     setLanguage(lng);
@@ -23,8 +27,7 @@ export const NewsProvider = ({ children }) => {
     const fetchArticles = async () => {
       try {
         setLoading(true);
-        // API ikigarura byose. Tugabanya mu Context.
-        const res = await axios.get(`${API_URL}/public/articles`); 
+         const res = await axios.get(`${API_URL}/public/articles`); 
         if (Array.isArray(res.data)) {
             setAllMedia(res.data);
         } else {
@@ -42,21 +45,18 @@ export const NewsProvider = ({ children }) => {
     fetchArticles();
   }, []); 
 
-  // LOGIC NSESHA: Kugabanyamo ibice bibiri: Inkuru gusa (images) n'Amashusho gusa (videos)
+  // ... (Amakode asigaye yose ni amwe) ...
+
   const articlesOnly = useMemo(() => 
     allMedia.filter(item => item.mediaType === 'image'), [allMedia]
   );
   const videosOnly = useMemo(() => 
     allMedia.filter(item => item.mediaType === 'video'), [allMedia]
   );
-  
-  // Logic ya Search ikora kuri 'articlesOnly' (Inkuru gusa)
-  const filteredArticles = useMemo(() => {
+    const filteredArticles = useMemo(() => {
     if (!searchQuery) {
-      // Niba nta search, garura articles zose (tugabanya nyuma)
       return articlesOnly; 
     }
-    // ... (Logic ya Search) ...
     const lowercasedQuery = searchQuery.toLowerCase();
     return articlesOnly.filter(article => { 
       const title = article.title || "";
@@ -69,32 +69,24 @@ export const NewsProvider = ({ children }) => {
       );
     });
   }, [articlesOnly, searchQuery]); 
-  
-  // LOGIC YA PAGINATION:
-  // Kugabanya filteredArticles muri page ntoya kugirango zijye muri RegularNews
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-  
-  // newsList izaba inkuru ziri kuri page iriho ubu GUSA
   const paginatedNewsList = useMemo(() => 
     filteredArticles.slice(indexOfFirstArticle, indexOfLastArticle), 
     [filteredArticles, indexOfFirstArticle, indexOfLastArticle]
   );
-
-  // Function yoherejwe hanze kugira ngo component zihindure page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 
   return (
     <NewsContext.Provider value={{
       searchQuery, setSearchQuery, language, switchLanguage,
-      newsList: paginatedNewsList, // Hano niho haba impinduka ikomeye
+      newsList: paginatedNewsList, 
       videosList: videosOnly,
       loading, error,
-      // Ongeyeho ibya Pagination kugira ngo RegularNews ibone buttons
-      currentPage,
+        currentPage,
       articlesPerPage,
-      totalArticles: filteredArticles.length, // Umubare w'inkuru zose (nyuma ya search)
+      totalArticles: filteredArticles.length, 
       paginate
     }}>
       {children}
