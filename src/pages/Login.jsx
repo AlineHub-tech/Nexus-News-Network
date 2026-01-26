@@ -5,7 +5,13 @@ import "../styles/Auth.css";
 import { AuthContext } from "../context/AuthContext"; 
 import { jwtDecode } from 'jwt-decode'; // Dukeneye jwt-decode hano kugenzura role vuba
 
-const API_LOGIN_URL = "http://localhost:5000/api/auth/login";
+// --- UMURONGO W'INGENZI WAKOSOWE HANO ---
+// Koresha Environment Variable VITE_API_URL iri muri Vercel Settings (https://url-ya-render.com)
+// Niba uri local development, ukoresha http://localhost:5000/api gusa (HTTP)
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_LOGIN_URL = `${API_BASE_URL}/auth/login`;
+// ----------------------------------------
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,6 +27,7 @@ const Login = () => {
     setIsLoggingIn(true); 
 
     try {
+      // API_LOGIN_URL irakora neza hano
       const res = await axios.post(API_LOGIN_URL, { email, password });
       const { token } = res.data;
 

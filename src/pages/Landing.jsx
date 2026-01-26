@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect, useMemo } from "react";
 import axios from 'axios'; 
-import "../styles/Landing.css"; // Styles rusange za Layout
+import "../styles/Landing.css"; 
 // Import components zose zikenerwa
-import LatestNews from "../components/LatestNews"; // Component yihariye ya LatestNews
+import LatestNews from "../components/LatestNews"; 
 import RegularNews from "../components/RegularNews";
 import PopularNews from "../components/PopularNews";
 import TV from "../components/TV";
@@ -16,10 +16,14 @@ import NewsCard from "../components/NewsCard";
 import { NewsContext } from '../context/NewsContext';
 
 
-const API_BASE_URL = 'http://localhost:5000/api/public'; 
+// --- UMURONGO W'INGENZI WAKOSOWE HANO ---
+// Dukoresha Environment Variable VITE_API_URL, itangira na https:// kuri Vercel (Production)
+// Niba uri local development, dukoresha http://localhost:5000/api gusa (HTTP)
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// ----------------------------------------
+
 
 const Landing = () => {
-  // newsList ubu irimo inkuru za page imwe gusa kubera pagination muri Context
   const { newsList, videosList, loading, error, searchQuery } = useContext(NewsContext);
   
   const [ads, setAds] = useState([]); 
@@ -28,7 +32,8 @@ const Landing = () => {
   useEffect(() => {
     const fetchAdsData = async () => { 
         try {
-            const adsRes = await axios.get(`${API_BASE_URL}/ads`);
+            // Guhuza neza: Twahinduye API_BASE_URL kugira ngo ikore hose
+            const adsRes = await axios.get(`${API_BASE_URL}/public/ads`);
             setAds(adsRes.data);
             setIsOtherLoading(false);
         } catch (err) {
@@ -39,15 +44,10 @@ const Landing = () => {
     fetchAdsData(); 
   }, []); 
 
-  // Dukoresha useMemo kugabanya urutonde rw'inkuru zavuye muri Context nta duplicates
-  // latestNews8 ikoresha inkuru 8 za mbere gusa muri list yose yavuye muri API
+  // ... (Gukoresha useMemo no kugaragaza Loading/Error/No results biracyari kimwe) ...
+
   const latestNews8 = useMemo(() => newsList.slice(0, 8), [newsList]);
-  
-  // RegularNews itangira ku nkuru ya 9 (izisigaye kuri page ya mbere)
-  // Kubera ko newsList yari ifite pages gusa, iyi logic irakenewe:
   const regularNewsSliced = useMemo(() => newsList.slice(8), [newsList]);
-  
-  // Inkuru 8 za Popular/Trending (zo muri ticker)
   const popularNewsSliced = useMemo(() => newsList.slice(0, 8), [newsList]); 
 
 
@@ -77,7 +77,6 @@ const Landing = () => {
       <SloganAnimation/>
 
       {/* SECTION 2: Latest News (Inkuru 8 zose hamwe) */}
-      {/* Container imwe itazigabanyamo Left/Center/Right muri Landing.jsx */}
       <section className="latest-news-section-container">
          <LatestNews news={latestNews8} /> 
       </section>

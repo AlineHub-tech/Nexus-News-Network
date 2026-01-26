@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/dashboard.css"; 
 
-const API_ADMIN_URL = "http://localhost:5000/api/admin";
+// --- UMURONGO W'INGENZI WAKOSOWE HANO ---
+// Koresha Environment Variable VITE_API_URL iri muri Vercel Settings (https://url-ya-render.com)
+// Niba uri local development, ukoresha http://localhost:5000/api gusa (HTTP)
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_ADMIN_URL = `${API_BASE_URL}/admin`;
+// ----------------------------------------
+
 
 const getToken = () => localStorage.getItem("token"); 
 
@@ -85,8 +91,9 @@ const AdminDashboard = () => {
               <div>
                 <h3>{n.title}</h3>
                 <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
-                {n.mediaUrl && n.mediaType === 'image' && <img src={`http://localhost:5000${n.mediaUrl}`} alt="Media" style={{maxWidth: '100px'}} />}
-                {n.mediaUrl && n.mediaType === 'video' && <video src={`http://localhost:5000${n.mediaUrl}`} controls style={{maxWidth: '100px'}} />}
+                {/* --- Hano twakosoye URL y'amafoto --- */}
+                {n.mediaUrl && n.mediaType === 'image' && <img src={`${API_BASE_URL}${n.mediaUrl}`} alt="Media" style={{maxWidth: '100px'}} />}
+                {n.mediaUrl && n.mediaType === 'video' && <video src={`${API_BASE_URL}${n.mediaUrl}`} controls style={{maxWidth: '100px'}} />}
               </div>
               <div>
                 <button onClick={() => handleApprove(n._id)}>Emeza</button>
@@ -107,11 +114,11 @@ const AdminDashboard = () => {
               <div>
                 <h3>{n.title}</h3>
                 <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
-                {n.mediaUrl && n.mediaType === 'image' && <img src={`http://localhost:5000${n.mediaUrl}`} alt="Media" style={{maxWidth: '100px'}} />}
-                {n.mediaUrl && n.mediaType === 'video' && <video src={`http://localhost:5000${n.mediaUrl}`} controls style={{maxWidth: '100px'}} />}
+                 {/* --- Hano twakosoye URL y'amafoto --- */}
+                {n.mediaUrl && n.mediaType === 'image' && <img src={`${API_BASE_URL}${n.mediaUrl}`} alt="Media" style={{maxWidth: '100px'}} />}
+                {n.mediaUrl && n.mediaType === 'video' && <video src={`${API_BASE_URL}${n.mediaUrl}`} controls style={{maxWidth: '100px'}} />}
               </div>
               <div>
-                {/* Hano dukoresha gusa handleDelete kuko nta button yo kwemeza ikenewe */}
                 <button onClick={() => handleDelete(n._id)} className="delete-btn">Siba Burundu</button>
               </div>
             </div>
@@ -121,7 +128,6 @@ const AdminDashboard = () => {
       <hr />
 
       <h2>Shyiraho Ads Nshya (Upload Method)</h2>
-      {/* Dutanga fetch functions muri AdsUpload kugira ngo zikore refresh iyo Ad yoherejwe */}
       <AdsUpload fetchApprovedNews={fetchApprovedNews} fetchPendingNews={fetchPendingNews} />
     </div>
   );
@@ -147,12 +153,11 @@ const AdsUpload = ({ fetchApprovedNews, fetchPendingNews }) => {
 
     try {
       const token = getToken();
-      await axios.post(`${API_ADMIN_URL}/ads`, formData, {
+      await axios.post(`${API_ADMIN_URL}/ads`, formData, { // API_ADMIN_URL irakora neza hano
         headers: { "x-auth-token": token },
       });
       alert("Ad yoherejwe kandi irakora");
       setTitle(""); setDescription(""); setMediaFile(null); 
-      // Refresh lists after successful upload
       if (fetchApprovedNews) fetchApprovedNews();
       if (fetchPendingNews) fetchPendingNews();
     } catch (err) {
@@ -174,7 +179,7 @@ const AdsUpload = ({ fetchApprovedNews, fetchPendingNews }) => {
       <input 
           type="file" 
           accept={mediaType === 'image' ? 'image/*' : 'video/*'}
-          onChange={e => setMediaFile(e.target.files[0])} // Gufata file ya mbere gusa
+          onChange={e => setMediaFile(e.target.files[0])} 
       />
 
       <button type="submit">Shyiraho Ad</button>
@@ -184,4 +189,3 @@ const AdsUpload = ({ fetchApprovedNews, fetchPendingNews }) => {
 
 
 export default AdminDashboard;
-

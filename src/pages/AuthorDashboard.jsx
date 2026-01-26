@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState }  from "react";
 import axios from "axios";
 import "../styles/dashboard.css"; 
 
-const API_SUBMIT_URL = "http://localhost:5000/api/writer/articles"; 
+// --- UMURONGO W'INGENZI WAKOSOWE HANO ---
+// Koresha Environment Variable VITE_API_URL iri muri Vercel Settings (https://url-ya-render.com)
+// Niba uri local development, ukoresha http://localhost:5000/api gusa (HTTP)
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_SUBMIT_URL = `${API_BASE_URL}/writer/articles`;
+// ----------------------------------------
 
 
 const getToken = () => localStorage.getItem("token"); 
@@ -11,7 +16,7 @@ const AuthorDashboard = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState(""); 
   const [category, setCategory] = useState("Politics"); 
-  const [mediaFile, setMediaFile] = useState(null); // Duhinduye file aho kuba URL
+  const [mediaFile, setMediaFile] = useState(null); 
   const [mediaType, setMediaType] = useState("image"); 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -33,6 +38,7 @@ const AuthorDashboard = () => {
       const token = getToken();
       if (!token) { alert("Ntabwo winjiye."); setIsSubmitting(false); return; }
 
+      // API_SUBMIT_URL irakora neza hano
       await axios.post(API_SUBMIT_URL, formData, {
         headers: { 
             "x-auth-token": token // Header ihuje na backend
@@ -85,4 +91,3 @@ const AuthorDashboard = () => {
 };
 
 export default AuthorDashboard;
-
