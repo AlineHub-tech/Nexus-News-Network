@@ -3,7 +3,6 @@ import "../styles/TVSection.css";
 
 const TV = ({ videos }) => { // Yakira 'videos' props
   if (!videos || videos.length === 0) {
-    // Nabishize muri div ikikije byose kugira ngo style y'umutwe igaragare
     return (
         <div className="tv-section-container">
             <h2 className="section-title">TV Section</h2> 
@@ -12,19 +11,21 @@ const TV = ({ videos }) => { // Yakira 'videos' props
     );
   }
 
-  // URL yuzuye ya server (Root URL)
-  const BASE_SERVER_URL = 'http://localhost:5000';
+  // --- UMURONGO W'INGENZI WAKOSOWE HANO ---
+  // Koresha Environment Variable VITE_API_URL iri muri Vercel Settings (https://url-ya-render.com)
+  // Niba uri local development, ukoresha http://localhost:5000 (HTTP)
+  const BASE_SERVER_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  // ----------------------------------------
 
   return (
-    // Nongeyeho container div ikikije byose kugira ngo umutwe ube hejuru ya grid
     <div className="tv-section-container"> 
-      {/* Umutwe wa section hamwe na style twumvikanyeho */}
       <h2 className="section-title">AMASHUSHO(TV)</h2> 
 
       <div className="tv-section">
         {videos.map((videoItem) => (
           <div key={videoItem._id} className="tv-card">
             <video controls>
+              {/* Dukoresha BASE_SERVER_URL nshya */}
               <source src={`${BASE_SERVER_URL}${videoItem.mediaUrl}`} type="video/mp4" />
               Your browser does not support the video tag.
             </video>

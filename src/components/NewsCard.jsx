@@ -3,7 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom"; 
 import "../styles/NewsCard.css";
 
-const BASE_SERVER_URL = 'http://localhost:5000';
+// --- UMURONGO W'INGENZI WAKOSOWE HANO ---
+// Koresha Environment Variable VITE_API_URL iri muri Vercel Settings (https://url-ya-render.com)
+// Niba uri local development, ukoresha http://localhost:5000 (HTTP)
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// ----------------------------------------
+
 
 // Hano twongereye props nshya yitwa 'extraClass'
 const NewsCard = ({ post, extraClass = '' }) => { 
@@ -15,10 +20,12 @@ const NewsCard = ({ post, extraClass = '' }) => {
       <div className={`news-card ${extraClass}`}> 
         <div className="news-media-container">
           {post.mediaUrl && post.mediaType === 'image' && (
-            <img src={`${BASE_SERVER_URL}${post.mediaUrl}`} alt={post.title} className="news-card-image" />
+            // Dukoresha API_BASE_URL nshya
+            <img src={`${API_BASE_URL}${post.mediaUrl}`} alt={post.title} className="news-card-image" />
           )}
           {post.mediaUrl && post.mediaType === 'video' && (
-            <video src={`${BASE_SERVER_URL}${post.mediaUrl}`} controls className="news-card-video">
+            // Dukoresha API_BASE_URL nshya
+            <video src={`${API_BASE_URL}${post.mediaUrl}`} controls className="news-card-video">
                 Your browser does not support the video tag.
             </video>
           )}
