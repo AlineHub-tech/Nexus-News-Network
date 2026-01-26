@@ -3,8 +3,11 @@ import axios from 'axios';
 
 export const NewsContext = createContext();
 
-// Dukoresha VITE_API_URL itazagira slash ku iherezo muri Vercel Settings
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'; // Hano nta /api ku iherezo
+// --- UMURONGO W'INGENZI URI KUGENA API BASE URL ---
+// Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com (Nta slash/api/public ku iherezo)
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// ----------------------------------------
+
 
 export const NewsProvider = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,8 +29,8 @@ export const NewsProvider = ({ children }) => {
       try {
         setLoading(true);
 
-        // HANO NIHO HAKOSOWE: Adiresi yose yanditswe neza (Api endpoint/public/articles)
-        // Iyi URL ubu izakora neza Vercel settings zose:
+        // HANO NIHO GUHAMAGARA API BYAKOSOWE: Twongeyemo '/api/public/'
+        // Adiresi yuzuye ikora neza ubu: https://
         const res = await axios.get(`${API_BASE_URL}/api/public/articles`);
 
         if (Array.isArray(res.data)) {
@@ -39,7 +42,7 @@ export const NewsProvider = ({ children }) => {
         }
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching articles in context:", err.message); // Ubutumwa burambuye
+        console.error("Error fetching articles in context:", err.message);
         setError("Habaye ikibazo cyo guhuza na server (CORS/Connection refused).");
         setLoading(false);
       }
@@ -47,7 +50,7 @@ export const NewsProvider = ({ children }) => {
     fetchArticles();
   }, []);
 
-  // ... (Amakode asigaye yose ni amwe, yita kuri filtering na pagination) ...
+  // ... (Gusigara byose kuri filtering, pagination, context value) ...
 
   const articlesOnly = useMemo(() =>
     allMedia.filter(item => item.mediaType === 'image'), [allMedia]
