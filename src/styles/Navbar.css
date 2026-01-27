@@ -1,131 +1,157 @@
-/* ==== GLOBAL NAVBAR WRAPPER ==== */
-.navbar {
-  width: 100%;
-  background: #002B5B; /* Dark blue */
-  color: #fff;
-  padding: 10px 20px;
+/* Default styles (Mobile First) */
+.navbar-container {
+  background-color: #0a1930; /* Dark blue background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
   position: sticky;
   top: 0;
-  margin-top:-10%;
-  z-index: 999;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  margin-top: -25%;
+  z-index: 100;
+  width: 100%;
 }
-.navvv{
+
+.navbar-top {
   display: flex;
-  gap:8%;
-}
-/* ==== TOP NAV (Home, Author, Admin) ==== */
-.nav-links {
-  display: flex;
-  gap: 20px;
+  justify-content: space-between;
   align-items: center;
 }
 
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  transition: 0.2s ease-in-out;
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
+/* Logos na Text byakozwe stretch kuri mobile */
+.logo-section {
+    display: flex;
+    align-items: center;
+    flex-direction: row; /* Biramburanye kuri mobile noneho */
 }
 
-.nav-links a:hover {
-  border-color: #FF0000; /* small red underline like Inyarwanda */
+.site-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 
-/* ==== LOGO STYLE ==== */
-.logo {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
+.site-name {
+    font-size: 16px; /* Font isomeka neza */
+    font-weight: bold;
+    color: #ffffff; /* White text on dark blue background */
+    margin-top: 0;
+    margin-left: 10px; /* Umwanya hagati ya logo na text */
 }
 
-.navbar img {
-  height: 45px;
-  border-radius:50%;
-}
-
-/* ==== RIGHT SIDE: SEARCH + LANGUAGE ==== */
 .nav-actions {
-  margin-left: auto;
-  display: flex;
-  gap: 15px;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
-/* ==== SECOND BAR (CATEGORIES NAVBAR) ==== */
-.explorer-navbar {
-  margin-top: 12px;
-  background: #0056A5; /* bright blue like inyarwanda */
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  border-radius: 8px;
+/* Size ya Login Icon yagabanutse */
+.auth-icon-button {
+    background: none;
+    border: none;
+    font-size: 18px; /* Size nshya */
+    cursor: pointer;
+    margin-left: 10px;
+    color: #ffffff; /* White color */
 }
 
-/* ==== CATEGORIES WRAPPER ==== */
-.categories {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
+.menu-toggle {
+  display: block; 
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #ffffff; /* White color */
 }
 
-/* ==== CATEGORY LINKS ==== */
-.category-link {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
+/* Mobile Menu (Hidden by default on mobile) */
+.nav-mobile-menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 60px; /* Adjust based on your header height */
+  left: 0;
+  right: 0;
+  background-color: #0a1930; /* Dark blue background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  z-index: 50;
+}
+
+.nav-mobile-menu.open {
+  display: flex; 
+}
+
+.menu-link {
+  padding: 10px 0;
+  color: #ffffff; /* White text */
   text-decoration: none;
-  padding-bottom: 2px;
-  transition: 0.2s;
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid #444;
+}
+
+.mobile-categories-title {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+/* Explorer Navbar (Categories bar Desktop view: hidden on mobile) */
+.explorer-navbar {
+  display: none; /* Hide category bar on mobile */
+  margin-top: 10px;
+  align-items: center;
+  overflow-x: auto; /* Horizontal scroll */
+  white-space: nowrap;
+  gap: 10px;
+}
+
+.category-link {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 12px;
+  background-color: #1a2b4c; /* Slightly lighter blue for contrast */
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  display: inline-block; 
+}
+
+.category-link.home-link {
+    background-color: #0056b3; /* Bright blue for Home link */
+    font-weight: bold;
 }
 
 .category-link:hover {
-  border-color: #FF0000;
+  background-color: #0056b3;
 }
 
-/* ==== RESPONSIVE ==== */
-@media (max-width: 900px) {
+
+/* --- Media Queries for responsiveness --- */
+
+/* Tablet styles (min-width: 600px) */
+@media (min-width: 600px) {
+    .navbar-container {
+      margin-top: -25%;
+    }
+  .site-name {
+    font-size: 18px;
+  }
+
+  .nav-mobile-menu {
+    display: none !important; 
+  }
+  
+  .menu-toggle {
+    display: none; 
+  }
+
   .explorer-navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .navbar{
-margin-top:-29%;
+    display: flex; /* Show category bar on tablets+ */
   }
 }
 
-@media (max-width: 768px) {
-  .nav-links {
-    display: none; /* hide top small nav like inyarwanda */
-  }
-  .navbar{
-margin-top:-29%;
-  }
-  .categories {
-    gap: 10px;
-  }
-
-  .category-link {
-    font-size: 13px;
-  }
-
-  .nav-actions {
-    gap: 5px;
-  }
-}
-
-@media (max-width: 480px) {
-  .explorer-navbar img {
-    height: 35px;
-  }
-    .navbar{
-margin-top:-18%;
-  }
+/* Desktop styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .navbar-container {
+        padding: 10px 50px;
+        margin-top: -25%;
+    }
 }

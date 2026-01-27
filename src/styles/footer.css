@@ -1,36 +1,96 @@
-.footer {
-    background: #002B5B;
-    color: #ffffff; 
-    padding-top: 50px; 
-    border-top: 6px solid #007bff; 
-    font-family: 'Poppins', sans-serif; 
+/* Default styles (Mobile First) */
+.footer-container-wrapper {
+  background-color: #0a1930; /* Dark blue background nka navbar */
+  color: #ffffff; /* White text */
+  padding-top: 30px;
+  padding-bottom: 20px;
+  width: 100%;
 }
 
-.footer-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 40px; 
-    max-width: 1200px;
-    margin: 0 auto 40px auto; 
+.footer-content-area {
+  display: flex;
+  flex-direction: column; /* Sections imwe munsi yindi kuri mobile */
+  gap: 20px;
+  padding: 0 15px; /* Padding ku mpande */
 }
 
-.footer-section h2,
-.footer-section h3 {
-    color: #007bff; 
-    margin-bottom: 18px;
-    font-weight: 700; 
-     border-bottom: 1px solid rgba(0, 123, 255, 0.4); 
-    padding-bottom: 12px;
+.footer-section h2, .footer-section h3 {
+  color: #0056b3; /* Bright blue color for titles */
+  border-bottom: 2px solid #0056b3;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.footer-section p {
-    margin-bottom: 15px;
-    line-height: 1.6;
-    color: #f3f3f3; 
-    font-weight: 300;
+/* Links styling */
+.footer-links ul {
+  list-style: none;
+  padding: 0;
 }
 
-/* Developer Name Styling (Bolder, Green color) */
+.footer-links li a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-bottom: 5px;
+  display: block;
+  transition: color 0.3s;
+}
+
+.footer-links li a:hover {
+  color: #0056b3;
+}
+
+/* Subscribe form styling */
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subscribe-form input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.subscribe-form button {
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  background-color: #0056b3; /* Bright blue button */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.subscribe-form button:hover {
+  background-color: #004494;
+}
+
+/* Social icons styling */
+.social-icons a {
+  color: #ffffff;
+  font-size: 24px;
+  margin-right: 15px;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #0056b3;
+}
+
+/* Bottom copyright bar */
+.footer-bottom-bar {
+  background-color: #050e1a; /* Even darker blue */
+  text-align: center;
+  padding: 15px 15px;
+  margin-top: 30px;
+}
+
+.footer-copyright {
+  font-size: 14px;
+  color: #aaa;
+}
+
 .developer-name {
     font-weight: bold;
     color: #ff380b; 
@@ -46,106 +106,33 @@ text-decoration: none;
     text-decoration: underline;
 }
 
-/* Quick Links Styling */
-.footer-links ul {
-    list-style: none;
-    padding: 0;
+
+/* --- Media Queries for responsiveness --- */
+
+/* Tablet styles (min-width: 600px) */
+@media (min-width: 600px) {
+  .footer-content-area {
+    flex-direction: row; /* Sections eshatu/enye kuruhande */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 30px;
+  }
+
+  .footer-section {
+    flex-basis: 45%; /* Buri section ifata hafi kimwe cya kabiri kuri tablet */
+  }
+
+  .footer-subscribe, .footer-socials {
+    flex-basis: 45%; /* Gutunganya neza spacing */
+  }
 }
 
-.footer-links li a {
-    color: #e9e9e9;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    display: block;
-    padding: 8px 0;
-    font-weight: 400;
-    /* Faint line between links */
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.05); 
-}
-
-.footer-links li:last-child a {
-    border-bottom: none; /* Remove border from the last link */
-}
-
-.footer-links li a:hover {
-    color: #ffffff;
-    padding-left: 8px; /* Clear visual feedback on hover */
-}
-
-/* Social Icons Styling */
-.social-icons a {
-    color: #ffffff;
-    font-size: 26px;
-    margin-right: 20px;
-    transition: color 0.3s ease;
-}
-
-.social-icons a:hover {
-    color: #007bff;
-}
-
-/* Subscribe Form Styling */
-.subscribe-form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.subscribe-form input {
-    padding: 14px;
-    border: 1px solid #333;
-    border-radius: 4px;
-    background-color: #0a192a; /* Slightly lighter input background */
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-}
-
-.subscribe-form button {
-    padding: 14px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-family: 'Poppins', sans-serif;
-}
-
-.subscribe-form button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
-.footer-bottom-bar {
-    background-color: #000000; 
-    padding: 20px 20px;
-    width: 100%; 
-    box-sizing: border-box; 
-    text-align: center; 
-    border-top: 1px solid #333;
-}
-
-.footer-copyright {
-    margin: 0; 
-    font-size: 0.85rem;
-    color: #ececec;
-}
-@media (max-width: 768px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        text-align: center;
+/* Desktop styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .footer-content-area {
+        padding: 0 50px;
     }
-    .social-icons {
-        justify-content: center;
-    }
-    .subscribe-form input, .subscribe-form button {
-      width: 90%;
-      margin: 0 auto;
-    }
-    .footer-links li a {
-        text-align: center;
+    .footer-section {
+        flex-basis: 22%; /* Buri section ifata hafi kimwe cya kane kuri desktop */
     }
 }
