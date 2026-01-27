@@ -74,11 +74,11 @@ const Footer = () => {
           <h3>{t("contactUs")}</h3>
           <div className="social-icons">
             {/* Koresha icons zose neza */}
-            <a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
-            <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="Twitter"><i className="fab fa-x-twitter"></i></a>
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
-            <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" aria-label="TikTok"><i className="fab fa-tiktok"></i></a>
-            <a href="https://www.youtube.com" target="_blank" rel="noreferrer" aria-label="Youtube"><i className="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61566301534848&mibextid=ZbWKwL" target="_blank" rel="noreferrer" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/NEXUSNEWSNETWAK?t=PvqTyUXF3XBBmADoGwdg_w&s=09" target="_blank" rel="noreferrer" aria-label="Twitter"><i className="fab fa-x-twitter"></i></a>
+            <a href=" https://www.instagram.com/nnnrwanda?utm_source=ig_web_button_share_sheet&igsh=MXBoa2E1bXFnb3N2MA==" target="_blank" rel="noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+            <a href=" https://www.tiktok.com/@nexus.news.network?_t=ZM-8xy3htvIVbp&_r=1" target="_blank" rel="noreferrer" aria-label="TikTok"><i className="fab fa-tiktok"></i></a>
+            <a href="youtube.com/@NexusNewsNetwork_11" target="_blank" rel="noreferrer" aria-label="Youtube"><i className="fab fa-youtube"></i></a>
             <a href="mailto:nexusnewsnetwork1@gmail.com" aria-label="Email"><i className="fas fa-envelope"></i></a>
           </div>
         </div>
