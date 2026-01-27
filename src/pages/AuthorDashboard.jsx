@@ -1,23 +1,25 @@
 import React, { useState }  from "react";
 import axios from "axios";
-import "../styles/dashboard.css"; 
+import "../styles/dashboard.css";
 
-// --- UMURONGO W'INGENZI WAKOSOWE HANO ---
-// Koresha Environment Variable VITE_API_URL iri muri Vercel Settings (https://url-ya-render.com)
-// Niba uri local development, ukoresha http://localhost:5000/api gusa (HTTP)
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const API_SUBMIT_URL = `${API_BASE_URL}/writer/articles`;
+// --- UMURONGO W'INGENZI WAKOSOWE HANO MURI ADIRESI ---
+// Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com (Nta slash/api ku iherezo)
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'; // Hano wakuyemo '/api' ku iherezo
 // ----------------------------------------
 
+// Hano API_SUBMIT_URL yakosowe kugira ngo ihuze neza na server.js:
+// Adiresi yuzuye ubu ni: https://
+const API_SUBMIT_URL = `${API_BASE_URL}/api/writer/articles`; 
 
-const getToken = () => localStorage.getItem("token"); 
+
+const getToken = () => localStorage.getItem("token");
 
 const AuthorDashboard = () => {
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState(""); 
-  const [category, setCategory] = useState("Politics"); 
-  const [mediaFile, setMediaFile] = useState(null); 
-  const [mediaType, setMediaType] = useState("image"); 
+  const [body, setBody] = useState("");
+  const [category, setCategory] = useState("Politics");
+  const [mediaFile, setMediaFile] = useState(null);
+  const [mediaType, setMediaType] = useState("image");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -30,60 +32,59 @@ const AuthorDashboard = () => {
     formData.append("category", category);
     formData.append("mediaType", mediaType);
     if (mediaFile) {
-        formData.append("mediaFile", mediaFile); 
+        formData.append("mediaFile", mediaFile);
     }
-    // Nta formData.append("author", ...) kuko backend ibifatira muri Token
 
     try {
       const token = getToken();
-      if (!token) { alert("Ntabwo winjiye."); setIsSubmitting(false); return; }
+      if (!token) { alert("You are not logged in."); setIsSubmitting(false); return; } // Ubutumwa bwahujwe
 
       // API_SUBMIT_URL irakora neza hano
       await axios.post(API_SUBMIT_URL, formData, {
-        headers: { 
-            "x-auth-token": token // Header ihuje na backend
+        headers: {
+            "x-auth-token": token
         },
       });
 
-      alert("Inkuru yoherejwe kuri admin approval (Status: Pending)");
+      alert("Article submitted for admin approval (Status: Pending)"); // Ubutumwa bwahujwe
       // Reset form
       setTitle(""); setBody(""); setMediaFile(null); setIsSubmitting(false);
 
     } catch (err) {
       console.error(err.response ? err.response.data : err.message);
-      alert("Habaye ikibazo mu kohereza inkuru.");
+      alert("An error occurred while submitting the article."); // Ubutumwa bwahujwe
       setIsSubmitting(false);
     }
   };
 
   return (
     <div className="dashboard-container">
-      <h2>Shyiraho Inkuru Nshya (Upload Method)</h2>
+      <h2>Submit New Article</h2>
       <form onSubmit={handleSubmit} className="dashboard-form">
-        <input type="text" placeholder="Title y'inkuru" value={title} onChange={(e) => setTitle(e.target.value)} required/>
-        <textarea placeholder="Ibirimo byose (Content/Body)" value={body} onChange={(e) => setBody(e.target.value)} required/>
-        
+        <input type="text" placeholder="Article Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
+        <textarea placeholder="Content/Body" value={body} onChange={(e) => setBody(e.target.value)} required/>
+
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="Politics">Politics</option><option value="Life">Life</option>
           <option value="Entertainment">Entertainment</option><option value="Culture">Culture</option>
           <option value="Education">Education</option><option value="Business">Business</option>
           <option value="Opinion">Opinion</option><option value="Sport">Sport</option>
-          <option value="TV">TV (Amashusho)</option><option value="Community">Community</option>
+          <option value="TV">TV (Video)</option><option value="Community">Community</option>
         </select>
-        
+
         <select value={mediaType} onChange={(e) => setMediaType(e.target.value)}>
             <option value="image">Image</option>
             <option value="video">Video</option>
         </select>
 
-        <input 
-          type="file" 
+        <input
+          type="file"
           accept={mediaType === 'image' ? 'image/*' : 'video/*'}
-          onChange={(e) => setMediaFile(e.target.files[0])} 
+          onChange={(e) => setMediaFile(e.target.files[0])}
         />
-        
+
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Iri kohereza...' : 'Ohereza Inkuru Kuri Admin'}
+          {isSubmitting ? 'Submitting...' : 'Submit Article for Approval'}
         </button>
       </form>
     </div>
