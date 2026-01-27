@@ -1,14 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NewsContext } from "../context/NewsContext";
-import SearchBar from "./SearchBar";
-import LangSwitch from "./LangSwitch";
-import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 import nnn from "../assets/nnn.jpg";
-import "../styles/ExplorerCard.css";
-import "../styles/Navbar.css";
+import "../styles/Navbar.css"; 
+import SearchBar from "./SearchBar"; 
+import LangSwitch from "./LangSwitch";
+
 
 export default function Navbar() {
-  // Define a comprehensive translation mapping
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language } = useContext(NewsContext);
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const translations = {
     Politics: { en: "Politics", rw: "Politiki", fr: "Politique" },
     Sport: { en: "Sport", rw: "Imikino", fr: "Sport" },
@@ -21,56 +26,80 @@ export default function Navbar() {
     Business: { en: "Business", rw: "Ubucuruzi", fr: "Affaires" },
     Education: { en: "Education", rw: "Uburezi", fr: "Éducation" },
     Home: { en: "Home", rw: "Ahabanza", fr: "Accueil" },
-    Author: { en: "Author", rw: "Uwanditse", fr: "Auteur" },
-    Admin: { en: "Admin", rw: "Umuyobozi", fr: "Admin" },
-    LogoText: { en: "Nexus News Network", rw: "Nexus News Network", fr: "Nexus News Network" }, // Logo text typically stays the same
+    Login: { en: "Login", rw: "Injira", fr: "Connexion" },
+    Logout: { en: "Logout", rw: "Sohoka", fr: "Déconnexion" },
+    Dashboard: { en: "Dashboard", rw: "Dashboard", fr: "Tableau de bord" },
   };
 
   const categories = [
-    "Politics",
-    "Sport",
-    "Community",
-    "Life",
-    "Culture",
-    "Entertainment",
-    "TV",
-    "Opinion",
-    "Business",
-    "Education",
+    "Politics", "Sport", "Community", "Life", "Culture",
+    "Entertainment", "TV", "Opinion", "Business", "Education",
   ];
 
-  const { language } = useContext(NewsContext);
-
-  // Helper function to get the translated string
   const getTranslation = (key) => {
-    // Default to English if the requested language isn't available for that key
+    // Kosora uburyo translation iboneka neza kurusha ubugorozi bwabanje:
+    if (translations[key] && translations[key][language]) {
+        return translations[key][language];
+    }
+    return key; // Garura key niba translation itarabonetse
+  };
 
-    return translations[key]?.[language] || translations[key]?.en || key;
+  const handleAuthAction = () => {
+    setIsMenuOpen(false);
+    if (user) {
+        logout();
+        navigate("/");
+    } else {
+        navigate("/login");
+    }
   };
 
   return (
-    <header className="navbar">
-      <div className="navvv">
-        <div className="log">{getTranslation("LogoText")}</div>
-
-        <nav className="nav-links">
-          <Link to="/">{getTranslation("Home")}</Link>
-          <Link to="/register">{getTranslation("Author")}</Link>
-          <Link to="/register">{getTranslation("Admin")}</Link>
-        </nav>
+    <header className="navbar-container sticky-top">
+      <div className="navbar-top">
+        <div className="logo-section">
+            <Link to="/"> 
+                <img src={nnn} alt="Logo" className="site-logo" />
+            </Link>
+            <div className="site-name">Nexus News Network</div>
+        </div>
 
         <div className="nav-actions">
           <SearchBar />
           <LangSwitch />
+          
+          <button onClick={handleAuthAction} className="auth-icon-button" title={user ? getTranslation("Logout") : getTranslation("Login")}>
+             👤
+          </button>
+
+          <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+             ☰ 
+          </button>
         </div>
       </div>
+
+      <nav className={`nav-mobile-menu ${isMenuOpen ? 'open' : ''}`}>
+        <Link to="/" onClick={() => setIsMenuOpen(false)} className="menu-link">{getTranslation("Home")}</Link>
+        
+        {user && (
+            <Link to={user.role === 'admin' ? "/admin-dashboard" : "/author-dashboard"} onClick={() => setIsMenuOpen(false)} className="menu-link">
+                {getTranslation("Dashboard")}
+            </Link>
+        )}
+
+        <div className="mobile-categories-title">Categories</div>
+        {categories.map((c) => (
+             <Link key={c} to={`/category/${c}`} onClick={() => setIsMenuOpen(false)} className="menu-link">
+                {getTranslation(c)}
+             </Link>
+        ))}
+      </nav>
+
       <nav className="explorer-navbar">
-        <div className="logo">
-          <img src={nnn} alt="Logo" />
-        </div>
-        <div className="categories">
+        <div className="categories-wrapper-desktop">
+          <Link to="/" className="category-link home-link">{getTranslation("Home")}</Link>
+
           {categories.map((c) => (
-            // >>>>> HANO TWAKOSOYE LINK KUGIRA NGO IJYE KURI /category/CategoryName <<<<<
             <Link key={c} to={`/category/${c}`} className="category-link">
               {getTranslation(c)}
             </Link>

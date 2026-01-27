@@ -2,13 +2,13 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { NewsContext } from "../context/NewsContext";
 import "../styles/footer.css";
+// Injection ya Font Awesome CSS link muri index.html irakenewe kugira ngo icons zigaragare
 
 const Footer = () => {
   const { language } = useContext(NewsContext) || { language: "en" };
   const [email, setEmail] = useState("");
 
   const translations = {
-    // ... (translations object remains exactly as provided previously) ...
     allRightsReserved: { en: "All rights reserved.", rw: "Uburenganzira bwose burabitswe.", fr: "Tous droits réservés." },
     contactUs: { en: "Contact Us", rw: "Twandikire", fr: "Nous Contacter" },
     quickLinks: { en: "Quick Links", rw: "Imiyoboro Yihuse", fr: "Liens Rapides" },
@@ -32,8 +32,8 @@ const Footer = () => {
   };
 
   return (
-    <footer className="footer">
-      <div className="footer-container">
+    <footer className="footer-container-wrapper">
+      <div className="footer-content-area">
 
         {/* SECTION 1: INFO & DESCRIPTION */}
         <div className="footer-section footer-info">
@@ -73,28 +73,17 @@ const Footer = () => {
         <div className="footer-section footer-socials">
           <h3>{t("contactUs")}</h3>
           <div className="social-icons">
-            <a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="Twitter">
-              <i className="fab fa-x-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" aria-label="TikTok">
-              <i className="fab fa-tiktok"></i>
-            </a>
-            <a href="https://www.youtube.com" target="_blank" rel="noreferrer" aria-label="Youtube">
-              <i className="fab fa-youtube"></i>
-            </a>
-            <a href="mailto:nexusnewsnetwork1@gmail.com" aria-label="Email">
-              <i className="fas fa-envelope"></i>
-            </a>
+            {/* Koresha icons zose neza */}
+            <a href="https://www.facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
+            <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="Twitter"><i className="fab fa-x-twitter"></i></a>
+            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com" target="_blank" rel="noreferrer" aria-label="TikTok"><i className="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com" target="_blank" rel="noreferrer" aria-label="Youtube"><i className="fab fa-youtube"></i></a>
+            <a href="mailto:nexusnewsnetwork1@gmail.com" aria-label="Email"><i className="fas fa-envelope"></i></a>
           </div>
         </div>
       </div>
-      
+
       {/* COPYRIGHT BAR - Stays full width */}
       <div className="footer-bottom-bar">
         <p className="footer-copyright">
@@ -103,6 +92,9 @@ const Footer = () => {
             </a>
         </p>
       </div>
+
+      {/* Kwibutsa kongeramo Font Awesome mu index.html */}
+      {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> */}
 
     </footer>
   );
