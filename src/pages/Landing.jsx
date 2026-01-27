@@ -19,7 +19,7 @@ import { NewsContext } from '../context/NewsContext';
 
 // --- UMURONGO W'INGENZI URI KUGENA API BASE URL ---
 // Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com (Nta slash/api/public ku iherezo)
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
 // ----------------------------------------
 
 

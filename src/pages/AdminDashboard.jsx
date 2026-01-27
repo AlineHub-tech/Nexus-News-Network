@@ -3,7 +3,7 @@ import axios from "axios";
 import "../styles/dashboard.css";
 
 // Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // Yakosowe hano
+const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000"; // Yakosowe hano
 
 // Hano API_ADMIN_URL yakosowe kugira ngo ihuze neza na server.js:
 // Adiresi yuzuye ubu ni: https://

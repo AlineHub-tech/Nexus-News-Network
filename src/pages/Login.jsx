@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 
 // --- UMURONGO W'INGENZI URI KUGENA API BASE URL ---
 // Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com (Nta slash ku iherezo)
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
 
 // HANO NIHO HAKOSOWE: Nongeyemo '/api' kugira ngo ihuze na Server.js (app.use('/api/auth', authRoutes))
 const API_LOGIN_URL = `${API_BASE_URL}/api/auth/login`;
