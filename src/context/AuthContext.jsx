@@ -1,10 +1,17 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'; 
+import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 
 export const AuthContext = createContext();
 
-const API_AUTH_URL = "http://localhost:5000/api/auth";
+// --- UMURONGO W'INGENZI WAKOSOWE HANO MURI ADIRESI ---
+// Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com (Nta slash ku iherezo)
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+// Hano API_AUTH_URL yakosowe kugira ngo ihuze na Server.js (app.use('/api/auth', authRoutes))
+const API_AUTH_URL = `${API_BASE_URL}/api/auth`;
+// ----------------------------------------
+
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -14,12 +21,15 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = async (token) => {
     try {
       axios.defaults.headers.common['x-auth-token'] = token; // Shyiramo token muri default headers
-      const res = await axios.get(`${API_AUTH_URL}/user`); // Kohereza request kuri /api/auth/user (backend route)
+      // Guhamagara bikosoye neza ubu:
+      const res = await axios.get(`${API_AUTH_URL}/user`); // Kohereza request kuri /api/auth/user
       setUser(res.data);
     } catch (err) {
       console.error("Authentication failed during fetch:", err);
       localStorage.removeItem('token');
       setUser(null);
+      // Hano ukwiye guhita ukora logout() kugira ngo usibe default header ya axios
+      delete axios.defaults.headers.common['x-auth-token']; 
     } finally {
       setLoading(false);
     }
@@ -36,10 +46,9 @@ export const AuthProvider = ({ children }) => {
 
   const login = (token) => {
     localStorage.setItem('token', token);
-    // Tuvuye kuri login, twahita tumenya byihuse details zitari password muri token ubwayo
     const decoded = jwtDecode(token);
-    setUser(decoded.user); // Dufata user object muri token
-    fetchUser(token); // Ariko tugakomeza kugenzura ku server byizewe
+    setUser(decoded.user);
+    fetchUser(token);
   };
 
   const logout = () => {
@@ -54,4 +63,5 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   );
 };
+
 export default AuthProvider;
