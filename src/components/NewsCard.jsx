@@ -6,7 +6,7 @@ import "../styles/NewsCard.css";
 // --- UMURONGO W'INGENZI WAKOSOWE HANO ---
 // Koresha Environment Variable VITE_API_URL iri muri Vercel Settings (https://url-ya-render.com)
 // Niba uri local development, ukoresha http://localhost:5000 (HTTP)
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
 // ----------------------------------------
 
 

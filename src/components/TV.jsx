@@ -14,7 +14,7 @@ const TV = ({ videos }) => { // Yakira 'videos' props
   // --- UMURONGO W'INGENZI WAKOSOWE HANO ---
   // Koresha Environment Variable VITE_API_URL iri muri Vercel Settings (https://url-ya-render.com)
   // Niba uri local development, ukoresha http://localhost:5000 (HTTP)
-  const BASE_SERVER_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const BASE_SERVER_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
   // ----------------------------------------
 
   return (

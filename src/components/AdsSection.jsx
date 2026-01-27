@@ -13,7 +13,7 @@ const AdsSection = ({ ads }) => {
     );
   }
 
-  const BASE_SERVER_URL = 'http://localhost:5000';
+  const BASE_SERVER_URL = '//localhost:5000';
 
   return (
     // Nongeyeho container div ikikije byose kugira ngo umutwe ube hejuru ya grid
