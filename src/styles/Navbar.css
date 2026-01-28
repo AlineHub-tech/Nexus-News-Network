@@ -128,7 +128,7 @@
 /* Tablet styles (min-width: 600px) */
 @media (min-width: 600px) {
     .navbar-container {
-      margin-top: -35%;
+      margin-top: -15%;
     }
   .site-name {
     font-size: 18px;
@@ -151,9 +151,10 @@
 @media (min-width: 1024px) {
     .navbar-container {
         padding: 10px 50px;
-        margin-top: -35%;
+        margin-top: -15%;
     }
 }
+
 
 
 
