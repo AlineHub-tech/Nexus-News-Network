@@ -1,4 +1,3 @@
-/* Default styles (Mobile First) */
 .navbar-container {
   background-color: #0a1930; /* Dark blue background */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -129,7 +128,7 @@
 /* Tablet styles (min-width: 600px) */
 @media (min-width: 600px) {
     .navbar-container {
-      margin-top: -25%;
+      /* margin-top: -25%; */
     }
   .site-name {
     font-size: 18px;
@@ -152,6 +151,7 @@
 @media (min-width: 1024px) {
     .navbar-container {
         padding: 10px 50px;
-        margin-top: -25%;
+        /* margin-top: -25%; */
     }
 }
+
