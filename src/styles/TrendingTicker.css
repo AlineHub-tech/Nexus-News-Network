@@ -18,3 +18,4 @@ body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:va
 }
 .trending span{display:inline-block;padding-left:100%;animation:ticker 18s linear infinite}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
