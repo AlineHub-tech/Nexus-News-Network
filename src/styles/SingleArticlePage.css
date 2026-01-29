@@ -10,7 +10,7 @@
   padding: 20px 0;
 }
 
-.article-content-wrapper h3 {
+.article-content-wrapper h4 {
   font-size: 2.5rem;
   color: #333;
   margin-top: 5%;
@@ -50,4 +50,3 @@
   text-decoration: none; /* Gukuraho uturongo tumanura kuri links */
   color: inherit;
 }
-
