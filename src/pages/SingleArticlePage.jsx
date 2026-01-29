@@ -50,7 +50,7 @@ const SingleArticlePage = () => {
         <div className="single-article-container">
             <Navbar/>
             <div className="article-content-wrapper">
-                <h1>{article.title}</h1>
+                <h3>{article.title}</h3>
                 <p className="article-meta">
                     By <strong>{article.author}</strong> | {article.category} | {new Date(article.createdAt).toLocaleString()}
                 </p>
@@ -74,3 +74,4 @@ const SingleArticlePage = () => {
 };
 
 export default SingleArticlePage;
+
