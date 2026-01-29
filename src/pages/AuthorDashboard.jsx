@@ -2,13 +2,10 @@ import React, { useState }  from "react";
 import axios from "axios";
 import "../styles/dashboard.css";
 
-// --- UMURONGO W'INGENZI WAKOSOWE HANO MURI ADIRESI ---
-// Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com (Nta slash/api ku iherezo)
-const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000'; // Hano wakuyemo '/api' ku iherezo
-// ----------------------------------------
+// Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com
+const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000'; 
 
-// Hano API_SUBMIT_URL yakosowe kugira ngo ihuze neza na server.js:
-// Adiresi yuzuye ubu ni: https://
+// Adiresi yuzuye ubu ni: https://nexus-news-network-backend.onrender.com
 const API_SUBMIT_URL = `${API_BASE_URL}/api/writer/articles`; 
 
 
@@ -16,7 +13,8 @@ const getToken = () => localStorage.getItem("token");
 
 const AuthorDashboard = () => {
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  // Twahinduye body ikaba content kugira ngo bihure na Admin side (Database field name)
+  const [content, setContent] = useState(""); 
   const [category, setCategory] = useState("Politics");
   const [mediaFile, setMediaFile] = useState(null);
   const [mediaType, setMediaType] = useState("image");
@@ -28,7 +26,8 @@ const AuthorDashboard = () => {
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("body", body);
+    // Twohereje content aho kohereza body
+    formData.append("content", content); 
     formData.append("category", category);
     formData.append("mediaType", mediaType);
     if (mediaFile) {
@@ -37,22 +36,21 @@ const AuthorDashboard = () => {
 
     try {
       const token = getToken();
-      if (!token) { alert("You are not logged in."); setIsSubmitting(false); return; } // Ubutumwa bwahujwe
+      if (!token) { alert("You are not logged in."); setIsSubmitting(false); return; } 
 
-      // API_SUBMIT_URL irakora neza hano
       await axios.post(API_SUBMIT_URL, formData, {
         headers: {
             "x-auth-token": token
         },
       });
 
-      alert("Article submitted for admin approval (Status: Pending)"); // Ubutumwa bwahujwe
+      alert("Article submitted for admin approval (Status: Pending)"); 
       // Reset form
-      setTitle(""); setBody(""); setMediaFile(null); setIsSubmitting(false);
+      setTitle(""); setContent(""); setMediaFile(null); setIsSubmitting(false);
 
     } catch (err) {
       console.error(err.response ? err.response.data : err.message);
-      alert("An error occurred while submitting the article."); // Ubutumwa bwahujwe
+      alert("An error occurred while submitting the article. Check network tab for CORS issues.");
       setIsSubmitting(false);
     }
   };
@@ -62,7 +60,8 @@ const AuthorDashboard = () => {
       <h2>Submit New Article</h2>
       <form onSubmit={handleSubmit} className="dashboard-form">
         <input type="text" placeholder="Article Title" value={title} onChange={(e) => setTitle(e.target.value)} required/>
-        <textarea placeholder="Content/Body" value={body} onChange={(e) => setBody(e.target.value)} required/>
+        {/* Dukoresha content hano */}
+        <textarea placeholder="Content/Body" value={content} onChange={(e) => setContent(e.target.value)} required/>
 
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="Politics">Politics</option><option value="Life">Life</option>

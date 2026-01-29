@@ -1,18 +1,16 @@
 // src/pages/AdminDashboard.jsx
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import "../styles/dashboard.css"; // Styles zirakenewe kuri Modal
+import "../styles/dashboard.css"; // Koresha CSS igaragara hepfo muri Step 2
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000"; 
 const API_ADMIN_URL = `${API_BASE_URL}/api/admin`; 
 
 const getToken = () => localStorage.getItem("token");
 
-// Function ifasha kubona URL y'ifoto cyangwa video neza
-// Cloudinary itanga URL yuzuye, ntabwo dukeneye kongeramo API_BASE_URL
 const getMediaUrl = (mediaUrl) => {
     if (mediaUrl && mediaUrl.startsWith('https://res.cloudinary.com')) {
-        return mediaUrl; // Ni URL yuzuye
+        return mediaUrl; // URL yuzuye ya Cloudinary
     }
     // Niba ari iyo muri uploads ya kera (local development gusa)
     const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
@@ -189,7 +187,8 @@ const AdminDashboard = () => {
               <div>
                 <h3>{n.title}</h3>
                 <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
-                {/* Image/Video igaragaye neza */}
+                {/* Hano twongereyeho class "article-content-display" */}
+                <p className="article-content-display">{n.content || n.body}</p>
                 {n.mediaUrl && n.mediaType === 'image' && <img src={getMediaUrl(n.mediaUrl)} alt="Media" style={{maxWidth: '200px'}} />}
                 {n.mediaUrl && n.mediaType === 'video' && <video src={getMediaUrl(n.mediaUrl)} controls style={{maxWidth: '200px'}} />}
               </div>
@@ -213,6 +212,8 @@ const AdminDashboard = () => {
               <div>
                 <h3>{n.title}</h3>
                 <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
+                 {/* Hano twongereyeho class "article-content-display" */}
+                <p className="article-content-display">{n.content || n.body}</p>
                  {n.mediaUrl && n.mediaType === 'image' && <img src={getMediaUrl(n.mediaUrl)} alt="Media" style={{maxWidth: '200px'}} />}
                 {n.mediaUrl && n.mediaType === 'video' && <video src={getMediaUrl(n.mediaUrl)} controls style={{maxWidth: '200px'}} />}
               </div>
@@ -253,7 +254,7 @@ const AdminDashboard = () => {
   );
 };
 
-// Component ya AdsUpload yakosowe
+// Component ya AdsUpload (ntabwo ihindutse)
 const AdsUpload = ({ fetchAds }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -294,7 +295,7 @@ const AdsUpload = ({ fetchAds }) => {
       <input
           type="file"
           accept={mediaType === 'image' ? 'image/*' : 'video/*'}
-          onChange={e => setMediaFile(e.target.files[0])} // Corrected to get the first file
+          onChange={e => setMediaFile(e.target.files)} 
       />
       <button type="submit">Shyiraho Ad</button>
     </form>
@@ -303,3 +304,4 @@ const AdsUpload = ({ fetchAds }) => {
 
 
 export default AdminDashboard;
+
