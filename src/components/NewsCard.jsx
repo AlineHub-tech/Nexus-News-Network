@@ -43,4 +43,3 @@ const NewsCard = ({ post, extraClass = '' }) => {
 };
 
 export default NewsCard;
-
