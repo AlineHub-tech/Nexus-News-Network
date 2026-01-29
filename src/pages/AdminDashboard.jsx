@@ -1,7 +1,7 @@
 // src/pages/AdminDashboard.jsx (cyangwa aho ubika admin dashboard yawe)
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-// import { useAuth } from '../context/AuthContext'; // Injizamo AuthContext nshya
+import { useAuth } from '../context/AuthContext'; // Injizamo AuthContext nshya
 import "../styles/dashboard.css"; // Koresha CSS iyo uhari
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000";
@@ -259,3 +259,4 @@ const AdsUpload = ({ refreshNewsLists }) => {
 
 
 export default AdminDashboard;
+
