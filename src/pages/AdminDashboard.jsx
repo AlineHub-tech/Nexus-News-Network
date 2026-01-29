@@ -1,17 +1,20 @@
-// src/pages/AdminDashboard.jsx (cyangwa aho ubika admin dashboard yawe)
+// src/pages/AdminDashboard.jsx
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import { useAuth } from '../context/AuthContext'; // Injizamo AuthContext nshya
-import "../styles/dashboard.css"; // Koresha CSS iyo uhari
+import "../styles/dashboard.css"; // Menya neza ko iyi file ihari kandi ifite styles za modal
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000";
+// Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; // Yakosowe hano
 const API_ADMIN_URL = `${API_BASE_URL}/api/admin`; 
 
-// Component yo guhindura inkuru (Edit Modal)
+// Kazi gusa ako kubona token muri localStorage
+const getToken = () => localStorage.getItem("token");
+
+// --- Component yo guhindura inkuru (Edit Modal) ---
 const EditNewsModal = ({ newsItem, onClose, onUpdateSuccess }) => {
-  const { getToken } = useAuth();
   const [title, setTitle] = useState(newsItem.title);
-  const [content, setContent] = useState(newsItem.content || ''); // Assuming content field exists
+  // Dufashe ko inkuru ifite field ya 'content' na 'category' muri database
+  const [content, setContent] = useState(newsItem.content || ''); 
   const [category, setCategory] = useState(newsItem.category || ''); 
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -59,24 +62,23 @@ const EditNewsModal = ({ newsItem, onClose, onUpdateSuccess }) => {
   );
 };
 
-
+// --- Component Nyakuri ya Admin Dashboard ---
 const AdminDashboard = () => {
-  const { getToken } = useAuth(); // Koresha context
   const [pendingNews, setPendingNews] = useState([]);
   const [approvedNews, setApprovedNews] = useState([]);
+  const [adsList, setAdsList] = useState([]); // State nshya yo kubika Ads
   const [editingNewsItem, setEditingNewsItem] = useState(null); // State yo gufata inkuru iri edited
 
   // Function ifasha kubona URL y'ifoto cyangwa video neza
   const getMediaUrl = (mediaUrl) => {
     // MediaUrl iba itangira na /uploads/... 
     // Dushyiraho API_BASE_URL imbere kugira ngo URL yuzure neza: https://...
-    // Tureba ko API_BASE_URL idafite trailing slash
     const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
     const media = mediaUrl.startsWith('/') ? mediaUrl : `/${mediaUrl}`;
     return `${base}${media}`;
   };
 
-  // Functions zose zishyizwe muri useCallback kugira ngo zikore neza muri useEffect
+  // Function yo kugarura inkuru zitarasuzumwa
   const fetchPendingNews = useCallback(async () => {
     try {
       const token = getToken();
@@ -88,8 +90,9 @@ const AdminDashboard = () => {
     } catch (err) {
       console.error("Error fetching pending news:", err.response?.data?.msg || err.message);
     }
-  }, [getToken]);
+  }, []);
 
+  // FUNCTION IGARURA INKURU ZEMEJWE
   const fetchApprovedNews = useCallback(async () => {
     try {
       const token = getToken();
@@ -101,14 +104,26 @@ const AdminDashboard = () => {
     } catch (err) {
       console.error("Error fetching approved news:", err.response?.data?.msg || err.message);
     }
-  }, [getToken]);
+  }, []);
 
-  const refreshNewsLists = useCallback(() => {
+  // FUNCTION IGARURA ADS
+  const fetchAds = useCallback(async () => {
+    try {
+        const res = await axios.get(`${API_ADMIN_URL}/ads`); // Dukesha ko iyi route iri public cg se ukeneye token
+        setAdsList(res.data);
+    } catch (err) {
+        console.error("Error fetching ads:", err.response?.data?.msg || err.message);
+    }
+  }, []);
+
+  const refreshAllLists = useCallback(() => {
     fetchPendingNews();
     fetchApprovedNews();
-  }, [fetchPendingNews, fetchApprovedNews]);
+    fetchAds();
+  }, [fetchPendingNews, fetchApprovedNews, fetchAds]);
 
 
+  // Function yo kwemeza inkuru (Approved)
   const handleApprove = async (id) => {
     try {
       const token = getToken();
@@ -116,14 +131,14 @@ const AdminDashboard = () => {
         headers: { "x-auth-token": token },
       });
       alert("Inkuru yemejwe kandi yashyizwe hanze!");
-      refreshNewsLists(); 
+      refreshAllLists(); 
     } catch (err) {
       console.error("Error approving news:", err.response?.data?.msg || err.message);
     }
   };
 
-  // Function yo gusiba inkuru (Delete)
-  const handleDelete = async (id) => {
+  // Function yo gusiba inkuru (Delete Article)
+  const handleDeleteArticle = async (id) => {
     if (!window.confirm("Ese uzi neza ko ushaka gusiba iyi nkuru burundu?")) return;
     try {
         const token = getToken();
@@ -131,15 +146,31 @@ const AdminDashboard = () => {
           headers: { "x-auth-token": token },
         });
         alert("Inkuru yasibwe!");
-        refreshNewsLists();
+        refreshAllLists();
       } catch (err) {
         console.error("Error deleting news:", err.response?.data?.msg || err.message);
       }
   };
 
+  // Function yo gusiba Ads (Delete Ad)
+  const handleDeleteAd = async (id) => {
+    if (!window.confirm("Ese uzi neza ko ushaka gusiba iyi Ads?")) return;
+    try {
+        const token = getToken(); // Akenshi gusiba ads bisaba admin token
+        await axios.delete(`${API_ADMIN_URL}/ads/${id}`, {
+          headers: { "x-auth-token": token },
+        });
+        alert("Ad yasibwe!");
+        fetchAds(); // Refresh Ads list only
+      } catch (err) {
+        console.error("Error deleting ad:", err.response?.data?.msg || err.message);
+      }
+  };
+
+
   useEffect(() => {
-    refreshNewsLists();
-  }, [refreshNewsLists]);
+    refreshAllLists();
+  }, [refreshAllLists]);
 
   return (
     <div className="dashboard-container">
@@ -150,7 +181,7 @@ const AdminDashboard = () => {
         <EditNewsModal 
           newsItem={editingNewsItem} 
           onClose={() => setEditingNewsItem(null)} 
-          onUpdateSuccess={refreshNewsLists}
+          onUpdateSuccess={refreshAllLists}
         />
       )}
 
@@ -162,13 +193,14 @@ const AdminDashboard = () => {
               <div>
                 <h3>{n.title}</h3>
                 <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
+                {/* Image/Video igaragaye neza */}
                 {n.mediaUrl && n.mediaType === 'image' && <img src={getMediaUrl(n.mediaUrl)} alt="Media" />}
                 {n.mediaUrl && n.mediaType === 'video' && <video src={getMediaUrl(n.mediaUrl)} controls />}
               </div>
               <div className="actions">
                 <button onClick={() => handleApprove(n._id)}>Emeza</button>
                 <button onClick={() => setEditingNewsItem(n)}>Edit</button>
-                <button onClick={() => handleDelete(n._id)} className="delete-btn">Siba</button>
+                <button onClick={() => handleDeleteArticle(n._id)} className="delete-btn">Siba</button>
               </div>
             </div>
         ))
@@ -185,12 +217,12 @@ const AdminDashboard = () => {
               <div>
                 <h3>{n.title}</h3>
                 <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
-                {n.mediaUrl && n.mediaType === 'image' && <img src={getMediaUrl(n.mediaUrl)} alt="Media" />}
+                 {n.mediaUrl && n.mediaType === 'image' && <img src={getMediaUrl(n.mediaUrl)} alt="Media" />}
                 {n.mediaUrl && n.mediaType === 'video' && <video src={getMediaUrl(n.mediaUrl)} controls />}
               </div>
               <div className="actions">
                 <button onClick={() => setEditingNewsItem(n)}>Edit</button>
-                <button onClick={() => handleDelete(n._id)} className="delete-btn">Siba Burundu</button>
+                <button onClick={() => handleDeleteArticle(n._id)} className="delete-btn">Siba Burundu</button>
               </div>
             </div>
         ))
@@ -199,23 +231,41 @@ const AdminDashboard = () => {
       <hr />
 
       <h2>Shyiraho Ads Nshya (Upload Method)</h2>
-      <AdsUpload refreshNewsLists={refreshNewsLists} />
+      <AdsUpload fetchAds={fetchAds} />
+
+      <hr />
+
+      <h2>Ads Zihari</h2>
+      <div className="admin-news-list">
+        {adsList.length === 0 ? (<p>Nta Ads zihari.</p>) : (
+            adsList.map((ad) => (
+                <div key={ad._id} className="news-item">
+                    <div>
+                        <h3>{ad.title}</h3>
+                        <p>{ad.description}</p>
+                        {ad.mediaUrl && ad.mediaType === 'image' && <img src={getMediaUrl(ad.mediaUrl)} alt="Ad Media" />}
+                        {ad.mediaUrl && ad.mediaType === 'video' && <video src={getMediaUrl(ad.mediaUrl)} controls />}
+                    </div>
+                    <div className="actions">
+                        <button onClick={() => handleDeleteAd(ad._id)} className="delete-btn">Siba Ad</button>
+                    </div>
+                </div>
+            ))
+        )}
+      </div>
     </div>
   );
 };
 
-// Component ya AdsUpload yakosowe:
-const AdsUpload = ({ refreshNewsLists }) => {
-  const { getToken } = useAuth();
+// Component ya AdsUpload yakosowe
+const AdsUpload = ({ fetchAds }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
   const [mediaType, setMediaType] = useState("image");
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
@@ -223,7 +273,6 @@ const AdsUpload = ({ refreshNewsLists }) => {
     if (mediaFile) {
         formData.append("mediaFile", mediaFile);
     }
-
     try {
       const token = getToken();
       await axios.post(`${API_ADMIN_URL}/ads`, formData, {
@@ -231,7 +280,7 @@ const AdsUpload = ({ refreshNewsLists }) => {
       });
       alert("Ad yoherejwe kandi irakora");
       setTitle(""); setDescription(""); setMediaFile(null);
-      if (refreshNewsLists) refreshNewsLists(); // Refresh lists after ad upload (optional, but good practice)
+      if (fetchAds) fetchAds(); // Refresh Ads list
     } catch (err) {
       console.error(err.response?.data?.msg || err.message);
       alert("Habaye ikibazo mu kohereza Ad.");
@@ -240,7 +289,6 @@ const AdsUpload = ({ refreshNewsLists }) => {
 
   return (
     <form onSubmit={handleSubmit} className="dashboard-form">
-      {/* ... forms fields remain the same */}
       <input placeholder="Title y'Ad" value={title} onChange={e=>setTitle(e.target.value)} required/>
       <textarea placeholder="Description" value={description} onChange={e=>setDescription(e.target.value)} required/>
       <select value={mediaType} onChange={e => setMediaType(e.target.value)}>
@@ -250,7 +298,7 @@ const AdsUpload = ({ refreshNewsLists }) => {
       <input
           type="file"
           accept={mediaType === 'image' ? 'image/*' : 'video/*'}
-          onChange={e => setMediaFile(e.target.files[0])}
+          onChange={e => setMediaFile(e.target.files[0])} // Use e.target.files[0]
       />
       <button type="submit">Shyiraho Ad</button>
     </form>
@@ -259,4 +307,3 @@ const AdsUpload = ({ refreshNewsLists }) => {
 
 
 export default AdminDashboard;
-
