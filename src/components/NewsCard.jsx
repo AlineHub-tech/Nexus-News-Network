@@ -32,7 +32,7 @@ const NewsCard = ({ post, extraClass = '' }) => {
         </div>
         
         <div className="news-info">
-          <h3>{post.title}</h3>
+          <h5>{post.title}</h5>
           <p className="news-meta">
             By <strong>{post.author}</strong> | {post.category} | {new Date(post.createdAt).toLocaleString()} 
           </p>
@@ -43,3 +43,4 @@ const NewsCard = ({ post, extraClass = '' }) => {
 };
 
 export default NewsCard;
+
