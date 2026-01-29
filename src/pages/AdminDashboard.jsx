@@ -1,19 +1,28 @@
 // src/pages/AdminDashboard.jsx
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import "../styles/dashboard.css"; // Koresha CSS igaragara hepfo
+import "../styles/dashboard.css"; // Styles zirakenewe kuri Modal
 
-// Turakeka ko API_BASE_URL isanzwe ihari neza:
-const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000"; 
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000"; 
 const API_ADMIN_URL = `${API_BASE_URL}/api/admin`; 
 
-// Kazi gusa ako kubona token muri localStorage
 const getToken = () => localStorage.getItem("token");
+
+// Function ifasha kubona URL y'ifoto cyangwa video neza
+// Cloudinary itanga URL yuzuye, ntabwo dukeneye kongeramo API_BASE_URL
+const getMediaUrl = (mediaUrl) => {
+    if (mediaUrl && mediaUrl.startsWith('https://res.cloudinary.com')) {
+        return mediaUrl; // Ni URL yuzuye
+    }
+    // Niba ari iyo muri uploads ya kera (local development gusa)
+    const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+    const media = mediaUrl.startsWith('/') ? mediaUrl : `/${mediaUrl}`;
+    return `${base}${media}`;
+};
 
 // --- Component yo guhindura inkuru (Edit Modal) ---
 const EditNewsModal = ({ newsItem, onClose, onUpdateSuccess }) => {
   const [title, setTitle] = useState(newsItem.title);
-  // Dukoresha 'content' kuko aribyo dukoresha muri React side
   const [content, setContent] = useState(newsItem.content || newsItem.body || ''); 
   const [category, setCategory] = useState(newsItem.category || ''); 
   const [isUpdating, setIsUpdating] = useState(false);
@@ -24,15 +33,15 @@ const EditNewsModal = ({ newsItem, onClose, onUpdateSuccess }) => {
     try {
       const token = getToken();
       await axios.put(`${API_ADMIN_URL}/articles/${newsItem._id}`, 
-        { title, content, category }, // twohereza 'content'
+        { title, content, category }, 
         { headers: { "x-auth-token": token } }
       );
       alert("Inkuru yahinduwe neza!");
-      onUpdateSuccess(); // Refresh lists
-      onClose(); // Close the modal
+      onUpdateSuccess(); 
+      onClose(); 
     } catch (err) {
       console.error("Error updating news:", err.response?.data?.msg || err.message);
-      alert("Habaye ikibazo mu guhindura inkuru. Reba muri console niba CORS ari sawa.");
+      alert("Habaye ikibazo mu guhindura inkuru.");
     } finally {
         setIsUpdating(false);
     }
@@ -68,13 +77,6 @@ const AdminDashboard = () => {
   const [approvedNews, setApprovedNews] = useState([]);
   const [adsList, setAdsList] = useState([]); 
   const [editingNewsItem, setEditingNewsItem] = useState(null); 
-
-  // Function ifasha kubona URL y'ifoto cyangwa video neza
-  const getMediaUrl = (mediaUrl) => {
-    const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
-    const media = mediaUrl.startsWith('/') ? mediaUrl : `/${mediaUrl}`;
-    return `${base}${media}`;
-  };
 
   const fetchPendingNews = useCallback(async () => {
     try {
