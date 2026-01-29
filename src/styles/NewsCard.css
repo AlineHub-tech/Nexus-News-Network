@@ -41,7 +41,7 @@
 }
 
 .news-info h5 {
-  font-size: 1.2rem; /* Font size nziza */
+  font-size: 1.1rem; /* Font size nziza */
   font-weight: 700;
   margin: 0 0 10px 0;
   color: #000000; /* Black color ku mutwe w'inkuru */
@@ -65,3 +65,4 @@
 .news-card.large-card .news-card-video {
     height: 250px; /* Uburebure bwikubye kuri large card */
 }
+
