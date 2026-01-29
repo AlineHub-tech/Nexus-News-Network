@@ -1,4 +1,3 @@
-// src/pages/AdminDashboard.jsx
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import "../styles/dashboard.css"; // Menya neza ko iyi file ihari kandi ifite styles za modal
@@ -307,3 +306,4 @@ const AdsUpload = ({ fetchAds }) => {
 
 
 export default AdminDashboard;
+
