@@ -6,43 +6,48 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #ffffff; /* Ibara ryo hanze rigomba kuba ryera cyangwa rikaba ryiza */
+  background-color: #ffffff; 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10000;
+  /* Kugerageza gutuma ijyaho neza ku buryo bworoshye */
+  transition: opacity 0.5s ease-out;
 }
 
 .loading-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
+  width: 100%;
+  max-width: 300px;
 }
 
 .logo-wrapper {
-  margin-bottom: 10px;
+  perspective: 1000px; /* Bituma animation imera nk'iri muri 3D */
 }
 
 .loading-logo {
-  width: 150px; /* Bunini bwa Logo yawe */
+  width: clamp(120px, 20vw, 180px); /* Ibihindura size bitewe na screen */
   height: auto;
-  border-radius: 10px; /* Niba ari ifoto ishobora kugira imbehe nziza */
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Igicucu cyoroheje cyane */
   animation: pulseLogo 2s infinite ease-in-out;
 }
 
-/* Animation ituma logo yitunga */
+/* Animation yavuguruwe (Pulse + Subtle Float) */
 @keyframes pulseLogo {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.08); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
+  0% { transform: scale(1) translateY(0); opacity: 1; }
+  50% { transform: scale(1.05) translateY(-5px); opacity: 0.85; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
 .loading-bar {
-  width: 240px;
-  height: 6px;
+  width: 100%; /* Izafatira kuri width ya loading-content */
+  height: 5px;
   background-color: #f1f5f9;
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
   position: relative;
 }
@@ -52,23 +57,36 @@
   top: 0;
   left: 0;
   height: 100%;
-  width: 40%; /* Bunini bw'agace kagaragara kagenda */
-  background: linear-gradient(90deg, #2563eb, #3b82f6); /* Ibara rya Blue */
-  border-radius: 10px;
-  animation: moveProgress 1.5s infinite ease-in-out;
+  width: 45%; 
+  /* Gradient igezweho isa na Professional Websites */
+  background: linear-gradient(90deg, transparent, #2563eb, transparent);
+  border-radius: 20px;
+  animation: moveProgress 1.6s infinite cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* Animation ituma umurongo ugenda utagarara */
+/* Animation igenda neza (Smooth Flow) */
 @keyframes moveProgress {
-  0% { left: -40%; }
-  100% { left: 100%; }
+  0% { left: -50%; }
+  100% { left: 110%; }
 }
 
 .loading-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #475569;
-  letter-spacing: 0.5px;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1.5px; /* Umwanya hagati y'inyuguti (Professional) */
   margin-top: 5px;
+  opacity: 0.7;
+}
+
+/* Kuri Mobile ntoya cyane */
+@media (max-width: 480px) {
+  .loading-bar {
+    width: 80%;
+  }
+  .loading-text {
+    font-size: 0.8rem;
+  }
 }
