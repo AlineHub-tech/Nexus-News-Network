@@ -70,3 +70,68 @@
     .news-item { flex-direction: column; }
     .admin-media-preview { max-width: 100%; }
 }
+/* Admin Ads Management */
+.admin-ads-display-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.admin-ad-item {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.admin-ad-thumb {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.admin-ad-thumb-text {
+  height: 100px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #64748b;
+}
+
+.admin-ad-info {
+  padding: 10px;
+}
+
+.admin-ad-info h4 {
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete-btn-sm {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  width: 100%;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.admin-ad-upload-form {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 2px dashed #cbd5e1;
+}
+
+
