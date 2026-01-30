@@ -1,5 +1,6 @@
 /* src/styles/SingleArticlePage.css */
 
+/* --- PAGE LAYOUT --- */
 .single-article-page {
     background-color: #ffffff;
     min-height: 100vh;
@@ -46,7 +47,10 @@
     margin-bottom: 30px;
 }
 
-.meta-divider { margin: 0 10px; color: #d1d5db; }
+.meta-divider { 
+    margin: 0 10px; 
+    color: #d1d5db; 
+}
 
 /* --- MEDIA (IFOTO) --- */
 .article-media-wrapper {
@@ -63,17 +67,31 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* --- BODY TEXT (SPACE YAVUYEMO) --- */
+/* --- BODY TEXT (Professional spacing) --- */
 .article-body-content {
     font-family: 'Charter', 'Georgia', serif;
     font-size: 1.25rem;
-    line-height: 1.4;
+    line-height: 1.6;          /* Professional line spacing */
     color: #2d3748;
-    
-    /* Iki nicyo gikuramo space nini */
-    white-space: pre-line; 
-    margin: 0;
-    padding: 0;
+    white-space: normal;        /* Remove pre-line to avoid large spaces */
+}
+
+/* Paragraph spacing */
+.article-body-content p {
+    margin: 0 0 16px 0;         /* Space between paragraphs */
+}
+
+.article-body-content p:last-child {
+    margin-bottom: 0;           /* Remove bottom space on last paragraph */
+}
+
+/* Optional styling for emphasis */
+.article-body-content strong {
+    font-weight: 600;
+}
+
+.article-body-content em {
+    font-style: italic;
 }
 
 /* --- RESPONSIVE FIXES --- */
@@ -91,23 +109,24 @@
     
     .article-body-content {
         font-size: 1.15rem;
-        line-height: 1.6;
+        line-height: 1.5;
+    }
+
+    .article-body-content p {
+        margin-bottom: 12px;
     }
 
     .full-article-media {
         border-radius: 8px;
-        /* Kuri mobile ifoto yakwirwa screen yose */
         width: calc(100% + 30px);
         margin-left: -15px;
     }
 }
 
+/* --- LOADING STATE --- */
 .loading-state {
     text-align: center;
     padding: 100px;
     font-size: 1.2rem;
     color: #666;
 }
-
-
-
