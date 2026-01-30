@@ -1,53 +1,102 @@
-/* src/styles/SingleArticlePage.css */
+/* SingleArticlePage.css */
+
+:root {
+    --text-color: #1a1a1a;
+    --meta-color: #555;
+    --primary-font: 'Georgia', serif; /* Font nziza yo gusoma inkuru ndende */
+    --secondary-font: 'Helvetica Neue', Arial, sans-serif;
+}
 
 .single-article-container {
-  margin: 0 auto; /* Gushyira urupapuro hagati */
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff;
 }
 
 .article-content-wrapper {
-  padding: 20px 0;
+    max-width: 850px; /* Width nziza kuri Desktop ituma amaso atananiwa */
+    margin: 40px auto;
+    padding: 0 20px;
+    flex: 1;
 }
 
+/* --- TITLE STYLES --- */
 .article-content-wrapper h4 {
-  font-size: 2.2rem;
-  color: #333;
-  margin-top: 5%;
-   margin-left: 17%;
-   border-bottom: 2px solid #eee; /* Gutandukanya umutwe n'ibindi */
-  padding-bottom: 10px;
+    font-family: var(--secondary-font);
+    font-size: 2.8rem; /* Font nini kuko ariyo title */
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text-color);
+    margin-bottom: 15px;
 }
 
+/* --- META STYLES (Author, Date) --- */
 .article-meta {
-  font-size: 0.9rem;
-  margin-left: 17%;
-  color: #666;
-  margin-bottom: 20px;
+    font-family: var(--secondary-font);
+    font-size: 0.95rem;
+    color: var(--meta-color);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
 }
 
+.article-meta strong {
+    color: #e63946; /* Color yihariye ku mwanditsi */
+}
+
+/* --- MEDIA STYLES (Image/Video) --- */
 .article-media {
-  width: 70%; /* Ifoto yuzura umwanya wose */
-  height: auto;
-  margin-left: 10%;
-  max-height: 500px; /* Ntibe ndende cyane */
-  object-fit: cover;
-  margin-bottom: 25px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+/* --- BODY STYLES (Amaparagraph) --- */
 .article-body {
-  font-size: 1.1rem;
-  margin-left: 15%;
-  color: #444;
-  line-height: 1.6; /* Gutuma inyandiko isomeka neza */
-  margin-top: -2%;
+    font-family: var(--primary-font);
+    font-size: 1.25rem; /* Size nziza ituma umuntu adahumbiza */
+    line-height: 1.8; /* Umwanya uhagije hagati y'imirongo */
+    color: #333;
+    
+    /* IKI NI CYO CYINGENZI: Bituma paragraph ziguma uko umwanditsi yabishatse */
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+    
+    text-align: left;
 }
 
-/* Style y'uburyo umuntu akanda kuri NewsCard */
-.news-card-link {
-  text-decoration: none; /* Gukuraho uturongo tumanura kuri links */
-  color: inherit;
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablet (Ipad) */
+@media (max-width: 1024px) {
+    .article-content-wrapper {
+        max-width: 90%;
+    }
+    .article-content-wrapper h4 {
+        font-size: 2.2rem;
+    }
 }
 
+/* Mobile (Telefone) */
+@media (max-width: 600px) {
+    .article-content-wrapper {
+        margin: 20px auto;
+    }
+    
+    .article-content-wrapper h4 {
+        font-size: 1.8rem; /* Title isigara igaragara neza kuri screen nto */
+        line-height: 1.3;
+    }
+
+    .article-body {
+        font-size: 1.15rem; /* Kugabanya size gato kuri mobile */
+        line-height: 1.7;
+    }
+
+    .article-meta {
+        font-size: 0.85rem;
+    }
+}
