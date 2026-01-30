@@ -16,14 +16,18 @@ const SingleArticlePage = () => {
     useEffect(() => {
         const fetchArticle = async () => {
             try {
+                // 1. Fata amakuru y'inkuru
                 const res = await axios.get(`${API_ARTICLE_FETCH}/articles/${id}`);
                 setArticle(res.data);
                 setLoading(false);
 
-                // --- HANO NIHO HONGEWEWE UBURYO BWO KUBARA VIEWS ---
-                // Twongera view imwe muri database igihe cyose inkuru ifungutse
-                await axios.put(`${API_ARTICLE_FETCH}/articles/${id}/view`);
-                // ---------------------------------------------------
+                // 2. Update views (Ibi nibyo bituma Popular News ikora)
+                // Koresha "try-catch" yihariye hano kugira ngo view-error idahagarika page
+                try {
+                    await axios.put(`${API_ARTICLE_FETCH}/articles/${id}/view`);
+                } catch (vErr) {
+                    console.error("View update failed:", vErr);
+                }
                 
             } catch (err) {
                 console.error("Error fetching article:", err);
@@ -36,9 +40,15 @@ const SingleArticlePage = () => {
     if (loading) return <div className="loading-state">Loading...</div>;
     if (!article) return <div className="loading-state">Article not found.</div>;
 
-    const getMediaUrl = (mediaUrl) => {
-        if (!mediaUrl) return "";
-        return mediaUrl.startsWith('http') ? mediaUrl : `${API_BASE_URL_FETCH}${mediaUrl}`;
+    // --- HANO NIHO HAKOSOWE KUGIRA NGO AMAFOTO AGARAGARE ---
+    const getMediaUrl = (url) => {
+        if (!url) return "";
+        // Niba ari Cloudinary (itangizwa na http/https), iyereke uko iri
+        if (url.startsWith('http')) return url;
+        
+        // Niba ari local path (fallback), ongeraho base URL neza
+        const base = API_BASE_URL_FETCH.endsWith('/') ? API_BASE_URL_FETCH.slice(0, -1) : API_BASE_URL_FETCH;
+        return `${base}${url.startsWith('/') ? url : '/' + url}`;
     };
 
     const renderArticleBody = (bodyText) => {
@@ -46,7 +56,7 @@ const SingleArticlePage = () => {
         // Split by newline and filter out empty strings
         const paragraphs = bodyText.split(/\n+/).filter(p => p.trim() !== "");
         return paragraphs.map((para, index) => (
-            <p key={index} className="paragraph">{para.trim()}</p>
+            <div key={index} className="article-paragraph">{para.trim()}</div>
         ));
     };
 
