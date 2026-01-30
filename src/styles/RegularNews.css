@@ -87,3 +87,70 @@
     border-bottom: 3px solid #fff;
     color: white;
 }
+/* Styling ivuguruye y'umutwe wa section */
+.section-title {
+  position: relative;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1a1a1a; /* Ibara rya black icicye */
+  text-transform: uppercase; /* Bituma amagambo agaragara neza cyane */
+  letter-spacing: 1px;
+  padding-left: 15px; /* Umwanya w'akamenyetso k'ibumoso */
+  margin-top: 50px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Akamenyetso k'ibara ry'ubururu k'ibumoso bwa Title */
+.section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background-color: #00008b; /* Ibara rya Blue y'umwimerere */
+  border-radius: 2px;
+}
+
+/* Umurongo munshyi wa Title usandara kuri page yose */
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background-color: #e2e8f0; /* Umurongo woroshye ugenda kuri page */
+  margin-left: 20px;
+}
+
+/* Iyo Title iri mu gice gifite ibara rya Blue (Latest News) */
+.latest-news-section .section-title {
+    color: white;
+}
+
+.latest-news-section .section-title::before {
+    background-color: #ffffff; /* Akamenyetso kaba umweru */
+}
+
+.latest-news-section .section-title::after {
+    background-color: rgba(255, 255, 255, 0.2); /* Umurongo woroheje cyane */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.4rem;
+    margin-top: 35px;
+  }
+  
+  /* Kurinda ko umurongo uba muremure cyane kuri mobile */
+  .section-title::after {
+    display: none; /* Kuri mobile umurongo wo ku ruhande uravaho kuko nta mwanya uhari */
+  }
+  
+  .section-title {
+      border-bottom: 2px solid #e2e8f0; /* Musimbure n'umurongo wo munsi gusa kuri mobile */
+      padding-bottom: 10px;
+  }
+}
