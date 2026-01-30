@@ -1,0 +1,74 @@
+/* src/styles/LoadingScreen.css */
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff; /* Ibara ryo hanze rigomba kuba ryera cyangwa rikaba ryiza */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-wrapper {
+  margin-bottom: 10px;
+}
+
+.loading-logo {
+  width: 150px; /* Bunini bwa Logo yawe */
+  height: auto;
+  border-radius: 10px; /* Niba ari ifoto ishobora kugira imbehe nziza */
+  animation: pulseLogo 2s infinite ease-in-out;
+}
+
+/* Animation ituma logo yitunga */
+@keyframes pulseLogo {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.loading-bar {
+  width: 240px;
+  height: 6px;
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%; /* Bunini bw'agace kagaragara kagenda */
+  background: linear-gradient(90deg, #2563eb, #3b82f6); /* Ibara rya Blue */
+  border-radius: 10px;
+  animation: moveProgress 1.5s infinite ease-in-out;
+}
+
+/* Animation ituma umurongo ugenda utagarara */
+@keyframes moveProgress {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
+
+.loading-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #475569;
+  letter-spacing: 0.5px;
+  margin-top: 5px;
+}
