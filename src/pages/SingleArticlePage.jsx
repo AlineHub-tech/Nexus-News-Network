@@ -12,7 +12,6 @@ const SingleArticlePage = () => {
     const { id } = useParams();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchArticle = async () => {
@@ -21,47 +20,47 @@ const SingleArticlePage = () => {
                 setArticle(res.data);
                 setLoading(false);
             } catch (err) {
-                console.error("Error fetching single article:", err.response?.data?.msg || err.message);
-                setError("An error occurred while fetching the article details.");
                 setLoading(false);
             }
         };
         fetchArticle();
     }, [id]);
 
-    if (loading) return <div className="loading-state">Loading article...</div>;
-    if (error) return <div className="error-state">{error}</div>;
-    if (!article) return <div className="error-state">Article not found.</div>;
+    if (loading) return <div className="loading-container">Loading...</div>;
+    if (!article) return <div className="loading-container">Article not found.</div>;
 
-    const getMediaUrl = (mediaUrl) => {
-        return `${API_BASE_URL_FETCH}${mediaUrl}`;
-    };
+    const getMediaUrl = (mediaUrl) => `${API_BASE_URL_FETCH}${mediaUrl}`;
 
     return (
-        <div className="single-article-container">
+        <div className="single-article-page">
             <Navbar/>
-            <div className="article-content-wrapper">
-                <header className="article-header">
-                    <h4>{article.title}</h4>
-                    <div className="article-meta">
-                        By <strong>{article.author}</strong> <span className="separator">|</span> {article.category} <span className="separator">|</span> {new Date(article.createdAt).toDateString()}
+            <main className="article-main-content">
+                <article className="article-wrapper">
+                    <header className="article-header">
+                        <span className="category-badge">{article.category}</span>
+                        <h1>{article.title}</h1>
+                        <div className="article-meta">
+                            <span>By <strong>{article.author}</strong></span>
+                            <span className="dot">•</span>
+                            <span>{new Date(article.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                        </div>
+                    </header>
+
+                    <div className="article-media-container">
+                        {article.mediaUrl && article.mediaType === 'image' && (
+                            <img src={getMediaUrl(article.mediaUrl)} alt="" className="main-media" />
+                        )}
+                        {article.mediaUrl && article.mediaType === 'video' && (
+                            <video src={getMediaUrl(article.mediaUrl)} controls className="main-media" />
+                        )}
                     </div>
-                </header>
 
-                {article.mediaUrl && article.mediaType === 'image' && (
-                    <img src={getMediaUrl(article.mediaUrl)} alt={article.title} className="article-media" />
-                )}
-                {article.mediaUrl && article.mediaType === 'video' && (
-                    <video src={getMediaUrl(article.mediaUrl)} controls className="article-media">
-                        Your browser does not support the video tag.
-                    </video>
-                )}
-
-                {/* HANO HAHINDUWE: Nakoresheje <div> aho kuba <p> kugira ngo space ivemo */}
-                <div className="article-body">
-                    {article.body}
-                </div>
-            </div>
+                    {/* HANO NIHO HAKOSOWE SPACE: Nakoresheje div ifite class yihariye */}
+                    <div className="article-body-text">
+                        {article.body}
+                    </div>
+                </article>
+            </main>
             <Footer/>
         </div>
     );
