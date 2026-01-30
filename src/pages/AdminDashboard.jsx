@@ -191,42 +191,12 @@ const AdminDashboard = () => {
 
         <hr />
 
-        <section className="admin-section">
-          <h2>Shyiraho Ads Nshya (Upload Method)</h2>
-          <AdsUpload fetchAds={fetchAds} />
-        </section>
-
-        <hr />
-
-        <section className="admin-section">
-          <h2>Ads Zihari</h2>
-          <div className="admin-news-list">
-            {adsList.length === 0 ? <p>Nta Ads zihari.</p> : adsList.map((ad) => (
-              <div key={ad._id} className="news-item">
-                <div className="news-card-content">
-                  <h3>{ad.title}</h3>
-                  <p>{ad.description}</p>
-                  {ad.mediaUrl && ad.mediaType === 'image' && <img src={getMediaUrl(ad.mediaUrl)} alt="Ad Media" className="admin-media-preview" />}
-                </div>
-                <div className="actions">
-                  <button onClick={() => handleDeleteAd(ad._id)} className="delete-btn">Siba Ad</button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      </div>
-      <Footer />
-    </div>
-  );
-};
-
-// Component ya AdsUpload
-const AdsUpload = ({ fetchAds }) => {
+       const AdsUpload = ({ fetchAds }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
   const [mediaType, setMediaType] = useState("image");
+  const [placement, setPlacement] = useState("slider");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -234,32 +204,49 @@ const AdsUpload = ({ fetchAds }) => {
     formData.append("title", title);
     formData.append("description", description);
     formData.append("mediaType", mediaType);
-    if (mediaFile) formData.append("mediaFile", mediaFile);
+    formData.append("placement", placement);
+    if (placement === "slider" && mediaFile) {
+        formData.append("mediaFile", mediaFile);
+    }
 
     try {
       const token = getToken();
       await axios.post(`${API_ADMIN_URL}/ads`, formData, {
         headers: { "x-auth-token": token, "Content-Type": "multipart/form-data" },
       });
-      alert("Ad yashyizweho!");
+      alert("Ad yashyizweho neza!");
       setTitle(""); setDescription(""); setMediaFile(null);
       if (fetchAds) fetchAds(); 
-    } catch (err) { alert("Habaye ikibazo mu kohereza Ad."); }
+    } catch (err) { alert("Error uploading ad."); }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="dashboard-form">
+    <form onSubmit={handleSubmit} className="dashboard-form ad-admin-card">
+      <div className="input-group">
+        <label>Placement (Aho Ad ijya):</label>
+        <select value={placement} onChange={e => setPlacement(e.target.value)}>
+            <option value="slider">Media Slider (Iburyo - Ifoto/Video)</option>
+            <option value="sidebar">Sidebar Card (Ibumoso - Text Only)</option>
+        </select>
+      </div>
+
       <input placeholder="Title y'Ad" value={title} onChange={e=>setTitle(e.target.value)} required/>
       <textarea placeholder="Description" value={description} onChange={e=>setDescription(e.target.value)} required/>
-      <select value={mediaType} onChange={e => setMediaType(e.target.value)}>
-          <option value="image">Image</option>
-          <option value="video">Video</option>
-      </select>
-      <input type="file" accept={mediaType === 'image' ? 'image/*' : 'video/*'} onChange={e => setMediaFile(e.target.files[0])} />
+      
+      {placement === "slider" && (
+        <div className="media-fields">
+          <select value={mediaType} onChange={e => setMediaType(e.target.value)}>
+              <option value="image">Image</option>
+              <option value="video">Video</option>
+          </select>
+          <input type="file" accept={mediaType === 'image' ? 'image/*' : 'video/*'} 
+                 onChange={e => setMediaFile(e.target.files[0])} required />
+        </div>
+      )}
+      
       <button type="submit" className="submit-btn">Shyiraho Ad</button>
     </form>
   );
 };
 
 export default AdminDashboard;
-
