@@ -1,4 +1,5 @@
-/* --- GLOBAL ARTICLE STYLES --- */
+/* src/styles/SingleArticlePage.css */
+
 .single-article-page {
     background-color: #ffffff;
     min-height: 100vh;
@@ -6,124 +7,104 @@
     flex-direction: column;
 }
 
-.article-main-content {
+.article-main {
     flex: 1;
     display: flex;
     justify-content: center;
     padding: 40px 20px;
 }
 
-.article-wrapper {
+.article-container {
     width: 100%;
-    max-width: 740px; /* Intera nziza cyane kuri Desktop ituma amaso ataruha */
+    max-width: 800px; /* Optimal reading width */
 }
 
-/* --- HEADER & TITLE --- */
-.article-header {
-    margin-bottom: 25px;
-    text-align: left;
-}
-
-.category-badge {
+/* --- HEADER --- */
+.category-tag {
     background: #e63946;
-    color: white;
-    padding: 4px 12px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 12px;
     font-weight: 700;
-    border-radius: 2px;
-    display: inline-block;
-    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-radius: 3px;
 }
 
-.article-header h1 {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 2.8rem;
-    line-height: 1.1;
+.article-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
     font-weight: 800;
-    color: #121212;
-    margin: 0 0 15px 0;
+    line-height: 1.15;
+    color: #111827;
+    margin: 15px 0;
     letter-spacing: -1px;
 }
 
 .article-meta {
-    display: flex;
-    align-items: center;
-    color: #5f6368;
+    color: #6b7280;
     font-size: 0.95rem;
+    margin-bottom: 30px;
 }
 
-.dot { margin: 0 10px; color: #ccc; }
+.meta-divider { margin: 0 10px; color: #d1d5db; }
 
-/* --- MEDIA --- */
-.article-media-container {
-    margin: 30px 0;
+/* --- MEDIA (IFOTO) --- */
+.article-media-wrapper {
+    width: 100%;
+    margin-bottom: 35px;
 }
 
-.main-media {
+.full-article-media {
     width: 100%;
     height: auto;
-    max-height: 450px;
+    max-height: 550px;
     object-fit: cover;
-    border-radius: 4px;
-    display: block;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* --- BODY TEXT (IKOSORWA RYA SPACE) --- */
-.article-body-text {
+/* --- BODY TEXT (SPACE YAVUYEMO) --- */
+.article-body-content {
     font-family: 'Charter', 'Georgia', serif;
-    font-size: 1.2rem;
-    line-height: 1.6; /* Intera uringaniye hagati y'imirongo */
-    color: #292929;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #2d3748;
     
-    /* Gukuramo space nini hagati y'ama paragrafe */
+    /* Iki nicyo gikuramo space nini */
     white-space: pre-line; 
     margin: 0;
     padding: 0;
 }
 
-/* --- RESPONSIVE DESIGN (TABLET) --- */
+/* --- RESPONSIVE FIXES --- */
+
+/* Desktop & Tablet */
 @media (max-width: 1024px) {
-    .article-wrapper {
-        max-width: 90%;
-    }
-    .article-header h1 {
-        font-size: 2.3rem;
-    }
+    .article-container { max-width: 90%; }
 }
 
-/* --- RESPONSIVE DESIGN (MOBILE) --- */
+/* Mobile */
 @media (max-width: 600px) {
-    .article-main-content {
-        padding: 20px 15px;
-    }
+    .article-main { padding: 20px 15px; }
     
-    .article-header h1 {
-        font-size: 1.75rem;
-        line-height: 1.2;
-    }
+    .article-title { font-size: 1.75rem; line-height: 1.2; }
     
-    .article-meta {
-        font-size: 0.85rem;
-        flex-wrap: wrap;
+    .article-body-content {
+        font-size: 1.15rem;
+        line-height: 1.6;
     }
 
-    .article-body-text {
-        font-size: 1.1rem;
-        line-height: 1.55;
-    }
-
-    .main-media {
-        border-radius: 0;
+    .full-article-media {
+        border-radius: 8px;
+        /* Kuri mobile ifoto yakwirwa screen yose */
         width: calc(100% + 30px);
         margin-left: -15px;
     }
 }
 
-.loading-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
+.loading-state {
+    text-align: center;
+    padding: 100px;
+    font-size: 1.2rem;
+    color: #666;
 }
