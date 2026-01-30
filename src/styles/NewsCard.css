@@ -1,52 +1,82 @@
-/* Styling rusange yo kuva mu isoko no ku ngingo ya link */
+/* NewsCard.css */
+
+:root {
+  --card-bg: #ffffff;
+  --text-title: #111827;
+  --text-meta: #6b7280;
+  --accent-red: #e63946;
+  --border-subtle: #f3f4f6;
+  --hover-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+  --font-sans: 'Inter', -apple-system, sans-serif;
+}
+
+/* Remove default link styles */
 .news-card-link {
-  text-decoration: none; /* Kuraho imirongo munsi ya links */
-  color: inherit; /* Gukomeza amabara asanzwe */
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease-in-out;
+}
+
+.news-card-link:hover {
+  transform: translateY(-4px);
 }
 
 .news-card {
-  /* Irimure: Iguma kuri block imwe */
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff; /* Umweru mwiza */
-  border-radius: 8px; /* Corners zoroheje */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Igicucu cyiza */
-  overflow: hidden;
   height: 100%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-subtle);
+  transition: box-shadow 0.3s ease;
 }
 
-.news-card:hover {
-  transform: translateY(-5px); /* Kugira animation nziza iyo umuntu ayikozaho */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Igicucu cyongereye ingufu */
+.news-card-link:hover .news-card {
+  box-shadow: var(--hover-shadow);
 }
 
+/* MEDIA CONTAINER (Perfect 16:9 Aspect Ratio) */
 .news-media-container {
+  position: relative;
   width: 100%;
-  /* Ifoto izakoresha 'object-fit: cover' muri Landing.css cyangwa hano niba ihari */
+  padding-top: 56.25%; /* 16:9 ratio */
+  background-color: #f9fafb;
+  overflow: hidden;
 }
 
-/* Amafoto agaragara neza cyane muri card */
-.news-card-image,
+.news-card-image, 
 .news-card-video {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 180px; /* Uburebure buhoraho bw'ifoto/video */
-  object-fit: cover; /* **Ibi nibyo bituma ifoto i-fit neza cyane** */
-  display: block;
+  height: 100%;
+  object-fit: cover; /* Ensures images aren't stretched */
+  transition: transform 0.5s ease;
 }
 
+.news-card-link:hover .news-card-image {
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* INFO SECTION */
 .news-info {
-  padding: 15px;
-  flex-grow: 1; /* Kugira ngo amakuru yuzure neza umwanya */
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .news-info h5 {
-  font-size: 1.1rem; /* Font size nziza */
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
   font-weight: 700;
-  margin: 0 0 10px 0;
-  color: #000000; /* Black color ku mutwe w'inkuru */
   line-height: 1.4;
-  /* Kugabanya umurongo w'inkuru iyo muremure cyane (optional) */
+  color: var(--text-title);
+  margin-bottom: 12px;
+  /* Limit title to 3 lines for clean grid */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -54,15 +84,65 @@
 }
 
 .news-meta {
-  font-size: 0.85rem;
-  color: #00008b; /* Blue color kuri meta data (author, category, date) */
-  margin: 0;
-  opacity: 0.8;
+  margin-top: auto;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-meta);
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
-/* Styles kuri 'extraClass' nini cyane (Urugero: Kuri desktop ishobora kuba nini) */
-.news-card.large-card .news-card-image,
-.news-card.large-card .news-card-video {
-    height: 250px; /* Uburebure bwikubye kuri large card */
+.news-meta strong {
+  color: var(--accent-red);
+  font-weight: 600;
 }
 
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablet & Smaller Desktops */
+@media (max-width: 1024px) {
+  .news-info h5 {
+    font-size: 1.05rem;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 600px) {
+  .news-card {
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  /* Optional: Make cards horizontal on mobile if they are too narrow */
+  /* If you want horizontal cards on mobile, use this: */
+  /*
+  .news-card {
+    flex-direction: row;
+    height: 120px;
+  }
+  .news-media-container {
+    width: 40%;
+    padding-top: 0;
+    height: 100%;
+  }
+  .news-info h5 {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 2;
+  }
+  */
+  
+  .news-info {
+    padding: 12px;
+  }
+  
+  .news-info h5 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+}
+
+/* Style for special Extra Classes (e.g., Featured Card) */
+.news-card.featured {
+  border: 2px solid var(--accent-red);
+}
