@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Navbar  from '../components/Navbar'; 
+import Navbar from '../components/Navbar'; 
 import Footer from '../components/Footer';
 import '../styles/SingleArticlePage.css';
 
@@ -20,48 +20,55 @@ const SingleArticlePage = () => {
                 setArticle(res.data);
                 setLoading(false);
             } catch (err) {
+                console.error("Error:", err);
                 setLoading(false);
             }
         };
         fetchArticle();
     }, [id]);
 
-    if (loading) return <div className="loading-container">Loading...</div>;
-    if (!article) return <div className="loading-container">Article not found.</div>;
+    if (loading) return <div className="loading-state">Loading...</div>;
+    if (!article) return <div className="loading-state">Article not found.</div>;
 
-    const getMediaUrl = (mediaUrl) => `${API_BASE_URL_FETCH}${mediaUrl}`;
+    const getMediaUrl = (mediaUrl) => {
+        if (!mediaUrl) return "";
+        return mediaUrl.startsWith('http') ? mediaUrl : `${API_BASE_URL_FETCH}${mediaUrl}`;
+    };
 
     return (
         <div className="single-article-page">
-            <Navbar/>
-            <main className="article-main-content">
-                <article className="article-wrapper">
+            <Navbar />
+            <main className="article-main">
+                <article className="article-container">
                     <header className="article-header">
-                        <span className="category-badge">{article.category}</span>
-                        <h1>{article.title}</h1>
+                        <span className="category-tag">{article.category}</span>
+                        <h1 className="article-title">{article.title}</h1>
                         <div className="article-meta">
-                            <span>By <strong>{article.author}</strong></span>
-                            <span className="dot">•</span>
-                            <span>{new Date(article.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                            By <strong>{article.author}</strong> 
+                            <span className="meta-divider">|</span>
+                            {new Date(article.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                         </div>
                     </header>
 
-                    <div className="article-media-container">
+                    {/* IFOTO CYANGWA VIDEO - Hano hagaragajwe neza */}
+                    <div className="article-media-wrapper">
                         {article.mediaUrl && article.mediaType === 'image' && (
-                            <img src={getMediaUrl(article.mediaUrl)} alt="" className="main-media" />
+                            <img src={getMediaUrl(article.mediaUrl)} alt={article.title} className="full-article-media" />
                         )}
                         {article.mediaUrl && article.mediaType === 'video' && (
-                            <video src={getMediaUrl(article.mediaUrl)} controls className="main-media" />
+                            <video src={getMediaUrl(article.mediaUrl)} controls className="full-article-media">
+                                Your browser does not support the video tag.
+                            </video>
                         )}
                     </div>
 
-                    {/* HANO NIHO HAKOSOWE SPACE: Nakoresheje div ifite class yihariye */}
-                    <div className="article-body-text">
+                    {/* BODY - Space nini yavuyemo hano */}
+                    <div className="article-body-content">
                         {article.body}
                     </div>
                 </article>
             </main>
-            <Footer/>
+            <Footer />
         </div>
     );
 };
