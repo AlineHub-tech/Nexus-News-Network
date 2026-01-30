@@ -1,109 +1,129 @@
-/* src/styles/SingleArticlePage.css */
-
-:root {
-  --font-serif: 'Charter', 'Georgia', serif;
-  --font-sans: 'Inter', -apple-system, sans-serif;
-  --text-main: #1a1a1a;
-  --text-muted: #5f6368;
-  --bg-color: #ffffff;
+/* --- GLOBAL ARTICLE STYLES --- */
+.single-article-page {
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.single-article-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--bg-color);
+.article-main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
 }
 
-.article-content-wrapper {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 24px;
-  flex: 1;
+.article-wrapper {
+    width: 100%;
+    max-width: 740px; /* Intera nziza cyane kuri Desktop ituma amaso ataruha */
 }
 
 /* --- HEADER & TITLE --- */
 .article-header {
-  margin-bottom: 24px;
+    margin-bottom: 25px;
+    text-align: left;
 }
 
-.article-content-wrapper h4 {
-  font-family: var(--font-sans);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  font-weight: 800;
-  line-height: 1.15;
-  color: #111827;
-  margin-bottom: 15px;
-  letter-spacing: -0.03em;
+.category-badge {
+    background: #e63946;
+    color: white;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.article-header h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 2.8rem;
+    line-height: 1.1;
+    font-weight: 800;
+    color: #121212;
+    margin: 0 0 15px 0;
+    letter-spacing: -1px;
 }
 
 .article-meta {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  border-bottom: 1px solid #f1f3f4;
-  padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    color: #5f6368;
+    font-size: 0.95rem;
 }
 
-.article-meta strong {
-  color: #000;
-}
-
-.separator {
-  margin: 0 8px;
-  color: #ccc;
-}
+.dot { margin: 0 10px; color: #ccc; }
 
 /* --- MEDIA --- */
-.article-media {
-  width: 100%;
-  max-height: 520px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 30px;
+.article-media-container {
+    margin: 30px 0;
 }
 
-/* --- BODY TEXT (KWA KOSORWA BURUNDU) --- */
-.article-body {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  line-height: 1.7; /* Umwanya mwiza hagati y'imirongo */
-  color: #2d3436;
-  
-  /* Ibi nibyo bikuramo space nyinshi */
-  white-space: pre-line; 
-  margin-top: 0;
-  
-  /* Isuku y'inyandiko */
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+.main-media {
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .article-content-wrapper {
-    padding: 25px 16px;
-  }
-
-  .article-content-wrapper h4 {
-    font-size: 1.85rem;
-  }
-
-  .article-body {
-    font-size: 1.15rem;
-    line-height: 1.65;
-  }
-  
-  .article-media {
-    border-radius: 8px;
-    width: calc(100% + 32px);
-    margin-left: -16px;
-  }
+/* --- BODY TEXT (IKOSORWA RYA SPACE) --- */
+.article-body-text {
+    font-family: 'Charter', 'Georgia', serif;
+    font-size: 1.2rem;
+    line-height: 1.6; /* Intera uringaniye hagati y'imirongo */
+    color: #292929;
+    
+    /* Gukuramo space nini hagati y'ama paragrafe */
+    white-space: pre-line; 
+    margin: 0;
+    padding: 0;
 }
 
-.loading-state, .error-state {
-  text-align: center;
-  padding: 100px;
-  font-family: var(--font-sans);
-  color: var(--text-muted);
+/* --- RESPONSIVE DESIGN (TABLET) --- */
+@media (max-width: 1024px) {
+    .article-wrapper {
+        max-width: 90%;
+    }
+    .article-header h1 {
+        font-size: 2.3rem;
+    }
+}
+
+/* --- RESPONSIVE DESIGN (MOBILE) --- */
+@media (max-width: 600px) {
+    .article-main-content {
+        padding: 20px 15px;
+    }
+    
+    .article-header h1 {
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+    
+    .article-meta {
+        font-size: 0.85rem;
+        flex-wrap: wrap;
+    }
+
+    .article-body-text {
+        font-size: 1.1rem;
+        line-height: 1.55;
+    }
+
+    .main-media {
+        border-radius: 0;
+        width: calc(100% + 30px);
+        margin-left: -15px;
+    }
+}
+
+.loading-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
 }
