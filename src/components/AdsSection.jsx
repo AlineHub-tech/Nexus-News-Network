@@ -33,7 +33,7 @@ const AdsSection = ({ ads }) => {
 
   return (
     <div className="ads-section-main-wrapper">
-      <h2 className="section-title">AMATANGAZO (Advertisements)</h2>
+      <h2 className="section-title">AMATANGAZO (ADS)</h2>
       
       <div className="ads-grid-layout">
         
@@ -87,3 +87,4 @@ const AdsSection = ({ ads }) => {
 };
 
 export default AdsSection;
+
