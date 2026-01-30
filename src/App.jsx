@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Nongeyemo useState na useEffect
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingScreen from "./components/LoadingScreen"; // Ihamagare hano
 
@@ -24,14 +24,15 @@ export default function App(){
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Igihe loading imara (urugero: amasegonda 2.5)
+    // Igihe LoadingScreen igomba kumara mbere yo kwerekana website
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, 2000); // 2000ms = amasegonda 2 (ushobora kuyongera cyangwa ukayagabanya)
+
     return () => clearTimeout(timer);
   }, []);
 
-  // Niba ikiri kuloading, erekana LoadingScreen gusa
+  // IKI NI CYO CYINGENZI: Niba isLoading ari true, garagaza LoadingScreen yonyine
   if (isLoading) {
     return <LoadingScreen />;
   }
