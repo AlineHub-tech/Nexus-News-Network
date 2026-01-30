@@ -27,8 +27,6 @@ const LatestNews = ({ news }) => {
 
   return (
     <div className="latest-news-section-wrapper">
-      <h2 className="section-title">INKURU ZAGEZWEHO (Latest News)</h2>
-      
       <div className="latest-news-grid">
         
         {/* LEFT COLUMN: 2 News Items */}
@@ -75,3 +73,4 @@ const LatestNews = ({ news }) => {
 };
 
 export default LatestNews;
+
