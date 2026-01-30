@@ -52,7 +52,7 @@
     color: #d1d5db; 
 }
 
-/* --- MEDIA (IFOTO) --- */
+/* --- MEDIA (IMAGE/VIDEO) --- */
 .article-media-wrapper {
     width: 100%;
     margin-bottom: 35px;
@@ -73,7 +73,7 @@
     font-size: 1.25rem;
     line-height: 1.6;          /* Professional line spacing */
     color: #2d3748;
-    white-space: normal;        /* Remove pre-line to avoid large spaces */
+    white-space: normal;        /* Remove pre-line */
 }
 
 /* Paragraph spacing */
@@ -85,7 +85,7 @@
     margin-bottom: 0;           /* Remove bottom space on last paragraph */
 }
 
-/* Optional styling for emphasis */
+/* Optional inline styling */
 .article-body-content strong {
     font-weight: 600;
 }
