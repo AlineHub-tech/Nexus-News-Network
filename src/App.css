@@ -10,6 +10,7 @@
 body {
     /* Guhisha burundu ibyarenze iburyo n'ibumoso */
     overflow-x: hidden;
+    background:rgba(2, 2, 48, 0.767);
 }
 
 .landing-container {
