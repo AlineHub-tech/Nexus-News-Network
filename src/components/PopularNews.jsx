@@ -1,5 +1,4 @@
-// src/components/PopularNews.jsx
-import React, { useState, useEffect } from "react";
+import React from "react";
 import NewsCard from "./NewsCard";
 import "../styles/PopularNews.css";
 
@@ -8,29 +7,29 @@ const PopularNews = ({ newsList }) => {
   if (!newsList || newsList.length === 0) {
     return (
         <div className="popular-news-container">
-            <h2 className="section-title">Trending News (8 Items)</h2>
-            <p>Nta nkuru zikunzwe zibonetse.</p>
+            <h2 className="section-title">INKURU ZIKUNZWE (Popular News)</h2>
+            <p>Nta nkuru zibonetse.</p>
         </div>
     );
   }
 
-  // Dukoresha inkuru 8 gusa (nubwo landing page yohereza 4)
-  const trendingNews = newsList.slice(0, 8);
-
+  // 1. Tondika inkuru hashingiwe ku zarebwe cyane (views)
+  // 2. Fata inkuru 8 za mbere zifite views nyinshi
+  const trendingNews = [...newsList]
+    .sort((a, b) => (b.views || 0) - (a.views || 0))
+    .slice(0, 8);
 
   return (
     <div className="popular-news-container">
-      {/* Umutwe wa section hamwe na style twumvikanyeho */}
-      <h2 className="section-title">INKURU ZIKUZWE(Trending News)</h2> 
+      <h2 className="section-title">INKURU ZAREBWE CYANE (Most Viewed)</h2> 
 
-      {/* Agace kanyerera nk'aka trending ticker */}
       <div className="popular-news-ticker-wrap">
         <div className="popular-news-ticker-move">
-            {/* Dukoresha urutonde kabiri kugira ngo animation ikomeze nta gihagarara */}
             {trendingNews.map((post) => (
                 <NewsCard key={post._id} post={post} /> 
             ))}
-             {trendingNews.map((post) => (
+            {/* Clone kugira ngo animation ikomeze (loop) */}
+            {trendingNews.map((post) => (
                 <NewsCard key={`${post._id}-clone`} post={post} /> 
             ))}
         </div>
