@@ -1,157 +1,129 @@
-/* src/styles/dashboard.css (Yuzuye) */
+/* dashboard.css */
 
+:root {
+  --primary-color: #2563eb;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #1e293b;
+  --border-color: #e2e8f0;
+}
+
+.page-wrapper {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Dashboard Container */
 .dashboard-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+  flex: 1;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
-h1, h2 {
-    color: #333;
+/* Titles */
+.dashboard-container h2 {
+  color: var(--text-main);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  border-bottom: 3px solid var(--primary-color);
+  display: inline-block;
+  padding-bottom: 5px;
 }
 
-hr {
-    margin: 20px 0;
-    border: 1px solid #ccc;
-}
-
-.admin-news-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.news-item {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.news-item h3 {
-    margin: 0 0 5px 0;
-}
-
-.news-item p {
-    margin: 0 0 10px 0;
-}
-
-/* IYI NIYO STYLE IKEMURA IKIBASHO CY'UMWANYA */
-.article-content-display {
-  /* Ibi nibyo bituma Enter n'umwanya byubahirizwa mu kugaragaza inkuru */
-  white-space: pre-wrap; 
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: #555;
-}
-
-
-.news-item img, .news-item video {
-    max-width: 200px; 
-    height: auto;
-    margin-top: 10px;
-    display: block;
-    border-radius: 4px;
-}
-
-.actions button {
-    margin-left: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    background-color: #007bff; /* Primary action color */
-}
-
-.actions button:hover {
-    opacity: 0.9;
-}
-
-.delete-btn {
-    background-color: #dc3545; /* Danger color */
-}
-
+/* Form Layout */
 .dashboard-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.dashboard-form input,
-.dashboard-form textarea,
-.dashboard-form select,
-.dashboard-form button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box; /* Ensures padding is included in width */
+/* Input & Select Styles */
+.dashboard-form input[type="text"],
+.dashboard-form select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  background: #fff;
+  transition: border-color 0.3s ease;
 }
 
+.dashboard-form input:focus,
+.dashboard-form select:focus,
+.dashboard-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* --- KUGIRA NGO BODY ISIGE UMWANYA HAGATI Y'AMA PARAGRAPH --- */
+.dashboard-form textarea {
+  width: 100%;
+  min-height: 350px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1.8; /* Ibi bituma imirongo itegerana cyane */
+  white-space: pre-wrap; /* Bituma iyo ukanze Enter umwanya uguma hagati y'ama paragraph */
+  font-family: inherit;
+  resize: vertical;
+}
+
+/* File Input */
+.dashboard-form input[type="file"] {
+  padding: 10px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  border: 2px dashed var(--border-color);
+  cursor: pointer;
+}
+
+/* Submit Button */
 .dashboard-form button {
-    background-color: #28a745;
-    color: white;
-    cursor: pointer;
-    border: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
+  margin-top: 10px;
 }
 
 .dashboard-form button:hover {
-    opacity: 0.9;
+  background-color: #1d4ed8;
 }
 
-
-/* MODAL STYLES (for EditNewsModal component) */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+.dashboard-form button:active {
+  transform: scale(0.98);
 }
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 500px;
-  width: 90%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+.dashboard-form button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
 }
 
-.modal-content form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.modal-content form input,
-.modal-content form textarea,
-.modal-content form select {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.modal-actions button {
-    width: auto; /* Override 100% width from general form styles */
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-container {
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  .dashboard-container h2 {
+    font-size: 22px;
+  }
 }
