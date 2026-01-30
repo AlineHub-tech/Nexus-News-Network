@@ -35,6 +35,17 @@ const SingleArticlePage = () => {
         return mediaUrl.startsWith('http') ? mediaUrl : `${API_BASE_URL_FETCH}${mediaUrl}`;
     };
 
+    // Function to convert text body into paragraphs
+    const renderArticleBody = (bodyText) => {
+        if (!bodyText) return null;
+
+        // Split by double newline for paragraphs
+        const paragraphs = bodyText.split(/\n\s*\n/);
+        return paragraphs.map((para, index) => (
+            <p key={index}>{para.trim()}</p>
+        ));
+    };
+
     return (
         <div className="single-article-page">
             <Navbar />
@@ -50,7 +61,7 @@ const SingleArticlePage = () => {
                         </div>
                     </header>
 
-                    {/* IFOTO CYANGWA VIDEO - Hano hagaragajwe neza */}
+                    {/* IFOTO CYANGWA VIDEO */}
                     <div className="article-media-wrapper">
                         {article.mediaUrl && article.mediaType === 'image' && (
                             <img src={getMediaUrl(article.mediaUrl)} alt={article.title} className="full-article-media" />
@@ -62,9 +73,9 @@ const SingleArticlePage = () => {
                         )}
                     </div>
 
-                    {/* BODY - Space nini yavuyemo hano */}
+                    {/* BODY - paragraphs properly spaced */}
                     <div className="article-body-content">
-                        {article.body}
+                        {renderArticleBody(article.body)}
                     </div>
                 </article>
             </main>
