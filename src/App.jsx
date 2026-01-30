@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react"; // Nongeyemo useState na useEffect
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoadingScreen from "./components/LoadingScreen"; // Ihamagare hano
+
 // Pages Rusange
 import Landing from "./pages/Landing";
 import CategoryPage from "./pages/CategoryPage";
@@ -8,7 +10,6 @@ import OurMission from "./pages/OurMission";
 import OurVision from "./pages/OurVision";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
-// Components Zikoresha Props (TV na Ads zikoreshwa muri Landing.jsx)
 
 // Authentication Pages & Tools
 import { AuthProvider } from "./context/AuthContext";
@@ -18,9 +19,23 @@ import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
 import AuthorDashboard from "./pages/AuthorDashboard";
 import PrivateRoute from "./components/PrivateRoute"; 
-// PrivateRoute igenzura 'user' na 'role' mbere yo kwinjiza
 
 export default function App(){
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Igihe loading imara (urugero: amasegonda 2.5)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Niba ikiri kuloading, erekana LoadingScreen gusa
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <BrowserRouter>
      <AuthProvider>
@@ -32,14 +47,14 @@ export default function App(){
           <Route path="/vision" element={<OurVision />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
-         <Route path="/category/:categoryName" element={<CategoryPage />} />
-           <Route path="/article/:id" element={<SingleArticlePage />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
+          <Route path="/article/:id" element={<SingleArticlePage />} />
           
           {/* Inzira za Auth */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} /> 
           
-          {/* Inzira Zirinzwe (Private Routes - zigenzura role) */}
+          {/* Inzira Zirinzwe (Private Routes) */}
           <Route
             path="/admin"
             element={
@@ -51,7 +66,7 @@ export default function App(){
           <Route
             path="/author"
             element={
-              <PrivateRoute roles={["writer"]}> {/* Role muri DB ni 'writer' */}
+              <PrivateRoute roles={["writer"]}>
                 <AuthorDashboard />
               </PrivateRoute>
             }
