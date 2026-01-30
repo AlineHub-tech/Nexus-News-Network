@@ -19,8 +19,14 @@ const SingleArticlePage = () => {
                 const res = await axios.get(`${API_ARTICLE_FETCH}/articles/${id}`);
                 setArticle(res.data);
                 setLoading(false);
+
+                // --- HANO NIHO HONGEWEWE UBURYO BWO KUBARA VIEWS ---
+                // Twongera view imwe muri database igihe cyose inkuru ifungutse
+                await axios.put(`${API_ARTICLE_FETCH}/articles/${id}/view`);
+                // ---------------------------------------------------
+                
             } catch (err) {
-                console.error("Error:", err);
+                console.error("Error fetching article:", err);
                 setLoading(false);
             }
         };
@@ -35,14 +41,12 @@ const SingleArticlePage = () => {
         return mediaUrl.startsWith('http') ? mediaUrl : `${API_BASE_URL_FETCH}${mediaUrl}`;
     };
 
-    // Function to convert text body into paragraphs
     const renderArticleBody = (bodyText) => {
         if (!bodyText) return null;
-
-        // Split by double newline for paragraphs
-        const paragraphs = bodyText.split(/\n\s*\n/);
+        // Split by newline and filter out empty strings
+        const paragraphs = bodyText.split(/\n+/).filter(p => p.trim() !== "");
         return paragraphs.map((para, index) => (
-            <p key={index}>{para.trim()}</p>
+            <p key={index} className="paragraph">{para.trim()}</p>
         ));
     };
 
@@ -58,10 +62,11 @@ const SingleArticlePage = () => {
                             By <strong>{article.author}</strong> 
                             <span className="meta-divider">|</span>
                             {new Date(article.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                            <span className="meta-divider">|</span>
+                            <span className="views-count">👁️ {article.views || 0} views</span>
                         </div>
                     </header>
 
-                    {/* IFOTO CYANGWA VIDEO */}
                     <div className="article-media-wrapper">
                         {article.mediaUrl && article.mediaType === 'image' && (
                             <img src={getMediaUrl(article.mediaUrl)} alt={article.title} className="full-article-media" />
@@ -73,7 +78,6 @@ const SingleArticlePage = () => {
                         )}
                     </div>
 
-                    {/* BODY - paragraphs properly spaced */}
                     <div className="article-body-content">
                         {renderArticleBody(article.body)}
                     </div>
