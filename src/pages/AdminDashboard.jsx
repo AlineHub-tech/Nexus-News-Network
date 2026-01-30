@@ -1,15 +1,14 @@
 // src/pages/AdminDashboard.jsx
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
+import Navbar from "../components/Navbar"; 
+import Footer from "../components/Footer";
 import "../styles/dashboard.css"; // Styles zirakenewe kuri Modal
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000"; 
 const API_ADMIN_URL = `${API_BASE_URL}/api/admin`; 
 
 const getToken = () => localStorage.getItem("token");
-
-// Function ifasha kubona URL y'ifoto cyangwa video neza
-// Cloudinary itanga URL yuzuye, ntabwo dukeneye kongeramo API_BASE_URL
 const getMediaUrl = (mediaUrl) => {
     if (mediaUrl && mediaUrl.startsWith('https://res.cloudinary.com')) {
         return mediaUrl; // Ni URL yuzuye
@@ -171,6 +170,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="dashboard-container">
+       <Navbar /> {/* Navbar ihamagawe hano */}
       <h1>Admin Dashboard</h1>
 
       {editingNewsItem && (
@@ -298,7 +298,9 @@ const AdsUpload = ({ fetchAds }) => {
       />
       <button type="submit">Shyiraho Ad</button>
     </form>
+    
   );
+   <Footer /> 
 };
 
 
