@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import "../styles/dashboard.css";
+import "../styles/dashboard1.css";
 
 // Import Navbar na Footer
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000"; 
 const API_ADMIN_URL = `${API_BASE_URL}/api/admin`; 
@@ -262,3 +262,4 @@ const AdsUpload = ({ fetchAds }) => {
 };
 
 export default AdminDashboard;
+
