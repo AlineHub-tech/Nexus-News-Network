@@ -63,7 +63,7 @@
 .article-body {
   font-family: var(--font-serif);
   font-size: 1.25rem; /* Size nziza cyane kuri Desktop */
-  line-height: 1.2;   /* Umwanya hagati y'imirongo uringaniye */
+  line-height: 1.7;   /* Umwanya hagati y'imirongo uringaniye */
   color: var(--text-main);
   
   /* IBI NI BYO BYAKOSOYE SPACE HAGATI Y'AMAPARAGRAPH */
@@ -115,4 +115,5 @@
     font-size: 1.6rem;
   }
 }
+
 
