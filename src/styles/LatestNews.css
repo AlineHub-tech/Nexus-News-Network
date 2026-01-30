@@ -1,8 +1,8 @@
 /* Container Nyamukuru */
 .latest-news-section-wrapper {
   max-width: 1300px;
-  margin: 40px auto;
-  padding: 0 20px;
+  /* margin: 40px auto;
+  padding: 0 20px; */
 }
 
 /* GRID SYSTEM */
@@ -108,3 +108,4 @@
     order: 2; /* Sidebar comes after slider on mobile */
   }
 }
+
