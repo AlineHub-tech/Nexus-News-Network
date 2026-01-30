@@ -1,19 +1,16 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import "../styles/dashboard1.css";
-
-// Import Navbar na Footer
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import "../styles/dashboard1.css";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000"; 
 const API_ADMIN_URL = `${API_BASE_URL}/api/admin`; 
 
 const getToken = () => localStorage.getItem("token");
+
 const getMediaUrl = (mediaUrl) => {
-    if (mediaUrl && mediaUrl.startsWith('https://res.cloudinary.com')) {
-        return mediaUrl;
-    }
+    if (mediaUrl && mediaUrl.startsWith('https://res.cloudinary.com')) return mediaUrl;
     const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
     const media = mediaUrl.startsWith('/') ? mediaUrl : `/${mediaUrl}`;
     return `${base}${media}`;
@@ -39,11 +36,8 @@ const EditNewsModal = ({ newsItem, onClose, onUpdateSuccess }) => {
       onUpdateSuccess(); 
       onClose(); 
     } catch (err) {
-      console.error("Error updating news:", err.response?.data?.msg || err.message);
       alert("Habaye ikibazo mu guhindura inkuru.");
-    } finally {
-        setIsUpdating(false);
-    }
+    } finally { setIsUpdating(false); }
   };
 
   return (
@@ -54,12 +48,12 @@ const EditNewsModal = ({ newsItem, onClose, onUpdateSuccess }) => {
           <label>Title:</label>
           <input value={title} onChange={e => setTitle(e.target.value)} required />
           <label>Content:</label>
-          <textarea value={content} onChange={e => setContent(e.target.value)} rows={5} required />
+          <textarea value={content} onChange={e => setContent(e.target.value)} rows={6} required />
           <label>Category:</label>
           <input value={category} onChange={e => setCategory(e.target.value)} />
           <div className="modal-actions">
-            <button type="submit" disabled={isUpdating}>{isUpdating ? 'Saving...' : 'Save Changes'}</button>
-            <button type="button" onClick={onClose}>Cancel</button>
+            <button type="submit" className="save-btn">{isUpdating ? 'Saving...' : 'Save Changes'}</button>
+            <button type="button" className="cancel-btn" onClick={onClose}>Cancel</button>
           </div>
         </form>
       </div>
@@ -67,48 +61,35 @@ const EditNewsModal = ({ newsItem, onClose, onUpdateSuccess }) => {
   );
 };
 
-// --- Admin Dashboard Nyakuri ---
+// --- Main Admin Dashboard ---
 const AdminDashboard = () => {
   const [pendingNews, setPendingNews] = useState([]);
   const [approvedNews, setApprovedNews] = useState([]);
   const [adsList, setAdsList] = useState([]); 
   const [editingNewsItem, setEditingNewsItem] = useState(null); 
 
-  const fetchPendingNews = useCallback(async () => {
+  const refreshAllLists = useCallback(async () => {
     try {
       const token = getToken();
-      const res = await axios.get(`${API_ADMIN_URL}/pending-articles`, { headers: { "x-auth-token": token } });
-      setPendingNews(res.data);
-    } catch (err) { console.error(err); }
+      if (!token) return;
+      const [pending, approved, ads] = await Promise.all([
+        axios.get(`${API_ADMIN_URL}/pending-articles`, { headers: { "x-auth-token": token } }),
+        axios.get(`${API_ADMIN_URL}/approved-articles`, { headers: { "x-auth-token": token } }),
+        axios.get(`${API_ADMIN_URL}/ads`, { headers: { "x-auth-token": token } })
+      ]);
+      setPendingNews(pending.data);
+      setApprovedNews(approved.data);
+      setAdsList(ads.data);
+    } catch (err) { console.error("Error fetching data", err); }
   }, []);
 
-  const fetchApprovedNews = useCallback(async () => {
-    try {
-      const token = getToken();
-      const res = await axios.get(`${API_ADMIN_URL}/approved-articles`, { headers: { "x-auth-token": token } });
-      setApprovedNews(res.data);
-    } catch (err) { console.error(err); }
-  }, []);
-
-  const fetchAds = useCallback(async () => {
-    try {
-        const token = getToken(); 
-        const res = await axios.get(`${API_ADMIN_URL}/ads`, { headers: { "x-auth-token": token } }); 
-        setAdsList(res.data);
-    } catch (err) { console.error(err); }
-  }, []);
-
-  const refreshAllLists = useCallback(() => {
-    fetchPendingNews();
-    fetchApprovedNews();
-    fetchAds();
-  }, [fetchPendingNews, fetchApprovedNews, fetchAds]);
+  useEffect(() => { refreshAllLists(); }, [refreshAllLists]);
 
   const handleApprove = async (id) => {
     try {
       const token = getToken();
       await axios.put(`${API_ADMIN_URL}/articles/${id}/approve`, {}, { headers: { "x-auth-token": token } });
-      alert("Inkuru yemejwe!");
+      alert("Inkuru yemejwe kandi yashyizwe hanze!");
       refreshAllLists(); 
     } catch (err) { console.error(err); }
   };
@@ -127,71 +108,100 @@ const AdminDashboard = () => {
     try {
         const token = getToken(); 
         await axios.delete(`${API_ADMIN_URL}/ads/${id}`, { headers: { "x-auth-token": token } });
-        fetchAds(); 
+        refreshAllLists(); 
     } catch (err) { console.error(err); }
   };
-
-  useEffect(() => { refreshAllLists(); }, [refreshAllLists]);
 
   return (
     <div className="page-wrapper">
       <Navbar />
       <div className="dashboard-container">
-        <h1>Admin Dashboard</h1>
+        <header className="admin-main-header">
+          <h1>Admin Management Panel</h1>
+          <p>Control news flow and advertisements across Nexus News Network.</p>
+        </header>
 
         {editingNewsItem && (
-          <EditNewsModal 
-            newsItem={editingNewsItem} 
-            onClose={() => setEditingNewsItem(null)} 
-            onUpdateSuccess={refreshAllLists}
-          />
+          <EditNewsModal newsItem={editingNewsItem} onClose={() => setEditingNewsItem(null)} onUpdateSuccess={refreshAllLists} />
         )}
 
+        {/* 1. Pending Section */}
         <section className="admin-section">
-          <h2>Inkuru Zitarasuzumwa (Pending Approval)</h2>
-          <div className="admin-news-list">
-            {pendingNews.length === 0 ? <p>Nta nkuru nshya zitarasuzumwa zihari.</p> : pendingNews.map((n) => (
-              <div key={n._id} className="news-item">
-                <div className="news-card-content">
+          <div className="section-title-wrap">
+             <h2>Pending Approval ({pendingNews.length})</h2>
+          </div>
+          <div className="admin-grid">
+            {pendingNews.map((n) => (
+              <div key={n._id} className="admin-item-card">
+                {n.mediaUrl && <img src={getMediaUrl(n.mediaUrl)} alt="" className="admin-item-img" />}
+                <div className="admin-item-info">
                   <h3>{n.title}</h3>
-                  <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
-                  {n.mediaUrl && n.mediaType === 'image' && <img src={getMediaUrl(n.mediaUrl)} alt="Media" className="admin-media-preview" />}
-                  {n.mediaUrl && n.mediaType === 'video' && <video src={getMediaUrl(n.mediaUrl)} controls className="admin-media-preview" />}
-                </div>
-                <div className="actions">
-                  <button onClick={() => handleApprove(n._id)} className="approve-btn">Emeza</button>
-                  <button onClick={() => setEditingNewsItem(n)} className="edit-btn">Edit</button>
-                  <button onClick={() => handleDeleteArticle(n._id)} className="delete-btn">Siba</button>
+                  <p>By {n.author} | {n.category}</p>
+                  <div className="admin-btn-group">
+                    <button onClick={() => handleApprove(n._id)} className="approve-btn">Approve</button>
+                    <button onClick={() => setEditingNewsItem(n)} className="edit-btn">Edit</button>
+                    <button onClick={() => handleDeleteArticle(n._id)} className="delete-btn">Delete</button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        <hr />
-
+        {/* 2. Approved Section */}
         <section className="admin-section">
-          <h2>Inkuru Zemejwe (Approved News)</h2>
-          <div className="admin-news-list">
-            {approvedNews.length === 0 ? <p>Nta nkuru zemejwe zihari.</p> : approvedNews.map((n) => (
-              <div key={n._id} className="news-item">
-                <div className="news-card-content">
+          <h2>Approved Articles</h2>
+          <div className="admin-grid">
+            {approvedNews.map((n) => (
+              <div key={n._id} className="admin-item-card approved">
+                <div className="admin-item-info">
                   <h3>{n.title}</h3>
-                  <p>Author: {n.author} | Status: <strong>{n.status}</strong></p>
-                  {n.mediaUrl && n.mediaType === 'image' && <img src={getMediaUrl(n.mediaUrl)} alt="Media" className="admin-media-preview" />}
-                </div>
-                <div className="actions">
-                  <button onClick={() => setEditingNewsItem(n)} className="edit-btn">Edit</button>
-                  <button onClick={() => handleDeleteArticle(n._id)} className="delete-btn">Siba Burundu</button>
+                  <p>By {n.author} | {n.category}</p>
+                  <div className="admin-btn-group">
+                    <button onClick={() => setEditingNewsItem(n)} className="edit-btn">Edit</button>
+                    <button onClick={() => handleDeleteArticle(n._id)} className="delete-btn">Delete</button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        <hr />
+        {/* 3. Ads Upload Section */}
+        <section className="admin-section ads-management">
+          <h2>Ads Management</h2>
+          <div className="ads-container-split">
+            <div className="ads-upload-side">
+               <AdsUpload fetchAds={refreshAllLists} />
+            </div>
+            
+            <div className="ads-list-side">
+              <h3>Live Advertisements</h3>
+              <div className="admin-ads-scroll">
+                {adsList.map((ad) => (
+                  <div key={ad._id} className="admin-ad-mini-card">
+                    <div className="ad-mini-media">
+                      {ad.mediaUrl ? <img src={getMediaUrl(ad.mediaUrl)} alt="" /> : <div className="no-media-placeholder">TEXT AD</div>}
+                    </div>
+                    <div className="ad-mini-text">
+                      <h4>{ad.title}</h4>
+                      <span className="ad-placement-badge">{ad.placement || 'slider'}</span>
+                      <button onClick={() => handleDeleteAd(ad._id)} className="delete-btn-sm">Siba</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
-       const AdsUpload = ({ fetchAds }) => {
+// --- Sub-component: AdsUpload ---
+const AdsUpload = ({ fetchAds }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [mediaFile, setMediaFile] = useState(null);
@@ -216,25 +226,24 @@ const AdminDashboard = () => {
       });
       alert("Ad yashyizweho neza!");
       setTitle(""); setDescription(""); setMediaFile(null);
-      if (fetchAds) fetchAds(); 
-    } catch (err) { alert("Error uploading ad."); }
+      fetchAds(); 
+    } catch (err) { alert("Habaye ikibazo mu gushyiraho Ad."); }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="dashboard-form ad-admin-card">
-      <div className="input-group">
-        <label>Placement (Aho Ad ijya):</label>
+    <form onSubmit={handleSubmit} className="admin-ad-form">
+      <div className="input-row">
+        <label>Placement:</label>
         <select value={placement} onChange={e => setPlacement(e.target.value)}>
-            <option value="slider">Media Slider (Iburyo - Ifoto/Video)</option>
-            <option value="sidebar">Sidebar Card (Ibumoso - Text Only)</option>
+            <option value="slider">Media Slider (Iburyo)</option>
+            <option value="sidebar">Sidebar (Ibumoso - Text Only)</option>
         </select>
       </div>
-
-      <input placeholder="Title y'Ad" value={title} onChange={e=>setTitle(e.target.value)} required/>
-      <textarea placeholder="Description" value={description} onChange={e=>setDescription(e.target.value)} required/>
+      <input placeholder="Ad Title" value={title} onChange={e=>setTitle(e.target.value)} required/>
+      <textarea placeholder="Ad Description..." value={description} onChange={e=>setDescription(e.target.value)} required/>
       
       {placement === "slider" && (
-        <div className="media-fields">
+        <div className="file-input-group">
           <select value={mediaType} onChange={e => setMediaType(e.target.value)}>
               <option value="image">Image</option>
               <option value="video">Video</option>
@@ -243,8 +252,7 @@ const AdminDashboard = () => {
                  onChange={e => setMediaFile(e.target.files[0])} required />
         </div>
       )}
-      
-      <button type="submit" className="submit-btn">Shyiraho Ad</button>
+      <button type="submit" className="admin-submit-btn">Upload Ad</button>
     </form>
   );
 };
