@@ -31,7 +31,7 @@ const RegularNews = ({ newsList }) => {
   return (
     <div className="regular-news-section-container">
       {/* Hano niho wongeye umutwe na style ya section-title */}
-      <h2 className="section-title">Latest Articles</h2> 
+      <h2 className="section-title">IZINDI NKURU</h2> 
 
       <div className="regular-news-grid">
         {newsList.map((post) => (
@@ -56,3 +56,4 @@ const RegularNews = ({ newsList }) => {
 };
 
 export default RegularNews;
+
