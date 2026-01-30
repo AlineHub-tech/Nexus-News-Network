@@ -1,46 +1,71 @@
-// src/components/AdsSection.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/AdsSection.css";
 
-const AdsSection = ({ ads }) => { 
-  if (!ads || ads.length === 0) {
-    // Nabishize muri div ikikije byose kugira ngo style y'umutwe igaragare
-    return (
-        <div className="ads-section-container">
-            <h2 className="section-title">Advertisements</h2>
-            <div className="ads-section">Nta matangazo aboneka ubu.</div>;
-        </div>
-    );
-  }
+const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000";
 
-  const BASE_SERVER_URL = '//localhost:5000';
+const AdsSection = ({ ads }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Gufata Ads zifite Media (iburyo) n'izifite Text gusa (ibumoso)
+  const mediaAds = ads?.filter(ad => ad.mediaUrl).slice(0, 5) || [];
+  const textAds = ads?.slice(0, 3) || []; // Fata 3 zambere zo ku ruhande rw'ibumoso
+
+  // Slider Logic kuri Media Ads
+  useEffect(() => {
+    if (mediaAds.length > 0) {
+      const timer = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % mediaAds.length);
+      }, 4000); // Ihinduranya buri masegonda 4
+      return () => clearInterval(timer);
+    }
+  }, [mediaAds.length]);
+
+  if (!ads || ads.length === 0) return null;
 
   return (
-    // Nongeyeho container div ikikije byose kugira ngo umutwe ube hejuru ya grid
-    <div className="ads-section-container">
-      {/* Umutwe wa section hamwe na style twumvikanyeho */}
-      <h2 className="section-title">AMATANGAZO(Advertisements)</h2>
+    <div className="ads-section-main-wrapper">
+      <h2 className="section-title">AMATANGAZO (Advertisements)</h2>
+      
+      <div className="ads-grid-layout">
+        
+        {/* LEFT SIDE: Text-Only Stack (3 Rows) */}
+        <div className="ads-left-column">
+          {textAds.map((ad) => (
+            <div key={`text-${ad._id}`} className="text-ad-row">
+              <span className="ad-tag">PROMOTED</span>
+              <h4>{ad.title}</h4>
+              <p>{ad.description}</p>
+            </div>
+          ))}
+        </div>
 
-      <div className="ads-section">
-        {ads.map((ad, index) => (
-          <div 
-              key={ad._id} 
-              className="ad-card"
-              // Delay ituma ziza zikurikiranye nkuko biba kuri media atandukanye
-              style={{ animationDelay: `${index * 0.1}s` }} 
-          >
-            {ad.mediaUrl && ad.mediaType === 'image' && (
-              <img src={`${BASE_SERVER_URL}${ad.mediaUrl}`} alt={ad.title || "advertisement"} />
-            )}
-            {ad.mediaUrl && ad.mediaType === 'video' && (
-              <video controls>
-                  <source src={`${BASE_SERVER_URL}${ad.mediaUrl}`} type="video/mp4" />
-                  Your browser does not support the video tag.
-              </video>
-            )}
-            <p>{ad.description}</p>
+        {/* RIGHT SIDE: Animated Media Slider */}
+        <div className="ads-right-column">
+          <div className="slider-viewport">
+            {mediaAds.map((ad, index) => (
+              <div 
+                key={`media-${ad._id}`} 
+                className={`slide-item ${index === currentSlide ? "active" : ""}`}
+              >
+                {ad.mediaType === 'image' ? (
+                  <img src={`${API_BASE_URL}${ad.mediaUrl}`} alt={ad.title} />
+                ) : (
+                  <video autoPlay muted loop src={`${API_BASE_URL}${ad.mediaUrl}`} />
+                )}
+                <div className="slide-overlay">
+                  <h3>{ad.title}</h3>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+          {/* Slider Dots */}
+          <div className="slider-dots">
+            {mediaAds.map((_, i) => (
+              <span key={i} className={`dot ${i === currentSlide ? "active" : ""}`} />
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
