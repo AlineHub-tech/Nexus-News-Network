@@ -40,3 +40,33 @@
 .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; }
 .modal-content { background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 600px; }
 .modal-content textarea { width: 100%; margin: 10px 0; padding: 10px; white-space: pre-wrap; line-height: 1.6; }
+.admin-section { margin-bottom: 50px; }
+.admin-media-preview { max-width: 250px; border-radius: 8px; margin-top: 10px; display: block; }
+
+.news-item {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.dashboard-form textarea, .modal-content textarea {
+    white-space: pre-wrap; /* Paragraph spacing */
+    min-height: 150px;
+    line-height: 1.6;
+}
+
+.actions { display: flex; gap: 10px; }
+.approve-btn { background: #16a34a; color: #fff; }
+.edit-btn { background: #2563eb; color: #fff; }
+.delete-btn { background: #dc2626; color: #fff; }
+
+@media (max-width: 768px) {
+    .news-item { flex-direction: column; }
+    .admin-media-preview { max-width: 100%; }
+}
