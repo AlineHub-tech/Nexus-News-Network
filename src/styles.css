@@ -2,7 +2,7 @@
   --dark:#0a2a66;
   --accent:#000000; /* for trending and highlights */
   --muted:#6b7280;
-  --bg:#c1c1e6;
+  --bg:rgba(2, 2, 48, 0.767);
 }
 
 /* Global */
@@ -151,4 +151,5 @@ body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:va
   .search-input{display:none}
   .grid.cards{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
   .article-img{height:220px}
+
 }
