@@ -1,4 +1,7 @@
-import React, { useContext, useState, useEffect, useMemo } from "react";
+// src/pages/Landing.jsx
+
+// KOSORA HANO: Twongeyemo 'useCallback' mu rutonde rwa React hooks
+import React, { useContext, useState, useEffect, useMemo, useCallback } from "react";
 import axios from 'axios';
 import "../styles/Landing.css";
 import LatestNews from "../components/LatestNews";
@@ -12,7 +15,7 @@ import TrendingTicker from '../components/TrendingTicker';
 import SloganAnimation from '../components/SloganAnimation';
 import { NewsContext } from '../context/NewsContext';
 
-// --- KOSORA HANO: Shyiraho http:// cyangwa https:// nyayo ---
+// --- API BASE URL: Emeza ko hari http:// cyangwa https:// ---
 const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
 
 const Landing = () => {
@@ -20,13 +23,13 @@ const Landing = () => {
   const [ads, setAds] = useState([]);
   const [isOtherLoading, setIsOtherLoading] = useState(true);
 
-  // --- IYI LOGIC NI INGENZI KURI CLOUDINARY ---
-  // Ifasha gukosora URL z'amafoto mbere y'uko agera muri LatestNews/RegularNews
-  const formatNewsWithImages = useCallback((list) => {
+  // Logic yo gukosora URL z'amafoto (Cloudinary vs Local)
+  const formatMediaList = useCallback((list) => {
+    if (!list) return [];
     return list.map(item => {
       let finalUrl = item.mediaUrl || "";
-      // Niba URL itangiye na http (Cloudinary), ihite iyikoresha gutyo
-      if (!finalUrl.startsWith('http') && finalUrl !== "") {
+      // Niba URL ari iyuzuye (Cloudinary), yikoreshe gutyo
+      if (finalUrl && !finalUrl.startsWith('http')) {
           const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
           const path = finalUrl.startsWith('/') ? finalUrl : '/' + finalUrl;
           finalUrl = `${base}${path}`;
@@ -39,24 +42,28 @@ const Landing = () => {
     const fetchAdsData = async () => {
         try {
             const adsRes = await axios.get(`${API_BASE_URL}/api/public/ads`);
-            // Kosora URL za Ads nazo hano
-            const formattedAds = adsRes.data.map(ad => ({
-                ...ad,
-                mediaUrl: ad.mediaUrl?.startsWith('http') ? ad.mediaUrl : `${API_BASE_URL}${ad.mediaUrl}`
-            }));
+            // Kosora URL za Ads nazo
+            const formattedAds = adsRes.data.map(ad => {
+                let url = ad.mediaUrl || "";
+                if (url && !url.startsWith('http')) {
+                    const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+                    url = `${base}${url.startsWith('/') ? url : '/' + url}`;
+                }
+                return { ...ad, mediaUrl: url };
+            });
             setAds(formattedAds);
             setIsOtherLoading(false);
         } catch (err) {
-            console.error("Error fetching ads data:", err.response?.data || err.message);
+            console.error("Error fetching ads:", err.message);
             setIsOtherLoading(false);
         }
     };
     fetchAdsData();
   }, []);
 
-  // Koresha useMemo kugira ngo amakuru aze yakosowe URL
-  const formattedNews = useMemo(() => formatNewsWithImages(newsList), [newsList, formatNewsWithImages]);
-  const formattedVideos = useMemo(() => formatNewsWithImages(videosList), [videosList, formatNewsWithImages]);
+  // Gutunganya inkuru zose zifite URL zikora
+  const formattedNews = useMemo(() => formatMediaList(newsList), [newsList, formatMediaList]);
+  const formattedVideos = useMemo(() => formatMediaList(videosList), [videosList, formatMediaList]);
 
   const latestNews8 = useMemo(() => formattedNews.slice(0, 8), [formattedNews]);
   const regularNewsSliced = useMemo(() => formattedNews.slice(8), [formattedNews]);
@@ -68,16 +75,6 @@ const Landing = () => {
 
   if (error) {
     return <div className="error-container">Error: {error}</div>;
-  }
-
-  if (newsList.length === 0 && searchQuery !== "") {
-    return (
-        <div className="landing-container">
-            <Navbar/>
-            <p className="no-results">Nta nkuru zibonetse kuri search: "{searchQuery}".</p>
-            <Footer/>
-        </div>
-    );
   }
 
   return (
