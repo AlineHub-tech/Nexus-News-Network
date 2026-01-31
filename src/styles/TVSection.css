@@ -2,7 +2,7 @@
 
 .tv-section-container {
     /* padding: 40px 5%; */
-    background-color: #111; /* Background y'umukara bituma video zigaragara neza */
+     background-color: #0a1930;  /* Background y'umukara bituma video zigaragara neza */
     border-radius: 12px;
     margin-top: 20px;
 }
@@ -128,4 +128,5 @@
         font-size: 1.4rem;
     }
 }
+
 
