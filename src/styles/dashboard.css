@@ -127,3 +127,9 @@
     font-size: 22px;
   }
 }
+.article-content-display, .dashboard-form textarea {
+    white-space: pre-wrap; /* Ibi bituma Enter ikora nk'umurongo mushya */
+    word-wrap: break-word;
+}
+
+
