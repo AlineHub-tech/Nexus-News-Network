@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../styles/NewsCard.css";
 
 // --- KOSORA API_BASE_URL (Shyiraho http: cyangwa https: nyayo) ---
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
 
 const NewsCard = ({ post, extraClass = '' }) => { 
   if (!post) return <div className="news-card">Loading...</div>;
@@ -57,3 +57,4 @@ const NewsCard = ({ post, extraClass = '' }) => {
 };
 
 export default NewsCard;
+
