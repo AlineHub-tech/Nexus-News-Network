@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import "../styles/TVSection.css";
 
 const TV = ({ videos }) => {
@@ -21,8 +19,6 @@ const TV = ({ videos }) => {
 
   return (
     <div className="page-wrapper">
-      <Navbar />
-
       <div className="tv-section-container">
         <h2 className="section-title">AMASHUSHO (TV SECTION)</h2>
 
@@ -54,10 +50,9 @@ const TV = ({ videos }) => {
           </div>
         )}
       </div>
-
-      <Footer />
     </div>
   );
 };
 
 export default TV;
+
