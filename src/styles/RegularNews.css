@@ -110,85 +110,39 @@
   color: #555;
   font-size: 1rem;
 }
-/* =============================================
-   UNIFIED SECTION HEADER (Popular & Ads Style)
-   ============================================= */
-.section-title {
+.section-header {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin: 40px 0 25px; /* Umwanya hejuru na munsi */
-    position: relative;
-    width: 100%;
+    margin: 40px 0 25px;
+    font-family: 'Inter', sans-serif;
+    padding: 0 10px; /* Umwanya muto ku mpande */
 }
 
-/* Inyandiko y'umutwe */
-.section-title h2 {
-    position: relative;
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
+.section-header .badge {
+    background: #FF0000; /* Red color kuko ari TV/Video style */
+    color: #ffffff;
+    padding: 6px 14px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(255, 0, 0, 0.2);
+}
+
+.section-header .title {
     font-size: 1.5rem;
     font-weight: 900;
-    color: #1a1a1a;
-    text-transform: uppercase;
-    padding: 10px 25px; /* Umwanya imbere y'inyandiko */
+    color: #111827;
     margin: 0;
-    z-index: 1;
+    text-transform: uppercase;
     white-space: nowrap;
 }
 
-/* Agasanduku k'ibara k'ibumoso (Badge Effect) */
-.section-title h2::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 45px; 
-    height: 100%;
-    background-color: #00008b; /* Blue y'umwimerere */
-    z-index: -1;
-    border-radius: 4px;
-}
-
-/* Umurongo mugari uca inyuma ukuzura page */
-.section-title::after {
-    content: "";
-    flex-grow: 1; /* Bituma umurongo wuzura umwanya usigaye */
+.section-header .line {
     height: 2px;
+    flex-grow: 1;
     background: linear-gradient(to right, #e2e8f0, transparent);
-    margin-top: 0; /* Kuva kuri flex-align center ntibigikenewe margin-top ya kera */
+    border-radius: 2px;
 }
 
-/* =============================================
-   Iyo section iri mu mwijima (Urugero: Latest News)
-   ============================================= */
-.latest-news-section .section-title h2 {
-    color: #ffffff;
-}
-
-.latest-news-section .section-title h2::before {
-    background-color: #ff4757; /* Ushobora gukoresha ubururu cyangwa umutuku */
-}
-
-.latest-news-section .section-title::after {
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
-}
-
-/* =============================================
-   RESPONSIVE (Mobile)
-   ============================================= */
-@media (max-width: 768px) {
-    .section-title {
-        margin-top: 30px;
-        margin-bottom: 20px;
-    }
-
-    .section-title h2 {
-        font-size: 1.1rem;
-        padding: 8px 18px;
-    }
-
-    .section-title h2::before {
-        width: 35px;
-    }
-}
