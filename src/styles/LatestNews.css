@@ -1,10 +1,31 @@
-/* --- DESKTOP GRID (2-4-2) --- */
-.latest-news-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* Hagati ni hanini */
-  gap: 20px;
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+  --card-bg: #ffffff;
+  --text-title: #111827;
+  --text-meta: #6b7280;
+  --accent-red: #e63946;
+  --border-subtle: #f3f4f6;
+  --hover-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+  --font-sans: 'Inter', -apple-system, sans-serif;
+}
+
+/* =========================================
+   2. MAIN GRID LAYOUT (DESKTOP)
+   ========================================= */
+.latest-news-section-wrapper {
   max-width: 1300px;
   margin: 0 auto;
+  padding: 20px;
+  font-family: var(--font-sans);
+}
+
+.latest-news-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* Side | Slider | Side */
+  gap: 20px;
+  align-items: stretch;
 }
 
 .news-side-column {
@@ -13,90 +34,193 @@
   gap: 20px;
 }
 
-/* --- CENTER SLIDER (The Animation Fix) --- */
+/* =========================================
+   3. SLIDER ANIMATION (CENTER)
+   ========================================= */
 .news-center-slider {
   position: relative;
-  height: 550px;
-  overflow: hidden;
+  height: 100%;
+  min-height: 450px;
+  background: #f9fafb;
   border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
 }
 
-.slider-container { width: 100%; height: 100%; position: relative; }
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 
 .slide-item {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  z-index: 1;
 }
 
 .slide-item.active {
   opacity: 1;
   visibility: visible;
+  position: relative; /* Bituma akura agafure */
+  z-index: 2;
+}
+
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
   z-index: 10;
 }
 
-/* Force Featured Card inside slider to look perfect */
-.slider-featured-card {
-  height: 100% !important;
-  width: 100% !important;
+.dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
-.slider-featured-card .news-media-container {
-  height: 100% !important;
-  padding-top: 0 !important;
+.dot.active {
+  background: var(--accent-red);
+  width: 24px;
+  border-radius: 10px;
 }
 
-/* =============================================
-   MOBILE VIEW (SLIDER FIRST + BBC STYLE)
-   ============================================= */
-@media (max-width: 768px) {
+/* =========================================
+   4. NEWSCARD CORE (FULL IMAGE FIX)
+   ========================================= */
+.news-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.news-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.3s ease;
+}
+
+.news-card-link:hover .news-card {
+  box-shadow: var(--hover-shadow);
+  transform: translateY(-2px);
+}
+
+/* Kureba ko ifoto idacropinga */
+.news-media-container {
+  position: relative;
+  width: 100%;
+  padding-top: 60%; 
+  background-color: #000; /* Umukara niba ifoto idakwiriye neza */
+  overflow: hidden;
+}
+
+.news-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* IFOTO YOSE IRAGARAGARA */
+  object-position: center;
+}
+
+.news-info {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-info h5 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-title);
+  margin-bottom: 8px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-meta {
+  margin-top: auto;
+  font-size: 0.75rem;
+  color: var(--text-meta);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* =========================================
+   5. MOBILE RESPONSIVE (ROW STYLE)
+   ========================================= */
+@media (max-width: 900px) {
   .latest-news-grid {
     display: flex;
-    flex-direction: column; /* Zose mu murongo umwe */
+    flex-direction: column;
+    gap: 15px;
   }
 
-  /* 1. SLIDER IZA HEJURU (4 news) */
+  /* 1. Slider ijyanywa hejuru */
   .news-center-slider {
-    order: -1; 
-    height: 350px !important;
-    margin-bottom: 25px;
-    display: block !important;
+    order: -1;
+    min-height: 300px;
   }
 
-  /* 2. IZINDI 4 ZIMEZE NKA BBC (Ifoto ibumoso, amagambo iburyo) */
-  .side-item-card {
-    flex-direction: row !important;
-    height: 110px !important;
-    gap: 15px !important;
-    border: none !important;
-    border-bottom: 1px solid #eee !important;
-    border-radius: 0 !important;
-    padding: 10px 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
+  /* 2. Inkuru zo ku mpande ziba Row */
+  .side-item-card .news-card {
+    flex-direction: row-reverse; /* PHOTO RIGHT, TEXT LEFT */
+    height: 130px;
+    align-items: stretch;
   }
 
   .side-item-card .news-media-container {
-    width: 120px !important;
-    height: 90px !important;
-    padding-top: 0 !important;
-    flex-shrink: 0;
+    width: 40%; /* Ifoto ifata 40% y'ubugari */
+    height: 100%;
+    padding-top: 0; /* Nakuyeho ratio kuko ubu height ifitwe na parent */
   }
 
-  .side-item-card .news-info { padding: 0 !important; justify-content: center; }
-  .side-item-card .news-info h5 { 
-    font-size: 0.95rem !important; 
-    -webkit-line-clamp: 2 !important; 
-    line-height: 1.3;
+  .side-item-card .news-info {
+    width: 60%;
+    padding: 12px;
+    justify-content: center;
+  }
+
+  .side-item-card .news-info h5 {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 2; /* Inshuro 2 gusa kuri mobile */
+    margin-bottom: 5px;
+  }
+
+  /* Kurinda ko inkuru zegerana cyane */
+  .news-side-column {
+    gap: 12px;
   }
 }
 
-/* Indicators */
-.slider-dots {
-  position: absolute; bottom: 20px; left: 50%;
-  transform: translateX(-50%); display: flex; gap: 8px; z-index: 20;
+/* Special styling for featured slider cards */
+.slider-featured-card .news-card {
+  border: none;
 }
-.dot { width: 8px; height: 8px; background: rgba(255,255,255,0.4); border-radius: 50%; }
-.dot.active { background: #fff; width: 25px; border-radius: 10px; }
+
+.slider-featured-card .news-media-container {
+  padding-top: 55%; /* Slider ifoto iba nini gato */
+}
