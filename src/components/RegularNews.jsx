@@ -30,13 +30,10 @@ const RegularNews = ({ newsList }) => {
 
   return (
     <div className="regular-news-section-container">
-        <div className="popular-news-container">
             <div className="section-header">
-                <span className="badge">Amakuru</span>
+                <span className="badge">News</span>
                 <h2 className="title">IZINDI NKURU </h2>
                 <div className="line"></div>
-            </div>
-            <p style={{ padding: '20px', textAlign: 'center' }}>Nta nkuru zibonetse.</p>
         </div>
 
       <div className="regular-news-grid">
@@ -62,3 +59,4 @@ const RegularNews = ({ newsList }) => {
 };
 
 export default RegularNews;
+
