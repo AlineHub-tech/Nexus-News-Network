@@ -1,4 +1,4 @@
-/* NewsCard.css - Version Ivuguruye (Auto-Height) */
+/* NewsCard.css */
 
 :root {
   --card-bg: #ffffff;
@@ -10,6 +10,7 @@
   --font-sans: 'Inter', -apple-system, sans-serif;
 }
 
+/* Remove default link styles */
 .news-card-link {
   text-decoration: none;
   color: inherit;
@@ -36,32 +37,28 @@
   box-shadow: var(--hover-shadow);
 }
 
-/* --- News Media Container - Icyahindutse --- */
+/* MEDIA CONTAINER (Perfect 16:9 Aspect Ratio) */
 .news-media-container {
+  position: relative;
   width: 100%;
-  line-height: 0; /* Kurinda space iri munsi y'ifoto */
+  padding-top: 56.25%; /* 16:9 ratio */
+  background-color: #f9fafb;
   overflow: hidden;
-  background-color: var(--border-subtle);
 }
 
-.news-card-image {
+.news-card-image, 
+.news-card-video {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto; /* Bituma ifoto yuzura hashingiwe ku miterere yayo (Ratio) */
-  display: block;
-  object-fit: cover; /* Niba ushaka ko yuzura neza mu bugari bwose */
+  height: 100%;
+  object-fit: cover; /* Ensures images aren't stretched */
   transition: transform 0.5s ease;
 }
 
-/* Kuri Mobile, niba ushaka ko ifoto itaba ndende cyane */
-@media (max-width: 600px) {
-  .news-card-image {
-    max-height: 250px; /* Bituma ifoto itaba ndende cyane kuri phone */
-    object-fit: cover;
-  }
-}
-
 .news-card-link:hover .news-card-image {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Slight zoom effect */
 }
 
 /* INFO SECTION */
@@ -74,11 +71,12 @@
 
 .news-info h5 {
   font-family: var(--font-sans);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   line-height: 1.4;
   color: var(--text-title);
   margin-bottom: 12px;
+  /* Limit title to 3 lines for clean grid */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -90,9 +88,58 @@
   font-family: var(--font-sans);
   font-size: 0.8rem;
   color: var(--text-meta);
+  line-height: 1.5;
   text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .news-meta strong {
   color: var(--accent-red);
+  font-weight: 600;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablet & Smaller Desktops */
+@media (max-width: 1024px) {
+  .news-info h5 {
+    font-size: 1.05rem;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 600px) {
+  .news-card {
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+   .news-card {
+    flex-direction: row;
+    height: 120px;
+  }
+  .news-media-container {
+    width: 40%;
+    padding-top: 0;
+    height: 100%;
+  }
+  .news-info h5 {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 2;
+  }
+  
+  
+  .news-info {
+    padding: 12px;
+  }
+  
+  .news-info h5 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+}
+
+/* Style for special Extra Classes (e.g., Featured Card) */
+.news-card.featured {
+  border: 2px solid var(--accent-red);
 }
