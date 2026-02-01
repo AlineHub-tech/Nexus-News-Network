@@ -5,8 +5,8 @@ import "../styles/LatestNews.css";
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Inkuru zose hano ziba zamaze gukosorerwa URL muri Landing.jsx
-  const latest8 = news || [];
+  // Gufata inkuru 8 za mbere
+  const latest8 = news?.slice(0, 8) || [];
   
   const leftNews = latest8.slice(0, 2);   
   const centerNews = latest8.slice(2, 6); 
@@ -27,17 +27,16 @@ const LatestNews = ({ news }) => {
     <div className="latest-news-section-wrapper">
       <div className="latest-news-grid">
         
-        {/* LEFT COLUMN */}
+        {/* LEFT COLUMN: 2 news as horizontal rows on mobile */}
         <div className="news-side-column left-side">
           {leftNews.map((post) => (
             <div key={post._id} className="side-item-wrapper">
-              {/* Menya neza ko NewsCard isoma post.mediaUrl yuzuye */}
-              <NewsCard post={post} />
+              <NewsCard post={post} extraClass="horizontal-card" />
             </div>
           ))}
         </div>
 
-        {/* MIDDLE COLUMN: Slider */}
+        {/* MIDDLE COLUMN: 4 news in a slider, big featured on mobile */}
         <div className="news-center-slider">
           <div className="slider-container">
             {centerNews.map((post, index) => (
@@ -56,11 +55,11 @@ const LatestNews = ({ news }) => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN */}
+        {/* RIGHT COLUMN: 2 news as horizontal rows on mobile */}
         <div className="news-side-column right-side">
           {rightNews.map((post) => (
             <div key={post._id} className="side-item-wrapper">
-              <NewsCard post={post} />
+              <NewsCard post={post} extraClass="horizontal-card" />
             </div>
           ))}
         </div>
