@@ -30,11 +30,11 @@ const RegularNews = ({ newsList }) => {
 
   return (
     <div className="regular-news-section-container">
-            <div className="section-header">
-                <span className="badge">News</span>
-                <h2 className="title">IZINDI NKURU </h2>
-                <div className="line"></div>
-        </div>
+      <div className="section-title">
+        <span className="badge">NEWS</span>
+        <h2 className="title">IZINDI NKURU</h2>
+        <div className="line"></div>
+      </div>
 
       <div className="regular-news-grid">
         {newsList.map((post) => (
@@ -59,4 +59,5 @@ const RegularNews = ({ newsList }) => {
 };
 
 export default RegularNews;
+
 
