@@ -1,11 +1,10 @@
-/* --- DESKTOP LAYOUT (The 2-4-2 Grid) --- */
+/* --- DESKTOP LAYOUT --- */
 .latest-news-grid {
   display: grid;
-  grid-template-columns: 1fr 1.8fr 1fr; /* Left, Slider, Right */
+  grid-template-columns: 1fr 2fr 1fr; /* 2-4-2 Grid */
   gap: 20px;
   max-width: 1300px;
   margin: 0 auto;
-  align-items: stretch;
 }
 
 .news-side-column {
@@ -14,12 +13,12 @@
   gap: 20px;
 }
 
-/* SLIDER STYLES */
+/* SLIDER LOGIC */
 .news-center-slider {
   position: relative;
-  height: 550px; /* Uburebure bwa slider hagati */
-  border-radius: 12px;
+  height: 550px;
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .slider-container { width: 100%; height: 100%; position: relative; }
@@ -29,7 +28,7 @@
   top: 0; left: 0; width: 100%; height: 100%;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
 }
 
 .slide-item.active {
@@ -38,36 +37,29 @@
   z-index: 5;
 }
 
-/* Force Slide card to cover full height */
-.main-slider-card {
-  height: 100% !important;
-}
-
-.main-slider-card .news-media-container {
-  height: 100% !important;
-  padding-top: 0 !important;
-}
+/* Force Slide Photo to be Full & Clear */
+.featured-slider-card { height: 100% !important; }
+.featured-slider-card .news-media-container { height: 100% !important; padding-top: 0 !important; }
 
 /* =============================================
-   MOBILE VIEW (The requested layout)
+   MOBILE VIEW (SLIDER FIRST, OTHERS BBC STYLE)
    ============================================= */
 @media (max-width: 768px) {
   .latest-news-grid {
     display: flex;
-    flex-direction: column; /* Zose ziza mu murongo umwe */
+    flex-direction: column; /* Stack everything */
   }
 
-  /* 1. Slider (Inkuru 4) iza hejuru */
+  /* 1. SLIDER IZA HEJURU (Inkuru 4) */
   .news-center-slider {
     order: -1; 
     height: 350px !important;
-    margin-bottom: 25px;
-    display: block !important;
+    margin-bottom: 20px;
   }
 
-  /* 2. BBC Style (Izisigaye 4: 2 Left & 2 Right) */
-  .side-news-card {
-    flex-direction: row !important; /* Ifoto ibumoso, amagambo iburyo */
+  /* 2. IZINDI 4 ZIMEZE NKA BBC (Ifoto ibumoso, amagambo iburyo) */
+  .bbc-mobile-style {
+    flex-direction: row !important;
     height: 110px !important;
     gap: 12px !important;
     border: none !important;
@@ -78,25 +70,24 @@
     box-shadow: none !important;
   }
 
-  .side-news-card .news-media-container {
+  .bbc-mobile-style .news-media-container {
     width: 120px !important;
     height: 85px !important;
     padding-top: 0 !important;
     flex-shrink: 0;
   }
 
-  .side-news-card .news-info { padding: 0 !important; }
-  .side-news-card .news-info h5 { 
+  .bbc-mobile-style .news-info { padding: 0 !important; }
+  .bbc-mobile-style .news-info h5 { 
     font-size: 0.95rem !important; 
     -webkit-line-clamp: 2 !important; 
-    line-height: 1.3;
   }
 }
 
 /* DOTS */
-.slider-indicators {
-  position: absolute; bottom: 20px; left: 50%;
+.slider-dots {
+  position: absolute; bottom: 15px; left: 50%;
   transform: translateX(-50%); display: flex; gap: 8px; z-index: 10;
 }
-.indicator { width: 8px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 50%; }
-.indicator.active { background: #fff; width: 22px; border-radius: 10px; }
+.dot { width: 8px; height: 8px; background: rgba(255,255,255,0.4); border-radius: 50%; }
+.dot.active { background: #fff; width: 20px; border-radius: 10px; }
