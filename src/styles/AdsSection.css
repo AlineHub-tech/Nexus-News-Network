@@ -140,4 +140,75 @@
     order: -1; /* Slider comes first on mobile */
   }
 }
+/* --- Floating Badge Design --- */
+.section-title {
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  display: block;
+}
+
+.section-title h2 {
+  position: relative;
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  z-index: 1;
+}
+
+/* Agace k'ibara rishashagirana (Accent Box) inyuma y'inyandiko */
+.section-title h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px; /* Agace gato k'ubururu k'ibumoso */
+  height: 100%;
+  background-color: #00008b;
+  z-index: -1;
+  border-radius: 4px;
+}
+
+/* Umurongo mugari uca munsi ukayunguruka (Shadow line) */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  background: #f1f5f9; /* Ibara ry'imvi yoroheje */
+  margin-top: -15px; /* Bituma uza hejuru gato ukajya munsi y'inyandiko */
+  border-radius: 10px;
+}
+
+/* Design ya Latest News (Iyo iri mu mwijima) */
+.latest-news-section .section-title h2 {
+    color: #ffffff;
+}
+
+.latest-news-section .section-title h2::before {
+    background-color: #ff4757; /* Aha ushobora gushyira irindi bara nka Red ngo bihinduke */
+}
+
+.latest-news-section .section-title::after {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Mobile View --- */
+@media (max-width: 768px) {
+  .section-title h2 {
+    font-size: 1.2rem;
+    padding: 5px 15px;
+  }
+  
+  .section-title::after {
+    height: 3px;
+    margin-top: -10px;
+  }
+}
+
+
 
