@@ -4,46 +4,47 @@ import "../styles/PopularNews.css";
 
 const PopularNews = ({ newsList }) => { 
   
-  // Niba nta nkuru zihari, ntacyo kwerekana (cyangwa erekana ubutumwa)
+  // 1. Niba nta nkuru zihari, ntacyo kwerekana
   if (!newsList || newsList.length === 0) {
     return (
         <div className="popular-news-container">
-            <div className="section-title">
-                <h2>INKURU ZIKUNZWE</h2>
+            <div className="section-header">
+                <span className="badge">Amakuru</span>
+                <h2 className="title">ZAREBWE CYANE</h2>
+                <div className="line"></div>
             </div>
-            <p className="no-news-msg">Nta nkuru zibonetse kuri uyu munyutsi.</p>
+            <p style={{ padding: '20px', textAlign: 'center' }}>Nta nkuru zibonetse.</p>
         </div>
     );
   }
 
-  // 1. Tondika inkuru hashingiwe ku zarebwe cyane (views)
-  // 2. Fata inkuru 10 za mbere zifite views nyinshi (Twayongereye kugira ngo ticker itumbuke)
+  // 2. Gutoranya inkuru 10 zifite views nyinshi
   const trendingNews = [...newsList]
     .sort((a, b) => (b.views || 0) - (a.views || 0))
     .slice(0, 10);
 
   return (
-    <section className="popular-news-section">
-      {/* Section Title ifite Design nshya */}
-      <div className="section-title">
-        <h2>INKURU ZAREBWE CYANE</h2>
+    <section className="popular-news-container">
+      {/* Section Header Design nshya */}
+      <div className="section-header">
+         <span className="badge">TOP 10</span>
+         <h2 className="title">ZAREBWE CYANE</h2>
+         <div className="line"></div>
       </div>
 
-      <div className="popular-news-ticker-container">
-        <div className="popular-news-ticker-track">
-            {/* 
-               Gukoresha inshuro ebyiri (Double Map) bituma ticker ikora "Seamless loop" 
-               nta gucikagurika iyo igeze mu mpera.
-            */}
+      {/* Ticker System */}
+      <div className="ticker-viewport">
+        <div className="ticker-track">
+            {/* 1. Inkuru z'umwimerere */}
             {trendingNews.map((post, index) => (
-                <div className="ticker-item" key={`${post._id}-${index}`}>
+                <div className="ticker-card-wrapper" key={`original-${post._id}-${index}`}>
                   <NewsCard post={post} /> 
                 </div>
             ))}
             
-            {/* Clone: Izi nizo zituma animation ikomeza idahagarara */}
+            {/* 2. Clone (Izi nizo zituma animation ikomeza idahagarara) */}
             {trendingNews.map((post, index) => (
-                <div className="ticker-item" key={`${post._id}-clone-${index}`}>
+                <div className="ticker-card-wrapper" key={`clone-${post._id}-${index}`}>
                   <NewsCard post={post} /> 
                 </div>
             ))}
