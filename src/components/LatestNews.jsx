@@ -5,7 +5,6 @@ import "../styles/LatestNews.css";
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Inkuru zose hano ziba zamaze gukosorerwa URL muri Landing.jsx
   const latest8 = news || [];
   
   const leftNews = latest8.slice(0, 2);   
@@ -31,7 +30,6 @@ const LatestNews = ({ news }) => {
         <div className="news-side-column left-side">
           {leftNews.map((post) => (
             <div key={post._id} className="side-item-wrapper">
-              {/* Menya neza ko NewsCard isoma post.mediaUrl yuzuye */}
               <NewsCard post={post} />
             </div>
           ))}
