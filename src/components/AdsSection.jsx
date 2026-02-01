@@ -33,13 +33,11 @@ const AdsSection = ({ ads }) => {
 
   return (
     <div className="ads-section-main-wrapper">
-           <div className="popular-news-container">
             <div className="section-header">
                 <span className="badge">ADS</span>
                 <h2 className="title">AMATANGAZO</h2>
                 <div className="line"></div>
             </div>
-        </div>
       <div className="ads-grid-layout">
         
         {/* LEFT SIDE: Text-Only Stack */}
@@ -92,3 +90,4 @@ const AdsSection = ({ ads }) => {
 };
 
 export default AdsSection;
+
