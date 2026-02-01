@@ -5,9 +5,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    margin: 40px 0 25px;
     font-family: 'Inter', sans-serif;
-    padding: 0 10px; /* Umwanya muto ku mpande */
 }
 
 .section-header .badge {
@@ -41,9 +39,7 @@
    2. VIDEO GRID LAYOUT & CARDS
    ============================================= */
 .tv-section-container {
-    padding: 20px 10px;
     max-width: 1200px;
-    margin: 0 auto;
 }
 
 .tv-section-grid {
@@ -138,4 +134,5 @@
         margin: 30px 0 20px;
     }
 }
+
 
