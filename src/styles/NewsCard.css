@@ -54,29 +54,9 @@
   height: 100%;
   
   /* Iki nicyo gikemura ikibazo kuri Mobile */
-  object-fit: contain !important; 
-  object-position: center !important; /* Bituma ifoto iguma hagati */
+  /* object-fit: contain !important;  */
+  /* object-position: center !important; /* Bituma ifoto iguma hagati */ */
 }
-
-/* --- Mobile Specific Fix --- */
-@media (max-width: 600px) {
-  .news-media-container {
-     /* Kuraho guhatira uburebure buhamye niba ifoto yanze kugaragara yose */
-     padding-top: 0 !important; 
-     height: 200px !important; /* Hamo uburebure buhagije kuri mobile */
-     display: flex;
-     align-items: center;
-     justify-content: center;
-  }
-
-  .news-card-image {
-    position: relative !important;
-    max-height: 100%;
-    width: auto !important; /* Bituma ifoto itanyurwa (no stretching) */
-    margin: 0 auto;
-  }
-}
-
 .news-card-link:hover .news-card-image {
   transform: scale(1.05); /* Slight zoom effect */
 }
