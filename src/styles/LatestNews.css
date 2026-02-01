@@ -1,16 +1,23 @@
-/* --- Desktop Grid Setup --- */
+/* --- DESKTOP LAYOUT (The 2-4-2 Grid) --- */
 .latest-news-grid {
   display: grid;
   grid-template-columns: 1fr 1.8fr 1fr; /* Left, Slider, Right */
   gap: 20px;
   max-width: 1300px;
   margin: 0 auto;
+  align-items: stretch;
 }
 
-/* 1. SLIDER FIX (Hagati) */
+.news-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* SLIDER STYLES */
 .news-center-slider {
   position: relative;
-  height: 500px; /* Uburebure kuri Desktop */
+  height: 550px; /* Uburebure bwa slider hagati */
   border-radius: 12px;
   overflow: hidden;
 }
@@ -20,74 +27,76 @@
 .slide-item {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  opacity: 0; visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
   transition: opacity 1s ease-in-out;
 }
 
-.slide-item.active { opacity: 1; visibility: visible; }
-
-/* Force Card yose kuzura Slider */
-.slider-card { 
-  height: 100% !important; 
-  width: 100% !important;
-  margin: 0 !important;
+.slide-item.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 5;
 }
 
-.slider-card .news-media-container { 
-  height: 100% !important; 
-  padding-top: 0 !important; 
+/* Force Slide card to cover full height */
+.main-slider-card {
+  height: 100% !important;
 }
 
-/* 2. SIDE CARDS (Desktop) */
-.news-side-column { display: flex; flex-direction: column; gap: 20px; }
-
-.side-card { height: 240px !important; }
+.main-slider-card .news-media-container {
+  height: 100% !important;
+  padding-top: 0 !important;
+}
 
 /* =============================================
-   MOBILE VIEW (The BBC Logic)
+   MOBILE VIEW (The requested layout)
    ============================================= */
 @media (max-width: 768px) {
   .latest-news-grid {
     display: flex;
-    flex-direction: column; /* Zose mu murongo umwe */
+    flex-direction: column; /* Zose ziza mu murongo umwe */
   }
 
-  /* Slider kuza hejuru */
+  /* 1. Slider (Inkuru 4) iza hejuru */
   .news-center-slider {
     order: -1; 
-    height: 320px !important;
-    margin-bottom: 15px;
+    height: 350px !important;
+    margin-bottom: 25px;
+    display: block !important;
   }
 
-  /* BBC Style: Ifoto ibumoso, amagambo iburyo */
-  .side-card {
-    flex-direction: row !important;
+  /* 2. BBC Style (Izisigaye 4: 2 Left & 2 Right) */
+  .side-news-card {
+    flex-direction: row !important; /* Ifoto ibumoso, amagambo iburyo */
     height: 110px !important;
     gap: 12px !important;
     border: none !important;
     border-bottom: 1px solid #eee !important;
     border-radius: 0 !important;
     padding: 10px 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
-  .side-card .news-media-container {
+  .side-news-card .news-media-container {
     width: 120px !important;
-    height: 90px !important;
+    height: 85px !important;
     padding-top: 0 !important;
     flex-shrink: 0;
   }
 
-  .side-card .news-info { padding: 0 !important; }
-  .side-card .news-info h5 { 
+  .side-news-card .news-info { padding: 0 !important; }
+  .side-news-card .news-info h5 { 
     font-size: 0.95rem !important; 
     -webkit-line-clamp: 2 !important; 
+    line-height: 1.3;
   }
 }
 
-/* Indicators */
+/* DOTS */
 .slider-indicators {
-  position: absolute; bottom: 15px; left: 50%;
-  transform: translateX(-50%); display: flex; gap: 8px; z-index: 20;
+  position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%); display: flex; gap: 8px; z-index: 10;
 }
 .indicator { width: 8px; height: 8px; background: rgba(255,255,255,0.5); border-radius: 50%; }
-.indicator.active { background: #fff; width: 20px; border-radius: 10px; }
+.indicator.active { background: #fff; width: 22px; border-radius: 10px; }
