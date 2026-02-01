@@ -37,30 +37,20 @@
   box-shadow: var(--hover-shadow);
 }
 
-/* MEDIA CONTAINER (Perfect 16:9 Aspect Ratio) */
 .news-media-container {
-  position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 ratio */
-  background-color: #f9fafb;
+  /* Siba padding-top ya kera (nka 56.25%) ushyireho ibi: */
+  height: auto !important; 
+  padding-top: 0 !important; 
   overflow: hidden;
 }
 
-/* Muri NewsCard.css */
 .news-card-image {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: static !important; /* Kuraho absolute positioning */
   width: 100%;
-  height: 100%;
-  
-  /* Iki nicyo gikemura ikibazo cy'ifoto idasobanutse */
-  object-fit: contain !important; 
-  
-  /* Iri bara naryo rirafasha niba ifoto ari ntoya kurusha agasanduku */
-  background-color: #f3f4f6; 
+  height: auto; /* Bituma ifoto yizamura ikurikije ingano yayo */
+  display: block;
 }
-
 
 .news-card-link:hover .news-card-image {
   transform: scale(1.05); /* Slight zoom effect */
@@ -133,5 +123,6 @@
 .news-card.featured {
   border: 2px solid var(--accent-red);
 }
+
 
 
