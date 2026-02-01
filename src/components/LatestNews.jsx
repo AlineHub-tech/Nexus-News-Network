@@ -5,9 +5,7 @@ import "../styles/LatestNews.css";
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Inkuru zose hano ziba zamaze gukosorerwa URL muri Landing.jsx
-  const latest8 = news || [];
-  
+  const latest8 = news?.slice(0, 8) || [];
   const leftNews = latest8.slice(0, 2);   
   const centerNews = latest8.slice(2, 6); 
   const rightNews = latest8.slice(6, 8);  
@@ -21,47 +19,42 @@ const LatestNews = ({ news }) => {
     }
   }, [centerNews.length]);
 
-  if (!news || news.length === 0) return <div className="news-loading">Loading news...</div>;
+  if (latest8.length === 0) return null;
 
   return (
     <div className="latest-news-section-wrapper">
       <div className="latest-news-grid">
         
-        {/* LEFT COLUMN */}
-        <div className="news-side-column left-side">
+        {/* DESKTOP LEFT COLUMN */}
+        <div className="news-side-column">
           {leftNews.map((post) => (
-            <div key={post._id} className="side-item-wrapper">
-              {/* Menya neza ko NewsCard isoma post.mediaUrl yuzuye */}
-              <NewsCard post={post} />
-            </div>
+            <NewsCard key={post._id} post={post} extraClass="bbc-style" />
           ))}
         </div>
 
-        {/* MIDDLE COLUMN: Slider */}
-        <div className="news-center-slider">
-          <div className="slider-container">
+        {/* CENTER SLIDER AREA */}
+        <div className="slider-main-area">
+          <div className="slider-track-box">
             {centerNews.map((post, index) => (
               <div 
                 key={post._id} 
-                className={`slide-item ${index === currentSlide ? "active" : ""}`}
+                className={`slide-unit ${index === currentSlide ? "active" : ""}`}
               >
-                <NewsCard post={post} extraClass="featured-card" />
+                <NewsCard post={post} extraClass="is-slider-featured" />
               </div>
             ))}
           </div>
-          <div className="slider-indicators">
+          <div className="slider-dots-nav">
             {centerNews.map((_, i) => (
-              <span key={i} className={`indicator ${i === currentSlide ? "active" : ""}`} />
+              <span key={i} className={`dot-nav ${i === currentSlide ? "active" : ""}`} />
             ))}
           </div>
         </div>
 
-        {/* RIGHT COLUMN */}
-        <div className="news-side-column right-side">
+        {/* DESKTOP RIGHT COLUMN */}
+        <div className="news-side-column">
           {rightNews.map((post) => (
-            <div key={post._id} className="side-item-wrapper">
-              <NewsCard post={post} />
-            </div>
+            <NewsCard key={post._id} post={post} extraClass="bbc-style" />
           ))}
         </div>
 
@@ -70,4 +63,4 @@ const LatestNews = ({ news }) => {
   );
 };
 
-export default LatestNews
+export default LatestNews;
