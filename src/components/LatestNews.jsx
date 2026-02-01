@@ -5,12 +5,12 @@ import "../styles/LatestNews.css";
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Gufata inkuru 8 za mbere
+  // Fata inkuru 8 za mbere
   const latest8 = news?.slice(0, 8) || [];
   
-  const leftNews = latest8.slice(0, 2);   
-  const centerNews = latest8.slice(2, 6); 
-  const rightNews = latest8.slice(6, 8);  
+  const leftNews = latest8.slice(0, 2);   // 2 Left
+  const centerNews = latest8.slice(2, 6); // 4 Slider
+  const rightNews = latest8.slice(6, 8);  // 2 Right
 
   useEffect(() => {
     if (centerNews.length > 0) {
@@ -21,29 +21,24 @@ const LatestNews = ({ news }) => {
     }
   }, [centerNews.length]);
 
-  if (!news || news.length === 0) return <div className="news-loading">Loading news...</div>;
+  if (!news || news.length === 0) return <div className="news-loading">Loading...</div>;
 
   return (
     <div className="latest-news-section-wrapper">
       <div className="latest-news-grid">
         
-        {/* LEFT COLUMN: 2 news as horizontal rows on mobile */}
-        <div className="news-side-column left-side">
+        {/* LEFT COLUMN (2 Cards) */}
+        <div className="news-side-column side-left">
           {leftNews.map((post) => (
-            <div key={post._id} className="side-item-wrapper">
-              <NewsCard post={post} extraClass="horizontal-card" />
-            </div>
+            <NewsCard key={post._id} post={post} extraClass="side-horizontal" />
           ))}
         </div>
 
-        {/* MIDDLE COLUMN: 4 news in a slider, big featured on mobile */}
+        {/* CENTER SLIDER (4 Cards) */}
         <div className="news-center-slider">
           <div className="slider-container">
             {centerNews.map((post, index) => (
-              <div 
-                key={post._id} 
-                className={`slide-item ${index === currentSlide ? "active" : ""}`}
-              >
+              <div key={post._id} className={`slide-item ${index === currentSlide ? "active" : ""}`}>
                 <NewsCard post={post} extraClass="featured-card" />
               </div>
             ))}
@@ -55,12 +50,10 @@ const LatestNews = ({ news }) => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: 2 news as horizontal rows on mobile */}
-        <div className="news-side-column right-side">
+        {/* RIGHT COLUMN (2 Cards) */}
+        <div className="news-side-column side-right">
           {rightNews.map((post) => (
-            <div key={post._id} className="side-item-wrapper">
-              <NewsCard post={post} extraClass="horizontal-card" />
-            </div>
+            <NewsCard key={post._id} post={post} extraClass="side-horizontal" />
           ))}
         </div>
 
