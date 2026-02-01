@@ -16,7 +16,6 @@
   color: inherit;
   display: block;
   transition: transform 0.2s ease-in-out;
-  height: 100%; /* Bituma cards zose mu grid zingana */
 }
 
 .news-card-link:hover {
@@ -38,16 +37,15 @@
   box-shadow: var(--hover-shadow);
 }
 
-/* --- News Media Container (Fixed Aspect Ratio) --- */
+/* --- News Media Container --- */
 .news-media-container {
   position: relative;
   width: 100%;
-  padding-top: 60%; /* Ratio nziza kuri Desktop/Tablet/Mobile */
-  background-color: #f3f4f6; /* Ibara rishobora kuza inyuma y'ifoto niba ifoto ari nto */
+  /* Twongereye height kugira ngo ifoto itaba nto cyane */
+  padding-top: 66.67%; 
+  /* Agace gasigaye kaba akirabura cyangwa imvi, bituma ifoto igaragara neza */
+  background-color: #1a1a1a; 
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .news-card-image {
@@ -57,15 +55,16 @@
   width: 100%;
   height: 100%;
   
-  /* IYI NIYO FIX Y'IFOTO: */
-  object-fit: contain !important; /* Birinda ko ifoto yanduranywa cyangwa icikamo igice */
+  /* IKI NICYO GIKEMURA IKIBAZO: 
+     Bituma ifoto yose yinjira mu kagafure idasepfuye (no cropping) */
+  object-fit: contain; 
   object-position: center;
-  background-color: #f3f4f6; /* Bituma aho ifoto itageze haza ari imvi yoroheje aho kuza umukara */
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
 .news-card-link:hover .news-card-image {
-  transform: scale(1.03);
+  /* Zoom yagabanyijwe kugira ngo itica contain effect */
+  transform: scale(1.03); 
 }
 
 /* INFO SECTION */
@@ -74,58 +73,68 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background: white;
 }
 
 .news-info h5 {
   font-family: var(--font-sans);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   line-height: 1.4;
   color: var(--text-title);
   margin-bottom: 12px;
+  /* Title limits */
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Limit to 2 lines for uniformity */
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.news-meta-bottom {
+.news-meta {
   margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
   color: var(--text-meta);
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 10px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.news-meta strong {
+  color: var(--accent-red);
+  font-weight: 600;
 }
 
 /* --- RESPONSIVE DESIGN --- */
 
-/* Tablet View */
 @media (max-width: 1024px) {
-  .news-media-container {
-    padding-top: 65%; /* Ifoto iba nini gato kuri Tablet */
+  .news-info h5 {
+    font-size: 1.05rem;
   }
 }
 
-/* Mobile Devices */
 @media (max-width: 600px) {
   .news-card {
     border-radius: 8px;
+    margin-bottom: 15px;
   }
-  
-  .news-media-container {
-    padding-top: 56.25%; /* Ratio ya 16:9 kuri Mobile */
-  }
-
+ 
   .news-info {
     padding: 12px;
   }
   
   .news-info h5 {
     font-size: 1rem;
-    -webkit-line-clamp: 3; /* Amagambo amwe ashobora kuba menshi kuri mobile */
+    margin-bottom: 8px;
+    /* Kuri mobile title yaba ngufi ho gato */
+    -webkit-line-clamp: 2; 
   }
+  
+  .news-media-container {
+    /* Guhindura ratio kuri mobile kugira ngo ifoto idasigamo umwanya munini */
+    padding-top: 56.25%; 
+  }
+}
+
+.news-card.featured {
+  border: 2px solid var(--accent-red);
 }
