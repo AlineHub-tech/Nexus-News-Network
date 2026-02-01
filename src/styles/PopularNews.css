@@ -1,8 +1,11 @@
-/* --- Floating Badge Design --- */
+/* =============================================
+   1. SECTION TITLE DESIGN (Floating Badge)
+   ============================================= */
 .section-title {
   position: relative;
-  margin-top: 50px;
-  margin-bottom: 40px;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  padding-left: 5px;
   display: block;
 }
 
@@ -10,115 +13,120 @@
   position: relative;
   display: inline-block;
   font-family: 'Inter', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: #1a1a1a;
   text-transform: uppercase;
-  padding: 8px 20px;
+  padding: 10px 25px;
   z-index: 1;
+  margin: 0;
+  letter-spacing: 0.5px;
 }
 
-/* Agace k'ibara rishashagirana (Accent Box) inyuma y'inyandiko */
+/* Agasanduku k'ubururu k'ibumoso (Badge) */
 .section-title h2::before {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 0;
-  width: 40px; /* Agace gato k'ubururu k'ibumoso */
+  top: 0;
+  width: 45px; 
   height: 100%;
-  background-color: #00008b;
+  background-color: #00008b; /* Blue y'umwimerere */
   z-index: -1;
   border-radius: 4px;
 }
 
-/* Umurongo mugari uca munsi ukayunguruka (Shadow line) */
+/* Umurongo mugari uca munsi ya section yose */
 .section-title::after {
   content: "";
   display: block;
   width: 100%;
-  height: 4px;
-  background: #f1f5f9; /* Ibara ry'imvi yoroheje */
-  margin-top: -15px; /* Bituma uza hejuru gato ukajya munsi y'inyandiko */
-  border-radius: 10px;
+  height: 2px;
+  background: #e2e8f0; /* Umurongo w'imvi woroshye */
+  margin-top: -12px; /* Bituma uza inyuma y'inyandiko neza */
 }
 
-/* Design ya Latest News (Iyo iri mu mwijima) */
-.latest-news-section .section-title h2 {
-    color: #ffffff;
-}
-
-.latest-news-section .section-title h2::before {
-    background-color: #ff4757; /* Aha ushobora gushyira irindi bara nka Red ngo bihinduke */
-}
-
-.latest-news-section .section-title::after {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* --- Mobile View --- */
-@media (max-width: 768px) {
-  .section-title h2 {
-    font-size: 1.2rem;
-    padding: 5px 15px;
-  }
-  
-  .section-title::after {
-    height: 3px;
-    margin-top: -10px;
-  }
-}
-
-
+/* =============================================
+   2. POPULAR NEWS TICKER (Horizontal Scroll)
+   ============================================= */
 .popular-news-container {
-    padding: 20px 0;
-    background-color: #f8f9fa;
-    overflow: hidden; /* Bihisha igice cy'inkuru cyarenzeho */
-}
-
-.popular-news-ticker-wrap {
-    display: flex;
-    overflow: hidden;
+    padding: 30px 0;
+    background-color: #fcfcfc;
     width: 100%;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* Container ipfunyitse ticker yose */
+.popular-news-ticker-wrap {
+    width: 100%;
+    overflow: hidden; /* Bihisha inkuru ziri hanze ya screen */
+    background-color: #fff;
+    padding: 20px 0;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+}
+
+/* Umurongo ugendaho inkuru (Track) */
 .popular-news-ticker-move {
     display: flex;
-    /* Dushyizeho animation */
-    animation: tickerMove 30s linear infinite; /* 30s, iteka, nta mpagarara */
+    width: max-content; /* Ingenzi: Bituma inkuru zose zijya ku murongo umwe mugari */
+    animation: tickerMove 45s linear infinite; /* Speed yoroheje */
 }
 
-/* Definition ya animation yo gutambuka */
+/* Iyo umuntu ashyizeho imbeba, animation irahagarara */
+.popular-news-ticker-move:hover {
+    animation-play-state: paused;
+}
+
+/* Imiterere ya buri nkuru imbere muri ticker */
+.ticker-item {
+    width: 320px; /* Ubugari bwa buri NewsCard */
+    padding: 0 15px;
+    flex-shrink: 0; /* Birinda ko card zigabanuka (shrink) */
+}
+
+/* Animation ikora "Infinite Loop" */
 @keyframes tickerMove {
     0% {
         transform: translateX(0);
     }
     100% {
-        /* Izinga ryose ry'inkuru 8 rigenda */
+        /* Ifata -50% kuko twakubye inkuru kabiri muri JSX */
         transform: translateX(-50%); 
     }
 }
 
-/* Gukosora style ya NewsCard mu buryo bwa ticker */
-.popular-news-ticker-move .news-card-link {
-    /* Burikard igomba kugira ubugari butazwi kugirango bitambuke neza */
-    width: 300px; 
-    flex-shrink: 0; /* Irinda ko buri card yigabanyamo kabiri */
-    margin-right: 15px;
+/* =============================================
+   3. RESPONSIVE DESIGN (Telefone)
+   ============================================= */
+@media (max-width: 768px) {
+  .section-title h2 {
+    font-size: 1.1rem;
+    padding: 8px 18px;
+  }
+
+  .section-title h2::before {
+    width: 35px;
+  }
+
+  .section-title::after {
+    margin-top: -8px;
+  }
+
+  .ticker-item {
+    width: 260px; /* Card ziba ntoya kuri mobile */
+    padding: 0 10px;
+  }
+
+  .popular-news-ticker-move {
+    animation-duration: 30s; /* Kuri mobile zigendeho gato kuko screen ni nto */
+  }
 }
 
-.popular-news-ticker-move .news-card {
-    /* Style ntoya kuri ticker */
-    box-shadow: none;
-    border-radius: 0;
-    border-right: 1px solid #eee;
+/* Ubutumwa mu gihe nta nkuru zihari */
+.no-news-msg {
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+    text-align: center;
 }
-
-.popular-news-ticker-move .news-title {
-    font-size: 0.9rem; /* Font ntoya ariko isomeka */
-    white-space: nowrap; /* Amagambo ntajya munsi y'umurongo */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Utudomo iyo byarenze */
-}
-
