@@ -46,23 +46,21 @@
   overflow: hidden;
 }
 
-  .news-media-container {
-  position: relative;
-  width: 100%;
-  /* Ongera padding-top kugira ngo agasanduku k'ifoto kabe kanini (urugero 75% biba ari 4:3) */
-  padding-top: 65% !important; 
-  background-color: #f9fafb;
-  overflow: hidden;
-}
-
-.news-card-image,.news-card-video  {
+/* Muri NewsCard.css */
+.news-card-image {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ibi biragumaho ariko kuko agasanduku ari kanini ifoto izagaragara neza */
+  
+  /* Iki nicyo gikemura ikibazo cy'ifoto idasobanutse */
+  object-fit: contain !important; 
+  
+  /* Iri bara naryo rirafasha niba ifoto ari ntoya kurusha agasanduku */
+  background-color: #f3f4f6; 
 }
+
 
 .news-card-link:hover .news-card-image {
   transform: scale(1.05); /* Slight zoom effect */
