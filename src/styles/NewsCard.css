@@ -1,22 +1,24 @@
-/* =============================================
-   NEWSCARD BASE STYLES
-   ============================================= */
+
 :root {
   --card-bg: #ffffff;
-  --text-title: #1a1a1a;
-  --text-meta: #666666;
-  --accent-blue: #00008b;
-  --border-color: #eeeeee;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.1);
+  --text-title: #111827;
+  --text-meta: #6b7280;
+  --accent-red: #e63946;
+  --border-subtle: #f3f4f6;
+  --hover-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
+  --font-sans: 'Inter', -apple-system, sans-serif;
 }
 
+/* Remove default link styles */
 .news-card-link {
   text-decoration: none;
   color: inherit;
   display: block;
-  height: 100%;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease-in-out;
+}
+
+.news-card-link:hover {
+  transform: translateY(-4px);
 }
 
 .news-card {
@@ -26,23 +28,20 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
+  border: 1px solid var(--border-subtle);
+  transition: box-shadow 0.3s ease;
 }
 
-.news-card:hover {
-  box-shadow: var(--shadow-md);
+.news-card-link:hover .news-card {
+  box-shadow: var(--hover-shadow);
 }
 
-/* =============================================
-   MEDIA CONTAINER (Image/Video Area)
-   ============================================= */
+/* MEDIA CONTAINER (Perfect 16:9 Aspect Ratio) */
 .news-media-container {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
-  background-color: #f4f4f4;
+  padding-top: 56.25%; /* 16:9 ratio */
+  background-color: #f9fafb;
   overflow: hidden;
 }
 
@@ -53,116 +52,96 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* CRITICAL: contain ensures full image shows, cover fills the box */
-  object-fit: cover; 
+  /* object-fit: cover; /* Ensures images aren't stretched */ */
   transition: transform 0.5s ease;
 }
 
 .news-card-link:hover .news-card-image {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Slight zoom effect */
 }
 
-/* Overlay Elements */
-.card-category-tag {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: var(--accent-blue);
-  color: #fff;
-  padding: 4px 10px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  border-radius: 4px;
-  z-index: 2;
-}
-
-.video-icon-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  z-index: 2;
-}
-
-/* =============================================
-   INFO SECTION (Text Content)
-   ============================================= */
+/* INFO SECTION */
 .news-info {
-  padding: 15px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .news-info h5 {
-  font-size: 1.1rem;
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
   font-weight: 700;
   line-height: 1.4;
   color: var(--text-title);
   margin-bottom: 12px;
-  /* Multi-line ellipsis */
+  /* Limit title to 3 lines for clean grid */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.news-meta-bottom {
+.news-meta {
   margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
   color: var(--text-meta);
-  border-top: 1px solid var(--border-color);
-  padding-top: 10px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
-.author-name {
+.news-meta strong {
+  color: var(--accent-red);
   font-weight: 600;
-  color: var(--accent-blue);
 }
 
-.post-time {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablet & Smaller Desktops */
+@media (max-width: 1024px) {
+  .news-info h5 {
+    font-size: 1.05rem;
+  }
 }
 
-/* =============================================
-   RESPONSIVE & SPECIAL LAYOUTS
-   ============================================= */
-
-/* Mobile: BBC Row Style (Force Horizontal) */
+/* Mobile Devices */
 @media (max-width: 600px) {
-  /* This works only if you pass a specific class to NewsCard */
-  .horizontal-row-mobile {
-    flex-direction: row !important;
-    height: 110px !important;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .horizontal-row-mobile .news-media-container {
-    width: 120px !important;
-    height: 90px !important;
-    padding-top: 0 !important; /* Disables the 16:9 ratio */
-    flex-shrink: 0;
+  .news-card {
     border-radius: 8px;
+    margin-bottom: 15px;
   }
 
-  .horizontal-row-mobile .news-info h5 {
-    font-size: 0.9rem !important;
+  /* Optional: Make cards horizontal on mobile if they are too narrow */
+  /* If you want horizontal cards on mobile, use this: */
+  /*
+  .news-card {
+    flex-direction: row;
+    height: 120px;
+  }
+  .news-media-container {
+    width: 40%;
+    padding-top: 0;
+    height: 100%;
+  }
+  .news-info h5 {
+    font-size: 0.95rem;
     -webkit-line-clamp: 2;
   }
+  */
+  
+  .news-info {
+    padding: 12px;
+  }
+  
+  .news-info h5 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+}
+
+/* Style for special Extra Classes (e.g., Featured Card) */
+.news-card.featured {
+  border: 2px solid var(--accent-red);
 }
