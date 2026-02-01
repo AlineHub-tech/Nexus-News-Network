@@ -114,7 +114,10 @@
     margin-bottom: 15px;
   }
 
-   .news-card {
+  /* Optional: Make cards horizontal on mobile if they are too narrow */
+  /* If you want horizontal cards on mobile, use this: */
+  /*
+  .news-card {
     flex-direction: row;
     height: 120px;
   }
@@ -127,7 +130,7 @@
     font-size: 0.95rem;
     -webkit-line-clamp: 2;
   }
-  
+  */
   
   .news-info {
     padding: 12px;
