@@ -4,10 +4,9 @@ import "../styles/LatestNews.css";
 
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Divide the 8 news items: 2 Left, 4 Slider, 2 Right
   const latest8 = news?.slice(0, 8) || [];
-  const leftNews = latest8.slice(0, 2);
+
+  const leftNews = latest8.slice(0, 2);   
   const centerNews = latest8.slice(2, 6); 
   const rightNews = latest8.slice(6, 8);  
 
@@ -26,19 +25,19 @@ const LatestNews = ({ news }) => {
     <div className="latest-news-section-wrapper">
       <div className="latest-news-grid">
         
-        {/* DESKTOP LEFT (2 News Items) */}
+        {/* DESKTOP: IBUMOSO (2 cards) */}
         <div className="news-side-column side-left">
           {leftNews.map((post) => (
-            <NewsCard key={post._id} post={post} extraClass="bbc-mobile-card" />
+            <NewsCard key={post._id} post={post} extraClass="side-item-card" />
           ))}
         </div>
 
-        {/* CENTER SLIDER (4 News Items) */}
+        {/* HAGATI: SLIDER (4 cards) */}
         <div className="news-center-slider">
           <div className="slider-container">
             {centerNews.map((post, index) => (
               <div key={post._id} className={`slide-item ${index === currentSlide ? "active" : ""}`}>
-                <NewsCard post={post} extraClass="main-featured-card" />
+                <NewsCard post={post} extraClass="slider-featured-card" />
               </div>
             ))}
           </div>
@@ -49,10 +48,10 @@ const LatestNews = ({ news }) => {
           </div>
         </div>
 
-        {/* DESKTOP RIGHT (2 News Items) */}
+        {/* DESKTOP: IBURYO (2 cards) */}
         <div className="news-side-column side-right">
           {rightNews.map((post) => (
-            <NewsCard key={post._id} post={post} extraClass="bbc-mobile-card" />
+            <NewsCard key={post._id} post={post} extraClass="side-item-card" />
           ))}
         </div>
 
