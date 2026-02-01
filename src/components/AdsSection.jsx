@@ -21,30 +21,30 @@ const AdsSection = ({ ads }) => {
     }
   }, [mediaAds.length]);
 
+  // Iki ni cyo gice cy'ingenzi cyakosowe kugira ngo amafoto agaragare
   const getMediaUrl = (url) => {
     if (!url) return "";
-    if (url.startsWith("http")) return url;
+    if (url.startsWith("http")) return url; // Niba ari Cloudinary (itangizwa na http)
     const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
-    return `${base}${url.startsWith('/') ? url : '/' + url}`;
+    return `${base}${url.startsWith('/') ? url : '/' + url}`; // Niba ari local server
   };
 
   if (!ads || ads.length === 0) return null;
 
   return (
     <div className="ads-section-main-wrapper">
-      
-      {/* SECTION TITLE IVUGURUYE (Nk'iya Popular News) */}
-      <div className="section-title">
-        <span className="badge">OFFICIAL</span>
-        <h2 className="title">AMATANGAZO</h2>
-        <div className="line"></div>
-      </div>
-      
+           <div className="popular-news-container">
+            <div className="section-header">
+                <span className="badge">ADS</span>
+                <h2 className="title">AMATANGAZO</h2>
+                <div className="line"></div>
+            </div>
+        </div>
       <div className="ads-grid-layout">
         
         {/* LEFT SIDE: Text-Only Stack */}
         <div className="ads-left-column">
-          {textAds.length === 0 ? <p className="no-ads">Nta matangazo ahari</p> : 
+          {textAds.length === 0 ? <p className="no-ads">No text ads available</p> : 
             textAds.map((ad) => (
               <div key={`text-${ad._id}`} className="text-ad-row">
                 <span className="ad-tag">PROMOTED</span>
