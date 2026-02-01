@@ -1,97 +1,152 @@
-/* --- DESKTOP GRID (2-Slider-2) --- */
+/* =============================================
+   1. DESKTOP GRID (2 - 4 Slider - 2)
+   ============================================= */
+.latest-news-section-wrapper {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
 .latest-news-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr; /* Center slider is twice as wide */
-  gap: 20px;
-  max-width: 1300px;
-  margin: 0 auto;
-  align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr 1.8fr 1fr; /* 2 Left, 4 Center Slider, 2 Right */
+    gap: 20px;
+    align-items: stretch;
 }
 
 .news-side-column {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* --- CENTER SLIDER FIX --- */
+/* =============================================
+   2. CENTER SLIDER ANIMATION
+   ============================================= */
 .news-center-slider {
-  position: relative;
-  height: 550px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #000;
+    position: relative;
+    height: 540px;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.slider-container { width: 100%; height: 100%; position: relative; }
+.slider-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 
 .slide-item {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.8s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out;
 }
 
 .slide-item.active {
-  opacity: 1;
-  visibility: visible;
-  z-index: 5;
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
 }
 
-/* Featured card takes full slider height */
-.main-featured-card { height: 100% !important; }
-.main-featured-card .news-media-container { height: 100% !important; padding-top: 0 !important; }
+/* Force NewsCard inside slider to fill the box */
+.slide-item .news-card.featured-slider-card {
+    height: 100% !important;
+    width: 100% !important;
+    border: none !important;
+}
+
+.slide-item .news-card.featured-slider-card .news-media-container {
+    height: 100% !important;
+    padding-top: 0 !important;
+}
 
 /* =============================================
-   MOBILE VIEW (Slider Top, Others BBC Style)
+   3. MOBILE VERSION (Slider First + BBC Style)
    ============================================= */
 @media (max-width: 768px) {
-  .latest-news-grid {
-    display: flex;
-    flex-direction: column; /* Stack everything vertically */
-  }
+    .latest-news-grid {
+        display: flex;
+        flex-direction: column; /* Stack everything */
+    }
 
-  /* Slider comes first on mobile */
-  .news-center-slider {
-    order: -1; 
-    height: 350px !important;
-    margin-bottom: 20px;
-  }
+    /* Slider stays on TOP */
+    .news-center-slider {
+        order: -1; 
+        height: 350px !important;
+        margin-bottom: 20px;
+        display: block !important;
+    }
 
-  /* BBC Style for side cards (Image left, details right) */
-  .bbc-mobile-card {
-    flex-direction: row !important;
-    height: 120px !important;
-    gap: 15px !important;
-    border: none !important;
-    border-bottom: 1px solid #eee !important;
-    border-radius: 0 !important;
-    padding: 10px 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
+    /* BBC STYLE: Image Left, Details Right for the 4 side news */
+    .news-card.bbc-mobile-style {
+        flex-direction: row !important;
+        height: 115px !important;
+        gap: 12px !important;
+        padding: 10px 0 !important;
+        border: none !important;
+        border-bottom: 1px solid #eee !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
 
-  .bbc-mobile-card .news-media-container {
-    width: 130px !important;
-    height: 100px !important;
-    padding-top: 0 !important;
-    flex-shrink: 0;
-  }
+    /* Image Box on Mobile */
+    .news-card.bbc-mobile-style .news-media-container {
+        width: 130px !important;
+        height: 90px !important;
+        padding-top: 0 !important;
+        flex-shrink: 0;
+        border-radius: 8px;
+    }
 
-  .bbc-mobile-card .news-info { padding: 0 !important; justify-content: center; }
-  
-  .bbc-mobile-card .news-info h5 { 
-    font-size: 1rem !important; 
-    -webkit-line-clamp: 2 !important; 
-    line-height: 1.3;
-  }
+    /* Text Box on Mobile */
+    .news-card.bbc-mobile-style .news-info {
+        padding: 0 !important;
+        justify-content: center;
+    }
+
+    .news-card.bbc-mobile-style .news-info h5 {
+        font-size: 0.95rem !important;
+        -webkit-line-clamp: 2 !important; /* Max 2 lines */
+        line-height: 1.3;
+        margin-bottom: 5px;
+    }
+
+    .news-card.bbc-mobile-style .news-meta-bottom {
+        font-size: 0.7rem !important;
+        border: none;
+        padding: 0;
+    }
 }
 
-/* SLIDER DOTS */
+/* SLIDER INDICATORS */
 .slider-dots {
-  position: absolute; bottom: 15px; left: 50%;
-  transform: translateX(-50%); display: flex; gap: 8px; z-index: 10;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 20;
 }
-.dot { width: 8px; height: 8px; background: rgba(255,255,255,0.4); border-radius: 50%; }
-.dot.active { background: #fff; width: 22px; border-radius: 10px; }
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+}
+
+.dot.active {
+    background: #fff;
+    width: 25px;
+    border-radius: 10px;
+}
