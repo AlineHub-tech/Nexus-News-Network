@@ -1,152 +1,230 @@
-/* --- Container Nyamukuru --- */
-.latest-news-section-wrapper {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 15px;
+/* =============================================
+   1. GLOBAL SECTION TITLES (Badge Design)
+   ============================================= */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0 25px;
+    font-family: 'Inter', sans-serif;
 }
 
-/* --- GRID SYSTEM (Desktop) --- */
-.latest-news-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.8fr 1fr; /* Middle is wider */
-  gap: 20px;
-  align-items: start;
+.section-title .badge {
+    background: #00008b; /* Blue ya kinyamwuga */
+    color: white;
+    padding: 5px 12px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    text-transform: uppercase;
 }
 
-/* SIDE COLUMNS (Left & Right) */
-.news-side-column {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.section-title .title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
 
-/* --- CENTER SLIDER --- */
-.news-center-slider {
-  position: relative;
-  height: 540px; /* Bunini bwa hagati */
-  background: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.slider-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.slide-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-  transform: scale(1.05);
-}
-
-.slide-item.active {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 10;
-}
-
-/* --- SLIDER DOTS --- */
-.slider-indicators {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 20;
-}
-
-.indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.4);
-  transition: 0.3s;
-}
-
-.indicator.active {
-  background: #00008b; /* Blue ya website */
-  width: 25px;
-  border-radius: 10px;
+.section-title .line {
+    height: 2px;
+    flex-grow: 1;
+    background: linear-gradient(to right, #e2e8f0, transparent);
 }
 
 /* =============================================
-   RESPONSIVE: MOBILE BBC STYLE (The Fix)
+   2. LATEST NEWS GRID & SLIDER (The Ultimate Fix)
    ============================================= */
-
-@media (max-width: 768px) {
-  .latest-news-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* Slider ihatirwa kuza hejuru ya zose */
-  .news-center-slider {
-    order: -1; 
-    height: 350px;
-    margin-bottom: 20px;
-  }
-
-  /* Ihatira amakarita yo ku mpande kuba imirongo (BBC Style) */
-  .news-card.horizontal-card {
-    flex-direction: row !important; /* Row layout */
-    height: 110px !important;
-    gap: 12px;
-    padding: 10px 0 !important;
-    border: none !important;
-    border-bottom: 1px solid #eee !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    align-items: flex-start;
-  }
-
-  /* Ifoto iba ntoya ibumoso */
-  .news-card.horizontal-card .news-media-container {
-    width: 120px !important;
-    height: 85px !important;
-    padding-top: 0 !important;
-    flex-shrink: 0;
-    border-radius: 8px;
-  }
-
-  /* Inyandiko iba iburyo */
-  .news-card.horizontal-card .news-info {
-    padding: 0 !important;
-    flex-grow: 1;
-  }
-
-  .news-card.horizontal-card .news-info h5 {
-    font-size: 0.95rem !important;
-    line-height: 1.3;
-    font-weight: 700;
-    margin-bottom: 5px;
-    -webkit-line-clamp: 2 !important; /* Imirongo 2 gusa */
-  }
-
-  .news-card.horizontal-card .news-meta-bottom {
-    font-size: 0.7rem !important;
-    border: none;
-    padding: 0;
-  }
+.latest-news-section-wrapper {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
-/* TABLET VIEW */
-@media (min-width: 769px) and (max-width: 1100px) {
-  .latest-news-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  .news-center-slider {
-    grid-column: span 2;
-    height: 450px;
-  }
+.latest-news-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* CENTER SLIDER */
+.news-center-slider {
+    position: relative;
+    height: 550px;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.slider-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden; /* Bituma izidahari zidafunga active slide */
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1;
+}
+
+.slide-item.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+}
+
+/* Force NewsCard kuba nini mu slider */
+.slide-item .news-card.featured-card {
+    height: 100% !important;
+    border: none !important;
+}
+
+/* SIDE COLUMNS */
+.news-side-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =============================================
+   3. POPULAR NEWS TICKERS (No Duplicates)
+   ============================================= */
+.popular-news-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.ticker-viewport {
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.ticker-track {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+    animation: scrollTicker 45s linear infinite;
+}
+
+.ticker-track:hover {
+    animation-play-state: paused;
+}
+
+.ticker-item {
+    width: 320px !important;
+    flex-shrink: 0 !important;
+    padding: 0 10px !important;
+}
+
+@keyframes scrollTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* =============================================
+   4. RESPONSIVE DESIGN (BBC Style Mobile)
+   ============================================= */
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .latest-news-grid {
+        grid-template-columns: 1fr 1.5fr;
+    }
+    .news-side-column.right-side { display: none; } /* Gabanya amakuru kuri tablet */
+}
+
+/* MOBILE BBC STYLE (768px & Down) */
+@media (max-width: 768px) {
+    .latest-news-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Slider hejuru */
+    .news-center-slider {
+        order: -1;
+        height: 380px !important;
+        margin-bottom: 20px;
+        display: block !important;
+    }
+
+    /* BBC Style Rows kuri Left/Right News */
+    .news-card.horizontal-card {
+        flex-direction: row !important;
+        height: 110px !important;
+        gap: 12px;
+        padding: 10px 0 !important;
+        border: none !important;
+        border-bottom: 1px solid #eee !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    .news-card.horizontal-card .news-media-container {
+        width: 110px !important;
+        height: 80px !important;
+        padding-top: 0 !important;
+        flex-shrink: 0;
+        border-radius: 8px;
+    }
+
+    .news-card.horizontal-card .news-info {
+        padding: 0 !important;
+    }
+
+    .news-card.horizontal-card .news-info h5 {
+        font-size: 0.95rem !important;
+        -webkit-line-clamp: 2 !important;
+        line-height: 1.3;
+    }
+
+    /* Popular Ticker Mobile Fix */
+    .ticker-item {
+        width: 280px !important;
+    }
+    
+    .section-title .title {
+        font-size: 1.2rem;
+    }
+}
+
+/* INDICATORS (Dots) */
+.slider-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 30;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.indicator.active {
+    background: #fff;
+    width: 20px;
+    border-radius: 10px;
 }
