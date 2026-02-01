@@ -1,10 +1,17 @@
-/* --- Desktop Grid Fix --- */
+/* LatestNews.css */
+
+/* --- Desktop Layout (2-Slider-2) --- */
+.latest-news-section-wrapper {
+  max-width: 1300px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
 .latest-news-grid {
   display: grid;
   grid-template-columns: 1fr 1.8fr 1fr;
   gap: 20px;
-  max-width: 1300px;
-  margin: 0 auto;
+  align-items: stretch;
 }
 
 .news-side-column {
@@ -13,52 +20,52 @@
   gap: 20px;
 }
 
-/* --- 1. SLIDER FIX (Hagati) --- */
+/* --- CENTER SLIDER (Fixing Overlap) --- */
 .news-center-slider {
   position: relative;
   height: 550px;
   border-radius: 12px;
   overflow: hidden;
   background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-.slider-track-container {
+.slider-container {
   width: 100%;
   height: 100%;
   position: relative;
 }
 
-.slide-item-fixed {
-  position: absolute !important; /* Force position absolute */
-  top: 0; left: 0; 
-  width: 100% !important; 
+/* Force slides to stack on top of each other */
+.slide-item {
+  position: absolute !important;
+  top: 0; left: 0;
+  width: 100% !important;
   height: 100% !important;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
 }
 
-.slide-item-fixed.active {
+.slide-item.active {
   opacity: 1;
   visibility: visible;
   z-index: 10;
 }
 
-/* Force Card yose kuzura Slider Photo */
-.slider-card-full {
+/* Featured Slider Card - Force full height & clear image */
+.featured-slider-card {
   height: 100% !important;
   width: 100% !important;
-  margin: 0 !important;
-  border: none !important;
 }
 
-.slider-card-full .news-media-container {
+.featured-slider-card .news-media-container {
   height: 100% !important;
   padding-top: 0 !important;
 }
 
 /* =============================================
-   MOBILE VIEW (Slider Top + BBC Style)
+   MOBILE VIEW (Slider First + BBC Style Row)
    ============================================= */
 @media (max-width: 768px) {
   .latest-news-grid {
@@ -66,17 +73,19 @@
     flex-direction: column !important;
   }
 
+  /* Slider stays on TOP */
   .news-center-slider {
-    order: -1; /* Slider hejuru */
+    order: -1; 
     height: 350px !important;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    display: block !important;
   }
 
-  /* BBC STYLE FOR ALL 4 SIDE CARDS */
-  .bbc-card-style {
+  /* BBC STYLE: Row Layout for side column news */
+  .bbc-row-card {
     display: flex !important;
-    flex-direction: row !important; /* Image left, info right */
-    height: 120px !important;
+    flex-direction: row !important; /* Image Left, Info Right */
+    height: 115px !important;
     gap: 12px !important;
     border: none !important;
     border-bottom: 1px solid #eee !important;
@@ -86,30 +95,48 @@
     box-shadow: none !important;
   }
 
-  .bbc-card-style .news-media-container {
+  .bbc-row-card .news-media-container {
     width: 130px !important;
-    height: 95px !important;
+    height: 90px !important;
     padding-top: 0 !important;
     flex-shrink: 0;
     border-radius: 8px;
   }
 
-  .bbc-card-style .news-info {
+  .bbc-row-card .news-info {
     padding: 0 !important;
     justify-content: center;
   }
 
-  .bbc-card-style .news-info h5 {
+  .bbc-row-card .news-info h5 {
     font-size: 0.95rem !important;
-    line-height: 1.3;
     -webkit-line-clamp: 2 !important;
+    line-height: 1.3;
   }
 }
 
-/* Dots */
-.slider-dots {
-  position: absolute; bottom: 20px; left: 50%;
-  transform: translateX(-50%); display: flex; gap: 8px; z-index: 20;
+/* DOTS / INDICATORS */
+.slider-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 30;
 }
-.dot { width: 8px; height: 8px; background: rgba(255,255,255,0.4); border-radius: 50%; }
-.dot.active { background: #fff; width: 25px; border-radius: 10px; }
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.indicator.active {
+  background: #fff;
+  width: 25px;
+  border-radius: 10px;
+}
