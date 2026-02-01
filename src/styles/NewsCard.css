@@ -1,25 +1,18 @@
 /* NewsCard.css */
-
 :root {
   --card-bg: #ffffff;
   --text-title: #111827;
   --text-meta: #6b7280;
-  --accent-red: #e63946;
+  --accent-blue: #00008b;
   --border-subtle: #f3f4f6;
-  --hover-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
-  --font-sans: 'Inter', -apple-system, sans-serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
-/* Remove default link styles */
 .news-card-link {
   text-decoration: none;
   color: inherit;
   display: block;
-  transition: transform 0.2s ease-in-out;
-}
-
-.news-card-link:hover {
-  transform: translateY(-4px);
+  transition: all 0.3s ease;
 }
 
 .news-card {
@@ -33,35 +26,23 @@
   transition: box-shadow 0.3s ease;
 }
 
-.news-card-link:hover .news-card {
-  box-shadow: var(--hover-shadow);
-}
-
-/* MEDIA CONTAINER (Perfect 16:9 Aspect Ratio) */
+/* Fix for Full Image Visibility */
 .news-media-container {
   position: relative;
   width: 100%;
   padding-top: 56.25%; /* 16:9 ratio */
-  background-color: #f9fafb;
+  background-color: #f3f4f6;
   overflow: hidden;
 }
 
-.news-card-image, 
-.news-card-video {
+.news-card-image {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* object-fit: cover; /* Ensures images aren't stretched */ */
-  transition: transform 0.5s ease;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: contain !important; /* Birinda ko ifoto icikamo igice */
+  background-color: #f3f4f6;
 }
 
-.news-card-link:hover .news-card-image {
-  transform: scale(1.05); /* Slight zoom effect */
-}
-
-/* INFO SECTION */
 .news-info {
   padding: 16px;
   display: flex;
@@ -71,79 +52,23 @@
 
 .news-info h5 {
   font-family: var(--font-sans);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.4;
   color: var(--text-title);
-  margin-bottom: 12px;
-  /* Limit title to 3 lines for clean grid */
+  margin-bottom: 8px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.news-meta {
+.news-meta-bottom {
   margin-top: auto;
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
   color: var(--text-meta);
-  line-height: 1.5;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
 }
-
-.news-meta strong {
-  color: var(--accent-red);
-  font-weight: 600;
-}
-
-/* --- RESPONSIVE DESIGN --- */
-
-/* Tablet & Smaller Desktops */
-@media (max-width: 1024px) {
-  .news-info h5 {
-    font-size: 1.05rem;
-  }
-}
-
-/* Mobile Devices */
-@media (max-width: 600px) {
-  .news-card {
-    border-radius: 8px;
-    margin-bottom: 15px;
-  }
-
-  /* Optional: Make cards horizontal on mobile if they are too narrow */
-  /* If you want horizontal cards on mobile, use this: */
-  /*
-  .news-card {
-    flex-direction: row;
-    height: 120px;
-  }
-  .news-media-container {
-    width: 40%;
-    padding-top: 0;
-    height: 100%;
-  }
-  .news-info h5 {
-    font-size: 0.95rem;
-    -webkit-line-clamp: 2;
-  }
-  */
-  
-  .news-info {
-    padding: 12px;
-  }
-  
-  .news-info h5 {
-    font-size: 1rem;
-    margin-bottom: 8px;
-  }
-}
-
-/* Style for special Extra Classes (e.g., Featured Card) */
-.news-card.featured {
-  border: 2px solid var(--accent-red);
-}
-
