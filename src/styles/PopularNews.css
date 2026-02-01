@@ -1,127 +1,97 @@
-/* =============================================
-   1. SECTION HEADER (Floating Badge Design)
-   ============================================= */
-.section-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin: 40px 20px 25px;
-    font-family: 'Inter', sans-serif;
-}
-
-.section-header .badge {
-    background: #00008b; /* Ibara rya Blue y'umwimerere */
-    color: #ffffff;
-    padding: 6px 14px;
-    font-weight: 800;
-    font-size: 0.8rem;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 6px rgba(0, 0, 139, 0.2);
-}
-
-.section-header .title {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #111827;
-    margin: 0;
-    text-transform: uppercase;
-    white-space: nowrap;
-}
-
-.section-header .line {
-    height: 2px;
-    flex-grow: 1; /* Umurongo wuzura page yose */
-    background: linear-gradient(to right, #0a1930, transparent);
-    border-radius: 5px;
-}
-
-/* =============================================
-   2. TICKER SYSTEM (Kukuraho Duplicate Overlap)
-   ============================================= */
 .popular-news-container {
     width: 100%;
-    overflow: hidden; /* Birinda scrollbar y'uburyo na bumoso */
-    background-color: #f9fafb;
-    padding: 20px 0 40px;
+    padding: 30px 0;
+    overflow: hidden;
 }
 
+/* Ticker Logic */
 .ticker-viewport {
     width: 100%;
-    overflow: hidden; /* Iki nicyo gihisha inkuru ziri hanze ya screen */
+    overflow: hidden;
     position: relative;
     padding: 10px 0;
 }
 
 .ticker-track {
-    display: flex !important; /* Force guhagarara mu murongo umwe */
-    width: max-content !important; /* Ingenzi: Bituma track iba ndende cyane (nka 6000px) */
-    animation: scrollTicker 50s linear infinite; /* Speed ituje */
-    will-change: transform;
+    display: flex !important;
+    flex-wrap: nowrap !important; /* Force cards ku murongo umwe */
+    width: max-content !important; /* Ingenzi kugira ngo duplicate idatunda hamwe */
+    animation: scrollTicker 50s linear infinite;
 }
 
-/* Bihagarara iyo umusomyi ashyizeho imbeba (Mouse hover) */
 .ticker-track:hover {
     animation-play-state: paused;
 }
 
-/* Ibi nibyo bikemura ikibazo cy'inkuru zanduranya (Overlap Fix) */
-.ticker-card-wrapper {
-    width: 320px !important; /* Ubugari buhoraho bwa buri NewsCard */
-    padding: 0 12px; /* Intera hagati y'inkuru n'indi */
-    flex-shrink: 0 !important; /* Birinda card kwigabanya ubugari (The fix) */
+.ticker-item {
+    width: 320px !important; 
+    flex-shrink: 0 !important; /* Birinda cards kwipfina kuri screen */
+    padding: 0 12px !important;
 }
 
-/* Styling ya NewsCard imbere muri Ticker */
-.ticker-card-wrapper > * {
-    transition: transform 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    border-radius: 8px;
-    background: #fff;
-}
-
-.ticker-card-wrapper:hover > * {
-    transform: translateY(-5px); /* Uture bimeze nka animation */
-    box-shadow: 0 13px 23px rgba(0,0,0,0.1);
-}
-
-/* Animation Move Logic */
+/* Animation Move */
 @keyframes scrollTicker {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        /* Ifata -50% kugira ngo isubire inyuma neza aho clone yatangiriye */
-        transform: translateX(-50%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-/* =============================================
-   3. RESPONSIVE DESIGN (Mobile)
-   ============================================= */
-@media (max-width: 768px) {
-    .section-header {
-        margin: 30px 15px 15px;
-        gap: 8px;
-    }
-
-    .section-header .title {
-        font-size: 1.1rem;
-    }
-
-    .section-header .badge {
-        padding: 4px 10px;
-        font-size: 0.7rem;
-    }
-
-    .ticker-card-wrapper {
-        width: 270px !important; /* Card ziba ntoya kuri mobile */
-        padding: 0 8px;
-    }
-
-    .ticker-track {
-        animation-duration: 35s; /* Zigendeho gato kuko screen ni nto */
-    }
+/* Card Metadata (Time & Author) */
+.news-meta-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    font-size: 0.75rem;
+    color: #6b7280;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 10px;
 }
 
+.post-time {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+}
+
+.card-category-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #00008b;
+    color: #fff;
+    padding: 3px 8px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+/* Section Title Styling */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 20px 25px;
+}
+
+.section-title .badge {
+    background: #00008b;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 4px;
+}
+
+.section-title .title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.section-title .line {
+    height: 2px;
+    flex-grow: 1;
+    background: linear-gradient(to right, #e2e8f0, transparent);
+}
