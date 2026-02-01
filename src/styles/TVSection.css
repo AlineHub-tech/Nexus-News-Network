@@ -36,38 +36,44 @@
 }
 
 /* =============================================
-   2. VIDEO GRID LAYOUT & CARDS
+   1. CONTAINER & GRID (Zayaguye)
    ============================================= */
 .tv-section-container {
-    max-width: 1200px;
+    padding: 20px 10px;
+    max-width: 1300px; /* Twongereye ubugari bwa page yose */
+    margin: 0 auto;
 }
 
 .tv-section-grid {
     display: grid;
-    gap: 25px;
-    /* DESKTOP: Inshuro 4 kuri buri murongo (4 columns) */
-    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px; /* Twongereye umwanya hagati y'inkuru */
+    
+    /* DESKTOP: Twazigize 3 kugira ngo zibe nini (Size nini) */
+    grid-template-columns: repeat(3, 1fr); 
 }
 
+/* =============================================
+   2. TV CARD (Imiterere nshya)
+   ============================================= */
 .tv-card {
     background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    overflow: hidden; /* Kugira ngo video na info bigume mu mbibi za card */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px; /* Corner zoroshye kurushaho */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
 }
 
 .tv-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
 .video-player-wrapper {
     position: relative;
     width: 100%;
-    /* Video ratio ya 16:9 */
-    padding-top: 56.25%; 
-    background-color: #000;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background-color: #1a1a1a;
 }
 
 .tv-video-element {
@@ -79,60 +85,53 @@
     object-fit: cover;
 }
 
+/* Inyandiko munsi ya Video */
 .tv-card-info {
-    padding: 15px;
+    padding: 20px; /* Twongereye padding */
 }
 
 .tv-card-info h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #333;
-    margin: 0 0 8px 0;
-    line-height: 1.3;
+    font-size: 1.2rem; /* Inyandiko nini isomeka neza */
+    font-weight: 800;
+    color: #111;
+    margin: 0 0 10px 0;
+    line-height: 1.4;
 }
 
 .video-author {
-    font-size: 0.8rem;
-    color: #777;
-    margin: 0;
-}
-
-.no-videos {
-    text-align: center;
-    padding: 40px;
+    font-size: 0.85rem;
     color: #666;
-    font-style: italic;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* =============================================
-   3. RESPONSIVE DESIGN
+   3. RESPONSIVE DESIGN (Amakarita Manini)
    ============================================= */
 
-/* TABLET VIEW (768px to 1024px): 3 columns */
-@media (min-width: 768px) and (max-width: 1024px) {
+/* TABLET (Kuri Tablet zibe 2 kuri buri murongo) */
+@media (max-width: 1024px) {
     .tv-section-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* MOBILE VIEW (Below 768px): 1 column */
-@media (max-width: 767px) {
+/* MOBILE (Kuri Telefone ibe 1 ariko ifite ubugari bwa screen) */
+@media (max-width: 600px) {
     .tv-section-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
 
-    .section-header .title {
-        font-size: 1.2rem;
-    }
-
-    .section-header .badge {
-        padding: 4px 10px;
-        font-size: 0.7rem;
+    .tv-card-info h4 {
+        font-size: 1rem;
     }
     
-    .section-header {
-        margin: 30px 0 20px;
+    .tv-section-container {
+        padding: 10px;
     }
 }
-
 
