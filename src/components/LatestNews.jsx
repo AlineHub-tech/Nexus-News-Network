@@ -5,11 +5,11 @@ import "../styles/LatestNews.css";
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Fata inkuru 8 za mbere neza neza
+  // Divide the 8 news items: 2 Left, 4 Slider, 2 Right
   const latest8 = news?.slice(0, 8) || [];
-  const leftNews = latest8.slice(0, 2);   // 2 Ibumoso
-  const centerNews = latest8.slice(2, 6); // 4 Hagati (Slider)
-  const rightNews = latest8.slice(6, 8);  // 2 Iburyo
+  const leftNews = latest8.slice(0, 2);
+  const centerNews = latest8.slice(2, 6); 
+  const rightNews = latest8.slice(6, 8);  
 
   useEffect(() => {
     if (centerNews.length > 0) {
@@ -26,34 +26,33 @@ const LatestNews = ({ news }) => {
     <div className="latest-news-section-wrapper">
       <div className="latest-news-grid">
         
-        {/* LEFT: 2 news cards (One on top of another) */}
+        {/* DESKTOP LEFT (2 News Items) */}
         <div className="news-side-column side-left">
           {leftNews.map((post) => (
-            <NewsCard key={post._id} post={post} extraClass="side-news-card" />
+            <NewsCard key={post._id} post={post} extraClass="bbc-mobile-card" />
           ))}
         </div>
 
-        {/* CENTER: 4 news cards in SLIDER */}
+        {/* CENTER SLIDER (4 News Items) */}
         <div className="news-center-slider">
           <div className="slider-container">
             {centerNews.map((post, index) => (
               <div key={post._id} className={`slide-item ${index === currentSlide ? "active" : ""}`}>
-                <NewsCard post={post} extraClass="main-slider-card" />
+                <NewsCard post={post} extraClass="main-featured-card" />
               </div>
             ))}
           </div>
-          {/* Slider Dots */}
-          <div className="slider-indicators">
+          <div className="slider-dots">
             {centerNews.map((_, i) => (
-              <span key={i} className={`indicator ${i === currentSlide ? "active" : ""}`} />
+              <span key={i} className={`dot ${i === currentSlide ? "active" : ""}`} />
             ))}
           </div>
         </div>
 
-        {/* RIGHT: 2 news cards (One on top of another) */}
+        {/* DESKTOP RIGHT (2 News Items) */}
         <div className="news-side-column side-right">
           {rightNews.map((post) => (
-            <NewsCard key={post._id} post={post} extraClass="side-news-card" />
+            <NewsCard key={post._id} post={post} extraClass="bbc-mobile-card" />
           ))}
         </div>
 
