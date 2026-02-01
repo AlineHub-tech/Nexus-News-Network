@@ -16,6 +16,7 @@
   color: inherit;
   display: block;
   transition: transform 0.2s ease-in-out;
+  height: 100%; /* Bituma cards zose mu grid zingana */
 }
 
 .news-card-link:hover {
@@ -37,13 +38,16 @@
   box-shadow: var(--hover-shadow);
 }
 
-/* --- News Media Container --- */
+/* --- News Media Container (Fixed Aspect Ratio) --- */
 .news-media-container {
   position: relative;
   width: 100%;
-  padding-top: 66%; /* Twongereye uburebure (Aspect Ratio) */
-  background-color: #f3f4f6; /* Agace kasigaye kaza ari imvi yoroheje */
+  padding-top: 60%; /* Ratio nziza kuri Desktop/Tablet/Mobile */
+  background-color: #f3f4f6; /* Ibara rishobora kuza inyuma y'ifoto niba ifoto ari nto */
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .news-card-image {
@@ -53,12 +57,15 @@
   width: 100%;
   height: 100%;
   
-  /* Iki nicyo gikemura ikibazo kuri Mobile */
-  /* object-fit: contain !important;  */
-  /* object-position: center !important; /* Bituma ifoto iguma hagati */ */
+  /* IYI NIYO FIX Y'IFOTO: */
+  object-fit: contain !important; /* Birinda ko ifoto yanduranywa cyangwa icikamo igice */
+  object-position: center;
+  background-color: #f3f4f6; /* Bituma aho ifoto itageze haza ari imvi yoroheje aho kuza umukara */
+  transition: transform 0.5s ease;
 }
+
 .news-card-link:hover .news-card-image {
-  transform: scale(1.05); /* Slight zoom effect */
+  transform: scale(1.03);
 }
 
 /* INFO SECTION */
@@ -67,43 +74,39 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  background: white;
 }
 
 .news-info h5 {
   font-family: var(--font-sans);
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.4;
   color: var(--text-title);
   margin-bottom: 12px;
-  /* Limit title to 3 lines for clean grid */
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2; /* Limit to 2 lines for uniformity */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.news-meta {
+.news-meta-bottom {
   margin-top: auto;
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
   color: var(--text-meta);
-  line-height: 1.5;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-
-.news-meta strong {
-  color: var(--accent-red);
-  font-weight: 600;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
 }
 
 /* --- RESPONSIVE DESIGN --- */
 
-/* Tablet & Smaller Desktops */
+/* Tablet View */
 @media (max-width: 1024px) {
-  .news-info h5 {
-    font-size: 1.05rem;
+  .news-media-container {
+    padding-top: 65%; /* Ifoto iba nini gato kuri Tablet */
   }
 }
 
@@ -111,47 +114,18 @@
 @media (max-width: 600px) {
   .news-card {
     border-radius: 8px;
-    margin-bottom: 15px;
   }
- 
+  
+  .news-media-container {
+    padding-top: 56.25%; /* Ratio ya 16:9 kuri Mobile */
+  }
+
   .news-info {
     padding: 12px;
   }
   
   .news-info h5 {
     font-size: 1rem;
-    margin-bottom: 8px;
+    -webkit-line-clamp: 3; /* Amagambo amwe ashobora kuba menshi kuri mobile */
   }
-  .news-media-container {
-  position: relative;
-  width: 100%;
-  padding-top: 66%; /* Twongereye uburebure (Aspect Ratio) */
-  background-color: #f3f4f6; /* Agace kasigaye kaza ari imvi yoroheje */
-  overflow: hidden;
 }
-
-.news-card-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  /* Iki nicyo gikemura ikibazo kuri Mobile */
-  /* object-fit: contain !important;  */
-  /* object-position: center !important; /* Bituma ifoto iguma hagati */ */
-}
-.news-card-link:hover .news-card-image {
-  transform: scale(1.05); /* Slight zoom effect */
-}
-}
-
-/* Style for special Extra Classes (e.g., Featured Card) */
-.news-card.featured {
-  border: 2px solid var(--accent-red);
-}
-
-
-
-
-
