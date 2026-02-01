@@ -39,17 +39,16 @@
    1. CONTAINER & GRID (Zayaguye)
    ============================================= */
 .tv-section-container {
-    padding: 20px 10px;
     max-width: 1300px; /* Twongereye ubugari bwa page yose */
-    margin: 0 auto;
+
 }
 
 .tv-section-grid {
     display: grid;
-    gap: 30px; /* Twongereye umwanya hagati y'inkuru */
+    gap: 20px; /* Twongereye umwanya hagati y'inkuru */
     
     /* DESKTOP: Twazigize 3 kugira ngo zibe nini (Size nini) */
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(4, 1fr); 
 }
 
 /* =============================================
@@ -61,7 +60,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     transition: all 0.3s ease;
-    border: 1px solid #f0f0f0;
+    border: 2px solid #f0f0f0;
 }
 
 .tv-card:hover {
@@ -134,4 +133,5 @@
         padding: 10px;
     }
 }
+
 
