@@ -5,42 +5,39 @@ import "../styles/LatestNews.css";
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Gufata inkuru 8 gusa nk'uko ubishaka
-  const latest8 = news?.slice(0, 8) || [];
+  // Inkuru zose hano ziba zamaze gukosorerwa URL muri Landing.jsx
+  const latest8 = news || [];
   
-  // Kugabanya inkuru mu bice 3
-  const leftNews = latest8.slice(0, 2);   // Inkuru 1-2
-  const centerNews = latest8.slice(2, 6); // Inkuru 3-6 (Slider)
-  const rightNews = latest8.slice(6, 8);  // Inkuru 7-8
+  const leftNews = latest8.slice(0, 2);   
+  const centerNews = latest8.slice(2, 6); 
+  const rightNews = latest8.slice(6, 8);  
 
-  // Logic ya Animation Slider (Hagati)
   useEffect(() => {
     if (centerNews.length > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % centerNews.length);
-      }, 4000); // Ihinduranya buri masegonda 4
+      }, 4000); 
       return () => clearInterval(timer);
     }
   }, [centerNews.length]);
 
-  if (!news || news.length === 0) return <div className="news-loading">Pakingira amakuru...</div>;
+  if (!news || news.length === 0) return <div className="news-loading">Loading news...</div>;
 
   return (
     <div className="latest-news-section-wrapper">
-      <h2 className="section-title">INKURU ZAGEZWEHO (Latest News)</h2>
-      
       <div className="latest-news-grid">
         
-        {/* LEFT COLUMN: 2 News Items */}
+        {/* LEFT COLUMN */}
         <div className="news-side-column left-side">
           {leftNews.map((post) => (
             <div key={post._id} className="side-item-wrapper">
+              {/* Menya neza ko NewsCard isoma post.mediaUrl yuzuye */}
               <NewsCard post={post} />
             </div>
           ))}
         </div>
 
-        {/* MIDDLE COLUMN: 4 News Slider Animation */}
+        {/* MIDDLE COLUMN: Slider */}
         <div className="news-center-slider">
           <div className="slider-container">
             {centerNews.map((post, index) => (
@@ -52,7 +49,6 @@ const LatestNews = ({ news }) => {
               </div>
             ))}
           </div>
-          {/* Slider Dots */}
           <div className="slider-indicators">
             {centerNews.map((_, i) => (
               <span key={i} className={`indicator ${i === currentSlide ? "active" : ""}`} />
@@ -60,7 +56,7 @@ const LatestNews = ({ news }) => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: 2 News Items */}
+        {/* RIGHT COLUMN */}
         <div className="news-side-column right-side">
           {rightNews.map((post) => (
             <div key={post._id} className="side-item-wrapper">
