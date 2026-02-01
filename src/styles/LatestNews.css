@@ -1,4 +1,4 @@
-/* --- Desktop Grid Setup --- */
+/* --- DESKTOP GRID --- */
 .latest-news-grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -7,33 +7,21 @@
   margin: 0 auto;
 }
 
-.news-side-column {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* --- Slider Core Logic --- */
+/* SLIDER FIX */
 .slider-main-area {
   position: relative;
-  height: 550px;
+  height: 520px;
   background: #000;
   border-radius: 12px;
   overflow: hidden;
 }
 
-.slider-track-box {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
 .slide-unit {
-  position: absolute;
+  position: absolute !important;
   top: 0; left: 0; width: 100%; height: 100%;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
 }
 
 .slide-unit.active {
@@ -42,13 +30,7 @@
   z-index: 10;
 }
 
-/* Forces the featured slide to look professional */
-.is-slider-featured { height: 100% !important; }
-.is-slider-featured .news-media-container { height: 100% !important; padding-top: 0 !important; }
-
-/* =============================================
-   MOBILE VIEW (BBC STYLE: SLIDER TOP)
-   ============================================= */
+/* --- MOBILE & BBC STYLE (The Fix) --- */
 @media (max-width: 768px) {
   .latest-news-grid {
     display: flex !important;
@@ -56,32 +38,34 @@
   }
 
   .slider-main-area {
-    order: -1; /* Slider moves to top */
+    order: -1; /* Slider hejuru */
     height: 350px !important;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
   }
 
-  /* BBC Style Row: Forces Image Left, Text Right */
+  /* Ihatira NewsCard kuba BBC style (Ifoto Ibumoso) */
   .bbc-style.news-card-link {
-    height: 115px !important;
+    height: 110px !important;
     margin-bottom: 10px;
   }
 
+  /* Force Horizontal Layout */
   .bbc-style .news-card {
-    flex-direction: row !important;
+    flex-direction: row !important; /* Row! */
+    height: 110px !important;
     gap: 12px !important;
     border: none !important;
     border-bottom: 1px solid #eee !important;
-    border-radius: 0 !important;
     background: transparent !important;
+    border-radius: 0 !important;
   }
 
+  /* Force Image Size */
   .bbc-style .news-media-container {
-    width: 130px !important;
-    height: 95px !important;
-    padding: 0 !important; /* Removes padding for row mode */
+    width: 120px !important; /* Fixed width */
+    height: 90px !important;
+    padding-top: 0 !important; /* Kuraho ya 56.25% */
     flex-shrink: 0;
-    border-radius: 8px;
   }
 
   .bbc-style .news-info {
@@ -90,15 +74,12 @@
   }
 
   .bbc-style h5 {
-    font-size: 0.95rem !important;
+    font-size: 0.9rem !important;
+    line-height: 1.2;
     -webkit-line-clamp: 2 !important;
   }
 }
 
-/* Dots Navigation */
-.slider-dots-nav {
-  position: absolute; bottom: 20px; left: 50%;
-  transform: translateX(-50%); display: flex; gap: 8px; z-index: 20;
-}
-.dot-nav { width: 8px; height: 8px; background: rgba(255,255,255,0.4); border-radius: 50%; }
+/* Dots */
+.dot-nav { width: 8px; height: 8px; background: rgba(255,255,255,0.4); border-radius: 50%; display: inline-block; margin: 0 4px; }
 .dot-nav.active { background: #fff; width: 22px; border-radius: 10px; }
