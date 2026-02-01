@@ -80,8 +80,8 @@ body {
 .section-title .line {
     height: 2px;
     flex-grow: 1; /* Bituma umurongo wuzura umwanya usigaye wose */
-    background: linear-gradient(to right, #e2e8f0, transparent);
-    border-radius: 2px;
+    background: linear-gradient(to right, #0a1930, transparent);
+    border-radius: 5px;
 }
 
 /* --- Iyo kuri Mobile --- */
