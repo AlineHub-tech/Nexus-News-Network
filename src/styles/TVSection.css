@@ -1,38 +1,29 @@
-  /* =============================================
-   1. SECTION HEADER (TV & Videos)
-   ============================================= */
-.section-header {
+.section-title {
     display: flex;
     align-items: center;
-    gap: 15px;
-    font-family: 'Inter', sans-serif;
+    gap: 12px;
+    margin: 0 20px 25px;
 }
 
-.section-header .badge {
-    background: #FF0000; /* Red color kuko ari TV/Video style */
-    color: #ffffff;
-    padding: 6px 14px;
+.section-title .badge {
+    background: #00008b;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 0.75rem;
     font-weight: 800;
-    font-size: 0.8rem;
     border-radius: 4px;
-    text-transform: uppercase;
-    box-shadow: 0 4px 6px rgba(255, 0, 0, 0.2);
 }
 
-.section-header .title {
-    font-size: 1.5rem;
+.section-title .title {
+    font-size: 1.4rem;
     font-weight: 900;
-    color: #111827;
-    margin: 0;
-    text-transform: uppercase;
     white-space: nowrap;
 }
 
-.section-header .line {
+.section-title .line {
     height: 2px;
     flex-grow: 1;
     background: linear-gradient(to right, #e2e8f0, transparent);
-    border-radius: 5px;
 }
 
 /* =============================================
@@ -133,5 +124,6 @@
         padding: 10px;
     }
 }
+
 
 
