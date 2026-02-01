@@ -37,19 +37,44 @@
   box-shadow: var(--hover-shadow);
 }
 
+/* --- News Media Container --- */
 .news-media-container {
+  position: relative;
   width: 100%;
-  /* Siba padding-top ya kera (nka 56.25%) ushyireho ibi: */
-  height: auto !important; 
-  padding-top: 0 !important; 
+  padding-top: 66%; /* Twongereye uburebure (Aspect Ratio) */
+  background-color: #f3f4f6; /* Agace kasigaye kaza ari imvi yoroheje */
   overflow: hidden;
 }
 
 .news-card-image {
-  position: static !important; /* Kuraho absolute positioning */
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto; /* Bituma ifoto yizamura ikurikije ingano yayo */
-  display: block;
+  height: 100%;
+  
+  /* Iki nicyo gikemura ikibazo kuri Mobile */
+  object-fit: contain !important; 
+  object-position: center !important; /* Bituma ifoto iguma hagati */
+}
+
+/* --- Mobile Specific Fix --- */
+@media (max-width: 600px) {
+  .news-media-container {
+     /* Kuraho guhatira uburebure buhamye niba ifoto yanze kugaragara yose */
+     padding-top: 0 !important; 
+     height: 200px !important; /* Hamo uburebure buhagije kuri mobile */
+     display: flex;
+     align-items: center;
+     justify-content: center;
+  }
+
+  .news-card-image {
+    position: relative !important;
+    max-height: 100%;
+    width: auto !important; /* Bituma ifoto itanyurwa (no stretching) */
+    margin: 0 auto;
+  }
 }
 
 .news-card-link:hover .news-card-image {
@@ -123,6 +148,7 @@
 .news-card.featured {
   border: 2px solid var(--accent-red);
 }
+
 
 
 
