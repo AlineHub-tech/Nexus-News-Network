@@ -21,44 +21,54 @@ const LatestNews = ({ news }) => {
 
   if (latest8.length === 0) return null;
 
+  // Inline styles to force absolute positioning and visibility
+  const slideStyle = (index) => ({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    opacity: index === currentSlide ? 1 : 0,
+    visibility: index === currentSlide ? 'visible' : 'hidden',
+    transition: 'opacity 1s ease-in-out',
+    zIndex: index === currentSlide ? 10 : 1
+  });
+
   return (
     <div className="latest-news-section-wrapper">
       <div className="latest-news-grid">
         
-        {/* DESKTOP LEFT (2) */}
-        <div className="news-side-column side-left">
+        {/* LEFT COLUMN (2 news) */}
+        <div className="news-side-column side-column-left">
           {leftNews.map((post) => (
-            <div key={post._id} className="bbc-row-wrapper">
-              <NewsCard post={post} extraClass="bbc-card-style" />
-            </div>
+            <NewsCard key={post._id} post={post} extraClass="bbc-mobile-row" />
           ))}
         </div>
 
-        {/* CENTER SLIDER (4) */}
+        {/* CENTER SLIDER (4 news sliding) */}
         <div className="news-center-slider">
-          <div className="slider-track-container">
+          <div style={{ position: 'relative', width: '100%', height: '100%' }}>
             {centerNews.map((post, index) => (
-              <div 
-                key={post._id} 
-                className={`slide-item-fixed ${index === currentSlide ? "active" : ""}`}
-              >
-                <NewsCard post={post} extraClass="slider-card-full" />
+              <div key={post._id} style={slideStyle(index)}>
+                <NewsCard post={post} extraClass="slider-full-card" />
               </div>
             ))}
           </div>
-          <div className="slider-dots">
+          <div className="slider-indicators">
             {centerNews.map((_, i) => (
-              <span key={i} className={`dot ${i === currentSlide ? "active" : ""}`} />
+              <span 
+                key={i} 
+                className={`indicator ${i === currentSlide ? "active" : ""}`}
+                onClick={() => setCurrentSlide(i)}
+              />
             ))}
           </div>
         </div>
 
-        {/* DESKTOP RIGHT (2) */}
-        <div className="news-side-column side-right">
+        {/* RIGHT COLUMN (2 news) */}
+        <div className="news-side-column side-column-right">
           {rightNews.map((post) => (
-            <div key={post._id} className="bbc-row-wrapper">
-              <NewsCard post={post} extraClass="bbc-card-style" />
-            </div>
+            <NewsCard key={post._id} post={post} extraClass="bbc-mobile-row" />
           ))}
         </div>
 
