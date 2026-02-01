@@ -1,28 +1,71 @@
-/* src/styles/TVSection.css */
-
-.tv-section-container {
-    /* padding: 40px 5%; */
-     background-color: #0a1930;  /* Background y'umukara bituma video zigaragara neza */
-    border-radius: 12px;
-    margin-top: 20px;
-}
-
+/* --- Floating Badge Design --- */
 .section-title {
-    color: #fff;
-    font-size: 2rem;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    border-left: 5px solid #e50914; /* Akamenyetso gatukura ku ruhande nka TV */
-    padding-left: 15px;
-    font-weight: bold;
+  position: relative;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  display: block;
 }
 
-/* GRID LAYOUT - Iyi niyo igena umubare wa cards */
-.tv-section-grid {
-    display: grid;
-    gap: 20px;
-    /* By'akarusho: Desktop nini (5 videos) */
-    grid-template-columns: repeat(5, 1fr);
+.section-title h2 {
+  position: relative;
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  z-index: 1;
+}
+
+/* Agace k'ibara rishashagirana (Accent Box) inyuma y'inyandiko */
+.section-title h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px; /* Agace gato k'ubururu k'ibumoso */
+  height: 100%;
+  background-color: #00008b;
+  z-index: -1;
+  border-radius: 4px;
+}
+
+/* Umurongo mugari uca munsi ukayunguruka (Shadow line) */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+  background: #f1f5f9; /* Ibara ry'imvi yoroheje */
+  margin-top: -15px; /* Bituma uza hejuru gato ukajya munsi y'inyandiko */
+  border-radius: 10px;
+}
+
+/* Design ya Latest News (Iyo iri mu mwijima) */
+.latest-news-section .section-title h2 {
+    color: #ffffff;
+}
+
+.latest-news-section .section-title h2::before {
+    background-color: #ff4757; /* Aha ushobora gushyira irindi bara nka Red ngo bihinduke */
+}
+
+.latest-news-section .section-title::after {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Mobile View --- */
+@media (max-width: 768px) {
+  .section-title h2 {
+    font-size: 1.2rem;
+    padding: 5px 15px;
+  }
+  
+  .section-title::after {
+    height: 3px;
+    margin-top: -10px;
+  }
 }
 
 /* TV CARD STYLE */
@@ -128,5 +171,6 @@
         font-size: 1.4rem;
     }
 }
+
 
 
