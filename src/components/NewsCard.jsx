@@ -7,7 +7,6 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
 const NewsCard = ({ post, extraClass = '' }) => { 
   if (!post) return <div className="news-card">Loading...</div>;
 
-  // Logic yo kwerekana igihe hashize inkuru isohotse (Time Ago)
   const formatTimeAgo = (dateString) => {
     const now = new Date();
     const past = new Date(dateString);
@@ -18,7 +17,7 @@ const NewsCard = ({ post, extraClass = '' }) => {
 
     if (diffInMins < 60) return `Hashize ${diffInMins} min`;
     if (diffInHours < 24) return `Hashize ${diffInHours} h`;
-    return `${diffInDays} days ago`;
+    return `${diffInDays} d ago`;
   };
 
   const getMediaUrl = (url) => {
@@ -29,15 +28,17 @@ const NewsCard = ({ post, extraClass = '' }) => {
   };
   
   return (
-    <Link to={`/article/${post._id}`} className="news-card-link">
-      <div className={`news-card ${extraClass}`}> 
+    <Link to={`/article/${post._id}`} className={`news-card-link ${extraClass}`}>
+      <div className="news-card"> 
         <div className="news-media-container">
-          {post.mediaUrl && post.mediaType === 'image' && (
-            <img src={getMediaUrl(post.mediaUrl)} alt={post.title} className="news-card-image" />
+          {/* Niba ari video, erekana thumbnail niba ihari, bitari ibyo erekana video yihagarariye */}
+          {post.mediaType === 'video' ? (
+             <video src={getMediaUrl(post.mediaUrl)} className="news-card-image" muted />
+          ) : (
+             <img src={getMediaUrl(post.mediaUrl)} alt={post.title} className="news-card-image" />
           )}
-          {post.mediaUrl && post.mediaType === 'video' && (
-             <div className="video-icon-overlay">▶</div>
-          )}
+          
+          {post.mediaType === 'video' && <div className="video-icon-overlay">▶</div>}
           <span className="card-category-tag">{post.category}</span>
         </div>
         
