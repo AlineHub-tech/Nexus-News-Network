@@ -4,8 +4,8 @@ import "../styles/LatestNews.css";
 
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const latest8 = news?.slice(0, 8) || [];
 
+  const latest8 = news?.slice(0, 8) || [];
   const leftNews = latest8.slice(0, 2);   
   const centerNews = latest8.slice(2, 6); 
   const rightNews = latest8.slice(6, 8);  
@@ -25,19 +25,24 @@ const LatestNews = ({ news }) => {
     <div className="latest-news-section-wrapper">
       <div className="latest-news-grid">
         
-        {/* DESKTOP: IBUMOSO (2 cards) */}
+        {/* DESKTOP LEFT (2) */}
         <div className="news-side-column side-left">
           {leftNews.map((post) => (
-            <NewsCard key={post._id} post={post} extraClass="side-item-card" />
+            <div key={post._id} className="bbc-row-wrapper">
+              <NewsCard post={post} extraClass="bbc-card-style" />
+            </div>
           ))}
         </div>
 
-        {/* HAGATI: SLIDER (4 cards) */}
+        {/* CENTER SLIDER (4) */}
         <div className="news-center-slider">
-          <div className="slider-container">
+          <div className="slider-track-container">
             {centerNews.map((post, index) => (
-              <div key={post._id} className={`slide-item ${index === currentSlide ? "active" : ""}`}>
-                <NewsCard post={post} extraClass="slider-featured-card" />
+              <div 
+                key={post._id} 
+                className={`slide-item-fixed ${index === currentSlide ? "active" : ""}`}
+              >
+                <NewsCard post={post} extraClass="slider-card-full" />
               </div>
             ))}
           </div>
@@ -48,10 +53,12 @@ const LatestNews = ({ news }) => {
           </div>
         </div>
 
-        {/* DESKTOP: IBURYO (2 cards) */}
+        {/* DESKTOP RIGHT (2) */}
         <div className="news-side-column side-right">
           {rightNews.map((post) => (
-            <NewsCard key={post._id} post={post} extraClass="side-item-card" />
+            <div key={post._id} className="bbc-row-wrapper">
+              <NewsCard post={post} extraClass="bbc-card-style" />
+            </div>
           ))}
         </div>
 
