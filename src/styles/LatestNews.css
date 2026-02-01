@@ -1,85 +1,110 @@
-/* --- DESKTOP GRID --- */
-.latest-news-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 20px;
+/* Container Nyamukuru */
+.latest-news-section-wrapper {
   max-width: 1300px;
-  margin: 0 auto;
+  /* margin: 40px auto;
+  padding: 0 20px; */
 }
 
-/* SLIDER FIX */
-.slider-main-area {
+/* GRID SYSTEM */
+.latest-news-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr 1fr; /* Middle is wider */
+  gap: 20px;
+  align-items: start;
+}
+
+/* SIDE COLUMNS (Left & Right) */
+.news-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.side-item-wrapper {
+  height: auto;
+}
+
+/* CENTER SLIDER */
+.news-center-slider {
   position: relative;
-  height: 520px;
+  height: 500px; /* Bunini bwa hagati */
   background: #000;
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.slide-unit {
-  position: absolute !important;
-  top: 0; left: 0; width: 100%; height: 100%;
+.slider-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slide-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.8s ease-in-out;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  transform: scale(1.05); /* Slight zoom out animation */
 }
 
-.slide-unit.active {
+.slide-item.active {
   opacity: 1;
-  visibility: visible;
+  transform: scale(1);
   z-index: 10;
 }
 
-/* --- MOBILE & BBC STYLE (The Fix) --- */
-@media (max-width: 768px) {
+/* SLIDER DOTS */
+.slider-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  transition: 0.3s;
+}
+
+.indicator.active {
+  background: #e63946; /* Blue cyangwa Red ya website */
+  width: 30px;
+  border-radius: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+
+/* TABLET (min-width: 768px and max-width: 1024px) */
+@media (max-width: 1024px) {
   .latest-news-grid {
-    display: flex !important;
-    flex-direction: column !important;
+    grid-template-columns: 1fr 1fr; /* Sidebars go below or aside */
   }
-
-  .slider-main-area {
-    order: -1; /* Slider hejuru */
-    height: 350px !important;
-    margin-bottom: 20px;
-  }
-
-  /* Ihatira NewsCard kuba BBC style (Ifoto Ibumoso) */
-  .bbc-style.news-card-link {
-    height: 110px !important;
-    margin-bottom: 10px;
-  }
-
-  /* Force Horizontal Layout */
-  .bbc-style .news-card {
-    flex-direction: row !important; /* Row! */
-    height: 110px !important;
-    gap: 12px !important;
-    border: none !important;
-    border-bottom: 1px solid #eee !important;
-    background: transparent !important;
-    border-radius: 0 !important;
-  }
-
-  /* Force Image Size */
-  .bbc-style .news-media-container {
-    width: 120px !important; /* Fixed width */
-    height: 90px !important;
-    padding-top: 0 !important; /* Kuraho ya 56.25% */
-    flex-shrink: 0;
-  }
-
-  .bbc-style .news-info {
-    padding: 0 !important;
-    justify-content: center;
-  }
-
-  .bbc-style h5 {
-    font-size: 0.9rem !important;
-    line-height: 1.2;
-    -webkit-line-clamp: 2 !important;
+  .news-center-slider {
+    grid-column: span 2; /* Slider fills top */
+    height: 400px;
   }
 }
 
-/* Dots */
-.dot-nav { width: 8px; height: 8px; background: rgba(255,255,255,0.4); border-radius: 50%; display: inline-block; margin: 0 4px; }
-.dot-nav.active { background: #fff; width: 22px; border-radius: 10px; }
+/* MOBILE (max-width: 767px) */
+@media (max-width: 767px) {
+  .latest-news-grid {
+    grid-template-columns: 1fr; /* Everything in one column */
+  }
+  .news-center-slider {
+    grid-column: span 1;
+    height: 350px;
+  }
+  .news-side-column {
+    order: 2; /* Sidebar comes after slider on mobile */
+  }
+}
