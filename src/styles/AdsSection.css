@@ -185,7 +185,7 @@
     content: "";
     flex-grow: 1; /* Bituma umurongo wuzura umwanya usigaye */
     height: 2px;
-    background: linear-gradient(to right, #e2e8f0, transparent);
+ background: linear-gradient(to right, #0a1930, transparent);
     margin-top: 0; /* Kuva kuri flex-align center ntibigikenewe margin-top ya kera */
 }
 
@@ -222,6 +222,7 @@
         width: 35px;
     }
 }
+
 
 
 
