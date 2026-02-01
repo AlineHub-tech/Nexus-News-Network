@@ -44,4 +44,61 @@ body {
         grid-template-columns: 1fr !important; /* Inkuru imwe gusa */
     }
 }
+/* --- Modern Section Title (In Ads Section) --- */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0 30px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Aka gace gato k'ubururu (Badge) */
+.section-title .badge {
+    background: #00008b; /* Ibara rya Blue ya Popular News */
+    color: white;
+    padding: 4px 10px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Inyandiko (Title) */
+.section-title .title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0;
+    text-transform: uppercase;
+    white-space: nowrap; /* Birinda ko ijambo rijya munsi */
+}
+
+/* Umurongo mugari uca inyuma (Divider Line) */
+.section-title .line {
+    height: 2px;
+    flex-grow: 1; /* Bituma umurongo wuzura umwanya usigaye wose */
+    background: linear-gradient(to right, #e2e8f0, transparent);
+    border-radius: 2px;
+}
+
+/* --- Iyo kuri Mobile --- */
+@media (max-width: 768px) {
+    .section-title {
+        margin: 30px 0 20px;
+        gap: 8px;
+    }
+
+    .section-title .title {
+        font-size: 1.1rem;
+    }
+
+    .section-title .badge {
+        font-size: 0.65rem;
+        padding: 3px 8px;
+    }
+}
+
 
