@@ -1,37 +1,48 @@
 import React, { useContext } from "react";
 import NewsCard from "./NewsCard";
 import "../styles/RegularNews.css";
-import { NewsContext } from '../context/NewsContext'; // Import Context yo kubona pagination
+import { NewsContext } from '../context/NewsContext';
 
 const RegularNews = ({ newsList }) => { 
-  // Dukuye amakuru ya pagination muri Context
   const { paginate, currentPage, totalArticles, articlesPerPage } = useContext(NewsContext);
 
   if (!newsList || newsList.length === 0) {
-    return <p className="regular-news">Nta nkuru zisanzwe zibonetse ubu.</p>;
+    return (
+      <div className="regular-news-section-container">
+        <div className="section-title">
+          <span className="badge">NEW</span>
+          <h2 className="title">IZINDI NKURU</h2>
+          <div className="line"></div>
+        </div>
+        <p className="no-news">Nta nkuru zisanzwe zibonetse ubu.</p>
+      </div>
+    );
   }
 
-  // Kumenya umubare wa pages zose (total pages)
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
   
   const handleNext = () => {
     if (currentPage < totalPages) {
         paginate(currentPage + 1);
-        window.scrollTo(0, 0); // Gusikurira hejuru page ihindutse
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handlePrev = () => {
     if (currentPage > 1) {
         paginate(currentPage - 1);
-        window.scrollTo(0, 0); // Gusikurira hejuru page ihindutse
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   return (
     <div className="regular-news-section-container">
-      {/* Hano niho wongeye umutwe na style ya section-title */}
-      <h2 className="section-title">IZINDI NKURU</h2> 
+      {/* SECTION TITLE IVUGURUYE */}
+      <div className="section-title">
+        <span className="badge">LATEST</span>
+        <h2 className="title">IZINDI NKURU</h2>
+        <div className="line"></div>
+      </div>
 
       <div className="regular-news-grid">
         {newsList.map((post) => (
@@ -39,15 +50,23 @@ const RegularNews = ({ newsList }) => {
         ))}
       </div>
 
-      {/* SECTION YA PAGINATION BUTTONS */}
+      {/* PAGINATION BUTTONS */}
       {totalPages > 1 && (
         <div className="pagination-controls">
-          <button onClick={handlePrev} disabled={currentPage === 1}>
-            Prev
+          <button 
+            className="pagi-btn" 
+            onClick={handlePrev} 
+            disabled={currentPage === 1}
+          >
+            ← Prev
           </button>
-          <span> Page {currentPage} of {totalPages} </span>
-          <button onClick={handleNext} disabled={currentPage === totalPages}>
-            Next
+          <span className="pagi-info"> Page <strong>{currentPage}</strong> of {totalPages} </span>
+          <button 
+            className="pagi-btn" 
+            onClick={handleNext} 
+            disabled={currentPage === totalPages}
+          >
+            Next →
           </button>
         </div>
       )}
@@ -56,4 +75,3 @@ const RegularNews = ({ newsList }) => {
 };
 
 export default RegularNews;
-
