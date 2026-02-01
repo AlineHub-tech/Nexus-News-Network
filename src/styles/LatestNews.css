@@ -1,110 +1,106 @@
-/* Container Nyamukuru */
-.latest-news-section-wrapper {
-  max-width: 1300px;
-  /* margin: 40px auto;
-  padding: 0 20px; */
-}
-
-/* GRID SYSTEM */
+/* --- DESKTOP GRID (2 - Slider - 2) --- */
 .latest-news-grid {
   display: grid;
-  grid-template-columns: 1fr 1.8fr 1fr; /* Middle is wider */
+  grid-template-columns: 1fr 2fr 1fr; /* Middle is twice as wide as sides */
   gap: 20px;
-  align-items: start;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
-/* SIDE COLUMNS (Left & Right) */
 .news-side-column {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.side-item-wrapper {
-  height: auto;
-}
-
-/* CENTER SLIDER */
+/* SLIDER ANIMATION FIX */
 .news-center-slider {
   position: relative;
-  height: 500px; /* Bunini bwa hagati */
-  background: #000;
+  height: 540px; /* Slider height on Desktop */
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  background: #000;
 }
 
-.slider-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.slide-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.slide-item-fixed {
+  position: absolute !important;
+  top: 0; left: 0; width: 100%; height: 100%;
   opacity: 0;
-  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-  transform: scale(1.05); /* Slight zoom out animation */
+  visibility: hidden;
+  transition: opacity 1s ease-in-out;
 }
 
-.slide-item.active {
+.slide-item-fixed.active {
   opacity: 1;
-  transform: scale(1);
+  visibility: visible;
   z-index: 10;
 }
 
-/* SLIDER DOTS */
+/* Force NewsCard to fill the Slider area */
+.is-slider-main {
+  height: 100% !important;
+}
+
+.is-slider-main .news-media-container {
+  height: 100% !important;
+  padding-top: 0 !important;
+}
+
+/* =============================================
+   MOBILE VIEW (Slider First + BBC Style Rows)
+   ============================================= */
+@media (max-width: 768px) {
+  .latest-news-grid {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Slider comes first on mobile using 'order' */
+  .news-center-slider {
+    order: -1; 
+    height: 350px !important;
+    margin-bottom: 20px;
+    display: block !important;
+  }
+
+  /* BBC STYLE: Row layout for side cards (4 remaining news) */
+  .bbc-mobile-fix .news-card {
+    display: flex !important;
+    flex-direction: row !important; /* Image Left, Info Right */
+    height: 110px !important;
+    gap: 12px !important;
+    border: none !important;
+    border-bottom: 1px solid #eee !important;
+    border-radius: 0 !important;
+    padding: 10px 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .bbc-mobile-fix .news-media-container {
+    width: 120px !important;
+    height: 85px !important;
+    padding-top: 0 !important; /* Removes 16:9 ratio in list mode */
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  .bbc-mobile-fix .news-info {
+    padding: 0 !important;
+    justify-content: center;
+  }
+
+  .bbc-mobile-fix .news-info h5 {
+    font-size: 0.95rem !important;
+    -webkit-line-clamp: 2 !important; /* Only 2 lines on mobile list */
+    line-height: 1.3;
+  }
+}
+
+/* INDICATOR DOTS */
 .slider-indicators {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 20;
+  position: absolute; bottom: 20px; left: 50%;
+  transform: translateX(-50%); display: flex; gap: 8px; z-index: 20;
 }
-
-.indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.4);
-  transition: 0.3s;
-}
-
-.indicator.active {
-  background: #e63946; /* Blue cyangwa Red ya website */
-  width: 30px;
-  border-radius: 10px;
-}
-
-/* RESPONSIVE DESIGN */
-
-/* TABLET (min-width: 768px and max-width: 1024px) */
-@media (max-width: 1024px) {
-  .latest-news-grid {
-    grid-template-columns: 1fr 1fr; /* Sidebars go below or aside */
-  }
-  .news-center-slider {
-    grid-column: span 2; /* Slider fills top */
-    height: 400px;
-  }
-}
-
-/* MOBILE (max-width: 767px) */
-@media (max-width: 767px) {
-  .latest-news-grid {
-    grid-template-columns: 1fr; /* Everything in one column */
-  }
-  .news-center-slider {
-    grid-column: span 1;
-    height: 350px;
-  }
-  .news-side-column {
-    order: 2; /* Sidebar comes after slider on mobile */
-  }
-}
+.indicator { width: 8px; height: 8px; background: rgba(255,255,255,0.4); border-radius: 50%; }
+.indicator.active { background: #fff; width: 25px; border-radius: 10px; }
