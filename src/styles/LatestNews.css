@@ -1,17 +1,10 @@
-/* LatestNews.css */
-
-/* --- Desktop Layout (2-Slider-2) --- */
-.latest-news-section-wrapper {
-  max-width: 1300px;
-  margin: 40px auto;
-  padding: 0 15px;
-}
-
+/* --- Desktop 2-4-2 Grid --- */
 .latest-news-grid {
   display: grid;
   grid-template-columns: 1fr 1.8fr 1fr;
   gap: 20px;
-  align-items: stretch;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 .news-side-column {
@@ -20,52 +13,29 @@
   gap: 20px;
 }
 
-/* --- CENTER SLIDER (Fixing Overlap) --- */
+/* Slider Container Height */
 .news-center-slider {
-  position: relative;
   height: 550px;
+  background: #000;
   border-radius: 12px;
   overflow: hidden;
-  background: #000;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.slider-container {
-  width: 100%;
-  height: 100%;
   position: relative;
 }
 
-/* Force slides to stack on top of each other */
-.slide-item {
-  position: absolute !important;
-  top: 0; left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.8s ease-in-out;
-}
-
-.slide-item.active {
-  opacity: 1;
-  visibility: visible;
-  z-index: 10;
-}
-
-/* Featured Slider Card - Force full height & clear image */
-.featured-slider-card {
+/* Force Slider Card to fill entire space */
+.slider-full-card {
   height: 100% !important;
   width: 100% !important;
+  border: none !important;
 }
 
-.featured-slider-card .news-media-container {
+.slider-full-card .news-media-container {
   height: 100% !important;
   padding-top: 0 !important;
 }
 
 /* =============================================
-   MOBILE VIEW (Slider First + BBC Style Row)
+   MOBILE VIEW (BBC STYLE: SLIDER TOP)
    ============================================= */
 @media (max-width: 768px) {
   .latest-news-grid {
@@ -73,19 +43,18 @@
     flex-direction: column !important;
   }
 
-  /* Slider stays on TOP */
+  /* Slider comes first */
   .news-center-slider {
     order: -1; 
     height: 350px !important;
-    margin-bottom: 25px;
-    display: block !important;
+    margin-bottom: 20px;
   }
 
-  /* BBC STYLE: Row Layout for side column news */
-  .bbc-row-card {
+  /* BBC STYLE for side news (Image Left, Info Right) */
+  .bbc-mobile-row {
     display: flex !important;
-    flex-direction: row !important; /* Image Left, Info Right */
-    height: 115px !important;
+    flex-direction: row !important; /* Image Left, Text Right */
+    height: 110px !important;
     gap: 12px !important;
     border: none !important;
     border-bottom: 1px solid #eee !important;
@@ -95,27 +64,26 @@
     box-shadow: none !important;
   }
 
-  .bbc-row-card .news-media-container {
-    width: 130px !important;
-    height: 90px !important;
-    padding-top: 0 !important;
+  .bbc-mobile-row .news-media-container {
+    width: 120px !important;
+    height: 85px !important;
+    padding-top: 0 !important; /* Removes 16:9 ratio to fit in row */
     flex-shrink: 0;
-    border-radius: 8px;
   }
 
-  .bbc-row-card .news-info {
+  .bbc-mobile-row .news-info {
     padding: 0 !important;
     justify-content: center;
   }
 
-  .bbc-row-card .news-info h5 {
+  .bbc-mobile-row .news-info h5 {
     font-size: 0.95rem !important;
     -webkit-line-clamp: 2 !important;
     line-height: 1.3;
   }
 }
 
-/* DOTS / INDICATORS */
+/* Slider Dots */
 .slider-indicators {
   position: absolute;
   bottom: 20px;
@@ -123,16 +91,15 @@
   transform: translateX(-50%);
   display: flex;
   gap: 8px;
-  z-index: 30;
+  z-index: 20;
 }
 
 .indicator {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255,255,255,0.4);
   cursor: pointer;
-  transition: 0.3s;
 }
 
 .indicator.active {
