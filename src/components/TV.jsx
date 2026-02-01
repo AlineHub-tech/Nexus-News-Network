@@ -20,12 +20,11 @@ const TV = ({ videos }) => {
   return (
     <div className="page-wrapper">
       <div className="tv-section-container">
-            <div className="section-header">
-                <span className="badge">TV</span>
-                <h2 className="title">AMASHUSHO</h2>
-                <div className="line"></div>
-        </div>
-
+        <div className="section-title">
+        <span className="badge">TV</span>
+        <h2 className="title">AMASHUSHO</h2>
+        <div className="line"></div>
+      </div>
         {(!videos || videos.length === 0) ? (
           <div className="no-videos">Nta mashusho ya TV aboneka ubu.</div>
         ) : (
@@ -59,6 +58,7 @@ const TV = ({ videos }) => {
 };
 
 export default TV;
+
 
 
 
