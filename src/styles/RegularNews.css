@@ -120,4 +120,65 @@
   color: #555;
   font-size: 1rem;
 }
+/* --- Modern & Professional Section Title --- */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Umwanya hagati y'inyandiko n'umurongo */
+  margin-top: 60px;
+  margin-bottom: 40px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.section-title h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+  padding-left: 15px;
+  border-left: 5px solid #00008b; /* Akamenyetso k'ubururu k'ibumoso */
+  line-height: 1;
+  white-space: nowrap; /* Bituma izina ridatandukana */
+}
+
+/* Umurongo mugari utandukanya sections */
+.section-title::after {
+  content: "";
+  height: 2px;
+  flex-grow: 1; /* Bituma umurongo wuzura umwanya usigaye wose */
+  background: linear-gradient(to right, #e2e8f0, transparent); /* Umurongo ugenda ukama */
+}
+
+/* --- Iyo iri mu gice cya Latest News (Blue Background) --- */
+.latest-news-section .section-title h2 {
+  color: #ffffff;
+  border-left-color: #ffffff; /* Akamenyetso kaba umweru */
+}
+
+.latest-news-section .section-title::after {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.3), transparent);
+}
+
+/* --- Responsive: Kuri Mobile --- */
+@media (max-width: 768px) {
+  .section-title {
+    margin-top: 40px;
+    margin-bottom: 25px;
+    gap: 10px;
+  }
+
+  .section-title h2 {
+    font-size: 1.3rem;
+    padding-left: 10px;
+    border-left-width: 4px;
+  }
+  
+  /* Kuri mobile umurongo tuwugabanya gato kugira ngo bidatonda */
+  .section-title::after {
+    height: 1px;
+  }
+}
+
 
