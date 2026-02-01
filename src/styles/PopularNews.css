@@ -1,74 +1,126 @@
-/* --- 1. Section Header Design --- */
+/* =============================================
+   1. SECTION HEADER (Floating Badge Design)
+   ============================================= */
 .section-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 40px 20px 20px;
+    gap: 15px;
+    margin: 40px 20px 25px;
+    font-family: 'Inter', sans-serif;
 }
 
 .section-header .badge {
-    background: #00008b;
-    color: white;
-    padding: 5px 12px;
-    font-weight: 900;
+    background: #00008b; /* Ibara rya Blue y'umwimerere */
+    color: #ffffff;
+    padding: 6px 14px;
+    font-weight: 800;
     font-size: 0.8rem;
     border-radius: 4px;
     text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 139, 0.2);
 }
 
 .section-header .title {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #1a1a1a;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #111827;
     margin: 0;
+    text-transform: uppercase;
     white-space: nowrap;
 }
 
 .section-header .line {
     height: 2px;
-    background: #eee;
-    flex-grow: 1;
+    flex-grow: 1; /* Umurongo wuzura page yose */
+    background: linear-gradient(to right, #e2e8f0, transparent);
+    border-radius: 2px;
 }
 
-/* --- 2. Ticker Logic (The Fix) --- */
+/* =============================================
+   2. TICKER SYSTEM (Kukuraho Duplicate Overlap)
+   ============================================= */
+.popular-news-container {
+    width: 100%;
+    overflow: hidden; /* Birinda scrollbar y'uburyo na bumoso */
+    background-color: #f9fafb;
+    padding: 20px 0 40px;
+}
+
 .ticker-viewport {
     width: 100%;
-    overflow: hidden; /* Bihisha ibisigaye */
-    background: #fdfdfd;
-    padding: 20px 0;
+    overflow: hidden; /* Iki nicyo gihisha inkuru ziri hanze ya screen */
+    position: relative;
+    padding: 10px 0;
 }
 
 .ticker-track {
-    display: flex !important; /* Force guhagarara ku murongo umwe */
-    width: max-content !important; 
-    animation: scrollTicker 45s linear infinite;
+    display: flex !important; /* Force guhagarara mu murongo umwe */
+    width: max-content !important; /* Ingenzi: Bituma track iba ndende cyane (nka 6000px) */
+    animation: scrollTicker 50s linear infinite; /* Speed ituje */
+    will-change: transform;
 }
 
+/* Bihagarara iyo umusomyi ashyizeho imbeba (Mouse hover) */
 .ticker-track:hover {
     animation-play-state: paused;
 }
 
-/* Ibi nibyo bikemura iby'inkuru zanduranya */
+/* Ibi nibyo bikemura ikibazo cy'inkuru zanduranya (Overlap Fix) */
 .ticker-card-wrapper {
-    width: 300px !important; /* Force ubugari bwa buri card */
-    margin-right: 20px !important;
-    flex-shrink: 0 !important; /* Irinda ko card yigabanya ubugari */
+    width: 320px !important; /* Ubugari buhoraho bwa buri NewsCard */
+    padding: 0 12px; /* Intera hagati y'inkuru n'indi */
+    flex-shrink: 0 !important; /* Birinda card kwigabanya ubugari (The fix) */
 }
 
-/* Kurinda ko NewsCard imbere yigira nabi */
+/* Styling ya NewsCard imbere muri Ticker */
 .ticker-card-wrapper > * {
-    width: 100% !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 8px;
+    background: #fff;
 }
 
+.ticker-card-wrapper:hover > * {
+    transform: translateY(-5px); /* Uture bimeze nka animation */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Animation Move Logic */
 @keyframes scrollTicker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Ifata -50% kugira ngo isubire inyuma neza aho clone yatangiriye */
+        transform: translateX(-50%);
+    }
 }
 
-/* --- 3. Mobile --- */
+/* =============================================
+   3. RESPONSIVE DESIGN (Mobile)
+   ============================================= */
 @media (max-width: 768px) {
-    .section-header .title { font-size: 1.1rem; }
-    .ticker-card-wrapper { width: 250px !important; }
+    .section-header {
+        margin: 30px 15px 15px;
+        gap: 8px;
+    }
+
+    .section-header .title {
+        font-size: 1.1rem;
+    }
+
+    .section-header .badge {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+    }
+
+    .ticker-card-wrapper {
+        width: 270px !important; /* Card ziba ntoya kuri mobile */
+        padding: 0 8px;
+    }
+
+    .ticker-track {
+        animation-duration: 35s; /* Zigendeho gato kuko screen ni nto */
+    }
 }
