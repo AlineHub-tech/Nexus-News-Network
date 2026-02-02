@@ -1,5 +1,4 @@
 
-
 :root {
   --card-bg: #ffffff;
   --text-title: #111827;
@@ -128,6 +127,7 @@
 .news-card.featured {
   border: 2px solid var(--accent-red);
 }
+
 
 
 
