@@ -3,40 +3,33 @@
   background-color: #fcfcfc;
   overflow: hidden; /* Ingenzi kugira ngo ticker itarenga screen */
 }
-
-.section-header {
-  max-width: 1400px;
-  margin: 0 auto 30px;
-  padding: 0 20px;
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 20px 25px;
 }
 
-.trending-badge {
-  background: #e63946;
-  color: white;
-  padding: 5px 12px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+.section-title .badge {
+    background: #00008b;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 4px;
 }
 
-.section-main-title {
-  margin-top: 10px;
-  font-size: 1.8rem;
-  color: #1a1a1a;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+.section-title .title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    white-space: nowrap;
 }
 
-.title-separator {
-  height: 4px;
-  width: 60px;
-  background: #e63946;
-  margin-top: 10px;
+.section-title .line {
+    height: 2px;
+    flex-grow: 1;
+    background: linear-gradient(to right, #e2e8f0, transparent);
 }
-
 /* TICKER SYSTEM */
 .ticker-container {
   width: 100%;
@@ -89,3 +82,4 @@
     animation-duration: 35s; /* Kuri mobile itemba vuba ho gato kuko screen ari nto */
   }
 }
+
