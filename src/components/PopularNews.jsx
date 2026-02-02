@@ -12,14 +12,10 @@ const PopularNews = ({ newsList }) => {
 
   return (
     <section className="popular-news-section">
-      <div className="section-header">
-        <div className="header-content">
-          <span className="trending-badge">
-            <i className="fas fa-fire"></i> TRENDING
-          </span>
-          <h2 className="section-main-title">INKURU ZAREBWE CYANE</h2>
-        </div>
-        <div className="title-separator"></div>
+        <div className="section-title">
+        <span className="badge">TV</span>
+        <h2 className="title">AMASHUSHO</h2>
+        <div className="line"></div>
       </div>
 
       <div className="ticker-container">
@@ -43,3 +39,4 @@ const PopularNews = ({ newsList }) => {
 };
 
 export default PopularNews;
+
