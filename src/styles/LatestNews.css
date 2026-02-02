@@ -1,86 +1,53 @@
 /* --- GRID SYSTEM --- */
 .latest-news-section-wrapper {
-  max-width: 1450px;
+  max-width: 1400px;
   margin: 20px auto;
   padding: 0 15px;
 }
 
 .latest-news-grid {
   display: grid;
+  /* 1fr 3.5fr 1fr ituma hagati haba hanini, impande zikaba ziringaniye */
   grid-template-columns: 1.2fr 3.5fr 1.2fr; 
-  gap: 20px;
-  align-items: stretch; 
+  gap: 15px; /* Twagabanyije gap kugira ngo space itaba nini cyane */
+  align-items: stretch;
 }
 
-/* SIDE COLUMNS: Twakuyeho space nini */
+/* SIDE COLUMNS (Left & Right) */
 .news-side-column {
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Iyi niyo space iri hagati y'inkuru yo hejuru n'iyo hasi */
-  height: 520px; /* Bigomba kungana na height ya Slider neza */
+  display: grid;
+  grid-template-rows: 1fr 1fr; /* Ibi bituma card 2 zingana neza 50/50 */
+  gap: 15px;
+  height: 100%; /* Ibi bituma zingana na height ya Slider */
 }
 
+/* SLIDER (HAGATI) */
+.news-center-slider {
+  position: relative;
+  height: 480px; /* Adjusta iyi height bitewe n'uko wifuza ko card zo ku mpande zingana */
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* CARD Z'IMPANDE */
 .side-item-wrapper {
-  flex: 1; /* Ibi bituma buri card ifata 50% neza nta space isagutse */
+  width: 100%;
   height: 100%;
 }
 
 .side-item-wrapper .news-card {
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  border: 1px solid #f0f0f0;
-  border-radius: 12px;
-  background: #fff;
-  overflow: hidden;
+  height: 100% !important; /* Force card kuzura 50% ya height ya column */
+  display: flex;
+  flex-direction: column;
 }
 
-/* SLIDER (HAGATI): Fixed focus and jumpiness */
-.news-center-slider {
-  position: relative;
-  height: 520px; 
-  background: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  /* Kuraho ibintu biza iyo ukanze kuri slide */
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Kuraho imyitwarire mibi kuri Link n'iza Slider */
-.news-card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  height: 100%;
-  outline: none; /* Kuraho ya blue border iyo ukanzeho */
-}
-
-/* FEATURED CARD (Muri Slider) */
-.featured-card {
-  height: 100% !important;
-  position: relative;
-}
-
-.featured-card .news-media-container {
-  position: absolute !important;
-  inset: 0;
-  height: 100% !important;
-  padding-top: 0 !important;
-  z-index: 1;
-}
-
-.featured-card .news-card-image {
-  height: 100% !important;
-  width: 100% !important;
-  object-fit: cover !important;
-}
-
-/* Amafoto ya Side Cards */
+/* KOSORA IFOTO MURI SIDE CARDS */
 .side-item-wrapper .news-media-container {
-  height: 160px !important; /* Ifoto igaragara neza */
-  position: relative;
   padding-top: 0 !important;
+  flex: 1; /* Ifoto ifata umwanya munini */
+  height: 160px; /* Uburebure bw'ifoto muri side cards */
+  position: relative;
 }
 
 .side-item-wrapper .news-card-image {
@@ -90,35 +57,61 @@
   object-fit: cover;
 }
 
-/* Details Overlay kuri Slider */
-.featured-card .news-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%);
-  padding: 60px 25px 25px;
-  color: white;
-  z-index: 2;
-  pointer-events: none; /* Bituma gukanda bitica animation */
+.side-item-wrapper .news-info {
+  padding: 12px !important;
+  background: white;
 }
 
-.featured-card .news-title {
-  color: white !important;
-  font-size: 2rem !important;
+.side-item-wrapper .news-title {
+  font-size: 1rem !important;
+  line-height: 1.3;
+  margin-bottom: 5px;
 }
 
-/* --- MOBILE --- */
-@media (max-width: 992px) {
+/* SLIDER CONTENT (FEATURED) */
+.featured-card {
+  height: 100% !important;
+}
+
+.featured-card .news-media-container {
+  position: absolute !important;
+  inset: 0;
+  height: 100% !important;
+  padding-top: 0 !important;
+}
+
+.featured-card .news-card-image {
+  height: 100% !important;
+  object-fit: cover;
+}
+
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 1024px) {
   .latest-news-grid {
+    grid-template-columns: 1fr; /* Kuri Mobile byose biba umurongo umwe */
     display: flex;
     flex-direction: column;
   }
-  .news-side-column {
-    height: auto;
-  }
+
   .news-center-slider {
+    order: 1;
     height: 300px;
-    margin-bottom: 15px;
+  }
+
+  .news-side-column {
+    order: 2;
+    display: flex; /* Kuri mobile zibe list */
+    flex-direction: column;
+  }
+
+  .side-item-wrapper .news-card {
+    flex-direction: row !important; /* Ifoto ibumoso */
+    height: 100px !important;
+  }
+
+  .side-item-wrapper .news-media-container {
+    width: 120px !important;
+    height: 100% !important;
+    flex: none;
   }
 }
