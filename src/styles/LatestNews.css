@@ -1,8 +1,9 @@
 /* --- GRID SYSTEM --- */
 .latest-news-section-wrapper {
   max-width: 1450px;
-  margin: 20px auto;
-  padding: 0 15px;
+  /* margin: 20px auto;
+  padding: 0 15px; */
+  
 }
 
 .latest-news-grid {
@@ -149,4 +150,5 @@
     height: 100% !important;
   }
 }
+
 
