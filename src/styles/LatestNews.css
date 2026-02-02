@@ -22,7 +22,7 @@
 /* --- SLIDER (MIDDLE) --- */
 .news-center-slider {
   position: relative;
-  min-height: 550px;
+  min-height: 450px;
   border-radius: 16px;
   overflow: hidden;
   background: #000;
@@ -156,3 +156,4 @@
   width: 30px;
   border-radius: 10px;
 }
+
