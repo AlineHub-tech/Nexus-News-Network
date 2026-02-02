@@ -1,22 +1,15 @@
-:root {
-  --accent-red: #e63946;
-  --text-title: #111827;
-  --text-meta: #6b7280;
-  --border-subtle: #f3f4f6;
-}
-
-/* CONTAINER NINI */
+/* --- LAYOUT MASTER --- */
 .latest-news-section-wrapper {
   max-width: 1400px;
-  margin: 30px auto;
-  padding: 0 15px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-/* GRID KURI DESKTOP (1fr - 3fr - 1fr) */
+/* Desktop: Hagati ni 3x iz'impande */
 .latest-news-grid {
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr; /* Hagati ni hanini cyane (Slider) */
-  gap: 20px;
+  grid-template-columns: 1fr 3fr 1fr; 
+  gap: 25px;
   align-items: stretch;
 }
 
@@ -26,13 +19,13 @@
   gap: 20px;
 }
 
-/* SLIDER STYLES */
+/* --- SLIDER (MIDDLE) --- */
 .news-center-slider {
   position: relative;
-  min-height: 500px; /* Uburebure bwa Slider kuri Desktop */
-  border-radius: 15px;
+  min-height: 550px;
+  border-radius: 16px;
   overflow: hidden;
-  background: #000; /* Backup niba ifoto itaraza */
+  background: #000;
 }
 
 .slider-container {
@@ -46,7 +39,7 @@
   inset: 0;
   display: none;
   opacity: 0;
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 
 .slide-item.active {
@@ -54,125 +47,112 @@
   opacity: 1;
 }
 
-/* FEATURED CARD (Muri Slider) */
+/* Featured Card (Slider content) */
 .featured-card {
   height: 100% !important;
-  width: 100%;
+  width: 100% !important;
   border: none !important;
 }
 
 .featured-card .news-media-container {
-  padding-top: 0 !important; /* Kuraho ratio isanzwe */
+  padding-top: 0 !important;
   height: 100% !important;
-  position: relative;
 }
 
 .featured-card .news-card-image {
-  position: absolute;
   height: 100% !important;
-  width: 100% !important;
-  object-fit: cover !important; /* Ifoto yuzure neza */
-  display: block !important;
+  object-fit: cover !important;
 }
 
-/* DETAILS ZIHEREREYE KURI IFOTO (Slider) */
+/* Details Overlay kuri Slider */
 .featured-card .news-info {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(transparent, rgba(0,0,0,0.85));
-  padding: 50px 25px 25px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  padding: 60px 30px 30px;
   color: white;
-  z-index: 2;
+  z-index: 5;
 }
 
 .featured-card .news-info h5 {
   color: white !important;
-  font-size: 2rem !important;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  font-size: 2.2rem !important;
+  line-height: 1.2;
 }
 
-/* INDICATORS */
-.slider-indicators {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 5;
-}
-
-.indicator {
-  width: 10px;
-  height: 10px;
-  background: rgba(255,255,255,0.4);
-  border-radius: 50%;
-}
-
-.indicator.active {
-  background: var(--accent-red);
-  width: 30px;
-  border-radius: 10px;
-}
-
-/* --- MOBILE DESIGN (768px no munsi) --- */
-@media (max-width: 768px) {
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 992px) {
   .latest-news-grid {
     display: flex;
     flex-direction: column;
   }
 
-  /* SLIDER IBA IYA MBERE KANDI IFOTO IKAGARAGARA */
+  /* Slider iba iya mbere kuri Mobile */
   .news-center-slider {
     order: 1;
-    min-height: 300px; /* Uburebure kuri Mobile */
-    margin-bottom: 20px;
+    min-height: 350px;
+    margin-bottom: 10px;
   }
 
   .featured-card .news-info h5 {
-    font-size: 1.3rem !important;
+    font-size: 1.4rem !important;
   }
 
-  /* INKURU ZINDI 4 ZIBA LIST (PHOTO LEFT | TEXT RIGHT) */
-  .news-side-column {
-    order: 2;
-  }
+  /* Inkuru 4 z'impande ziba List (Ifoto ibumoso) */
+  .left-side { order: 2; }
+  .right-side { order: 3; }
 
   .side-item-wrapper .news-card {
     display: flex !important;
-    flex-direction: row !important; /* Ifoto hirya, Amakuru hirya */
+    flex-direction: row !important;
     height: 120px !important;
-    background: white;
-    margin-bottom: 15px;
-    border: 1px solid var(--border-subtle);
+    border: none;
+    border-bottom: 1px solid #eee;
+    border-radius: 0;
+    align-items: center;
+    padding: 10px 0;
   }
 
   .side-item-wrapper .news-media-container {
-    width: 130px !important;
-    height: 100% !important;
+    width: 140px !important;
+    height: 100px !important;
     padding-top: 0 !important;
     flex-shrink: 0;
-  }
-
-  .side-item-wrapper .news-card-image {
-    position: relative !important;
-    height: 100% !important;
-    object-fit: cover !important;
+    border-radius: 12px;
   }
 
   .side-item-wrapper .news-info {
-    padding: 10px !important;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    padding: 0 15px !important;
     justify-content: center;
   }
 
   .side-item-wrapper .news-info h5 {
-    font-size: 0.95rem !important;
-    line-height: 1.2;
+    font-size: 1rem !important;
     -webkit-line-clamp: 2;
   }
+}
+
+/* Indicators dots */
+.slider-indicators {
+  position: absolute;
+  bottom: 25px;
+  right: 30px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+}
+
+.indicator.active {
+  background: #e63946;
+  width: 30px;
+  border-radius: 10px;
 }
