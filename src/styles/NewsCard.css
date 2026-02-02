@@ -97,7 +97,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.4;
-  color: var(--text-title);
+  color: black;
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -118,7 +118,7 @@
 
 .author-name {
   font-weight: 600;
-  color: #374151;
+  color:  #0a1930;
 }
 
 .post-time {
@@ -209,3 +209,4 @@
     padding: 2px 6px;
   }
 }
+
