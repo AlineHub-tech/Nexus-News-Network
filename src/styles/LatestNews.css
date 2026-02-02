@@ -23,7 +23,7 @@
 /* --- SLIDER (HAGATI) --- */
 .news-center-slider {
   position: relative;
-  min-height: 550px; /* Uburebure kuri Desktop */
+  min-height: 450px; /* Uburebure kuri Desktop */
   background: #1a1a1a;
   border-radius: 16px;
   overflow: hidden;
@@ -103,3 +103,4 @@
     flex-shrink: 0;
   }
 }
+
