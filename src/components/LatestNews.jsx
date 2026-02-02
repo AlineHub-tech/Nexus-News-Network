@@ -69,3 +69,4 @@ const LatestNews = ({ news }) => {
 };
 
 export default LatestNews;
+
