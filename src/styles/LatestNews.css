@@ -3,7 +3,7 @@
   max-width: 1450px;
   /* margin: 20px auto;
   padding: 0 15px; */
-  margin-bottom:-5%;
+  margin-top:0%;
 }
 
 .latest-news-grid {
@@ -150,6 +150,7 @@
     height: 100% !important;
   }
 }
+
 
 
 
