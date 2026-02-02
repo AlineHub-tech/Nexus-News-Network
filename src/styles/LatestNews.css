@@ -1,43 +1,40 @@
-/* Container Nyamukuru */
+/* Container nini */
 .latest-news-section-wrapper {
-  max-width: 1300px;
-  /* margin: 40px auto;
-  padding: 0 20px; */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* GRID SYSTEM */
+/* Grid system kuri Desktop */
 .latest-news-grid {
   display: grid;
-  grid-template-columns: 1fr 1.8fr 1fr; /* Middle is wider */
+  grid-template-columns: 1fr 2fr 1fr; /* Ibumoso, Hagati (Slider), Iburyo */
   gap: 20px;
   align-items: start;
 }
 
-/* SIDE COLUMNS (Left & Right) */
+/* Side Columns (Ibumoso n'Iburyo) */
 .news-side-column {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.side-item-wrapper {
-  height: auto;
-}
-
-/* CENTER SLIDER */
+/* Slider Hagati */
 .news-center-slider {
   position: relative;
-  height: 500px; /* Bunini bwa hagati */
-  background: #000;
-  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  height: 100%;
+  min-height: 400px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .slider-container {
-  width: 100%;
-  height: 100%;
   position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .slide-item {
@@ -47,64 +44,101 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-  transform: scale(1.05); /* Slight zoom out animation */
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease;
+  transform: scale(1.05);
+  display: none;
 }
 
 .slide-item.active {
+  display: block;
   opacity: 1;
   transform: scale(1);
-  z-index: 10;
 }
 
-/* SLIDER DOTS */
+/* Kwita kuri NewsCard (Ino miterere ishingiye kuri card yawe) */
+.side-item-wrapper, .slide-item {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.side-item-wrapper:hover {
+  transform: translateY(-5px);
+}
+
+/* Indicators (Udupoint twa slider) */
 .slider-indicators {
   position: absolute;
-  bottom: 20px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
-  z-index: 20;
+  gap: 8px;
+  z-index: 10;
 }
 
 .indicator {
   width: 10px;
   height: 10px;
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  background: rgba(255,255,255,0.4);
   transition: 0.3s;
 }
 
 .indicator.active {
-  background: #e63946; /* Blue cyangwa Red ya website */
-  width: 30px;
+  background: #ff0000; /* Cyangwa ibara riranga brand yawe */
+  width: 25px;
   border-radius: 10px;
 }
 
-/* RESPONSIVE DESIGN */
-
-/* TABLET (min-width: 768px and max-width: 1024px) */
-@media (max-width: 1024px) {
+/* --- RESPONSIVE KURI MOBILE --- */
+@media (max-width: 768px) {
   .latest-news-grid {
-    grid-template-columns: 1fr 1fr; /* Sidebars go below or aside */
+    display: flex;
+    flex-direction: column; /* Slider ijya hejuru */
   }
+
   .news-center-slider {
-    grid-column: span 2; /* Slider fills top */
-    height: 400px;
+    order: 1; /* Slider iba iya mbere */
+    min-height: 300px;
+    margin-bottom: 20px;
+  }
+
+  .left-side {
+    order: 2; /* Inkuru 2 z'ibumoso zikurikira slider */
+  }
+
+  .right-side {
+    order: 3; /* Inkuru 2 z'iburyo ziba izanyuma */
+  }
+
+  /* Imiterere y'inkuru (Ifoto ibumoso, Details iburyo) kuri Mobile */
+  /* Ibi birasaba ko muri NewsCard yawe harimo class nk'izi */
+  .side-item-wrapper .news-card { 
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .side-item-wrapper .news-card img {
+    width: 120px !important;
+    height: 90px !important;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  .side-item-wrapper .news-card-details {
+    flex: 1;
   }
 }
 
-/* MOBILE (max-width: 767px) */
-@media (max-width: 767px) {
-  .latest-news-grid {
-    grid-template-columns: 1fr; /* Everything in one column */
-  }
-  .news-center-slider {
-    grid-column: span 1;
-    height: 350px;
-  }
-  .news-side-column {
-    order: 2; /* Sidebar comes after slider on mobile */
-  }
+.news-loading {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+  color: #666;
 }
