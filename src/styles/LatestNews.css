@@ -1,159 +1,105 @@
-/* --- LAYOUT MASTER --- */
+/* --- GRID SYSTEM --- */
 .latest-news-section-wrapper {
   max-width: 1400px;
-  margin: 40px auto;
-  padding: 0 20px;
+  margin: 30px auto;
+  padding: 0 15px;
 }
 
-/* Desktop: Hagati ni 3x iz'impande */
 .latest-news-grid {
   display: grid;
+  /* 1fr 3fr 1fr ituma impande zingana neza, hagati ikaba nini */
   grid-template-columns: 1fr 3fr 1fr; 
   gap: 25px;
-  align-items: stretch;
+  align-items: stretch; /* Ituma zose ziba ndende kimwe */
 }
 
 .news-side-column {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex: 1; /* Ibi bituma left na right column zingana neza */
 }
 
-/* --- SLIDER (MIDDLE) --- */
+/* --- SLIDER (HAGATI) --- */
 .news-center-slider {
   position: relative;
-  min-height: 450px;
+  min-height: 550px; /* Uburebure kuri Desktop */
+  background: #1a1a1a;
   border-radius: 16px;
   overflow: hidden;
-  background: #000;
 }
 
-.slider-container {
+.slider-container, .slide-item {
   height: 100%;
   width: 100%;
-  position: relative;
 }
 
 .slide-item {
   position: absolute;
   inset: 0;
   display: none;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
 }
 
 .slide-item.active {
-  display: block;
-  opacity: 1;
+  display: block; /* Icyatuma ifoto igaragara */
 }
 
-/* Featured Card (Slider content) */
+/* KUGIRA NGO IFOTO YUZURE MURI SLIDE */
 .featured-card {
   height: 100% !important;
-  width: 100% !important;
-  border: none !important;
+  display: flex !important;
+  flex-direction: column;
 }
 
 .featured-card .news-media-container {
-  padding-top: 0 !important;
+  position: absolute !important; /* Ituma ifoto yuzura slide yose */
+  inset: 0;
+  padding-top: 0 !important; /* Kuraho ratio ya 16:9 isanzwe */
   height: 100% !important;
+  width: 100% !important;
 }
 
 .featured-card .news-card-image {
+  width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;
+  object-fit: cover !important; /* Ifoto ntirambuke nabi */
+  display: block !important;
 }
 
-/* Details Overlay kuri Slider */
 .featured-card .news-info {
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
+  z-index: 10;
   background: linear-gradient(transparent, rgba(0,0,0,0.9));
-  padding: 60px 30px 30px;
-  color: white;
-  z-index: 5;
+  width: 100%;
+  padding: 40px 20px;
 }
 
-.featured-card .news-info h5 {
-  color: white !important;
-  font-size: 2.2rem !important;
-  line-height: 1.2;
-}
-
-/* --- RESPONSIVE MOBILE --- */
+/* --- MOBILE RESPONSIVE --- */
 @media (max-width: 992px) {
   .latest-news-grid {
     display: flex;
     flex-direction: column;
   }
 
-  /* Slider iba iya mbere kuri Mobile */
   .news-center-slider {
     order: 1;
-    min-height: 350px;
-    margin-bottom: 10px;
+    min-height: 350px; /* Uburebure kuri mobile */
   }
-
-  .featured-card .news-info h5 {
-    font-size: 1.4rem !important;
-  }
-
-  /* Inkuru 4 z'impande ziba List (Ifoto ibumoso) */
-  .left-side { order: 2; }
-  .right-side { order: 3; }
 
   .side-item-wrapper .news-card {
     display: flex !important;
-    flex-direction: row !important;
-    height: 120px !important;
-    border: none;
-    border-bottom: 1px solid #eee;
-    border-radius: 0;
-    align-items: center;
-    padding: 10px 0;
+    flex-direction: row !important; /* Ifoto ibumoso */
+    height: 110px !important;
+    gap: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
   }
 
   .side-item-wrapper .news-media-container {
-    width: 140px !important;
-    height: 100px !important;
+    width: 120px !important;
+    height: 100% !important;
     padding-top: 0 !important;
     flex-shrink: 0;
-    border-radius: 12px;
-  }
-
-  .side-item-wrapper .news-info {
-    padding: 0 15px !important;
-    justify-content: center;
-  }
-
-  .side-item-wrapper .news-info h5 {
-    font-size: 1rem !important;
-    -webkit-line-clamp: 2;
   }
 }
-
-/* Indicators dots */
-.slider-indicators {
-  position: absolute;
-  bottom: 25px;
-  right: 30px;
-  display: flex;
-  gap: 8px;
-  z-index: 10;
-}
-
-.indicator {
-  width: 10px;
-  height: 10px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 50%;
-}
-
-.indicator.active {
-  background: #e63946;
-  width: 30px;
-  border-radius: 10px;
-}
-
