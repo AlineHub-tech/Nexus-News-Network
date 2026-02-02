@@ -21,14 +21,27 @@
   height: 100%;
 }
 
-/* SLIDER (HAGATI) */
 .news-center-slider {
   position: relative;
-  height: 520px; /* Uburebure buzwi kuri desktop */
+  height: 520px; 
   background: #000;
   border-radius: 12px;
   overflow: hidden;
+  /* Kuraho ibintu biza iyo ukanze kuri slide */
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
+
+/* Kuraho imyitwarire mibi kuri Link n'iza Slider */
+.news-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  outline: none; /* Kuraho ya blue border iyo ukanzeho */
+}
+
+
 
 /* --- KOSORA SIDE CARDS (LEFT & RIGHT) --- */
 .side-item-wrapper {
@@ -136,3 +149,4 @@
     height: 100% !important;
   }
 }
+
