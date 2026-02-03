@@ -1,8 +1,20 @@
+/* =============================================
+   1. CONTAINER & GRID
+   ============================================= */
+.tv-section-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 40px 20px;
+    /* Twahinduye background hano kugira ngo cards z'umweru zigaragare */
+    background-color: #f8fafc; 
+    border-radius: 20px;
+}
+
 .section-title {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 0 20px 25px;
+    margin-bottom: 30px;
 }
 
 .section-title .badge {
@@ -15,9 +27,10 @@
 }
 
 .section-title .title {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 900;
     white-space: nowrap;
+    color: #111;
 }
 
 .section-title .line {
@@ -26,44 +39,36 @@
     background: linear-gradient(to right, #e2e8f0, transparent);
 }
 
-/* =============================================
-   1. CONTAINER & GRID (Zayaguye)
-   ============================================= */
-.tv-section-container {
-    max-width: 1300px; /* Twongereye ubugari bwa page yose */
-
-}
-
 .tv-section-grid {
     display: grid;
-    gap: 20px; /* Twongereye umwanya hagati y'inkuru */
-    
-    /* DESKTOP: Twazigize 3 kugira ngo zibe nini (Size nini) */
+    gap: 25px;
     grid-template-columns: repeat(4, 1fr); 
 }
 
 /* =============================================
-   2. TV CARD (Imiterere nshya)
+   2. TV CARD (Shadow yongerewe)
    ============================================= */
 .tv-card {
-    background: #fff;
-    border-radius: 12px; /* Corner zoroshye kurushaho */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border-radius: 15px;
+    /* SHADOW: Ituma card itandukana na background neza */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 
+                0 8px 10px -6px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    transition: all 0.3s ease;
-    border: 2px solid #f0f0f0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Border yoroheje cyane */
 }
 
 .tv-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2);
 }
 
 .video-player-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
-    background-color: #1a1a1a;
+    padding-top: 56.25%; 
+    background-color: #000;
 }
 
 .tv-video-element {
@@ -75,55 +80,49 @@
     object-fit: cover;
 }
 
-/* Inyandiko munsi ya Video */
 .tv-card-info {
-    padding: 20px; /* Twongereye padding */
+    padding: 18px;
 }
 
 .tv-card-info h4 {
-    font-size: 1.2rem; /* Inyandiko nini isomeka neza */
+    font-size: 1.1rem;
     font-weight: 800;
-    color: #111;
-    margin: 0 0 10px 0;
+    color: #000; /* Title iba Black nk'izindi */
+    margin: 0 0 12px 0;
     line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .video-author {
-    font-size: 0.85rem;
-    color: #666;
-    font-weight: 600;
+    font-size: 0.8rem;
+    color: #00008b; /* Izina ry'umwanditsi rimeze nka darkblue */
+    font-weight: 700;
     text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 5px;
 }
 
-/* =============================================
-   3. RESPONSIVE DESIGN (Amakarita Manini)
-   ============================================= */
 
-/* TABLET (Kuri Tablet zibe 2 kuri buri murongo) */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
+    .tv-section-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
     .tv-section-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* MOBILE (Kuri Telefone ibe 1 ariko ifite ubugari bwa screen) */
 @media (max-width: 600px) {
     .tv-section-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .tv-card-info h4 {
-        font-size: 1rem;
     }
     
     .tv-section-container {
-        padding: 10px;
+        padding: 20px 10px;
+        background-color: transparent; /* Kuri mobile umweru usanzwe urahagije */
     }
 }
-
-
-
