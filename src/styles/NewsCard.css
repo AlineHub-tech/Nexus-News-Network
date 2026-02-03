@@ -1,9 +1,9 @@
 :root {
   --card-bg: #ffffff;
   --text-title: #000000;      /* Black */
-  --author-blue: #00008B;    /* Darkblue */
-  --date-time-red: #8B0000;   /* Darkred */
-  --accent-red: #e63946;
+  --author-blue: #010142;    /* Darkblue */
+  --date-time-red: #660000;   /* Darkred */
+  --accent-red: #490006;
   --border-subtle: #f3f4f6;
   --hover-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
   --font-sans: 'Inter', -apple-system, sans-serif;
@@ -19,7 +19,7 @@
 
 .news-card {
   background: var(--card-bg);
-  border-radius: 12px;
+  border-radius: 5px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -113,7 +113,7 @@
 }
 
 .author-name {
-  font-weight: 600;
+  font-weight: 800;
   color: var(--author-blue) !important; /* Darkblue */
 }
 
@@ -220,3 +220,4 @@
     padding: 2px 6px;
   }
 }
+
