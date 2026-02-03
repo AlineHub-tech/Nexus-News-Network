@@ -1,8 +1,6 @@
 /* Container Layout */
 .regular-news-section-container {
   max-width: 1200px;
-  /* margin: 40px auto; */
-  padding: 0 20px;
 }
 
 /* --- GRID SYSTEM --- */
@@ -32,11 +30,8 @@
   }
 }
 
-/* --- NEWS CARD STYLES (Uburyo NewsCard isa) --- */
-/* Icyitonderwa: Ibi styles bizakora niba NewsCard ifite class ya 'news-card' */
 .news-card {
   background: #fff;
-  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -137,3 +132,4 @@
     flex-grow: 1;
     background: linear-gradient(to right, #e2e8f0, transparent);
 }
+
