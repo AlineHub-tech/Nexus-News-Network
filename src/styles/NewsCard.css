@@ -1,9 +1,9 @@
 :root {
   --card-bg: #ffffff;
-  --text-title: #000000; /* Title isa Black */
-  --text-meta: #e63946;  /* Date na Time bisa Red (idapika cyane) */
+  --text-title: #000000;      /* Title y'inkuru (Black) */
+  --author-blue: #00008B;    /* Izina ry'uwanditse (Darkblue) */
+  --date-time-red: #8B0000;   /* Date na Time (Darkred) */
   --accent-red: #e63946;
-  --author-blue: #0a1930; /* Izina ry'uwanditse risa Darkblue */
   --border-subtle: #f3f4f6;
   --hover-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
   --font-sans: 'Inter', -apple-system, sans-serif;
@@ -73,7 +73,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* --- INFO SECTION --- */
+/* --- INFO SECTION (Ahabonekamo amabara wishimiye) --- */
 .news-info {
   padding: 16px;
   display: flex;
@@ -87,7 +87,7 @@
 
 .post-full-date {
   font-size: 0.75rem;
-  color: var(--text-meta); /* Date isa Red */
+  color: var(--date-time-red); /* Date iba Darkred */
   display: flex;
   align-items: center;
   gap: 5px;
@@ -98,7 +98,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.4;
-  color: var(--text-title); /* Title isa Black */
+  color: var(--text-title); /* Title iba Black */
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -112,29 +112,23 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.78rem;
-  color: var(--text-meta); /* Time isa Red */
   border-top: 1px solid var(--border-subtle);
   padding-top: 10px;
 }
 
 .author-name {
   font-weight: 600;
-  color: var(--author-blue); /* Izina ry'uwanditse risa Darkblue */
+  color: var(--author-blue); /* Izina ry'uwanditse darkblue */
 }
 
 .post-time {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: var(--text-meta); /* Time isa Red */
+  color: var(--date-time-red); /* Time iba Darkred */
 }
 
-/* --- FEATURED CARD (Muri Slider) --- */
-.featured-card .news-media-container {
-  padding-top: 0 !important;
-  height: 100%;
-}
-
+/* --- FEATURED CARD (Muri Slider - Ibi biba umweru kuri background y'umwijima) --- */
 .featured-card .news-info {
   position: absolute;
   bottom: 0;
@@ -150,7 +144,7 @@
 .featured-card .news-meta-bottom,
 .featured-card .author-name,
 .featured-card .post-time {
-  color: white !important; /* Kuri Slide ho bigume ari umweru kuko background ari umwijima */
+  color: white !important; 
   border: none;
 }
 
@@ -189,15 +183,13 @@
     line-height: 1.2;
   }
 
-  .side-item-wrapper .news-date-row {
-    display: block !important;
-    margin-bottom: 4px;
+  .side-item-wrapper .post-full-date {
+    color: var(--date-time-red) !important;
+    font-size: 0.65rem !important;
   }
 
-  .side-item-wrapper .post-full-date,
   .side-item-wrapper .news-meta-bottom {
     font-size: 0.65rem !important;
-    color: var(--text-meta) !important;
     display: flex !important;
     border-top: none;
     padding-top: 0;
@@ -208,6 +200,10 @@
 
   .side-item-wrapper .author-name {
     color: var(--author-blue) !important;
+  }
+  
+  .side-item-wrapper .post-time {
+    color: var(--date-time-red) !important;
   }
 
   .side-item-wrapper .card-category-tag {
