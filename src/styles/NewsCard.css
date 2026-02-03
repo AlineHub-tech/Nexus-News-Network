@@ -1,8 +1,9 @@
 :root {
   --card-bg: #ffffff;
-  --text-title:#000000;
-  --text-meta: #6b7280;
+  --text-title: #000000; /* Title isa Black */
+  --text-meta: #e63946;  /* Date na Time bisa Red (idapika cyane) */
   --accent-red: #e63946;
+  --author-blue: #0a1930; /* Izina ry'uwanditse risa Darkblue */
   --border-subtle: #f3f4f6;
   --hover-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
   --font-sans: 'Inter', -apple-system, sans-serif;
@@ -41,7 +42,7 @@
 .news-media-container {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  padding-top: 56.25%; 
   background-color: #f9fafb;
   overflow: hidden;
 }
@@ -56,7 +57,7 @@
   transition: transform 0.5s ease;
 }
 
-/* --- CATEGORY TAG (Kugaragara hejuru y'ifoto) --- */
+/* --- CATEGORY TAG --- */
 .card-category-tag {
   position: absolute;
   top: 12px;
@@ -86,7 +87,7 @@
 
 .post-full-date {
   font-size: 0.75rem;
-  color: var(--text-meta);
+  color: var(--text-meta); /* Date isa Red */
   display: flex;
   align-items: center;
   gap: 5px;
@@ -97,7 +98,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.4;
-  color:var(--text-title);
+  color: var(--text-title); /* Title isa Black */
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -111,20 +112,21 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.78rem;
-  color: var(--text-meta);
+  color: var(--text-meta); /* Time isa Red */
   border-top: 1px solid var(--border-subtle);
   padding-top: 10px;
 }
 
 .author-name {
   font-weight: 600;
-  color:#0a1930;
+  color: var(--author-blue); /* Izina ry'uwanditse risa Darkblue */
 }
 
 .post-time {
   display: flex;
   align-items: center;
   gap: 4px;
+  color: var(--text-meta); /* Time isa Red */
 }
 
 /* --- FEATURED CARD (Muri Slider) --- */
@@ -145,14 +147,15 @@
 
 .featured-card .news-title,
 .featured-card .post-full-date,
-.featured-card .news-meta-bottom {
-  color: white !important;
+.featured-card .news-meta-bottom,
+.featured-card .author-name,
+.featured-card .post-time {
+  color: white !important; /* Kuri Slide ho bigume ari umweru kuko background ari umwijima */
   border: none;
 }
 
-/* --- MOBILE RESPONSIVE (LIST STYLE) --- */
+/* --- MOBILE RESPONSIVE --- */
 @media (max-width: 850px) {
-  /* Ibi bikora kuri cards ziri muri Side Columns kuri mobile */
   .side-item-wrapper .news-card {
     flex-direction: row !important;
     height: auto !important;
@@ -180,12 +183,12 @@
 
   .side-item-wrapper .news-title {
     font-size: 0.95rem !important;
+    color: var(--text-title);
     -webkit-line-clamp: 2;
     margin-bottom: 5px;
     line-height: 1.2;
   }
 
-  /* Kugarura Author, Date, Time kuri Mobile */
   .side-item-wrapper .news-date-row {
     display: block !important;
     margin-bottom: 4px;
@@ -194,12 +197,17 @@
   .side-item-wrapper .post-full-date,
   .side-item-wrapper .news-meta-bottom {
     font-size: 0.65rem !important;
+    color: var(--text-meta) !important;
     display: flex !important;
     border-top: none;
     padding-top: 0;
     margin-top: 0;
     gap: 8px;
     justify-content: flex-start;
+  }
+
+  .side-item-wrapper .author-name {
+    color: var(--author-blue) !important;
   }
 
   .side-item-wrapper .card-category-tag {
@@ -209,5 +217,3 @@
     padding: 2px 6px;
   }
 }
-
-
