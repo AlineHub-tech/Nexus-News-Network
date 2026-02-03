@@ -1,6 +1,6 @@
 :root {
   --card-bg: #ffffff;
-  --text-title: #111827;
+  --text-title:#000000;
   --text-meta: #6b7280;
   --accent-red: #e63946;
   --border-subtle: #f3f4f6;
@@ -97,7 +97,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.4;
-  color: black;
+  color:var(--text-title);
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -118,7 +118,7 @@
 
 .author-name {
   font-weight: 600;
-  color:  #0a1930;
+  color:#0a1930;
 }
 
 .post-time {
@@ -209,4 +209,5 @@
     padding: 2px 6px;
   }
 }
+
 
