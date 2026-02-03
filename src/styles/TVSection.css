@@ -1,10 +1,5 @@
-/* =============================================
-   1. CONTAINER (Nta Background na muke)
-   ============================================= */
 .tv-section-container {
     max-width: 1400px;
-    margin: 40px auto;
-    padding: 20px;
     /* Twakuyeho background burundu */
     background: none !important; 
     background-color: transparent !important;
@@ -28,7 +23,7 @@
     gap: 30px; /* Space nini hagati ya cards */
     
     /* DESKTOP: Twazigize 3 gusa kugira ngo buri yose ibe nini (Size nini) */
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(5, 1fr); 
 }
 
 /* =============================================
@@ -36,7 +31,6 @@
    ============================================= */
 .tv-card {
     background: #ffffff !important;
-    border-radius: 16px; /* Inguni zizengurutse neza */
     /* Shadow ikomeye ituma card isimbuka (Pop out) */
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
     overflow: hidden;
@@ -98,7 +92,7 @@
 /* TABLET */
 @media (max-width: 1024px) {
     .tv-section-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 20px;
     }
 }
@@ -113,3 +107,4 @@
         font-size: 1.15rem;
     }
 }
+
