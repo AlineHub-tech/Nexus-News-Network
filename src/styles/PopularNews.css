@@ -63,7 +63,6 @@
   width: 320px;
   flex-shrink: 0;
   background: #ffffff;
-  border-radius: 15px;
   /* SHADOW: Ituma card itandukana na background neza */
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 
               0 8px 10px -6px rgba(0, 0, 0, 0.05);
@@ -104,3 +103,4 @@
     animation-duration: 40s;
   }
 }
+
