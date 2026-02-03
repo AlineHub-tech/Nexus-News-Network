@@ -1,76 +1,62 @@
 /* =============================================
-   1. CONTAINER & GRID (Nta Background y'umweru)
+   1. CONTAINER (Nta Background na muke)
    ============================================= */
 .tv-section-container {
     max-width: 1400px;
     margin: 40px auto;
     padding: 20px;
-    /* Twakuyeho background color hano (Transparent) */
-    background: transparent !important; 
+    /* Twakuyeho background burundu */
+    background: none !important; 
+    background-color: transparent !important;
 }
 
 .section-title {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 30px;
-}
-
-.section-title .badge {
-    background: #00008b;
-    color: #fff;
-    padding: 5px 12px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    border-radius: 4px;
+    gap: 15px;
+    margin-bottom: 35px;
 }
 
 .section-title .title {
-    font-size: 1.6rem;
+    font-size: 1.8rem; /* Titre nini kurushaho */
     font-weight: 900;
-    white-space: nowrap;
     color: #000;
-}
-
-.section-title .line {
-    height: 2px;
-    flex-grow: 1;
-    background: linear-gradient(to right, #e2e8f0, transparent);
 }
 
 .tv-section-grid {
     display: grid;
-    gap: 25px;
-    /* DESKTOP: Inkuru 4 ziringaniye */
-    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px; /* Space nini hagati ya cards */
+    
+    /* DESKTOP: Twazigize 3 gusa kugira ngo buri yose ibe nini (Size nini) */
+    grid-template-columns: repeat(3, 1fr); 
 }
 
 /* =============================================
-   2. TV CARD (Umweru ufite Shadow ituma ugaragara)
+   2. TV CARD (Size nini & High Definition Look)
    ============================================= */
 .tv-card {
-    background: #ffffff !important; /* Card yo igomba kuguma ari umweru */
-    border-radius: 12px;
-    /* SHADOW: Iyi niyo ituma card igaragara neza naho yaba iri ku mweru */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+    background: #ffffff !important;
+    border-radius: 16px; /* Inguni zizengurutse neza */
+    /* Shadow ikomeye ituma card isimbuka (Pop out) */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
     overflow: hidden;
-    transition: all 0.3s ease;
-    border: 1px solid #eee; /* Akaziga koroheje cyane ku mpande */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #f0f0f0;
 }
 
 .tv-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    border-color: #00008b; /* Iyo uyikozeho izina rihinduka dark blue gato */
+    transform: translateY(-12px) scale(1.02); /* Irazamuka cyane ikaba nini */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
 }
 
 .video-player-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 ratio */
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
     background-color: #000;
 }
 
+/* Imiterere ya Video */
 .tv-video-element {
     position: absolute;
     top: 0;
@@ -80,16 +66,17 @@
     object-fit: cover;
 }
 
+/* Info Section */
 .tv-card-info {
-    padding: 20px;
+    padding: 25px; /* Padding nini bituma card iba nini */
 }
 
 .tv-card-info h4 {
-    font-size: 1.1rem;
+    font-size: 1.3rem; /* Inyandiko nini isomeka neza cyane */
     font-weight: 800;
-    color: #000; /* Title: Black */
-    margin: 0 0 10px 0;
-    line-height: 1.4;
+    color: #000 !important; /* Black Title */
+    margin: 0 0 12px 0;
+    line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -97,28 +84,32 @@
 }
 
 .video-author {
-    font-size: 0.85rem;
-    color: #00008b; /* Author: Dark Blue */
+    font-size: 0.9rem;
+    color: #00008b !important; /* Dark Blue Author */
     font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* =============================================
-   3. RESPONSIVE DESIGN
+   3. RESPONSIVE DESIGN (Manini hose)
    ============================================= */
 
-@media (max-width: 1100px) {
+/* TABLET */
+@media (max-width: 1024px) {
     .tv-section-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 }
 
-@media (max-width: 600px) {
+/* MOBILE */
+@media (max-width: 650px) {
     .tv-section-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Iba imwe yagutse screen yose */
     }
-    
-    .tv-section-container {
-        padding: 10px;
+
+    .tv-card-info h4 {
+        font-size: 1.15rem;
     }
 }
