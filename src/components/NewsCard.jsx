@@ -69,7 +69,7 @@ const NewsCard = ({ post, extraClass = "" }) => {
 
           <div className="news-meta-bottom">
             <div className="author-info">
-              <span className="author-prefix">By</span>
+              <span className="author-prefix">Umwanditsi:</span>
               <span className="author-name">{post.author || "Nexus"}</span>
             </div>
             <span className="post-time">
@@ -83,3 +83,4 @@ const NewsCard = ({ post, extraClass = "" }) => {
 };
 
 export default NewsCard;
+
