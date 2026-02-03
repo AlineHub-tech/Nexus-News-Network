@@ -1,85 +1,106 @@
-.popular-news-section {
-  padding: 40px 0;
-  background-color: #fcfcfc;
-  overflow: hidden; /* Ingenzi kugira ngo ticker itarenga screen */
+.popular-news-container {
+  padding: 60px 0;
+  background-color: #f8fafc; /* Background itari umweru pure kugira ngo cards zizeho neza */
+  overflow: hidden;
 }
+
+/* SECTION HEADER */
 .section-title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 20px 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  max-width: 1400px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
 }
 
 .section-title .badge {
-    background: #00008b;
-    color: #fff;
-    padding: 5px 12px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    border-radius: 4px;
+  background: #00008b; /* Dark Blue nk'uko wayishakaga */
+  color: #fff;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border-radius: 4px;
+  letter-spacing: 1px;
 }
 
 .section-title .title {
-    font-size: 1.4rem;
-    font-weight: 900;
-    white-space: nowrap;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #111827;
+  white-space: nowrap;
+  text-transform: uppercase;
 }
 
 .section-title .line {
-    height: 2px;
-    flex-grow: 1;
-    background: linear-gradient(to right, #e2e8f0, transparent);
+  height: 2px;
+  flex-grow: 1;
+  background: linear-gradient(to right, #e2e8f0, transparent);
 }
-/* TICKER SYSTEM */
-.ticker-container {
+
+/* TICKER VIEWPORT */
+.ticker-viewport {
   width: 100%;
-  padding: 20px 0;
+  padding: 20px 0 40px; /* Padding ya ruguru na hano hasi ituma shadow itaba cut */
   position: relative;
-  /* Mask ituma mu mpande amakuru asa n'afifitse (fade effect) */
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .ticker-track {
   display: flex;
-  width: max-content; /* Ituma track iba ndende cyane kurusha screen */
-  gap: 25px; /* Space hagati ya buri card */
-  animation: scrollTicker 50s linear infinite; /* Animation itemba */
+  width: max-content;
+  gap: 30px;
+  animation: scrollTicker 60s linear infinite;
 }
 
-/* Bihagarara iyo ukanzeho cyangwa ushyizeho imbeba */
+/* Bihagarara iyo ushyizeho imbeba */
 .ticker-track:hover {
   animation-play-state: paused;
 }
 
+/* TICKER ITEM (CARD) */
 .ticker-item {
-  width: 320px; /* Ubugari bwa buri card */
+  width: 320px;
   flex-shrink: 0;
+  background: #ffffff;
+  border-radius: 15px;
+  /* SHADOW: Ituma card itandukana na background neza */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 
+              0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ANIMATION LOGIC */
+.ticker-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* ANIMATION */
 @keyframes scrollTicker {
   0% {
     transform: translateX(0);
   }
   100% {
-    /* Twimura track kugeza kuri 50% (aho clones zitangirira) */
-    /* Ibi bituma looping iba seamless nta gusimbuka */
     transform: translateX(-50%);
   }
 }
 
 /* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
-  .section-main-title {
-    font-size: 1.4rem;
+  .popular-news-container {
+    padding: 40px 0;
   }
-  
+
+  .section-title .title {
+    font-size: 1.2rem;
+  }
+
   .ticker-item {
-    width: 280px; /* Card ziba ntoya ho gato kuri mobile */
+    width: 280px;
   }
-  
+
   .ticker-track {
-    animation-duration: 35s; /* Kuri mobile itemba vuba ho gato kuko screen ari nto */
+    gap: 20px;
+    animation-duration: 40s;
   }
 }
-
