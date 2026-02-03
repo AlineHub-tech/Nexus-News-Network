@@ -1,20 +1,16 @@
 /* --- GRID SYSTEM --- */
 .latest-news-section-wrapper {
   max-width: 1450px;
-  /* margin: 20px auto;
-  padding: 0 15px; */
   margin-top:0%;
 }
 
 .latest-news-grid {
   display: grid;
-  /* 1.2fr - 3.5fr - 1.2fr ituma hagati haba hanini, impande zikaringanira */
   grid-template-columns: 1.2fr 3.5fr 1.2fr; 
   gap: 20px;
-  align-items: stretch; /* Ibi bituma zose zingana uburebure */
+  align-items: stretch; 
 }
 
-/* SIDE COLUMNS (Kurenganiza left na right) */
 .news-side-column {
   display: grid;
   grid-template-rows: 1fr 1fr; /* Card 2 zingana 50/50 */
@@ -26,14 +22,11 @@
   position: relative;
   height: 520px; 
   background: #000;
-  border-radius: 12px;
   overflow: hidden;
-  /* Kuraho ibintu biza iyo ukanze kuri slide */
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
-
-/* Kuraho imyitwarire mibi kuri Link n'iza Slider */
+/
 .news-card-link {
   text-decoration: none;
   color: inherit;
@@ -42,9 +35,6 @@
   outline: none; /* Kuraho ya blue border iyo ukanzeho */
 }
 
-
-
-/* --- KOSORA SIDE CARDS (LEFT & RIGHT) --- */
 .side-item-wrapper {
   height: 100%;
   width: 100%;
@@ -56,11 +46,9 @@
   flex-direction: column !important;
   height: 100% !important;
   border: 1px solid #f0f0f0;
-  border-radius: 10px;
   background: #fff;
 }
 
-/* Ibi bituma ifoto igaragara kuri side cards */
 .side-item-wrapper .news-media-container {
   position: relative !important;
   width: 100% !important;
@@ -150,6 +138,7 @@
     height: 100% !important;
   }
 }
+
 
 
 
