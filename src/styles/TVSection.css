@@ -1,13 +1,12 @@
 /* =============================================
-   1. CONTAINER & GRID
+   1. CONTAINER & GRID (Nta Background y'umweru)
    ============================================= */
 .tv-section-container {
     max-width: 1400px;
     margin: 40px auto;
-    padding: 40px 20px;
-    /* Twahinduye background hano kugira ngo cards z'umweru zigaragare */
-    background-color: #f8fafc; 
-    border-radius: 20px;
+    padding: 20px;
+    /* Twakuyeho background color hano (Transparent) */
+    background: transparent !important; 
 }
 
 .section-title {
@@ -30,7 +29,7 @@
     font-size: 1.6rem;
     font-weight: 900;
     white-space: nowrap;
-    color: #111;
+    color: #000;
 }
 
 .section-title .line {
@@ -42,32 +41,33 @@
 .tv-section-grid {
     display: grid;
     gap: 25px;
+    /* DESKTOP: Inkuru 4 ziringaniye */
     grid-template-columns: repeat(4, 1fr); 
 }
 
 /* =============================================
-   2. TV CARD (Shadow yongerewe)
+   2. TV CARD (Umweru ufite Shadow ituma ugaragara)
    ============================================= */
 .tv-card {
-    background: #ffffff;
-    border-radius: 15px;
-    /* SHADOW: Ituma card itandukana na background neza */
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 
-                0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    background: #ffffff !important; /* Card yo igomba kuguma ari umweru */
+    border-radius: 12px;
+    /* SHADOW: Iyi niyo ituma card igaragara neza naho yaba iri ku mweru */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
     overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Border yoroheje cyane */
+    transition: all 0.3s ease;
+    border: 1px solid #eee; /* Akaziga koroheje cyane ku mpande */
 }
 
 .tv-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: #00008b; /* Iyo uyikozeho izina rihinduka dark blue gato */
 }
 
 .video-player-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; 
+    padding-top: 56.25%; /* 16:9 ratio */
     background-color: #000;
 }
 
@@ -81,14 +81,14 @@
 }
 
 .tv-card-info {
-    padding: 18px;
+    padding: 20px;
 }
 
 .tv-card-info h4 {
     font-size: 1.1rem;
     font-weight: 800;
-    color: #000; /* Title iba Black nk'izindi */
-    margin: 0 0 12px 0;
+    color: #000; /* Title: Black */
+    margin: 0 0 10px 0;
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -97,20 +97,17 @@
 }
 
 .video-author {
-    font-size: 0.8rem;
-    color: #00008b; /* Izina ry'umwanditsi rimeze nka darkblue */
+    font-size: 0.85rem;
+    color: #00008b; /* Author: Dark Blue */
     font-weight: 700;
     text-transform: uppercase;
 }
 
+/* =============================================
+   3. RESPONSIVE DESIGN
+   ============================================= */
 
-@media (max-width: 1200px) {
-    .tv-section-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     .tv-section-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -122,7 +119,6 @@
     }
     
     .tv-section-container {
-        padding: 20px 10px;
-        background-color: transparent; /* Kuri mobile umweru usanzwe urahagije */
+        padding: 10px;
     }
 }
