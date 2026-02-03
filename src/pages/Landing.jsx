@@ -1,6 +1,3 @@
-// src/pages/Landing.jsx
-
-// KOSORA HANO: Twongeyemo 'useCallback' mu rutonde rwa React hooks
 import React, { useContext, useState, useEffect, useMemo, useCallback } from "react";
 import axios from 'axios';
 import "../styles/Landing.css";
@@ -106,3 +103,4 @@ const Landing = () => {
 };
 
 export default Landing;
+
