@@ -104,7 +104,7 @@
   z-index: 11;
 }
 
-.slide-overlay h3 { font-size: 1.5rem; }
+.slide-overlay h3 { font-size: 1rem; }
 
 /* DOTS */
 .slider-dots {
@@ -167,3 +167,4 @@
     flex-grow: 1;
     background: linear-gradient(to right, #e2e8f0, transparent);
 }
+
