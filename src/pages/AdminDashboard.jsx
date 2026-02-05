@@ -245,8 +245,8 @@ const AdsUpload = ({ fetchAds }) => {
   return (
     <form onSubmit={handleSubmit} className="admin-ad-form">
       <select value={placement} onChange={e => setPlacement(e.target.value)}>
-        <option value="slider">Media Slider (Iburyo)</option>
-        <option value="sidebar">Sidebar Card (Ibumoso - Text Only)</option>
+        <option value="slider">Media Slider (Ads y'amafoto)</option>
+        <option value="sidebar">Sidebar Card (Ads y'a text only)</option>
       </select>
       <input placeholder="Ad Title" value={title} onChange={e => setTitle(e.target.value)} required />
       <textarea placeholder="Ad Description" value={description} onChange={e => setDescription(e.target.value)} required />
@@ -257,5 +257,6 @@ const AdsUpload = ({ fetchAds }) => {
     </form>
   );
 };
+
 
 export default AdminDashboard;
