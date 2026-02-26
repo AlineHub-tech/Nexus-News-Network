@@ -13,7 +13,7 @@
 Experience the platform live here:  
 👉 **[Nexus News Network Live Demo]
 https://nexus-news-network.vercel.app/**
-https://nexus-news-network-backend.onrender.com**
+https://nexus-news-network-backend.onrender.com
 
 ---
 
