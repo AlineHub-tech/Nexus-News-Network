@@ -21,8 +21,7 @@ const SingleArticlePage = () => {
                 setArticle(res.data);
                 setLoading(false);
 
-                // 2. Update views (Ibi nibyo bituma Popular News ikora)
-                // Koresha "try-catch" yihariye hano kugira ngo view-error idahagarika page
+                // 2. Update views
                 try {
                     await axios.put(`${API_ARTICLE_FETCH}/articles/${id}/view`);
                 } catch (vErr) {
@@ -40,23 +39,24 @@ const SingleArticlePage = () => {
     if (loading) return <div className="loading-state">Loading...</div>;
     if (!article) return <div className="loading-state">Article not found.</div>;
 
-    // --- HANO NIHO HAKOSOWE KUGIRA NGO AMAFOTO AGARAGARE ---
     const getMediaUrl = (url) => {
         if (!url) return "";
-        // Niba ari Cloudinary (itangizwa na http/https), iyereke uko iri
         if (url.startsWith('http')) return url;
-        
-        // Niba ari local path (fallback), ongeraho base URL neza
         const base = API_BASE_URL_FETCH.endsWith('/') ? API_BASE_URL_FETCH.slice(0, -1) : API_BASE_URL_FETCH;
         return `${base}${url.startsWith('/') ? url : '/' + url}`;
     };
 
-    const renderArticleBody = (bodyText) => {
-        if (!bodyText) return null;
-        // Split by newline and filter out empty strings
-        const paragraphs = bodyText.split(/\n+/).filter(p => p.trim() !== "");
+    // --- HANO HAKOSOWE KUGIRA NGO BIHUZE NA DASHBOARD ---
+    const renderArticleBody = (text) => {
+        if (!text) return <p>No content available for this article.</p>;
+        
+        // Niba ari HTML iva muri editor (nka CKEditor), koresha dangerouslySetInnerHTML
+        // Niba ari Plain Text isanzwe (nka textarea), koresha split nk'uko wari ubifite
+        const paragraphs = text.split(/\n+/).filter(p => p.trim() !== "");
         return paragraphs.map((para, index) => (
-            <div key={index} className="article-paragraph">{para.trim()}</div>
+            <p key={index} className="article-paragraph" style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
+                {para.trim()}
+            </p>
         ));
     };
 
@@ -88,8 +88,9 @@ const SingleArticlePage = () => {
                         )}
                     </div>
 
+                    {/* HANO TWAKORESHEJE article.content kuko ari ryo Dashboard yawe yohereza */}
                     <div className="article-body-content">
-                        {renderArticleBody(article.body)}
+                        {renderArticleBody(article.content || article.body)}
                     </div>
                 </article>
             </main>
