@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Navbar from '../components/Navbar'; 
 import Footer from '../components/Footer';
 import '../styles/SingleArticlePage.css';
@@ -16,12 +17,11 @@ const SingleArticlePage = () => {
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                // 1. Fata amakuru y'inkuru
                 const res = await axios.get(`${API_ARTICLE_FETCH}/articles/${id}`);
                 setArticle(res.data);
                 setLoading(false);
 
-                // 2. Update views
+                // Update views
                 try {
                     await axios.put(`${API_ARTICLE_FETCH}/articles/${id}/view`);
                 } catch (vErr) {
@@ -46,12 +46,8 @@ const SingleArticlePage = () => {
         return `${base}${url.startsWith('/') ? url : '/' + url}`;
     };
 
-    // --- HANO HAKOSOWE KUGIRA NGO BIHUZE NA DASHBOARD ---
     const renderArticleBody = (text) => {
-        if (!text) return <p>No content available for this article.</p>;
-        
-        // Niba ari HTML iva muri editor (nka CKEditor), koresha dangerouslySetInnerHTML
-        // Niba ari Plain Text isanzwe (nka textarea), koresha split nk'uko wari ubifite
+        if (!text) return <p>No content available.</p>;
         const paragraphs = text.split(/\n+/).filter(p => p.trim() !== "");
         return paragraphs.map((para, index) => (
             <p key={index} className="article-paragraph" style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
@@ -60,42 +56,71 @@ const SingleArticlePage = () => {
         ));
     };
 
+    // SEO Data
+    const articleTitle = `${article.title} | Nexus News Network`;
+    const articleDesc = (article.content || article.body || "").substring(0, 160).replace(/[#*_]/g, '') + "...";
+    const articleUrl = `https://nexus-news-network.vercel.app{id}`;
+    const articleImg = getMediaUrl(article.mediaUrl);
+
     return (
-        <div className="single-article-page">
-            <Navbar />
-            <main className="article-main">
-                <article className="article-container">
-                    <header className="article-header">
-                        <span className="category-tag">{article.category}</span>
-                        <h1 className="article-title">{article.title}</h1>
-                        <div className="article-meta">
-                            By <strong>{article.author}</strong> 
-                            <span className="meta-divider">|</span>
-                            {new Date(article.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
-                            <span className="meta-divider">|</span>
-                            <span className="views-count">👁️ {article.views || 0} views</span>
+        <HelmetProvider>
+            <div className="single-article-page">
+                {/* --- SEO METADATA --- */}
+                <Helmet>
+                    <title>{articleTitle}</title>
+                    <meta name="description" content={articleDesc} />
+                    <link rel="canonical" href={articleUrl} />
+                    
+                    {/* Facebook / Open Graph */}
+                    <meta property="og:type" content="article" />
+                    <meta property="og:title" content={article.title} />
+                    <meta property="og:description" content={articleDesc} />
+                    <meta property="og:image" content={articleImg} />
+                    <meta property="og:url" content={articleUrl} />
+
+                    {/* Twitter */}
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:title" content={article.title} />
+                    <meta name="twitter:description" content={articleDesc} />
+                    <meta name="twitter:image" content={articleImg} />
+                </Helmet>
+
+                <Navbar />
+                
+                <main className="article-main">
+                    <article className="article-container">
+                        <header className="article-header">
+                            <span className="category-tag">{article.category}</span>
+                            <h1 className="article-title">{article.title}</h1>
+                            <div className="article-meta">
+                                By <strong>{article.author}</strong> 
+                                <span className="meta-divider">|</span>
+                                {new Date(article.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                <span className="meta-divider">|</span>
+                                <span className="views-count">👁️ {article.views || 0} views</span>
+                            </div>
+                        </header>
+
+                        <div className="article-media-wrapper">
+                            {article.mediaUrl && article.mediaType === 'image' && (
+                                <img src={articleImg} alt={article.title} className="full-article-media" />
+                            )}
+                            {article.mediaUrl && article.mediaType === 'video' && (
+                                <video src={articleImg} controls className="full-article-media">
+                                    Your browser does not support the video tag.
+                                </video>
+                            )}
                         </div>
-                    </header>
 
-                    <div className="article-media-wrapper">
-                        {article.mediaUrl && article.mediaType === 'image' && (
-                            <img src={getMediaUrl(article.mediaUrl)} alt={article.title} className="full-article-media" />
-                        )}
-                        {article.mediaUrl && article.mediaType === 'video' && (
-                            <video src={getMediaUrl(article.mediaUrl)} controls className="full-article-media">
-                                Your browser does not support the video tag.
-                            </video>
-                        )}
-                    </div>
-
-                    {/* HANO TWAKORESHEJE article.content kuko ari ryo Dashboard yawe yohereza */}
-                    <div className="article-body-content">
-                        {renderArticleBody(article.content || article.body)}
-                    </div>
-                </article>
-            </main>
-            <Footer />
-        </div>
+                        <div className="article-body-content">
+                            {renderArticleBody(article.content || article.body)}
+                        </div>
+                    </article>
+                </main>
+                
+                <Footer />
+            </div>
+        </HelmetProvider>
     );
 };
 
