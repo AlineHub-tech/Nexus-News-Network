@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org">
-  <!-- Home Page -->
   <url>
     <loc>https://nexus-news-network.vercel.app</loc>
     <lastmod>2024-03-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Category Pages -->
   <url>
-    <loc>https://nexus-news-network.vercel.apppolitics</loc>
+    <loc>https://nexus-news-network.vercel.app</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <url>
-    <loc>https://nexus-news-network.vercel.appentertainment</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Iyo ushyizeho inkuru nshya, uraza hano ukayongeramo gutya: -->
-  <!-- 
-  <url>
-    <loc>https://nexus-news-network.vercel.apparticle/ID_Y_INKURU</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url> 
-  -->
 </urlset>
