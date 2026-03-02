@@ -87,8 +87,8 @@ const Footer = () => {
       {/* COPYRIGHT BAR - Stays full width */}
       <div className="footer-bottom-bar">
         <p className="footer-copyright">
-            &copy; {new Date().getFullYear()} Nexus News Network. {t("allRightsReserved")} | Developed by <a href="https://aline-site-seven.vercel.app" target="_blank" rel="noopener noreferrer">
-              <span className="developer-name">Umugwaneza Aline</span>
+            &copy; {new Date().getFullYear()} Nexus News Network. {t("allRightsReserved")} | Developed by <a href="https://byte-flow-ltd.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <span className="developer-name">ByteFlow Ltd</span>
             </a>
         </p>
       </div>
@@ -101,3 +101,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
