@@ -8,7 +8,7 @@
 /* Global */
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:var(--dark);padding-top:78px}
-.container{max-width:2000px;margin:0 auto;padding:10px}
+.container{max-width:2000px;margin-top:-9%;padding:10px}
 .trending{
   background:var(--accent);
   color:#fff;
@@ -18,4 +18,5 @@ body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:va
 }
 .trending span{display:inline-block;padding-left:100%;animation:ticker 18s linear infinite}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
 
