@@ -1,20 +1,37 @@
 /* =========================================
-   NAVBAR CORE STYLE (FIXED & STICKY)
+   1. GLOBAL RESET (Kugira ngo icyanya cyera gishire)
+   ========================================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Shira padding kuri body ingana na height ya navbar 
+   kugira ngo content itazamuka ngo yihishe munsi yayo */
+body {
+  padding-top: 70px; 
+}
+
+/* =========================================
+   2. NAVBAR CONTAINER (FIXED TOP)
    ========================================= */
 .navbar-container {
-  background-color: #0a1930; /* Dark blue */
+  background-color: #0a1930;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  padding: 10px 15px;
+  padding: 10px 20px;
   
-  /* IBI NIBYO BITUMA IGUMA HEJURU KURI MOBILE */
-  position: sticky;
+  /* IBI NIBYO BIFIXINGA NAVBAR HEJURU NEZA */
+  position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   width: 100%;
-  z-index: 1100; /* Kuri slider cyangwa cards ntibiyijye hejuru */
-  
-  /* Nakuyeho margin-top: -35% kuko niyo yatumaga izamuka ikarenga screen */
-  margin-top: 0 !important; 
+  z-index: 2000; /* Izamure cyane ngo ijye hejuru y'ibindi byose */
+
+  /* KURAMO MARGIN ZOSE ZASHYIZWEMO */
+  margin: 0 !important; 
+  box-sizing: border-box;
 }
 
 .navbar-top {
@@ -23,10 +40,11 @@
   align-items: center;
   max-width: 1300px;
   margin: 0 auto;
+  width: 100%;
 }
 
 /* =========================================
-   LOGO SECTION
+   3. LOGO & BRANDING
    ========================================= */
 .logo-section {
   display: flex;
@@ -36,15 +54,15 @@
 }
 
 .site-logo {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .site-name {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: #ffffff;
   margin: 0;
@@ -53,7 +71,7 @@
 }
 
 /* =========================================
-   ACTIONS & BUTTONS
+   4. ACTIONS (LOGIN & MENU)
    ========================================= */
 .nav-actions {
   display: flex;
@@ -71,32 +89,31 @@
   display: flex;
   align-items: center;
   padding: 5px;
-  transition: opacity 0.2s;
-}
-
-.auth-icon-button:hover, 
-.menu-toggle:hover {
-  opacity: 0.8;
+  transition: transform 0.2s ease;
 }
 
 .auth-icon-button {
-  font-size: 20px; /* Login icon yagabanutse */
+  font-size: 20px; /* Login icon yagabanutse nk'uko wabishakaga */
+}
+
+.menu-toggle:active {
+  transform: scale(0.9);
 }
 
 /* =========================================
-   MOBILE MENU (OVERLAY)
+   5. MOBILE MENU (OVERLAY)
    ========================================= */
 .nav-mobile-menu {
   display: none;
   flex-direction: column;
   position: fixed;
-  top: 58px; /* Height ya navbar */
+  top: 60px; /* Munsi ya Navbar */
   left: 0;
   right: 0;
   bottom: 0;
   background-color: #0a1930;
-  padding: 25px;
-  z-index: 1050;
+  padding: 30px 20px;
+  z-index: 1999;
   overflow-y: auto;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -110,75 +127,79 @@
   color: #ffffff;
   text-decoration: none;
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 600;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .mobile-categories-title {
   color: #6b7280;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 25px 0 10px 0;
+  letter-spacing: 1.5px;
+  margin-top: 30px;
+  margin-bottom: 15px;
   font-weight: 700;
 }
 
 /* =========================================
-   DESKTOP CATEGORIES BAR
+   6. DESKTOP CATEGORIES BAR (EXPLORER)
    ========================================= */
 .explorer-navbar {
-  display: none; /* Bihishwa kuri Mobile */
+  display: none; /* Bihishe kuri Mobile */
   margin-top: 12px;
-  gap: 10px;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   overflow-x: auto;
-  padding-bottom: 5px;
-  scrollbar-width: none; /* Hide scrollbar Firefox */
+  scrollbar-width: none;
 }
 
 .explorer-navbar::-webkit-scrollbar {
-  display: none; /* Hide scrollbar Chrome/Safari */
+  display: none;
 }
 
 .category-link {
-  color: #e2e8f0;
+  color: #d1d5db;
   text-decoration: none;
-  padding: 6px 14px;
+  padding: 6px 16px;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   font-size: 0.9rem;
-  transition: all 0.3s ease;
   white-space: nowrap;
-}
-
-.category-link.home-link {
-  background-color: #e63946; /* Accent color */
-  font-weight: 700;
+  transition: all 0.3s ease;
 }
 
 .category-link:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: #e63946;
   color: #ffffff;
 }
 
+.category-link.home-link {
+  background-color: #e63946;
+  font-weight: 700;
+}
+
 /* =========================================
-   RESPONSIVE QUERIES
+   7. RESPONSIVE QUERIES
    ========================================= */
 
-/* Desktop (Above 900px) */
+/* Desktop Styles */
 @media (min-width: 900px) {
+  body {
+    padding-top: 100px; /* Umwanya w'inyongego kuri desktop kuko navbar iba nini */
+  }
+
   .navbar-container {
-    padding: 12px 60px;
+    padding: 15px 60px;
   }
 
   .menu-toggle {
-    display: none; /* Menu icon ihishwa kuri desktop */
+    display: none;
   }
 
   .explorer-navbar {
-    display: flex; /* Categories zigaragara kuri desktop */
+    display: flex;
     justify-content: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 10px;
   }
 
   .site-name {
@@ -186,13 +207,13 @@
   }
 }
 
-/* Mobile Small Adjustments */
+/* Mobile Small Screens */
 @media (max-width: 600px) {
   .site-name {
     font-size: 1rem;
   }
   
   .navbar-container {
-    padding: 8px 12px;
+    padding: 10px 15px;
   }
 }
