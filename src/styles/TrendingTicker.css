@@ -49,7 +49,8 @@ body {
 
   /* Niba hari margin isigaye kuri Navbar yizamure gato */
   .navbar-container {
-    margin-top: 0 !important;
+    margin-top:-8%;
     top: 0 !important;
   }
 }
+
