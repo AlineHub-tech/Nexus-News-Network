@@ -1,21 +1,12 @@
-/* Default styles (Mobile First) */
 .navbar-container {
   background-color: #0a1930; /* Dark blue background */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px 15px;
-  
-  /* --- HANO NIHO HAKOSOWE --- */
-  position: fixed; /* Fixed bituma iguma hejuru kuri mobile idanyeganyega */
+  position: sticky;
   top: 0;
-  left: 0;
-  z-index: 1000;
+  margin-top: -35%;
+  z-index: 100;
   width: 100%;
-  margin-top: 0; /* Margin nini yangizaga uko sticky/fixed ikora */
-}
-
-/* Kugira ngo inkuru itihisha munsi ya navbar kuri mobile, ongeraho padding hejuru muri body */
-body {
-  padding-top: 60px; 
 }
 
 .navbar-top {
@@ -28,7 +19,7 @@ body {
 .logo-section {
     display: flex;
     align-items: center;
-    flex-direction: row; 
+    flex-direction: row; /* Biramburanye kuri mobile noneho */
 }
 
 .site-logo {
@@ -38,11 +29,11 @@ body {
 }
 
 .site-name {
-    font-size: 16px; 
+    font-size: 16px; /* Font isomeka neza */
     font-weight: bold;
-    color: #ffffff; 
+    color: #ffffff; /* White text on dark blue background */
     margin-top: 0;
-    margin-left: 10px; 
+    margin-left: 10px; /* Umwanya hagati ya logo na text */
 }
 
 .nav-actions {
@@ -50,13 +41,14 @@ body {
     align-items: center;
 }
 
+/* Size ya Login Icon yagabanutse */
 .auth-icon-button {
     background: none;
     border: none;
-    font-size: 18px; 
+    font-size: 18px; /* Size nshya */
     cursor: pointer;
     margin-left: 10px;
-    color: #ffffff; 
+    color: #ffffff; /* White color */
 }
 
 .menu-toggle {
@@ -66,18 +58,18 @@ body {
   font-size: 24px;
   cursor: pointer;
   margin-left: 10px;
-  color: #ffffff; 
+  color: #ffffff; /* White color */
 }
 
-/* Mobile Menu */
+/* Mobile Menu (Hidden by default on mobile) */
 .nav-mobile-menu {
   display: none;
   flex-direction: column;
-  position: fixed; /* Fixed kugira ngo na menu itanyeganyega */
-  top: 60px; 
+  position: absolute;
+  top: 60px; /* Adjust based on your header height */
   left: 0;
   right: 0;
-  background-color: #0a1930; 
+  background-color: #0a1930; /* Dark blue background */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 10px 15px;
   z-index: 50;
@@ -89,7 +81,7 @@ body {
 
 .menu-link {
   padding: 10px 0;
-  color: #ffffff; 
+  color: #ffffff; /* White text */
   text-decoration: none;
   border-bottom: 1px solid #444;
 }
@@ -101,12 +93,12 @@ body {
     color: #ffffff;
 }
 
-/* Explorer Navbar */
+/* Explorer Navbar (Categories bar Desktop view: hidden on mobile) */
 .explorer-navbar {
-  display: none; 
+  display: none; /* Hide category bar on mobile */
   margin-top: 10px;
   align-items: center;
-  overflow-x: auto; 
+  overflow-x: auto; /* Horizontal scroll */
   white-space: nowrap;
   gap: 10px;
 }
@@ -115,14 +107,14 @@ body {
   color: #ffffff;
   text-decoration: none;
   padding: 8px 12px;
-  background-color: #1a2b4c; 
+  background-color: #1a2b4c; /* Slightly lighter blue for contrast */
   border-radius: 4px;
   transition: background-color 0.3s;
   display: inline-block; 
 }
 
 .category-link.home-link {
-    background-color: #0056b3; 
+    background-color: #0056b3; /* Bright blue for Home link */
     font-weight: bold;
 }
 
@@ -130,39 +122,35 @@ body {
   background-color: #0056b3;
 }
 
-/* --- Media Queries --- */
+
+/* --- Media Queries for responsiveness --- */
 
 /* Tablet styles (min-width: 600px) */
 @media (min-width: 600px) {
     .navbar-container {
-      position: sticky; /* Kuri desktop koresha sticky */
-      margin-top: 0; /* Kuraho margin na hano */
+      margin-top: -8%;
     }
-    
-    body {
-      padding-top: 0; /* Kuraho padding kuri body niba navbar ari sticky */
-    }
+  .site-name {
+    font-size: 18px;
+  }
 
-    .site-name {
-      font-size: 18px;
-    }
-
-    .nav-mobile-menu {
-      display: none !important; 
-    }
+  .nav-mobile-menu {
+    display: none !important; 
+  }
   
-    .menu-toggle {
-      display: none; 
-    }
+  .menu-toggle {
+    display: none; 
+  }
 
-    .explorer-navbar {
-      display: flex; 
-    }
+  .explorer-navbar {
+    display: flex; /* Show category bar on tablets+ */
+  }
 }
 
 /* Desktop styles (min-width: 1024px) */
 @media (min-width: 1024px) {
     .navbar-container {
         padding: 10px 50px;
+        margin-top: -8%;
     }
 }
