@@ -1,21 +1,41 @@
-:root{
-  --dark:#0a2a66;
-  --accent:#d60000; /* for trending and highlights */
-  --muted:#6b7280;
-  --bg:#f7f7f8;
+:root {
+  --dark: #0a2a66;
+  --accent: #d60000;
+  --muted: #6b7280;
+  --bg: #f7f7f8;
 }
 
-/* Global */
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter, Arial, sans-serif;background:var(--bg);color:var(--dark);padding-top:0}
-.container{max-width:2000px;margin:0 auto;padding:10px}
-.trending{
-  background:var(--accent);
-  color:#fff;
-  font-weight:700;
-  padding:8px 0;
-  overflow:hidden;
-  white-space:nowrap;
+* {
+  box-sizing: border-box;
 }
-.trending span{display:inline-block;padding-left:100%;animation:ticker 18s linear infinite}
-@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
+body {
+  margin: 0; /* Kuraho umwanya wose uzengurutse page */
+  padding: 0; 
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+}
+
+.trending {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  position: relative; /* Cyangwa 'fixed' niba ushaka ko igumaho uumanutse */
+  top: 0;
+}
+
+.trending span {
+  display: inline-block;
+  padding-left: 100%; /* Bituma itangirira hanze iburyo */
+  animation: ticker 18s linear infinite;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
