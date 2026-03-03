@@ -103,7 +103,7 @@ html, body {
     left: -100%;
     width: 85%;
     height: calc(100vh - 75px);
-    background-color: #0a1930;
+    background-color:#ffffff;
     display: flex;
     flex-direction: column;
     padding: 30px 20px;
@@ -183,3 +183,4 @@ html, body {
         width: 40px;
     }
 }
+
