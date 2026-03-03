@@ -1,45 +1,98 @@
 /* --- Variables --- */
 :root {
   --dark: #0a2a66;
-  --accent: #000000;
+  --accent: #00d4ff; /* Changed for better visibility */
   --muted: #6b7280;
   --bg: #c1c1e6;
   --primary-dark: #0a1930;
 }
 
-/* --- Global Fixes --- */
+/* --- Global Fixes (Kuraho ubusa bwose bwo hejuru) --- */
 * {
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 !important; /* Birinda margins zose zizana umwanya hejuru */
   padding: 0;
 }
 
 body {
-  margin: 0 !important;
-  padding: 0 !important; /* Ibi nibyo bikuraho ya space yari hejuru */
   font-family: 'Inter', Arial, sans-serif;
   background: var(--bg);
   color: var(--dark);
   overflow-x: hidden;
+  /* Kubera ko Navbar iri fixed, tugomba gusubiza content inyuma */
+  padding-top: 125px !important; 
 }
 
-.container {
-  max-width: 2000px;
-  margin: 0 auto;
-  padding: 15px;
-}
-
-/* --- NAVBAR (Sticky Fix) --- */
+/* --- NAVBAR (Fixed kuri Desktop & Mobile) --- */
 .navbar-container {
-  position: sticky;
-  top: 0; /* Bituma ifata hejuru neza */
-  z-index: 2000;
-  width: 100%;
+  position: fixed !important; /* Ituma iguma hejuru burundu */
+  top: 0 !important;
+  left: 0;
+  width: 100% !important;
+  z-index: 9999 !important; /* Ituma ijyaho hejuru y'ibindi byose */
   background: #ffffff;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* --- Trending Ticker --- */
+/* Navbar Top Section */
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5%;
+  height: 70px;
+}
+
+/* Explorer (Desktop Categories) */
+.explorer-navbar {
+  background-color: var(--primary-dark) !important;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.categories-wrapper-desktop {
+  display: flex;
+  gap: 20px;
+}
+
+.category-link {
+  color: #ffffff !important;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* --- MOBILE MENU (Background #0a1930) --- */
+.nav-mobile-menu {
+  position: fixed !important;
+  top: 70px; /* Munsi ya navbar-top neza */
+  left: -100%;
+  width: 100%;
+  height: calc(100vh - 70px);
+  background-color: #0a1930 !important; /* Ibara wasabye */
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  transition: 0.4s ease-in-out;
+  z-index: 9998;
+  overflow-y: auto;
+}
+
+.nav-mobile-menu.open {
+  left: 0 !important;
+}
+
+.menu-link {
+  color: white !important;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* --- Trending Ticker Fix --- */
 .trending {
   background: black;
   color: #fff;
@@ -47,19 +100,7 @@ body {
   padding: 10px 0;
   overflow: hidden;
   white-space: nowrap;
-  position: relative;
-  z-index: 10;
-}
-
-.trending span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: ticker 18s linear infinite;
-}
-
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  margin-top: 0 !important;
 }
 
 /* --- HERO SECTION --- */
@@ -67,119 +108,25 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 16px;
-  margin-top: 10px;
-}
-
-.hero-main {
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  height: 400px;
-}
-
-.hero-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .5s;
-}
-
-.hero-main:hover img {
-  transform: scale(1.05);
-}
-
-.hero-main .text {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.9));
-  color: white;
-}
-
-.hero-small {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.hero-small .card {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 10px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-/* --- NEWS CARDS & GRIDS --- */
-.regular-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.news-card {
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  transition: 0.3s;
-}
-
-.news-card:hover {
-  transform: translateY(-5px);
-}
-
-.news-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.news-content {
-  padding: 15px;
-}
-
-/* --- SECTION TITLES --- */
-.section-title {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--dark);
-  margin: 25px 0 15px;
-  border-left: 5px solid var(--primary-dark);
-  padding-left: 15px;
-  text-transform: uppercase;
-}
-
-/* --- FOOTER --- */
-.footer {
-  background: var(--primary-dark);
-  color: #fff;
-  padding: 40px 20px;
-  text-align: center;
-  margin-top: 50px;
+  margin-top: 20px !important;
 }
 
 /* --- RESPONSIVENESS (Mobile & Tablet) --- */
-
 @media (max-width: 992px) {
+  body {
+    padding-top: 80px !important; /* Kuri mobile navbar ni ntoya kuko explorer ivamo */
+  }
+
+  .explorer-navbar {
+    display: none !important;
+  }
+
   .hero {
     grid-template-columns: 1fr;
-  }
-  
-  .hero-main {
-    height: 300px;
   }
 }
 
 @media (max-width: 768px) {
-  body {
-    padding-top: 0 !important; /* Kuraho space yose kuri mobile */
-  }
-
   .container {
     padding: 10px;
   }
@@ -191,10 +138,6 @@ body {
 
 @media (max-width: 480px) {
   .hero-main {
-    height: 220px;
-  }
-  
-  .regular-grid {
-    grid-template-columns: 1fr;
+    height: 250px;
   }
 }
