@@ -1,4 +1,4 @@
-/* --- 1. GLOBAL RESET (Kukuraho space yo hejuru) --- */
+/* --- 1. GLOBAL RESET --- */
 * {
     margin: 0;
     padding: 0;
@@ -8,21 +8,19 @@
 html, body {
     width: 100%;
     overflow-x: hidden;
-    /* Twakuyeho padding-top hano kuko sticky ikora neza nta padding */
     margin: 0 !important;
 }
 
-/* --- 2. NAVBAR CONTAINER (Sticky Fix) --- */
+/* --- 2. NAVBAR CONTAINER (FIXED/STICKY) --- */
 .navbar-container {
-    position: sticky; /* Ituma iguma hejuru iyo u-scrolling */
+    position: sticky; 
     top: 0;
     width: 100%;
-    z-index: 2000; /* Kugira ngo itajya munsi y'amafoto */
+    z-index: 9999;
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Navbar Top Section */
 .navbar-top {
     display: flex;
     justify-content: space-between;
@@ -34,14 +32,16 @@ html, body {
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
+/* LOGO IBE IRI MU RUZIGA (CIRCLE) */
 .site-logo {
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%; /* Ibi nibyo biyigira uruziga */
     object-fit: cover;
+    border: 2px solid #f0f0f0;
 }
 
 .site-name {
@@ -51,10 +51,11 @@ html, body {
     text-transform: uppercase;
 }
 
+/* IBI BYO KURI NAV ACTIONS (Icons) */
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px; /* Iyi gap niyo ituma tudarapo n'ama-icons bitafatana */
 }
 
 /* --- 3. DESKTOP CATEGORIES --- */
@@ -66,8 +67,7 @@ html, body {
 .categories-wrapper-desktop {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    gap: 25px;
 }
 
 .category-link {
@@ -86,16 +86,16 @@ html, body {
 /* --- 4. MOBILE MENU (Background #0a1930) --- */
 .nav-mobile-menu {
     position: fixed;
-    top: 70px; /* Munsi ya navbar-top neza */
+    top: 70px;
     left: -100%;
-    width: 80%; /* Menu ntiyuzure screen yose ngo habeho umwanya */
+    width: 85%;
     height: calc(100vh - 70px);
-    background-color: #0a1930; /* Ibara wasabye */
+    background-color: #0a1930;
     display: flex;
     flex-direction: column;
     padding: 30px 20px;
     transition: 0.4s ease-in-out;
-    z-index: 1999;
+    z-index: 9998;
 }
 
 .nav-mobile-menu.open {
@@ -110,48 +110,60 @@ html, body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.mobile-categories-title {
-    color: #00d4ff;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+/* --- 5. TRENDING TICKER (Byatanyijwe na Navbar) --- */
+.trending {
+    background: black;
+    color: #fff;
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 0 !important; /* Birinda ko hagati ya Navbar na Ticker habamo ubusa */
 }
 
-/* --- 5. RESPONSIVE DESIGN --- */
+.trending span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker-move 20s linear infinite;
+}
 
-/* Mobile & Tablet Toggle */
+@keyframes ticker-move {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* --- 6. RESPONSIVE DESIGN (Mobile & Tablet) --- */
 .menu-toggle {
     display: none;
-    font-size: 1.8rem;
+    font-size: 2rem;
     background: none;
     border: none;
     cursor: pointer;
+    color: #0a1930;
 }
 
 @media (max-width: 992px) {
     .explorer-navbar {
-        display: none; /* Zimya categories zo kuri desktop */
+        display: none; 
     }
 
     .menu-toggle {
-        display: block; /* Garagaza button ya menu */
+        display: block; 
     }
 
-    /* Sigura ko navbar iguma hejuru kuri mobile */
-    .navbar-container {
-        position: sticky;
-        top: 0;
+    /* KUKURAHOM SEARCH BAR KURI MOBILE */
+    /* Niba search bar yawe ifite class cyangwa tag runaka, hano niho uyikurira */
+    .nav-actions .search-bar-container, 
+    .nav-actions input { 
+        display: none !important; 
+    }
+
+    .nav-actions {
+        gap: 15px; /* Gap ntoya ho gato kuri mobile */
     }
 }
 
 @media (max-width: 480px) {
     .site-name {
-        display: none; /* Kuraho izina rya site kuri telefone ntoya */
+        display: none; 
     }
-}
-
-/* Trending Ticker Space Fix */
-.trending {
-    margin-top: 0; /* Kuraho umwanya wose hagati ya navbar na ticker */
 }
