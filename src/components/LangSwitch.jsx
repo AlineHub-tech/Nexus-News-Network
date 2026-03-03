@@ -8,21 +8,23 @@ export default function LangSwitch() {
   const { switchLanguage } = useContext(NewsContext);
 
   const flagStyle = {
-    width: "16px",
-    height: "12px",
+    width: "20px", // Nayongereye gato ngo agaragare neza
+    height: "14px",
     objectFit: "cover",
     cursor: "pointer",
-    borderRadius: "1px",
-    marginLeft: "6px",
+    borderRadius: "2px",
+    transition: "transform 0.2s", // Bituma rinyeganyega gato iyo ugezeho
   };
 
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    /* Gukoresha gap: "10px" bituma amabendera yitarura neza */
+    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
       <img
         src={ukflag}
         alt="EN"
         style={flagStyle}
         onClick={() => switchLanguage("en")}
+        title="English"
       />
 
       <img
@@ -30,14 +32,15 @@ export default function LangSwitch() {
         alt="RW"
         style={flagStyle}
         onClick={() => switchLanguage("rw")}
+        title="Ikinyarwanda"
       />
       
-      {/* Add the French flag switch */}
       <img
         src={frflag}
         alt="FR"
         style={flagStyle}
         onClick={() => switchLanguage("fr")}
+        title="Français"
       />
     </div>
   );
