@@ -122,7 +122,8 @@ body {
 
 @media (max-width: 480px) {
   .site-name {
-    display: none;
+    /* display: none; */
   }
 }
+
 
