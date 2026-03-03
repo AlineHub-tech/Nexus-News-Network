@@ -1,157 +1,119 @@
+/* --- Navbar Container (KOSORA IBI) --- */
 .navbar-container {
-  background-color: #0a1930; /* Dark blue background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px 15px;
-  position: sticky;
+  background-color: #0a1930;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 12px 15px;
+  
+  /* Ibi nibyo bituma iguma hejuru u-scrollinga */
+  position: fixed; /* Koresha fixed kuri mobile kugira ngo idanyeganyega */
   top: 0;
-  margin-top: -35%;
-  z-index: 100;
+  left: 0;
+  right: 0;
   width: 100%;
+  z-index: 1000; /* Izamure cyane ngo ijye hejuru y'ibindi byose */
+  
+  /* KURAMO margin-top ya -35% kuko niyo yicaga ibintu */
+  margin-top: 0 !important; 
+}
+
+/* Kuri Body: Shira padding-top ingana na height ya navbar 
+   kugira ngo inkuru ya mbere itajya munsi ya navbar */
+body {
+  padding-top: 60px; 
 }
 
 .navbar-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Logos na Text byakozwe stretch kuri mobile */
+/* --- Logos & Text --- */
 .logo-section {
     display: flex;
     align-items: center;
-    flex-direction: row; /* Biramburanye kuri mobile noneho */
+    gap: 10px;
 }
 
 .site-logo {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .site-name {
-    font-size: 16px; /* Font isomeka neza */
-    font-weight: bold;
-    color: #ffffff; /* White text on dark blue background */
-    margin-top: 0;
-    margin-left: 10px; /* Umwanya hagati ya logo na text */
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 0.5px;
 }
 
+/* --- Actions --- */
 .nav-actions {
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
-/* Size ya Login Icon yagabanutse */
-.auth-icon-button {
+.auth-icon-button, .menu-toggle {
     background: none;
     border: none;
-    font-size: 18px; /* Size nshya */
+    color: #ffffff;
     cursor: pointer;
-    margin-left: 10px;
-    color: #ffffff; /* White color */
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-toggle {
-  display: block; 
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  margin-left: 10px;
-  color: #ffffff; /* White color */
+  font-size: 26px;
 }
 
-/* Mobile Menu (Hidden by default on mobile) */
+/* --- Mobile Menu --- */
 .nav-mobile-menu {
   display: none;
   flex-direction: column;
-  position: absolute;
-  top: 60px; /* Adjust based on your header height */
+  position: fixed; /* Bikore fixed nabwo */
+  top: 58px; /* Height ya navbar */
   left: 0;
   right: 0;
-  background-color: #0a1930; /* Dark blue background */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px 15px;
-  z-index: 50;
+  bottom: 0; /* Byuzuze screen yose niba ushaka */
+  background-color: #0a1930;
+  padding: 20px;
+  z-index: 999;
+  overflow-y: auto;
 }
 
 .nav-mobile-menu.open {
   display: flex; 
 }
 
-.menu-link {
-  padding: 10px 0;
-  color: #ffffff; /* White text */
-  text-decoration: none;
-  border-bottom: 1px solid #444;
-}
+/* --- RESPONSIVE ADJUSTMENTS --- */
 
-.mobile-categories-title {
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    color: #ffffff;
-}
-
-/* Explorer Navbar (Categories bar Desktop view: hidden on mobile) */
-.explorer-navbar {
-  display: none; /* Hide category bar on mobile */
-  margin-top: 10px;
-  align-items: center;
-  overflow-x: auto; /* Horizontal scroll */
-  white-space: nowrap;
-  gap: 10px;
-}
-
-.category-link {
-  color: #ffffff;
-  text-decoration: none;
-  padding: 8px 12px;
-  background-color: #1a2b4c; /* Slightly lighter blue for contrast */
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  display: inline-block; 
-}
-
-.category-link.home-link {
-    background-color: #0056b3; /* Bright blue for Home link */
-    font-weight: bold;
-}
-
-.category-link:hover {
-  background-color: #0056b3;
-}
-
-
-/* --- Media Queries for responsiveness --- */
-
-/* Tablet styles (min-width: 600px) */
-@media (min-width: 600px) {
-    .navbar-container {
-      margin-top: -8%;
-    }
-  .site-name {
-    font-size: 18px;
-  }
-
-  .nav-mobile-menu {
-    display: none !important; 
+@media (min-width: 768px) {
+  .navbar-container {
+    position: sticky; /* Kuri Desktop ishobora kuba sticky */
+    padding: 10px 40px;
   }
   
+  body {
+    padding-top: 0; /* Kuri desktop biba bimeze neza */
+  }
+
   .menu-toggle {
     display: none; 
   }
 
   .explorer-navbar {
-    display: flex; /* Show category bar on tablets+ */
+    display: flex;
+    margin-top: 10px;
+    gap: 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 10px;
   }
 }
-
-/* Desktop styles (min-width: 1024px) */
-@media (min-width: 1024px) {
-    .navbar-container {
-        padding: 10px 50px;
-        margin-top: -8%;
-    }
-}
-
