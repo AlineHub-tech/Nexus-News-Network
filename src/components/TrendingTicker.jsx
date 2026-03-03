@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { NewsContext } from "../context/NewsContext";
-import "../styles.css";
+import "../styles/TrendingTicker.css";
 
 export default function TrendingTicker() {
   const { latestNews } = useContext(NewsContext);
@@ -18,3 +18,4 @@ export default function TrendingTicker() {
     </div>
   );
 }
+
