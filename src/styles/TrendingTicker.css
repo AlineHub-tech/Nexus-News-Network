@@ -5,16 +5,14 @@
   --bg: #f7f7f8;
 }
 
-* {
-  box-sizing: border-box;
-}
-
+/* KOSORA HANO: Kuraho padding-top yose muri body */
 body {
-  margin: 0; /* Kuraho umwanya wose uzengurutse page */
-  padding: 0; 
+  margin: 0;
+  padding: 0; /* Twakuyeho ya 78px */
   font-family: Inter, Arial, sans-serif;
   background: var(--bg);
   color: var(--dark);
+  overflow-x: hidden; /* Birinda ko pageinyeganyega ijyanye n'impande kuri mobile */
 }
 
 .trending {
@@ -25,18 +23,19 @@ body {
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
+  /* Ibi bituma itangirira hejuru neza */
+  position: relative; 
   top: 0;
+  z-index: 9999;
 }
 
 .trending span {
   display: inline-block;
-  padding-left: 100%; /* Bituma itangirira hanze iburyo */
-  animation: ticker 18s linear infinite;
+  padding-left: 100%;
+  animation: ticker 25s linear infinite; /* 18s yari yihuta cyane ku makuru menshi */
 }
 
 @keyframes ticker {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
-
-
