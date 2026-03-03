@@ -97,7 +97,7 @@ const SingleArticlePage = () => {
                                 <span className="meta-divider">|</span>
                                 {new Date(article.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
                                 <span className="meta-divider">|</span>
-                                <span className="views-count">👁️ {article.views || 0} views</span>
+                                {/* <span className="views-count">👁️ {article.views || 0} views</span> */}
                             </div>
                         </header>
 
@@ -125,3 +125,4 @@ const SingleArticlePage = () => {
 };
 
 export default SingleArticlePage;
+
