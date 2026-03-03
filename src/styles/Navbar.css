@@ -1,33 +1,34 @@
 /* =========================================
-   1. GLOBAL RESET & BODY FIX
+   1. GLOBAL RESET (Kugira ngo icyanya cyera gishire)
    ========================================= */
 html, body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* Kurinda scroll y'iburyo */
+  overflow-x: hidden;
 }
 
-/* Padding ingana na height ya navbar kugira ngo content itazamuka munsi yayo */
+/* Shira padding kuri body ingana na height ya navbar 
+   kugira ngo content itazamuka ngo yihishe munsi yayo */
 body {
-  padding-top: 65px; 
+  padding-top: 70px; 
 }
 
 /* =========================================
-   2. NAVBAR CONTAINER (FIXED & NO GAP)
+   2. NAVBAR CONTAINER (FIXED TOP)
    ========================================= */
 .navbar-container {
   background-color: #0a1930;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  padding: 10px 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
   
-  /* IBI NIBYO BIKURAHO ICYANYA CYERA HEJURU */
+  /* IBI NIBYO BIFIXINGA NAVBAR HEJURU NEZA */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 2000;
-  
+  z-index: 2000; /* Izamure cyane ngo ijye hejuru y'ibindi byose */
+
   /* KURAMO MARGIN ZOSE ZASHYIZWEMO */
   margin: 0 !important; 
   box-sizing: border-box;
@@ -43,36 +44,30 @@ body {
 }
 
 /* =========================================
-   3. LOGO & BRANDING (FIXED WRAPPING)
+   3. LOGO & BRANDING
    ========================================= */
 .logo-section {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
-  /* IBI BITUMA IZINA RIGUMA RIRAMBUYE (NO BREAKING) */
-  flex-shrink: 0; 
-  white-space: nowrap; 
 }
 
 .site-logo {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .site-name {
-  font-size: 1.15rem; /* Size isomeka neza kuri mobile */
+  font-size: 1.2rem;
   font-weight: 800;
   color: #ffffff;
   margin: 0;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  /* KURINDA KO RYIGABANYAMO IBICE */
-  display: inline-block;
-  white-space: nowrap; 
 }
 
 /* =========================================
@@ -81,8 +76,7 @@ body {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
+  gap: 15px;
 }
 
 .auth-icon-button, 
@@ -95,10 +89,15 @@ body {
   display: flex;
   align-items: center;
   padding: 5px;
+  transition: transform 0.2s ease;
 }
 
 .auth-icon-button {
-  font-size: 19px; /* Login icon ntoya */
+  font-size: 20px; /* Login icon yagabanutse nk'uko wabishakaga */
+}
+
+.menu-toggle:active {
+  transform: scale(0.9);
 }
 
 /* =========================================
@@ -108,7 +107,7 @@ body {
   display: none;
   flex-direction: column;
   position: fixed;
-  top: 58px; /* Munsi ya Navbar */
+  top: 60px; /* Munsi ya Navbar */
   left: 0;
   right: 0;
   bottom: 0;
@@ -116,6 +115,7 @@ body {
   padding: 30px 20px;
   z-index: 1999;
   overflow-y: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-mobile-menu.open {
@@ -135,49 +135,62 @@ body {
   color: #6b7280;
   font-size: 0.8rem;
   text-transform: uppercase;
+  letter-spacing: 1.5px;
   margin-top: 30px;
   margin-bottom: 15px;
   font-weight: 700;
 }
 
 /* =========================================
-   6. DESKTOP CATEGORIES (EXPLORER)
+   6. DESKTOP CATEGORIES BAR (EXPLORER)
    ========================================= */
 .explorer-navbar {
   display: none; /* Bihishe kuri Mobile */
   margin-top: 12px;
-  gap: 10px;
+  gap: 12px;
   padding-top: 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   overflow-x: auto;
   scrollbar-width: none;
 }
 
+.explorer-navbar::-webkit-scrollbar {
+  display: none;
+}
+
 .category-link {
   color: #d1d5db;
   text-decoration: none;
-  padding: 6px 14px;
+  padding: 6px 16px;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   font-size: 0.9rem;
   white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.category-link:hover {
+  background-color: #e63946;
+  color: #ffffff;
 }
 
 .category-link.home-link {
   background-color: #e63946;
+  font-weight: 700;
 }
 
 /* =========================================
    7. RESPONSIVE QUERIES
    ========================================= */
 
+/* Desktop Styles */
 @media (min-width: 900px) {
   body {
-    padding-top: 100px; 
+    padding-top: 100px; /* Umwanya w'inyongego kuri desktop kuko navbar iba nini */
   }
 
   .navbar-container {
-    padding: 15px 50px;
+    padding: 15px 60px;
   }
 
   .menu-toggle {
@@ -190,16 +203,17 @@ body {
   }
 
   .site-name {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 }
 
+/* Mobile Small Screens */
 @media (max-width: 600px) {
   .site-name {
-    font-size: 0.95rem; /* Gabanya gato ngo ikwire mu murongo umwe kuri phone nto */
+    font-size: 1rem;
   }
   
   .navbar-container {
-    padding: 10px 12px;
+    padding: 10px 15px;
   }
 }
