@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/Auth.css"; // Koresha CSS ya Auth isanzwe kugira ngo zise
+import "../styles/Auth.css";
 
 const StaffGate = ({ onVerifySuccess }) => {
   const [formData, setFormData] = useState({
@@ -9,12 +9,10 @@ const StaffGate = ({ onVerifySuccess }) => {
   });
   const [error, setError] = useState("");
 
-  // --- HANO NIHO USHYIRA AMAKURU Y'ABAKOZI BEMEREWE ---
-  // Email, Role, na Key bigomba guhura neza kugira ngo afungurirwe Login
   const STAFF_DATABASE = [
-    { email: "admin@nexus.rw", role: "admin", key: "nexus_admin_2024" },
-    { email: "writer@nexus.rw", role: "writer", key: "nexus_author_2024" },
-    { email: "author@nexus.rw", role: "writer", key: "nexus_author_2024" }
+    { email: "admin@nexus.rw", role: "admin", key: "nexus_admin_2026_#stayupdated" },
+    { email: "writer@nexus.rw", role: "writer", key: "nexus_author_2026_#stayupdated" },
+    { email: "author@nexus.rw", role: "writer", key: "nexus_author_2026_#stayupdated" }
   ];
 
   const handleChange = (e) => {
@@ -33,11 +31,9 @@ const StaffGate = ({ onVerifySuccess }) => {
     );
 
     if (isStaff) {
-      // Niba amakuru ari yo, mwemerere akomeze kuri Login nyirizina
       onVerifySuccess(formData.email);
     } else {
       setError("Identity verification failed! Access Denied.");
-      // Nyuma y'amasegonda 3, niba ari umusomyi washatse kwinjira, umusubize kuri Home
       setTimeout(() => {
          if(!isStaff) window.location.href = "/";
       }, 3000);
@@ -54,7 +50,8 @@ const StaffGate = ({ onVerifySuccess }) => {
         </p>
       </div>
 
-      <form onSubmit={handleVerify} className="auth-form">
+      {/* 1. AUTOCOMPLETE="OFF" HANO KURI FORM */}
+      <form onSubmit={handleVerify} className="auth-form" autoComplete="off">
         <div style={{ marginBottom: "15px" }}>
           <label style={{ fontSize: "0.8rem", fontWeight: "bold" }}>Staff Email</label>
           <input
@@ -63,6 +60,7 @@ const StaffGate = ({ onVerifySuccess }) => {
             placeholder="Enter your professional email"
             value={formData.email}
             onChange={handleChange}
+            autoComplete="new-email" /* 2. IBI BIBWIRA BROWSER KUTABYUZUZA */
             required
           />
         </div>
@@ -96,6 +94,7 @@ const StaffGate = ({ onVerifySuccess }) => {
             placeholder="Enter Secret Key"
             value={formData.secretKey}
             onChange={handleChange}
+            autoComplete="new-password" /* 3. IBI BIBWIRA BROWSER KUTABYUZUZA */
             required
           />
         </div>
