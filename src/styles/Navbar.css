@@ -56,7 +56,7 @@ html, body {
 .site-name {
     font-size: 16px; /* Font isomeka neza */
     font-weight: bold;
-    color:#0a1930; /* White text on dark blue background */
+    color:white; /* White text on dark blue background */
     margin-top: 0;
     margin-left: 10px; /* Umwanya hagati ya logo na text */
 }
