@@ -57,10 +57,15 @@ body {
        Yishyire kuri 60px (cyangwa height ya Navbar yawe) */
     padding-top: 60px !important; 
   }
-  
+  .container {
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 10px;
+}
   .trending {
     /* Force trending kuzamuka ikegera navbar */
     position: relative;
     top: 0;
   }
 }
+
