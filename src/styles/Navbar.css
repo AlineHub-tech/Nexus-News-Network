@@ -25,37 +25,45 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 5%;
-    height: 70px;
+    padding: 10px 3%; /* Yagabanyijwe gato ngo izina ribone umwanya */
+    height: 75px;
 }
 
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 /* LOGO IBE IRI MU RUZIGA (CIRCLE) */
 .site-logo {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%; /* Ibi nibyo biyigira uruziga */
+    height: 48px;
+    width: 48px;
+    border-radius: 50% !important; /* Ibi nibyo biyigira uruziga */
     object-fit: cover;
-    border: 2px solid #f0f0f0;
+    border: 1px solid #ddd;
+    flex-shrink: 0; /* Birinda ko yikunja kuri mobile */
 }
 
+/* IZINA RIGARAGARA KURI MOBILE NA DESKTOP */
 .site-name {
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Yagabanyijwe gato ngo ikwire kuri mobile */
     color: #0a1930;
     text-transform: uppercase;
+    white-space: nowrap; /* Birinda ko rijya munsi */
 }
 
-/* IBI BYO KURI NAV ACTIONS (Icons) */
+/* NAV ACTIONS (Gap hagati ya Flag, Login, na Menu) */
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 20px; /* Iyi gap niyo ituma tudarapo n'ama-icons bitafatana */
+    gap: 18px !important; /* Iyi gap niyo itandukanya flag n'ibindi */
+}
+
+/* Ibi bitandukanya neza element ziri muri LangSwitch cyangwa SearchBar */
+.nav-actions > * {
+    margin-left: 5px; 
 }
 
 /* --- 3. DESKTOP CATEGORIES --- */
@@ -67,7 +75,7 @@ html, body {
 .categories-wrapper-desktop {
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 20px;
 }
 
 .category-link {
@@ -76,20 +84,15 @@ html, body {
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
-    transition: 0.3s;
-}
-
-.category-link:hover {
-    color: #00d4ff;
 }
 
 /* --- 4. MOBILE MENU (Background #0a1930) --- */
 .nav-mobile-menu {
     position: fixed;
-    top: 70px;
+    top: 75px;
     left: -100%;
     width: 85%;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 75px);
     background-color: #0a1930;
     display: flex;
     flex-direction: column;
@@ -117,7 +120,7 @@ html, body {
     padding: 12px 0;
     overflow: hidden;
     white-space: nowrap;
-    margin-top: 0 !important; /* Birinda ko hagati ya Navbar na Ticker habamo ubusa */
+    margin-top: 0 !important;
 }
 
 .trending span {
@@ -133,8 +136,7 @@ html, body {
 
 /* --- 6. RESPONSIVE DESIGN (Mobile & Tablet) --- */
 .menu-toggle {
-    display: none;
-    font-size: 2rem;
+    font-size: 1.8rem;
     background: none;
     border: none;
     cursor: pointer;
@@ -146,24 +148,28 @@ html, body {
         display: none; 
     }
 
-    .menu-toggle {
-        display: block; 
-    }
-
-    /* KUKURAHOM SEARCH BAR KURI MOBILE */
-    /* Niba search bar yawe ifite class cyangwa tag runaka, hano niho uyikurira */
-    .nav-actions .search-bar-container, 
-    .nav-actions input { 
+    /* KUKURAHOM SEARCH BAR KURI MOBILE NGO IZINA RIBONE UMWANYA */
+    /* Simbuza ".search-bar-wrapper" izina rya class ya search bar yawe niba idahise ivamo */
+    .search-bar-container, 
+    .navbar-top input { 
         display: none !important; 
     }
 
+    .site-name {
+        font-size: 0.9rem; /* Gabanya gato kuri mobile ntoya */
+    }
+
     .nav-actions {
-        gap: 15px; /* Gap ntoya ho gato kuri mobile */
+        gap: 12px !important; /* Gap ihagije kuri mobile */
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     .site-name {
-        display: none; 
+        font-size: 0.8rem; /* Kuri telefone ntoya cyane */
+    }
+    .site-logo {
+        height: 40px;
+        width: 40px;
     }
 }
