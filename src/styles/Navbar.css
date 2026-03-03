@@ -145,13 +145,15 @@ body {
    6. DESKTOP CATEGORIES BAR (EXPLORER)
    ========================================= */
 .explorer-navbar {
-  display: none; /* Hide category bar on mobile */
-  margin-top: 10px;
-  align-items: center;
-  overflow-x: auto; /* Horizontal scroll */
-  white-space: nowrap;
-  gap: 10px;
+  display: none; /* Bihishe kuri Mobile */
+  margin-top: 12px;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+
 .explorer-navbar::-webkit-scrollbar {
   display: none;
 }
@@ -215,4 +217,3 @@ body {
     padding: 10px 15px;
   }
 }
-
