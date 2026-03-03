@@ -1,4 +1,4 @@
-/* Auth.css */
+/* Auth.css - Final Unified Version */
 
 :root {
   --primary-color: #2563eb;
@@ -10,6 +10,7 @@
   --error-bg: #fef2f2;
   --error-text: #dc2626;
   --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --border-color: #e2e8f0;
 }
 
 /* Container ituma login ijyera hagati neza */
@@ -24,6 +25,13 @@
   font-family: 'Inter', -apple-system, sans-serif;
 }
 
+/* Staff Gate Icon Header */
+.gate-header-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
 /* Form Card */
 .auth-form {
   background: var(--white);
@@ -34,45 +42,84 @@
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px; /* Nagabanyije gap gato kubera Select */
 }
 
-/* Title ya Login */
+/* Title ya Login & Gate */
 .auth-container h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--text-dark);
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   letter-spacing: -0.025em;
+  text-align: center;
 }
 
-/* Input Fields */
-.auth-form input {
+.auth-container p.gate-subtext {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 20px;
+  max-width: 320px;
+}
+
+/* Input & Select Fields */
+.auth-form input,
+.auth-form select {
   width: 100%;
   padding: 14px 16px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   border-radius: 10px;
   font-size: 1rem;
   transition: all 0.2s ease;
   background-color: #fcfcfc;
+  font-family: inherit;
 }
 
-.auth-form input:focus {
+/* Special styling for Select (Gate Role) */
+.auth-form select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+.auth-form input:focus,
+.auth-form select:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
   background-color: #fff;
 }
 
-/* Error Message */
+/* Labels for Staff Gate */
+.auth-form label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: -12px; /* Bituma label yegera input yayo */
+  padding-left: 4px;
+}
+
+/* Error Message with Shake Animation */
 .error {
   background-color: var(--error-bg);
   color: var(--error-text);
   padding: 12px;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   text-align: center;
   border: 1px solid rgba(220, 38, 38, 0.2);
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
 }
 
 /* Submit Button */
@@ -96,21 +143,16 @@
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
-.auth-form button:active {
-  transform: translateY(0);
-}
-
 .auth-form button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   background-color: #94a3b8;
 }
 
-/* Link p (Register) */
-.auth-container p {
-  margin-top: 20px;
-  color: var(--text-muted);
-  font-size: 0.95rem;
+/* Back Link Fix */
+.auth-container .back-link {
+  margin-top: 25px;
+  font-size: 0.9rem;
 }
 
 .auth-container a {
@@ -129,5 +171,8 @@
 @media (max-width: 480px) {
   .auth-form {
     padding: 30px 20px;
+  }
+  .auth-container h2 {
+    font-size: 1.5rem;
   }
 }
