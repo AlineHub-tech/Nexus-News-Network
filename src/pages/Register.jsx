@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../styles/Auth.css";
+import StaffGate from "../components/StaffGate"; // Import StaffGate hano
 
-// --- UMURONGO W'INGENZI URI KUGENA API BASE URL ---
-// Turakeka ko VITE_API_URL muri Vercel ari: https://nexus-news-network-backend.onrender.com (Nta slash ku iherezo)
 const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
-
-// HANO NIHO HAKOSOWE: Nongeyemo '/api' kugira ngo ihuze na Server.js (app.use('/api/auth', authRoutes))
 const API_REGISTER_URL = `${API_BASE_URL}/api/auth/register`;
-// ----------------------------------------
-
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -20,43 +15,57 @@ const Register = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
+  // IKI NICYO GENZURA STAFF GATE
+  const [isVerified, setIsVerified] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setMessage("");
 
     try {
-      // API_REGISTER_URL irakora neza hano kubera '/api' yongewemo hejuru
       const res = await axios.post(API_REGISTER_URL, { username, email, password, role });
-
-      // Ubutumwa buhuje n'ururimi rwa code (English)
-      setMessage(`User ${username} registered successfully. Token: ${res.data.token.substring(0, 20)}...`);
-
+      setMessage(`User ${username} registered successfully.`);
     } catch (err) {
       console.error(err.response?.data || err);
-      // Kugenzura neza amakosa atandukanye no gutanga ubutumwa bw'icyongereza
-      const errorMessage = err.response?.data?.msg || err.message || "An error occurred during registration.";
+      const errorMessage = err.response?.data?.msg || "An error occurred during registration.";
       setError(errorMessage);
     }
   };
 
+  // 1. BANZA UGENZURE STAFF GATE (Niba atarayinyuramo)
+  if (!isVerified) {
+    return <StaffGate onVerifySuccess={() => setIsVerified(true)} target="register" />;
+  }
+
+  // 2. NIBA AMAZE KUBA VERIFIED, MWEREKE REGISTER FORM
   return (
     <div className="auth-container">
-      <h2>Register User</h2>
+      <div className="gate-header-icon">📝</div>
+      <h2>Create Staff Account</h2>
+      <p style={{textAlign: 'center', color: 'green', fontSize: '0.8rem', marginBottom: '15px'}}>
+        Identity Verified. You can now register.
+      </p>
+
       <form onSubmit={handleSubmit} className="auth-form">
         <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
         <input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        
+        <label style={{fontSize: '0.8rem', fontWeight: 'bold'}}>Assign Role</label>
         <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="writer">Writer</option>
+          <option value="writer">Writer / Author</option>
           <option value="admin">Admin</option>
         </select>
+
         {error && <p className="error">{error}</p>}
-        {message && <p style={{color: 'green'}}>{message}</p>}
-        <button type="submit">Register</button>
+        {message && <p style={{color: 'green', textAlign: 'center'}}>{message}</p>}
+        
+        <button type="submit">Register User</button>
       </form>
-      <p style={{textAlign: 'center', marginTop: '10px'}}>
-        Already have an account? <Link to="/login">Login here</Link>
+
+      <p style={{textAlign: 'center', marginTop: '15px'}}>
+        Already have an account? <Link to="/login" style={{color: '#2563eb', fontWeight: '700'}}>Login here</Link>
       </p>
     </div>
   );
