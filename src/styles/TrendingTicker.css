@@ -1,24 +1,31 @@
 :root {
   --dark: #0a2a66;
-  --accent: #d60000;
+  --accent: #d60000; /* for trending and highlights */
   --muted: #6b7280;
   --bg: #f7f7f8;
 }
 
 /* Global */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: Inter, Arial, sans-serif;
   background: var(--bg);
   color: var(--dark);
-  /* Kuri Desktop ubugumishaho 78px niba Navbar ari nini */
+  /* Kuri Desktop rero 78px ni sawa */
   padding-top: 78px; 
 }
 
-.container { max-width: 2000px; margin: 0 auto; padding: 10px; }
+.container {
+  max-width: 2000px;
+  margin: 0 auto;
+  padding: 10px;
+}
 
+/* --- TRENDING SECTION --- */
 .trending {
   background: var(--accent);
   color: #fff;
@@ -26,6 +33,10 @@ body {
   padding: 8px 0;
   overflow: hidden;
   white-space: nowrap;
+  /* Kurinda ko hari margin yatuma haza icyanya */
+  margin-top: 0 !important; 
+  display: block;
+  width: 100%;
 }
 
 .trending span {
@@ -39,19 +50,17 @@ body {
   100% { transform: translateX(-100%); }
 }
 
-/* --- IKI NICYO GIKORA KURI MOBILE --- */
-@media (max-width: 600px) {
+/* --- IKI NICYO GIKURAHO ICYANYA KURI MOBILE --- */
+@media (max-width: 768px) {
   body {
-    /* Gabanya iyi padding ikajya kuri height ya Navbar yawe kuri phone */
-    /* Niba Navbar ifite 60px, padding nayo igomba kuba 60px */
+    /* Gabanya 78px kuko kuri mobile navbar iba ari ntoya. 
+       Yishyire kuri 60px (cyangwa height ya Navbar yawe) */
     padding-top: 60px !important; 
   }
-
-  /* Niba hari margin isigaye kuri Navbar yizamure gato */
-  .navbar-container {
-    margin-top:-18%;
-    top: 0 !important;
+  
+  .trending {
+    /* Force trending kuzamuka ikegera navbar */
+    position: relative;
+    top: 0;
   }
 }
-
-
