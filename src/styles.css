@@ -36,7 +36,7 @@ body {
   left: 0;
   width: 100% !important;
   z-index: 9999 !important;
-  background: #ffffff;
+  background-color: #0a1930; 
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -125,3 +125,4 @@ body {
     display: none;
   }
 }
+
