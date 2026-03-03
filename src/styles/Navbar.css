@@ -17,7 +17,7 @@ html, body {
     top: 0;
     width: 100%;
     z-index: 9999;
-    background-color: #ffffff;
+   background-color: #0a1930; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -34,7 +34,14 @@ html, body {
     align-items: center;
     gap: 10px;
 }
-
+.auth-icon-button {
+    background: none;
+    border: none;
+    font-size: 18px; /* Size nshya */
+    cursor: pointer;
+    margin-left: 10px;
+    color: #ffffff; /* White color */
+}
 /* LOGO IBE IRI MU RUZIGA (CIRCLE) */
 .site-logo {
     height: 48px;
@@ -47,13 +54,16 @@ html, body {
 
 /* IZINA RIGARAGARA KURI MOBILE NA DESKTOP */
 .site-name {
-    font-weight: 800;
-    font-size: 1.1rem; /* Yagabanyijwe gato ngo ikwire kuri mobile */
-    color: #0a1930;
-    text-transform: uppercase;
-    white-space: nowrap; /* Birinda ko rijya munsi */
+    font-size: 16px; /* Font isomeka neza */
+    font-weight: bold;
+    color: #ffffff; /* White text on dark blue background */
+    margin-top: 0;
+    margin-left: 10px; /* Umwanya hagati ya logo na text */
 }
-
+.nav-actions {
+    display: flex;
+    align-items: center;
+}
 /* NAV ACTIONS (Gap hagati ya Flag, Login, na Menu) */
 .nav-actions {
     display: flex;
@@ -173,3 +183,4 @@ html, body {
         width: 40px;
     }
 }
+
