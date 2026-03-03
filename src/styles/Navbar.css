@@ -1,219 +1,157 @@
-/* =========================================
-   1. GLOBAL RESET (Kugira ngo icyanya cyera gishire)
-   ========================================= */
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-/* Shira padding kuri body ingana na height ya navbar 
-   kugira ngo content itazamuka ngo yihishe munsi yayo */
-body {
-  padding-top: 70px; 
-}
-
-/* =========================================
-   2. NAVBAR CONTAINER (FIXED TOP)
-   ========================================= */
+/* Default styles (Mobile First) */
 .navbar-container {
-  background-color: #0a1930;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  padding: 10px 20px;
-  
-  /* IBI NIBYO BIFIXINGA NAVBAR HEJURU NEZA */
-  position: fixed;
+  background-color: #0a1930; /* Dark blue background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
+  margin-top: -35%;
+  z-index: 100;
   width: 100%;
-  z-index: 2000; /* Izamure cyane ngo ijye hejuru y'ibindi byose */
-
-  /* KURAMO MARGIN ZOSE ZASHYIZWEMO */
-  margin: 0 !important; 
-  box-sizing: border-box;
 }
 
 .navbar-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1300px;
-  margin: 0 auto;
-  width: 100%;
 }
 
-/* =========================================
-   3. LOGO & BRANDING
-   ========================================= */
+/* Logos na Text byakozwe stretch kuri mobile */
 .logo-section {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-direction: row; /* Biramburanye kuri mobile noneho */
 }
 
 .site-logo {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .site-name {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+    font-size: 16px; /* Font isomeka neza */
+    font-weight: bold;
+    color: #ffffff; /* White text on dark blue background */
+    margin-top: 0;
+    margin-left: 10px; /* Umwanya hagati ya logo na text */
 }
 
-/* =========================================
-   4. ACTIONS (LOGIN & MENU)
-   ========================================= */
 .nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    align-items: center;
 }
 
-.auth-icon-button, 
+/* Size ya Login Icon yagabanutse */
+.auth-icon-button {
+    background: none;
+    border: none;
+    font-size: 18px; /* Size nshya */
+    cursor: pointer;
+    margin-left: 10px;
+    color: #ffffff; /* White color */
+}
+
 .menu-toggle {
+  display: block; 
   background: none;
   border: none;
-  color: #ffffff;
   font-size: 24px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  transition: transform 0.2s ease;
+  margin-left: 10px;
+  color: #ffffff; /* White color */
 }
 
-.auth-icon-button {
-  font-size: 20px; /* Login icon yagabanutse nk'uko wabishakaga */
-}
-
-.menu-toggle:active {
-  transform: scale(0.9);
-}
-
-/* =========================================
-   5. MOBILE MENU (OVERLAY)
-   ========================================= */
+/* Mobile Menu (Hidden by default on mobile) */
 .nav-mobile-menu {
   display: none;
   flex-direction: column;
-  position: fixed;
-  top: 60px; /* Munsi ya Navbar */
+  position: absolute;
+  top: 60px; /* Adjust based on your header height */
   left: 0;
   right: 0;
-  bottom: 0;
-  background-color: #0a1930;
-  padding: 30px 20px;
-  z-index: 1999;
-  overflow-y: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #0a1930; /* Dark blue background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  z-index: 50;
 }
 
 .nav-mobile-menu.open {
-  display: flex;
+  display: flex; 
 }
 
 .menu-link {
-  padding: 15px 0;
-  color: #ffffff;
+  padding: 10px 0;
+  color: #ffffff; /* White text */
   text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid #444;
 }
 
 .mobile-categories-title {
-  color: #6b7280;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  font-weight: 700;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    color: #ffffff;
 }
 
-/* =========================================
-   6. DESKTOP CATEGORIES BAR (EXPLORER)
-   ========================================= */
+/* Explorer Navbar (Categories bar Desktop view: hidden on mobile) */
 .explorer-navbar {
-  display: none; /* Bihishe kuri Mobile */
-  margin-top: 12px;
-  gap: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.explorer-navbar::-webkit-scrollbar {
-  display: none;
+  display: none; /* Hide category bar on mobile */
+  margin-top: 10px;
+  align-items: center;
+  overflow-x: auto; /* Horizontal scroll */
+  white-space: nowrap;
+  gap: 10px;
 }
 
 .category-link {
-  color: #d1d5db;
-  text-decoration: none;
-  padding: 6px 16px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  transition: all 0.3s ease;
-}
-
-.category-link:hover {
-  background-color: #e63946;
   color: #ffffff;
+  text-decoration: none;
+  padding: 8px 12px;
+  background-color: #1a2b4c; /* Slightly lighter blue for contrast */
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  display: inline-block; 
 }
 
 .category-link.home-link {
-  background-color: #e63946;
-  font-weight: 700;
+    background-color: #0056b3; /* Bright blue for Home link */
+    font-weight: bold;
 }
 
-/* =========================================
-   7. RESPONSIVE QUERIES
-   ========================================= */
+.category-link:hover {
+  background-color: #0056b3;
+}
 
-/* Desktop Styles */
-@media (min-width: 900px) {
-  body {
-    padding-top: 100px; /* Umwanya w'inyongego kuri desktop kuko navbar iba nini */
+
+/* --- Media Queries for responsiveness --- */
+
+/* Tablet styles (min-width: 600px) */
+@media (min-width: 600px) {
+    .navbar-container {
+      margin-top: -25%;
+    }
+  .site-name {
+    font-size: 18px;
   }
 
-  .navbar-container {
-    padding: 15px 60px;
+  .nav-mobile-menu {
+    display: none !important; 
   }
-
+  
   .menu-toggle {
-    display: none;
+    display: none; 
   }
 
   .explorer-navbar {
-    display: flex;
-    justify-content: center;
-  }
-
-  .site-name {
-    font-size: 1.5rem;
+    display: flex; /* Show category bar on tablets+ */
   }
 }
 
-/* Mobile Small Screens */
-@media (max-width: 600px) {
-  .site-name {
-    font-size: 1rem;
-  }
-  
-  .navbar-container {
-    padding: 10px 15px;
-  }
+/* Desktop styles (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .navbar-container {
+        padding: 10px 50px;
+        margin-top: -25%;
+    }
 }
