@@ -1,157 +1,179 @@
-/* Default styles (Mobile First) */
-.navbar-container {
-  background-color: #0a1930; /* Dark blue background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px 15px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
+/* --- Variables --- */
+:root {
+  --primary-dark: #0a192f; /* Background wifuza kuri mobile menu */
+  --accent-color: #00d4ff;
+  --text-white: #ffffff;
+  --text-gray: #ccd6f6;
+  --navbar-height: 70px;
 }
 
+/* --- Container -- */
+.navbar-container {
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Ituma iguma hejuru */
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Top Section (Logo & Actions) --- */
 .navbar-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 5%;
+  height: var(--navbar-height);
+  background: white;
 }
 
-/* Logos na Text byakozwe stretch kuri mobile */
 .logo-section {
-    display: flex;
-    align-items: center;
-    flex-direction: row; /* Biramburanye kuri mobile noneho */
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .site-logo {
-  width: 40px;
-  height: 40px;
+  height: 45px;
+  width: 45px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .site-name {
-    font-size: 16px; /* Font isomeka neza */
-    font-weight: bold;
-    color: #ffffff; /* White text on dark blue background */
-    margin-top: 0;
-    margin-left: 10px; /* Umwanya hagati ya logo na text */
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--primary-dark);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .nav-actions {
-    display: flex;
-    align-items: center;
-}
-
-/* Size ya Login Icon yagabanutse */
-.auth-icon-button {
-    background: none;
-    border: none;
-    font-size: 18px; /* Size nshya */
-    cursor: pointer;
-    margin-left: 10px;
-    color: #ffffff; /* White color */
-}
-
-.menu-toggle {
-  display: block; 
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  margin-left: 10px;
-  color: #ffffff; /* White color */
-}
-
-/* Mobile Menu (Hidden by default on mobile) */
-.nav-mobile-menu {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 60px; /* Adjust based on your header height */
-  left: 0;
-  right: 0;
-  background-color: #0a1930; /* Dark blue background */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px 15px;
-  z-index: 50;
-}
-
-.nav-mobile-menu.open {
-  display: flex; 
-}
-
-.menu-link {
-  padding: 10px 0;
-  color: #ffffff; /* White text */
-  text-decoration: none;
-  border-bottom: 1px solid #444;
-}
-
-.mobile-categories-title {
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    color: #ffffff;
-}
-
-/* Explorer Navbar (Categories bar Desktop view: hidden on mobile) */
-.explorer-navbar {
-  display: none; /* Hide category bar on mobile */
-  margin-top: 10px;
+  display: flex;
   align-items: center;
-  overflow-x: auto; /* Horizontal scroll */
-  white-space: nowrap;
-  gap: 10px;
+  gap: 15px;
+}
+
+/* --- Explorer Navbar (Desktop Categories) --- */
+.explorer-navbar {
+  background-color: var(--primary-dark);
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.categories-wrapper-desktop {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .category-link {
-  color: #ffffff;
+  color: var(--text-gray);
   text-decoration: none;
-  padding: 8px 12px;
-  background-color: #1a2b4c; /* Slightly lighter blue for contrast */
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  display: inline-block; 
-}
-
-.category-link.home-link {
-    background-color: #0056b3; /* Bright blue for Home link */
-    font-weight: bold;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: 0.3s;
+  text-transform: uppercase;
 }
 
 .category-link:hover {
-  background-color: #0056b3;
+  color: var(--accent-color);
 }
 
+.home-link {
+  color: var(--text-white);
+  border-bottom: 2px solid var(--accent-color);
+}
 
-/* --- Media Queries for responsiveness --- */
+/* --- Buttons --- */
+.auth-icon-button {
+  background: #f0f2f5;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
 
-/* Tablet styles (min-width: 600px) */
-@media (min-width: 600px) {
-    .navbar-container {
-      margin-top: -25%;
-    }
-  .site-name {
-    font-size: 18px;
+.auth-icon-button:hover {
+  background: #e2e8f0;
+}
+
+.menu-toggle {
+  display: none; /* Bihishwe kuri desktop */
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-dark);
+}
+
+/* --- Mobile Menu --- */
+.nav-mobile-menu {
+  position: fixed;
+  top: var(--navbar-height);
+  left: -100%; /* Bihishe hanze y'ecran */
+  width: 100%;
+  height: calc(100vh - var(--navbar-height));
+  background-color: #0a1930; /* Background wifuje */
+  display: flex;
+  flex-direction: column;
+  padding: 40px 20px;
+  transition: 0.4s ease-in-out;
+  overflow-y: auto;
+  z-index: 999;
+}
+
+.nav-mobile-menu.open {
+  left: 0; /* Igaragara iyo ifunguye */
+}
+
+.menu-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-categories-title {
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* --- RESPONSIVE (Tablets & Mobile) --- */
+
+@media (max-width: 992px) {
+  .explorer-navbar {
+    display: none; /* Kuraho categories za desktop kuri tablet/mobile */
   }
 
-  .nav-mobile-menu {
-    display: none !important; 
+  .menu-toggle {
+    display: block; /* Garagaza menu button */
+  }
+
+  .site-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-name {
+    display: none; /* Kuraho izina rya site kuri telefone ntoya ngo logo isgare yonyine */
   }
   
-  .menu-toggle {
-    display: none; 
+  .navbar-top {
+    padding: 10px 3%;
   }
 
-  .explorer-navbar {
-    display: flex; /* Show category bar on tablets+ */
+  .nav-actions {
+    gap: 8px;
   }
 }
-
-/* Desktop styles (min-width: 1024px) */
-@media (min-width: 1024px) {
-    .navbar-container {
-        padding: 10px 50px;
-        margin-top: -25%;
-    }
-}
-
