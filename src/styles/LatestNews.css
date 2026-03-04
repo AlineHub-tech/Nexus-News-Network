@@ -1,110 +1,122 @@
-/* Container Nyamukuru */
+/* =========================================
+   1. DESKTOP LAYOUT (GRID 4x2)
+   ========================================= */
 .latest-news-section-wrapper {
-  max-width: 1300px;
-  /* margin: 40px auto;
-  padding: 0 20px; */
+  max-width: 1450px;
+  margin: 0 auto;
+  padding: 20px 15px;
+  background: transparent;
 }
 
-/* GRID SYSTEM */
 .latest-news-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.8fr 1fr; /* Middle is wider */
+  display: grid !important;
+  /* Inkuru 4 ku murongo muremure (bituma 8 ziba 4 hejuru, 4 munsi) */
+  grid-template-columns: repeat(4, 1fr) !important; 
   gap: 20px;
-  align-items: start;
+  width: 100%;
 }
 
-/* SIDE COLUMNS (Left & Right) */
-.news-side-column {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* Kuraho amacolumn ya kera (Side Column) kuko ubu byose ni grid imwe */
+.news-side-column, 
+.news-center-slider {
+  display: contents !important; /* Bituma NewsCard zose zigana grid imwe */
 }
 
-.side-item-wrapper {
+/* KOSORA NEWSCARD KURI DESKTOP */
+.side-item-wrapper, .slide-item {
+  display: block !important;
+  position: relative !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  width: 100%;
   height: auto;
 }
 
-/* CENTER SLIDER */
-.news-center-slider {
-  position: relative;
-  height: 500px; /* Bunini bwa hagati */
-  background: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+/* =========================================
+   2. MOBILE LAYOUT (LIST: PHOTO LEFT, TEXT RIGHT)
+   ========================================= */
+@media (max-width: 768px) {
+  .latest-news-grid {
+    grid-template-columns: 1fr !important; /* Umurongo umwe gusa */
+    gap: 15px;
+  }
+
+  /* Ibi nibyo bituma Ifoto ijyera hino (Left) n'inyandiko hirya (Right) */
+  .news-card {
+    display: flex !important;
+    flex-direction: row !important; 
+    align-items: center;
+    height: 110px !important;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 5px;
+    width: 100%;
+  }
+
+  /* Size y'Ifoto kuri Mobile (Left) */
+  .news-card-image, 
+  .news-card img {
+    width: 130px !important;
+    height: 110px !important;
+    object-fit: cover !important;
+    flex-shrink: 0;
+  }
+
+  /* Inyandiko kuri Mobile (Right) */
+  .news-card-content {
+    padding: 10px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* Titre y'inkuru kuri mobile */
+  .news-card-content h3, 
+  .news-title {
+    font-size: 14px !important;
+    line-height: 1.3;
+    margin: 0 !important;
+    color: #1a202c;
+    /* Imirongo 2 gusa kuri mobile */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Kuraho description n'ibindi bitonzi kuri mobile ngo bimeze neza */
+  .news-card-description, 
+  .news-card-footer {
+    display: none !important;
+  }
 }
 
-.slider-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
+/* TABLET VIEW (2 ku murongo) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .latest-news-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* =========================================
+   3. KUKURAHO BLACK SPACE & ANIMATIONS
+   ========================================= */
+.news-center-slider {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
 }
 
 .slide-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-  transform: scale(1.05); /* Slight zoom out animation */
+  transform: none !important;
+  transition: none !important;
 }
 
-.slide-item.active {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 10;
-}
-
-/* SLIDER DOTS */
+/* Kuraho utudomo twa slider kuko tutagikenewe */
 .slider-indicators {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 10px;
-  z-index: 20;
-}
-
-.indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.4);
-  transition: 0.3s;
-}
-
-.indicator.active {
-  background: #e63946; /* Blue cyangwa Red ya website */
-  width: 30px;
-  border-radius: 10px;
-}
-
-/* RESPONSIVE DESIGN */
-
-/* TABLET (min-width: 768px and max-width: 1024px) */
-@media (max-width: 1024px) {
-  .latest-news-grid {
-    grid-template-columns: 1fr 1fr; /* Sidebars go below or aside */
-  }
-  .news-center-slider {
-    grid-column: span 2; /* Slider fills top */
-    height: 400px;
-  }
-}
-
-/* MOBILE (max-width: 767px) */
-@media (max-width: 767px) {
-  .latest-news-grid {
-    grid-template-columns: 1fr; /* Everything in one column */
-  }
-  .news-center-slider {
-    grid-column: span 1;
-    height: 350px;
-  }
-  .news-side-column {
-    order: 2; /* Sidebar comes after slider on mobile */
-  }
+  display: none !important;
 }
