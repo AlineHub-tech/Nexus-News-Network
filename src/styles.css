@@ -19,7 +19,7 @@ body, html {
   padding: 0;
   width: 100%;
   overflow-x: hidden;
-  background: white;
+  background: var(--bg);
   font-family: 'Inter', sans-serif;
 }
 
@@ -67,7 +67,34 @@ body {
   align-items: center;
 }
 
+/* --- 4. CENTRAL SLIDE VISIBILITY (FIXED) --- */
+.main-content-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1450px;
+  margin: 0 auto;
+}
 
+/* Ibi bituma inkuru zo hagati (Slide) zongera kugaragara */
+.latest-center-col {
+  display: block !important; /* Hindura hano niba grid yanze */
+  min-height: 450px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.latest-center-col .slide-item {
+  display: none;
+}
+
+.latest-center-col .slide-item.active {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  animation: slideFade 0.6s ease-in;
+}
 
 @keyframes slideFade {
   from { opacity: 0; transform: translateY(10px); }
@@ -81,5 +108,3 @@ body {
   .top-sticky-ads-container { top: 65px !important; }
   .trending { top: 175px !important; }
 }
-
-
