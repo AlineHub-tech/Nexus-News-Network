@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- 1. GOOGLE VERIFICATION TAG (Hano niho bayishyira) -->
+    <!-- 1. GOOGLE VERIFICATION TAG -->
     <meta name="google-site-verification" content="ibFwxasSBWRR2VXs8eKA0qNltBDD1T6HxTbQ8RL4RhM" />
 
     <!-- 2. SEO META TAGS -->
@@ -13,22 +13,27 @@
     <meta name="keywords" content="Nexus News Network, NNN, Rwanda News, Breaking News Kigali, Politics Rwanda, Entertainment, Sports Rwanda" />
     <meta name="author" content="Nexus News Network Team" />
 
-    <!-- 3. SOCIAL MEDIA (Open Graph) -->
+    <!-- 3. SOCIAL MEDIA (Open Graph) - FIXED IMAGE PATHS -->
     <meta property="og:title" content="Nexus News Network - Trusted Source of News" />
     <meta property="og:description" content="Stay updated with the most reliable news source in Rwanda. Politics, Sports, and Life." />
-    <meta property="og:image" content="%PUBLIC_URL%/nnn.jpg" />
+    <!-- Muri Vite, koresha / gusa kugira ngo ifoto yo mu public folder igaragare -->
+    <meta property="og:image" content="/nnn.jpg" />
     <meta property="og:url" content="https://nexus-news-network.vercel.app" />
     <meta property="og:type" content="website" />
 
-    <!-- 4. ICONS & STYLES -->
+    <!-- 4. ICONS & STYLES - FIXED FAVICON -->
+    <link rel="shortcut icon" href="/nnn.jpg" type="image/x-icon">
+    <!-- Font awesome cyangwa izindi styles niba uzikoresha -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/nnn.jpg" type="image/x-icon" style="border-radius: 50%;">
 
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- 5. ROOT ELEMENT -->
     <div id="root"></div>
-    <!-- Ibi nibyo bituma React ikora -->
+
+    <!-- 6. MAIN SCRIPT SOURCE -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
