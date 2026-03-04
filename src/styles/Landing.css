@@ -1,124 +1,44 @@
-/* =========================================
-   1. GLOBAL RESET & BODY (DYNAMIC FIX)
-   ========================================= */
-:root {
-  --nav-h: 65px;
-  --ads-h: 90px;
-  --ticker-h: 42px;
-  --bg-color: #c1c1e6;
+/* 1. KOSORA CENTER COLUMN (SLIDE) VISIBILITY */
+.latest-center-col {
+  display: grid !important; /* Kwemeza ko igaragara */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  min-height: 400px; /* Bituma itaba ubusa */
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* 2. KOSORA SLIDE ITEMS (Kwemeza ko 'active' item igaragara) */
+.latest-center-col .slide-item {
+  display: none; /* Bisanzwe biba bihishe */
 }
 
-html, body {
+.latest-center-col .slide-item.active {
+  display: block !important; /* Igaragaza gusa inkuru iriho */
   width: 100%;
-  overflow-x: hidden;
-  background: var(--bg-color);
-  font-family: 'Inter', -apple-system, sans-serif;
-  scroll-behavior: smooth;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
-/* =========================================
-   2. THE ULTIMATE STICKY HEADER WRAPPER
-   ========================================= */
-
-/* Iyi wrapper igumisha Navbar, Ads, na Ticker hejuru bidapfukana */
-.main-site-header {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 10000;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Navbar container */
-.navbar-container {
-  position: relative !important; /* Wrapper ni sticky, niyo mpamvu uyu uba relative */
-  width: 100% !important;
-  z-index: 1003;
-}
-
-/* Top Sticky Ads Section */
-.top-sticky-ads-container {
-  position: relative !important;
-  width: 100%;
-  min-height: var(--ads-h);
-  height: auto; /* Bituma text zose zigaragara */
-  z-index: 1002;
-  background: #ffffff;
-  border-top: 1px solid #eee;
-  border-bottom: 2px solid #0a1930;
-  display: flex;
-  align-items: center;
-}
-
-/* Trending Ticker */
-.trending {
-  position: relative !important;
-  width: 100%;
-  height: var(--ticker-h);
-  z-index: 1001;
-  background: #000;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-/* =========================================
-   3. MAIN CONTENT (NO OVERLAP FIX)
-   ========================================= */
-
+/* 3. KUKURAHO KWA KUPFUKANA (OVERLAP) */
 .main-content-layout {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1450px;
-  margin: 20px auto !important; /* Isunika inkuru munsi ya Header automatically */
-  padding: 0 15px;
+  position: relative !important;
+  z-index: 1 !important;
+  /* Sunika inkuru hasi neza kugira ngo itaza munsi ya Ticker */
+  margin-top: 30px !important; 
+  padding-top: 20px !important;
 }
 
-/* Latest News Container - Ibi bituma nta blank space ibaho */
-.latest-news-section-container {
-  width: 100%;
-  margin-bottom: 40px;
-  background: transparent !important;
-}
-
-/* =========================================
-   4. TV & ADS GRID (Hagati mu paji)
-   ========================================= */
-.tv-ads-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 25px;
-  margin-top: 40px;
-}
-
-@media (max-width: 1024px) {
-  .tv-ads-grid {
-    grid-template-columns: 1fr;
+/* 4. KOSORA GRID SYSTEM KURI DESKTOP */
+@media (min-width: 1024px) {
+  .latest-news-grid-section {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    gap: 20px;
   }
 }
 
-/* =========================================
-   5. MOBILE RESPONSIVE
-   ========================================= */
-@media (max-width: 768px) {
-  .main-content-layout {
-    margin-top: 10px !important;
-  }
-
-  /* Kuri Mobile Navbar niyo iguma hejuru gusa niba Ads ziba ndende */
-  .top-sticky-ads-container {
-    min-height: 80px;
-  }
+/* Animation Fix */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
