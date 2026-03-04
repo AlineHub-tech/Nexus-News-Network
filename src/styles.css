@@ -1,91 +1,127 @@
 /* --- Variables --- */
 :root {
-  --primary-dark: #0a1930;
+  --dark: #0a2a66;
+  --accent: #00d4ff;
+  --muted: #6b7280;
   --bg: #c1c1e6;
-  --nav-h: 65px; /* Uburebure bwa Logo section */
+  --primary-dark: #0a1930;
 }
 
-/* --- Global Reset (KOSORA HANO) --- */
+/* --- Global Reset --- */
 * {
   box-sizing: border-box;
-  /* Kuraho margin !important kuko yangiza grid y'inkuru */
+  margin: 0 !important; /* Kuraho margins zose mu buryo bwa rusange */
+  padding: 0;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
   width: 100%;
   overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   background: var(--bg);
 }
 
-/* --- STICKY HEADER WRAPPER --- */
-/* Ibi bituma Navbar -> Ads -> Ticker bigumana hejuru */
-.main-site-header {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 10000;
-  background: white;
-  display: flex;
-  flex-direction: column;
+/* Gufatanya Navbar na Content */
+body {
+  /* Iyi padding igomba kungana n'uburebure bwa Navbar gusa */
+  padding-top: 110px !important; 
 }
 
-/* --- NAVBAR (Fixed to top of the header) --- */
+/* --- NAVBAR (Fixed & Sticky) --- */
 .navbar-container {
-  width: 100%;
-  background: var(--primary-dark);
-  z-index: 1003;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0;
+  width: 100% !important;
+  z-index: 9999 !important;
+  background-color: #0a1930; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* --- TOP ADS (Munsi ya Navbar) --- */
-.top-sticky-ads-container {
-  width: 100%;
-  background: #ffffff;
-  border-bottom: 1px solid #ddd;
-  z-index: 1002;
-  min-height: 85px;
-  height: auto; /* Bituma text zose zigaragara */
+.navbar-top {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 5px 5%;
+  height: 65px; /* Uburebure bwa Logo section */
 }
 
-/* --- TRENDING TICKER (Munsi ya Ads) --- */
+.explorer-navbar {
+  background-color: var(--primary-dark) !important;
+  padding: 8px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* --- TRENDING TICKER (Yafatanye na Navbar) --- */
 .trending {
   background: black;
   color: #fff;
-  height: 40px;
-  width: 100%;
-  z-index: 1001;
-  display: flex;
-  align-items: center;
+  font-weight: 700;
+  padding: 10px 0;
   overflow: hidden;
-}
-
-/* --- MAIN CONTENT (Inkuru) --- */
-.main-content-layout {
+  white-space: nowrap;
   width: 100%;
-  max-width: 1400px;
-  margin: 20px auto; /* Isunika inkuru munsi ya ticker neza */
-  padding: 0 15px;
+  /* Ibi nibyo bituma yegera Navbar burundu */
+  margin-top: 0 !important; 
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
-/* Animation ya Ticker */
+/* Animation ya Trending Ticker */
 .trending span {
   display: inline-block;
-  white-space: nowrap;
+  padding-left: 100%;
   animation: ticker-move 20s linear infinite;
 }
 
 @keyframes ticker-move {
-  0% { transform: translateX(100%); }
+  0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
 
-/* --- MOBILE --- */
-@media (max-width: 768px) {
-  .main-content-layout { margin-top: 10px; }
+/* --- HERO SECTION --- */
+.hero {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  /* Space itangirira munsi ya Trending Ticker */
+  margin-top: 15px !important; 
+}
+
+/* --- MOBILE MENU --- */
+.nav-mobile-menu {
+  position: fixed !important;
+  top: 65px; /* Munsi ya navbar-top */
+  left: -100%;
+  width: 100%;
+  height: calc(100vh - 65px);
+  background-color: #0a1930 !important;
+  transition: 0.4s ease-in-out;
+  z-index: 9998;
+}
+
+.nav-mobile-menu.open {
+  left: 0 !important;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+  body {
+    padding-top: 65px !important; /* Kuri mobile explorer ivamo */
+  }
+  .explorer-navbar {
+    display: none !important;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-name {
+    /* display: none; */
+  }
 }
