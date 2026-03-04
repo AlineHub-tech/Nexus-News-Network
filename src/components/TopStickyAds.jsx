@@ -4,7 +4,6 @@ import "../styles/TopStickyAds.css";
 const TopStickyAds = ({ ads }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Gufilter ads zifite amakuru ahagije
   const validAds = ads?.filter(ad => ad.title || ad.mediaUrl) || [];
 
   useEffect(() => {
@@ -20,7 +19,7 @@ const TopStickyAds = ({ ads }) => {
 
   const currentAd = validAds[currentSlide];
   
-  // Gufata nimero mu buryo bwizewe
+  // Gufata nimero muri description (urugero: 078...)
   const phoneMatch = currentAd?.description?.match(/07\d{8}/);
   const phoneNumber = phoneMatch ? phoneMatch[0] : "";
 
@@ -31,23 +30,21 @@ const TopStickyAds = ({ ads }) => {
         <div className="ad-text-part">
           <span className="sponsored-label">PROMOTED</span>
           <h4 className="ad-title-full">{currentAd?.title}</h4>
-          <div className="ad-desc-row">
-            <p className="ad-full-desc">{currentAd?.description}</p>
-            {phoneNumber && (
-              <a href={`tel:${phoneNumber}`} className="call-btn-action">
-                📞 CALL
-              </a>
-            )}
-          </div>
+          <p className="ad-full-desc">{currentAd?.description}</p>
+          {phoneNumber && (
+            <a href={`tel:${phoneNumber}`} className="call-btn-action">
+              📞 CALL: {phoneNumber}
+            </a>
+          )}
         </div>
 
-        {/* Hagati: Line */}
+        {/* Hagati: Divider Line */}
         <div className="ad-vertical-divider"></div>
 
-        {/* Iburyo: Image Ads */}
+        {/* Iburyo: Photo Ads */}
         <div className="ad-media-part">
           {currentAd?.mediaUrl && (
-             <img src={currentAd.mediaUrl} alt="Ad" />
+             <img src={currentAd.mediaUrl} alt="Nexus Ad" />
           )}
         </div>
       </div>
