@@ -1,22 +1,23 @@
-/* --- Variables --- */
+/* --- Variables zawe --- */
 :root {
   --dark: #0a2a66;
   --bg: #c1c1e6;
   --primary-dark: #0a1930;
-  --nav-h: 65px; /* Uburebure bwa Logo section */
-  --explorer-h: 40px; /* Explorer bar */
-  --ads-h: 100px; /* Uburebure bwa Ads bushobora kwaguka */
+  --nav-h: 65px;
+  --explorer-h: 40px;
   --ticker-h: 40px;
 }
 
-/* --- Global Reset (KOSORA HANO) --- */
+/* --- Global Reset (Ikosore hano gusa) --- */
 * {
   box-sizing: border-box;
-  margin: 0; /* KURAKO !important HANO */
+  margin: 0; /* KURAKO !important HANO kugira ngo slide igarapare */
   padding: 0;
 }
 
 html, body {
+  margin: 0;
+  padding: 0;
   width: 100%;
   overflow-x: hidden;
   font-family: 'Inter', Arial, sans-serif;
@@ -24,14 +25,14 @@ html, body {
 }
 
 /* 
-   Iyi padding niyo isunika inkuru (Slides) hasi 
-   Nav(65) + Explorer(40) + Ads(100) + Ticker(40) = 245px
+   Iyi padding niyo isunika inkuru hasi 
+   Nav(65) + Explorer(40) + Ads(yaguka) + Ticker(40) 
 */
 body {
   padding-top: 250px !important; 
 }
 
-/* --- 1. NAVBAR SECTION (TOP 0) --- */
+/* --- 1. NAVBAR SECTION (Fixed) --- */
 .navbar-container {
   position: fixed !important;
   top: 0 !important;
@@ -57,26 +58,26 @@ body {
   align-items: center;
 }
 
-/* --- 2. ADS SECTION (MUNSI YA NAVBAR) --- */
+/* --- 2. ADS SECTION (Ikosore kugira ngo igume hejuru) --- */
 .top-sticky-ads-container {
   position: fixed !important;
-  /* Top = Nav(65) + Explorer(40) = 105px */
-  top: 105px !important; 
+  top: 105px !important; /* Munsi ya Navbar & Explorer */
   left: 0;
   width: 100% !important;
-  min-height: var(--ads-h);
-  height: auto;
+  min-height: 90px;
+  height: auto; /* Kwaguka bitewe na text */
   z-index: 9999 !important;
   background: #ffffff;
   border-bottom: 2px solid #ddd;
   display: flex;
   align-items: center;
 }
-/* --- 3. TRENDING TICKER (Kuyisunika hasi neza) --- */
+
+/* --- 3. TRENDING TICKER (Munsi ya Ads) --- */
 .trending {
   position: fixed !important;
-  /* Koresha top nini gato kugira ngo niyo ads yaba nini itayipfuka */
-  top: 215px !important; 
+  /* IBI NI INGENZI: Trending igomba kwisunika munsi ya Ads */
+  top: calc(105px + 90px) !important; 
   left: 0;
   width: 100% !important;
   height: var(--ticker-h);
@@ -85,40 +86,26 @@ body {
   color: #fff;
   display: flex;
   align-items: center;
+  margin-top: 0 !important;
 }
 
-/* --- 4. FIX INKURU / SLIDE VISIBILITY --- */
+/* --- 4. CENTRAL SLIDE VISIBILITY (IKOSORE HANO) --- */
 .main-content-layout {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 1450px;
   margin: 0 auto;
-  /* Iyi padding ni ingenzi cyane kugira ngo inkuru itajya munsi ya header */
-  padding-top: 20px; 
 }
 
-/* Kwemeza ko Slide iri central (Center Column) igaragara neza */
-@media (min-width: 1024px) {
-  .latest-news-grid-section {
-    display: grid !important;
-    grid-template-columns: repeat(12, 1fr) !important;
-    gap: 20px;
-  }
-
-  .latest-center-col {
-    grid-column: span 6 !important; /* Iha hagati umwanya wa 6 columns kuri 12 */
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  
-  /* Iz'ibumoso n'iburyo zikandara kuri 3-3 */
-  .latest-left-col, .latest-right-col {
-    grid-column: span 3 !important;
-  }
+/* Ibi bituma inkuru zo hagati (Central Slide) zigaragara */
+.latest-center-col {
+  display: grid !important; 
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 400px;
 }
 
 /* Kwemeza ko slide item igaragara */
@@ -129,3 +116,11 @@ body {
   width: 100%;
 }
 
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 992px) {
+  body { padding-top: 200px !important; }
+  .explorer-navbar { display: none !important; }
+  .top-sticky-ads-container { top: 65px !important; }
+  .trending { top: 165px !important; }
+  .latest-center-col { grid-template-columns: 1fr !important; }
+}
