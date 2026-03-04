@@ -1,10 +1,12 @@
+/* TopStickyAds.css */
+
 .top-sticky-ads-container {
   position: sticky;
-  top: 58px; /* Munsi ya Navbar */
+  top: 58px; /* Munsi ya Navbar yawe neza */
   z-index: 995;
   background: #ffffff;
   width: 100%;
-  height: 85px; /* Twongereye height gato */
+  height: 85px; /* Height yongerewe kugira ngo ifoto ijyemo neza */
   border-bottom: 2px solid #0a1930;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   display: flex;
@@ -18,94 +20,114 @@
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 15px;
-  gap: 20px;
+  gap: 15px;
 }
 
-/* LEFT PART: PHOTO */
+/* --- PHOTO PART --- */
 .ad-media-part {
-  width: 180px; /* Size yongerewe */
+  width: 160px; /* Size yongerewe nk'uko wabishakaga */
   height: 65px;
   flex-shrink: 0;
 }
 
-.media-box {
+.media-box-animation {
   width: 100%;
   height: 100%;
-  position: relative;
   border-radius: 8px;
   overflow: hidden;
   background: #000;
+  animation: fadeInAd 0.8s ease-in-out;
 }
 
-.media-box img {
+.media-box-animation img, .media-box-animation video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* MIDDLE: VERTICAL LINE */
+/* --- VERTICAL DIVIDER (Umurongo) --- */
 .ad-vertical-divider {
   width: 2px;
   height: 50px;
   background: #e2e8f0;
+  flex-shrink: 0;
 }
 
-/* RIGHT PART: TEXT */
+/* --- TEXT PART --- */
 .ad-text-part {
   flex-grow: 1;
   overflow: hidden;
 }
 
-.sponsored-label {
-  font-size: 0.6rem;
-  font-weight: 800;
-  color: #d60000;
-  display: block;
+.text-slide-animation {
+  animation: slideInText 0.6s ease-out;
 }
 
-.ad-text-part h4 {
+.sponsored-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #d60000;
+  letter-spacing: 0.5px;
+}
+
+.ad-title-limit {
   margin: 2px 0;
   font-size: 1rem;
   color: #0a1930;
+  font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.ad-actions-row {
+.ad-action-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
-.ad-actions-row p {
+.ad-desc-limit {
   margin: 0;
   font-size: 0.8rem;
   color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.call-now-small {
+.call-btn-small {
   background: #16a34a;
   color: white;
   text-decoration: none;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 4px;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
+  white-space: nowrap;
+  transition: 0.3s;
 }
 
-/* --- ANIMATION --- */
-.slide-up-animation {
-  animation: slideUp 0.5s ease-out;
+/* --- ANIMATIONS --- */
+@keyframes fadeInAd {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes slideInText {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-@media (max-width: 768px) {
-  .ad-media-part { width: 100px; }
-  .ad-actions-row p { display: none; }
-  .ad-vertical-divider { margin: 0 5px; }
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 600px) {
+  .ad-media-part {
+    width: 90px; /* Kuri mobile ifoto iba nto gato ngo text ikwire */
+  }
+  .ad-desc-limit {
+    display: none; /* Kurinda ko biba akajagari kuri phone */
+  }
+  .ad-title-limit {
+    font-size: 0.85rem;
+  }
 }
