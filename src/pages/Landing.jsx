@@ -34,7 +34,7 @@ const Landing = () => {
     });
   }, []);
 
-  // Fetch Ads
+  // Fetch Ads binyuze kuri Public API
   useEffect(() => {
     const fetchAdsData = async () => {
         try {
@@ -57,7 +57,7 @@ const Landing = () => {
     fetchAdsData();
   }, []);
 
-  // Gutunganya amadata (Memoized)
+  // Gutunganya amadata yose (Memoized)
   const formattedNews = useMemo(() => formatMediaList(newsList), [newsList, formatMediaList]);
   const formattedVideos = useMemo(() => formatMediaList(videosList), [videosList, formatMediaList]);
 
@@ -65,9 +65,8 @@ const Landing = () => {
   const regularNewsSliced = useMemo(() => formattedNews.slice(8), [formattedNews]);
   const popularNewsSliced = useMemo(() => formattedNews.slice(0, 8), [formattedNews]);
 
-  if (loading || isAdsLoading) {
-    return <LoadingScreen />;
-  }
+  // Handle Loading & Errors
+  if (loading || isAdsLoading) return <LoadingScreen />;
 
   if (error) {
     return (
@@ -84,46 +83,48 @@ const Landing = () => {
   }
 
   return (
-    <div className="landing-container" style={{ overflowX: "hidden" }}>
-      {/* 1. NAVBAR (Z-index: 1000 muri CSS) */}
+    <div className="landing-container" style={{ overflowX: "hidden", background: "#f4f4f4" }}>
+      {/* 1. NAVBAR (Fixed top: 0) */}
       <Navbar />
 
-      {/* 2. TOP STICKY ADS (Z-index: 990 muri CSS) */}
-      <TopStickyAds ads={ads} />
-
-      {/* 3. TRENDING TICKER WRAPPER: Ibi bituma Trending itihisha munsi ya Ads */}
-      <div style={{ 
-        position: "relative", 
-        zIndex: "100", 
-        background: "#fff",
-        borderBottom: "1px solid #eee" 
-      }}>
-         <TrendingTicker />
+      {/* 2. WRAPPER FOR STICKY ELEMENTS: 
+          Ibi bituma ibintu byose byigerera hejuru bidatwikiriye content */}
+      <div style={{ marginTop: "65px", position: "relative", zIndex: "500" }}>
+          <TopStickyAds ads={ads} />
+          
+          {/* Trending Ticker munsi ya Ads neza */}
+          <div style={{ position: "relative", zIndex: "100", background: "#000" }}>
+             <TrendingTicker />
+          </div>
       </div>
 
-      <main className="main-content-layout" style={{ marginTop: "20px" }}>
-        {/* 4. LATEST NEWS (Side-Slider-Side layout) */}
-        <section className="latest-news-section-container">
-           {/* IKI NICYO CYARI KIBURA: LatestNews ikoresha grid ya 2-4-2 */}
+      {/* 3. MAIN CONTENT: 
+          Nashyizemo marginTop na padding kugira ngo LATEST NEWS igaragara neza hagati */}
+      <main className="main-content-layout" style={{ marginTop: "30px", paddingBottom: "50px" }}>
+        
+        {/* LATEST NEWS: Ifite grid 2-4-2 (Side-Slider-Side) */}
+        <section className="latest-news-section-container" style={{ position: "relative", zIndex: "10" }}>
            <LatestNews news={latestNews8} />
         </section>
 
-        {/* 5. REGULAR NEWS */}
-        <section className="regular-news-section" style={{ marginTop: "40px" }}>
+        {/* REGULAR NEWS SECTION */}
+        <section className="regular-news-section" style={{ marginTop: "50px" }}>
           <RegularNews newsList={regularNewsSliced} />
         </section>
 
-        {/* 6. POPULAR NEWS */}
-        <section className="popular-news-section" style={{ marginTop: "40px" }}>
+        {/* POPULAR NEWS SECTION */}
+        <section className="popular-news-section" style={{ marginTop: "50px" }}>
           <PopularNews newsList={popularNewsSliced} />
         </section>
 
-        {/* 7. TV SECTION (AdsSection ya kera yayivuyemo) */}
-        <section className="tv-ads-grid" style={{ gridTemplateColumns: "1fr", marginTop: "40px" }}>
+        {/* TV SECTION (One Column layout) */}
+        <section className="tv-ads-grid" style={{ gridTemplateColumns: "1fr", marginTop: "50px" }}>
           <TV videos={formattedVideos} />
         </section>
+
       </main>
 
+      {/* 4. FOOTER */}
       <Footer />
     </div>
   );
