@@ -3,62 +3,51 @@ import "../styles/TopStickyAds.css";
 
 const TopStickyAds = ({ ads }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [fade, setFade] = useState(true); // Control animation
 
-  const mediaAds = ads?.filter(ad => ad.mediaUrl).slice(0, 10) || [];
-  const textAds = ads?.filter(ad => ad.title).slice(0, 10) || [];
+  // Gufilter ads zifite amakuru ahagije
+  const validAds = ads?.filter(ad => ad.title || ad.mediaUrl) || [];
 
   useEffect(() => {
-    const total = Math.max(mediaAds.length, textAds.length);
-    if (total > 0) {
+    if (validAds.length > 1) {
       const timer = setInterval(() => {
-        setFade(false); // Start fading out
-        setTimeout(() => {
-          setCurrentSlide((prev) => (prev + 1) % total);
-          setFade(true); // Fade back in
-        }, 500); // Wait for fade out
-      }, 6000); 
+        setCurrentSlide((prev) => (prev + 1) % validAds.length);
+      }, 5000); 
       return () => clearInterval(timer);
     }
-  }, [mediaAds.length, textAds.length]);
+  }, [validAds.length]);
 
-  const getMediaUrl = (url) => {
-    if (!url) return "";
-    if (url.startsWith("http")) return url;
-    return `https://nexus-news-network-backend.onrender.com${url.startsWith('/') ? url : '/' + url}`;
-  };
+  if (validAds.length === 0) return null;
 
-  if (!ads || ads.length === 0) return null;
-
-  const currentMediaAd = mediaAds[currentSlide % mediaAds.length];
-  const currentTextAd = textAds[currentSlide % textAds.length];
+  const currentAd = validAds[currentSlide];
   
-  // Extract phone number properly (safely)
-  const phoneNumber = currentTextAd?.description?.replace(/\D/g, '') || "";
+  // Gufata nimero mu buryo bwizewe
+  const phoneMatch = currentAd?.description?.match(/07\d{8}/);
+  const phoneNumber = phoneMatch ? phoneMatch[0] : "";
 
   return (
     <div className="top-sticky-ads-container">
-      <div className={`ad-wrapper-flex ${fade ? 'fade-in' : 'fade-out'}`}>
-        
-        {/* Ibumoso: Text (Niko wavuze ko client abishaka) */}
+      <div className="ad-wrapper-flex">
+        {/* Ibumoso: Text Ads */}
         <div className="ad-text-part">
-          <span className="sponsored-label">SPONSORED</span>
-          <h4 className="ad-title-full">{currentTextAd?.title}</h4>
-          <p className="ad-full-desc text-truncate">{currentTextAd?.description}</p>
-          {phoneNumber && (
-            <a href={`tel:${phoneNumber}`} className="call-btn-action">
-              📞 Call Now
-            </a>
-          )}
+          <span className="sponsored-label">PROMOTED</span>
+          <h4 className="ad-title-full">{currentAd?.title}</h4>
+          <div className="ad-desc-row">
+            <p className="ad-full-desc">{currentAd?.description}</p>
+            {phoneNumber && (
+              <a href={`tel:${phoneNumber}`} className="call-btn-action">
+                📞 CALL
+              </a>
+            )}
+          </div>
         </div>
 
-        {/* Hagati: Vertical Line */}
+        {/* Hagati: Line */}
         <div className="ad-vertical-divider"></div>
 
-        {/* Iburyo: Photo */}
+        {/* Iburyo: Image Ads */}
         <div className="ad-media-part">
-          {currentMediaAd && (
-             <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Ad" loading="lazy" />
+          {currentAd?.mediaUrl && (
+             <img src={currentAd.mediaUrl} alt="Ad" />
           )}
         </div>
       </div>
