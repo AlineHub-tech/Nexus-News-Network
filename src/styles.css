@@ -4,7 +4,7 @@
 :root {
   --nav-h: 65px;
   --explorer-h: 40px;
-  --ads-h: 100px; 
+  --ads-h: 110px; 
   --ticker-h: 40px;
   --bg: #c1c1e6;
   --primary-dark: #0a1930;
@@ -12,20 +12,20 @@
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-html, body {
+body, html {
+  margin: 0;
+  padding: 0;
   width: 100%;
   overflow-x: hidden;
   background: var(--bg);
   font-family: 'Inter', sans-serif;
 }
 
-/* Sunika inkuru hasi kugira ngo zihishwe na header (Nav+Explorer+Ads+Ticker) */
+/* Padding isunika inkuru munsi ya Header Fixed (Nav+Explorer+Ads+Ticker) */
 body {
-  padding-top: 250px !important; 
+  padding-top: 260px !important; 
 }
 
 .navbar-container {
@@ -37,12 +37,9 @@ body {
   background-color: var(--primary-dark);
 }
 
-.navbar-top { height: var(--nav-h); display: flex; align-items: center; padding: 0 5%; }
-.explorer-navbar { height: var(--explorer-h); background: var(--primary-dark); display: flex; justify-content: center; align-items: center; }
-
 .top-sticky-ads-container {
   position: fixed !important;
-  top: 105px !important; /* Nav(65) + Explorer(40) */
+  top: 105px !important; 
   left: 0;
   width: 100% !important;
   min-height: var(--ads-h);
@@ -53,101 +50,113 @@ body {
 
 .trending {
   position: fixed !important;
-  top: 205px !important; 
+  top: 215px !important; 
   left: 0;
   width: 100% !important;
   height: var(--ticker-h);
   z-index: 9998 !important;
   background: #000;
   color: #fff;
+  display: flex;
+  align-items: center;
 }
 
 /* =========================================
    2. LATEST NEWS - DESKTOP (GRID 4x2)
    ========================================= */
 
-.main-content-layout {
-  position: relative;
-  z-index: 1;
-  width: 100%;
+.latest-news-grid-section {
+  display: grid !important;
+  /* Inkuru 4 kuri buri murongo (8 ziba imirongo 2) */
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 25px;
+  padding: 15px;
   max-width: 1450px;
   margin: 0 auto;
 }
 
-/* Hano niho slide (umukara) iviramo: Byose biba grid imwe */
-.latest-news-grid-section {
-  display: grid !important;
-  gap: 20px;
-  padding: 10px;
-  /* Kuri Desktop: Inkuru 4 ku murongo (8 ziba 4 hejuru, 4 munsi) */
-  grid-template-columns: repeat(4, 1fr) !important;
-}
-
-/* Kuraho amacolumn ya kera (Side/Center Slider) */
+/* Kuraho amacolumn ya kera (Side/Center Slider) kugira ngo byose bijye muri grid 4x2 */
 .latest-left-col, .latest-center-col, .latest-right-col, .news-center-slider {
   display: contents !important; 
 }
 
+/* Inkuru card isanzwe kuri Desktop */
 .news-card-base { 
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   background-color: #ffffff;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
-  opacity: 1 !important;
-  visibility: visible !important;
+  transition: transform 0.3s ease;
 }
 
 .news-card-base img {
   width: 100%;
-  height: 180px; 
+  height: 190px; /* Uburebure bw'ifoto kuri Desktop */
   object-fit: cover;
 }
 
 /* =========================================
-   3. LATEST NEWS - MOBILE (LIST STYLE)
+   3. LATEST NEWS - MOBILE (LIST STYLE: BIG PHOTO)
    ========================================= */
 
 @media (max-width: 768px) {
-  body { padding-top: 220px !important; }
-  .top-sticky-ads-container { top: 65px !important; }
-  .trending { top: 165px !important; }
+  body {
+    padding-top: 230px !important;
+  }
 
   .latest-news-grid-section {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr !important; /* Umurongo umwe gusa */
     gap: 15px;
   }
 
-  /* List Style: Ifoto hino (left), Details hirya (right) */
+  /* List Style: Ifoto nini ibumoso (left), Details iburyo (right) */
   .news-card-base {
-    flex-direction: row !important;
-    height: 110px !important;
+    flex-direction: row !important; /* Ifoto ibumoso, Text iburyo */
+    height: 130px !important; /* Height yongerewe kugira ngo ifoto itaba ntoya */
     align-items: center;
   }
 
+  /* Ifoto kuri Mobile: Twaguye ubugari (Width) ngo ibe nini */
   .news-card-base img {
-    width: 130px !important;
-    height: 110px !important;
+    width: 150px !important; /* Ifoto yabaye nini (150px width) */
+    height: 100% !important;
     flex-shrink: 0;
   }
 
+  /* Inyandiko kuri Mobile (Right Side) */
+  .news-card-base .news-card-content, 
   .news-card-base h3 {
-    font-size: 14px !important;
+    padding: 10px !important;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .news-card-base h3 {
+    font-size: 15px !important; /* Text nini isomeka neza */
     line-height: 1.3;
-    padding: 10px;
+    margin: 0 !important;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3; /* Imirongo 3 ya title kuri mobile */
     -webkit-box-orient: vertical;
     overflow: hidden;
+    color: #111;
+  }
+
+  /* Kuraho footer n'ibindi bidakenewe kuri mobile ngo bimeze neza */
+  .news-card-footer, .news-card-description {
+    display: none !important;
   }
 }
 
 /* Tablet view (2 columns) */
-@media (min-width: 601px) and (max-width: 1023px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .latest-news-grid-section {
      grid-template-columns: repeat(2, 1fr) !important;
   }
