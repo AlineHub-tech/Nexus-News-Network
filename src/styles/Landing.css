@@ -1,65 +1,83 @@
-/* =========================================
-   1. KOSORA CENTER COLUMN (SLIDE) VISIBILITY
-   ========================================= */
-.latest-center-col {
-  display: grid !important; /* Kwemeza ko hagati hagumya kuba grid */
-  grid-template-columns: 1fr; /* Cyangwa repeat(2, 1fr) niba ariko grid yawe imeze */
-  gap: 20px;
-  min-height: 450px; /* Bituma slide idahungabana */
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative;
-  z-index: 5;
+/* --- Styling Rusange Kuri Cards Zose Muri Landing Page --- */
+
+/* Iyi class (urugero) igomba kuba iri muri NewsCard.jsx div nkuru */
+.news-card-base { 
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  height: 100%; /* Zose zingana mu burebure */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
 }
 
-/* 2. KOSORA SLIDE ITEMS (Kwemeza ko active slide igaragara) */
-/* Niba Slider yawe ikoresha class ya .slide-item */
-.latest-center-col .slide-item {
-  display: none; /* Izitari active zirahishwa */
+.news-card-base:hover {
+    transform: translateY(-5px); /* Animation nziza iyo umuntu ayikozaho */
 }
 
-/* Iyi niyo ituma inkuru ihita igaragara */
-.latest-center-col .slide-item.active {
-  display: block !important; 
-  visibility: visible !important;
-  opacity: 1 !important;
+/* Amafoto yuzuye neza */
+.news-card-base img {
   width: 100%;
-  animation: slideFadeIn 0.8s ease-in-out;
-}
-
-/* 3. KUKURAHO KWA KUPFUKANA (LAYOUT FIX) */
-.main-content-layout {
-  position: relative !important;
-  z-index: 1 !important;
-  /* Isunika inkuru hasi neza munsi ya Ticker */
-  margin-top: 25px !important; 
-  padding: 0 15px;
+  height: 180px; /* Uburebure buhoraho bw'ifoto */
+  object-fit: cover; /* **Ibi nibyo bituma ifoto i-fit neza** */
   display: block;
 }
 
-/* Animation ya Slide */
-@keyframes slideFadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(10px); 
+/* --- SECTION 2: Layout yo Hejuru (Mobile, Tablet, Desktop) --- */
+
+.latest-news-grid-section {
+  display: grid;
+  gap: 20px;
+  padding: 10px;
+}
+
+/* 1. Mobile (Default: Byose kuri column 1 bigahagararana) */
+.latest-news-grid-section {
+  grid-template-columns: 1fr;
+}
+
+.latest-left-col, .latest-center-col, .latest-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* 2. Tablet (min-width: 600px) */
+@media (min-width: 600px) {
+  /* Kuri tablet turashyiramo columns 2 */
+  .latest-news-grid-section {
+     grid-template-columns: repeat(2, 1fr);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+
+  /* Hagati (Center) igafata uburebure bwose bwa 2 kuri tablet */
+  .latest-center-col {
+    grid-column: span 2;
+    display: grid; /* Noneho Center nayo igira grid yayo */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
-/* =========================================
-   4. KOSORA GRID SYSTEM KURI DESKTOP (3-6-3)
-   ========================================= */
+/* 3. Desktop (min-width: 1024px): Layout ya 2-4-2 */
 @media (min-width: 1024px) {
   .latest-news-grid-section {
-    display: grid !important;
-    grid-template-columns: repeat(12, 1fr) !important;
-    gap: 20px;
+    /* Columns 12 muri rusange: 3 (Left) + 6 (Center) + 3 (Right) */
+    grid-template-columns: repeat(12, 1fr); 
   }
-  
+
+  .latest-left-col {
+    grid-column: span 3; /* 25% */
+  }
+
   .latest-center-col {
-    grid-column: span 6 !important; /* Ifata hagati hejuru */
+    grid-column: span 6; /* 50% */
+    /* Muri center (4 articles), ubu zihagarara neza muri grid ya 2x2 */
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .latest-right-col {
+    grid-column: span 3; /* 25% */
   }
 }
