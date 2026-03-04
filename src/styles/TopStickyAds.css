@@ -2,7 +2,7 @@
 
 .top-sticky-ads-container {
   position: sticky;
-  top: 58px; /* Munsi ya Navbar */
+  top: 78px; /* Munsi ya Navbar */
   z-index: 990;
   background: #ffffff;
   width: 100%;
