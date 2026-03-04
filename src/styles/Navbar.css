@@ -11,19 +11,23 @@ html, body {
     margin: 0 !important;
 }
 
-/* --- 1. NAVBAR (Fixed Top) --- */
+/* --- 2. NAVBAR CONTAINER (FIXED/STICKY) --- */
 .navbar-container {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0;
-  width: 100% !important;
-  z-index: 10000 !important;
-  background-color: var(--primary-dark);
+    position: sticky; 
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+   background-color: #0a1930; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-top { height: var(--nav-h); display: flex; align-items: center; padding: 0 5%; }
-.explorer-navbar { height: var(--explorer-h); background: var(--primary-dark); display: flex; justify-content: center; }
-
+.navbar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 3%; /* Yagabanyijwe gato ngo izina ribone umwanya */
+    height: 75px;
+}
 
 .logo-section {
     display: flex;
@@ -179,4 +183,3 @@ html, body {
         width: 40px;
     }
 }
-
