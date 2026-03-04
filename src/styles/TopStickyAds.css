@@ -1,13 +1,15 @@
+/* TopStickyAds.css */
+
 .top-sticky-ads-container {
   position: sticky;
-  top: 60px; /* Munsi ya Navbar */
-  z-index: 990; /* Gabanya iyi ngo itatwikira content */
+  top: 58px; /* Munsi ya Navbar */
+  z-index: 990;
   background: #ffffff;
   width: 100%;
-  min-height: 110px;
-  padding: 12px 0;
+  min-height: 100px;
+  padding: 10px 0;
   border-bottom: 2px solid #0a1930;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
 }
@@ -16,17 +18,18 @@
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 1350px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 0 20px;
-  gap: 25px;
+  padding: 0 15px;
+  gap: 20px;
 }
 
+/* --- PHOTO PART --- */
 .ad-media-part {
-  width: 240px; 
-  height: 100px;
+  width: 250px; /* Ifoto nini kuri desktop */
+  height: 90px;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   background: #000;
 }
@@ -37,38 +40,102 @@
   object-fit: cover;
 }
 
+/* --- DIVIDER --- */
 .ad-vertical-divider {
   width: 2px;
-  height: 80px;
+  height: 70px;
   background: #e2e8f0;
+  flex-shrink: 0;
 }
 
-.ad-text-part { flex-grow: 1; }
-.sponsored-label { font-size: 0.65rem; font-weight: 900; color: #e63946; }
-.ad-title-full { font-size: 1.2rem; font-weight: 800; color: #0a1930; margin: 0; }
-.ad-description-container { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-.ad-full-desc { font-size: 0.95rem; color: #475569; line-height: 1.5; white-space: normal; }
+/* --- TEXT PART --- */
+.ad-text-part {
+  flex-grow: 1;
+}
 
-.call-btn-full {
+.sponsored-label {
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: #e63946;
+  text-transform: uppercase;
+}
+
+.ad-title-full {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0a1930;
+}
+
+.ad-desc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.ad-full-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.4;
+  white-space: normal; /* Amagambo amanuka mu mirongo */
+}
+
+.call-btn-action {
   background: #16a34a;
   color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
   text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.8rem;
   font-weight: 700;
   white-space: nowrap;
 }
 
-/* MOBILE FIX */
+/* =========================================
+   MOBILE FIX (The Major Correction)
+   ========================================= */
 @media (max-width: 600px) {
-  .top-sticky-ads-container { min-height: 150px; top: 55px; }
-  .ad-media-part { width: 130px; height: 110px; }
-  .ad-vertical-divider { height: 100px; }
-  .ad-description-container { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .top-sticky-ads-container {
+    min-height: 160px; /* Twongereye height ngo byose bikwire */
+    top: 55px; /* Navbar ya mobile */
+    padding: 12px 0;
+  }
+
+  .ad-wrapper-flex {
+    flex-direction: column; /* Ifoto hejuru, Amagambo munsi */
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .ad-media-part {
+    width: 100%; /* Ifoto yuzura ubugari kuri phone */
+    max-width: 320px;
+    height: 100px;
+  }
+
+  .ad-vertical-divider {
+    display: none; /* Ukureho umurongo kuri mobile kuko zikurikirana */
+  }
+
+  .ad-desc-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ad-full-desc {
+    font-size: 0.8rem;
+    padding: 0 10px;
+  }
+
+  .call-btn-action {
+    width: 80%; /* Buto nini kuri phone ngo bakande borohewe */
+  }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.text-slide-animation { animation: fadeIn 0.8s ease-in-out; }
+/* Animation */
+.text-slide-content { animation: fadeIn 0.8s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
