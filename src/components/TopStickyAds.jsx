@@ -6,19 +6,21 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000";
 const TopStickyAds = ({ ads }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // 1. Gufata gusa Ads zifite ifoto/video (mediaUrl) kugira ngo zize hejuru
-  const sliderAds = ads?.filter(ad => ad.mediaUrl).slice(0, 10) || [];
+  // Gufata Ads zifite ifoto/video
+  const mediaAds = ads?.filter(ad => ad.mediaUrl).slice(0, 10) || [];
+  // Gufata Ads zifite amagambo gusa (cyangwa izo ari zo zose)
+  const textAds = ads?.filter(ad => ad.title).slice(0, 10) || [];
 
   useEffect(() => {
-    if (sliderAds.length > 0) {
+    const total = Math.max(mediaAds.length, textAds.length);
+    if (total > 0) {
       const timer = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % sliderAds.length);
-      }, 5000); // Ihindura buri masegonda 5
+        setCurrentSlide((prev) => (prev + 1) % total);
+      }, 5000);
       return () => clearInterval(timer);
     }
-  }, [sliderAds.length]);
+  }, [mediaAds.length, textAds.length]);
 
-  // Logic yawe isanzwe yo gufata URL (Kugira ngo ifoto igaragare)
   const getMediaUrl = (url) => {
     if (!url) return "";
     if (url.startsWith("http")) return url;
@@ -26,34 +28,42 @@ const TopStickyAds = ({ ads }) => {
     return `${base}${url.startsWith('/') ? url : '/' + url}`;
   };
 
-  if (sliderAds.length === 0) return null;
+  if (!ads || ads.length === 0) return null;
 
-  const currentAd = sliderAds[currentSlide];
+  const currentMediaAd = mediaAds[currentSlide % mediaAds.length];
+  const currentTextAd = textAds[(currentSlide + 1) % textAds.length]; // Slide itandukanye gato
 
   return (
     <div className="top-sticky-ads-container">
-      <div className="ad-content-box">
-        {/* IFOTO/VIDEO IBURYO */}
-        <div className="ad-media-thumb">
-          {currentAd.mediaType === 'video' ? (
-            <video autoPlay muted loop src={getMediaUrl(currentAd.mediaUrl)} />
-          ) : (
-            <img src={getMediaUrl(currentAd.mediaUrl)} alt={currentAd.title} />
+      <div className="ad-wrapper-flex">
+        
+        {/* LEFT: PHOTO ADS (Size yongerewe) */}
+        <div className="ad-media-part">
+          {currentMediaAd?.mediaUrl && (
+            <div className="media-box">
+               <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Ads" />
+               <div className="media-info-overlay">
+                  <span>{currentMediaAd.title}</span>
+               </div>
+            </div>
           )}
         </div>
-        
-        {/* IZINA N'AMAGAMBO HAGATI */}
-        <div className="ad-details">
-          <span className="ad-sponsored-tag">SPONSORED AD</span>
-          <h4>{currentAd.title}</h4>
+
+        {/* MIDDLE: VERTICAL LINE (Ihagaraye) */}
+        <div className="ad-vertical-divider"></div>
+
+        {/* RIGHT: TEXT ADS (Zihinduranya) */}
+        <div className="ad-text-part">
+          <span className="sponsored-label">PROMOTED</span>
+          <h4 className="slide-up-animation">{currentTextAd?.title}</h4>
+          <div className="ad-actions-row">
+             <p>{currentTextAd?.description?.substring(0, 40)}...</p>
+             <a href={`tel:${currentTextAd?.description?.match(/\d+/)}`} className="call-now-small">
+               📞 CALL
+             </a>
+          </div>
         </div>
 
-        {/* CALL BUTTON IBURYO (Niba hari numero muri description) */}
-        <div className="ad-action">
-           <a href={`tel:${currentAd.description || '0780000000'}`} className="ad-call-btn">
-             📞 CALL
-           </a>
-        </div>
       </div>
     </div>
   );
