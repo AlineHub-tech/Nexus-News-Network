@@ -1,122 +1,85 @@
-/* =========================================
-   1. DESKTOP LAYOUT (4 HEJURU, 4 MUNSI)
-   ========================================= */
-
-.latest-news-section-wrapper {
+/* --- DESKTOP: 4 HEJURU, 4 MUNSI --- */
+.latest-news-grid-system {
+  display: grid !important;
+  /* Ibi bituma inkuru 4 zingana neza kuri Desktop */
+  grid-template-columns: repeat(4, 1fr) !important; 
+  gap: 20px !important;
+  width: 100% !important;
   max-width: 1450px;
   margin: 0 auto;
-  padding: 20px 10px;
 }
 
-/* Force Grid 4x2 kuri Desktop */
-.latest-news-grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important; 
-  gap: 25px;
-  width: 100%;
-}
-
-/* Kuraho amacolumn ya kera (Left, Center, Right) kuko ubu byose ni grid imwe */
-.news-side-column, 
-.news-center-slider,
-.left-side,
-.right-side {
+/* Kuraho ibisigisigi bya Slider na Side Columns */
+.news-side-column, .news-center-slider, .slider-container, 
+.left-side, .right-side, .side-item-wrapper, .slide-item {
   display: contents !important; 
-}
-
-/* --- CARD STYLE (Ibi nibyo bituma zisa neza) --- */
-.news-card-base { 
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  background-color: #ffffff;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+  position: static !important;
   opacity: 1 !important;
   visibility: visible !important;
+  height: auto !important;
 }
 
-.news-card-base:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+/* Card Style: Kwemeza ko amashusho ari meza */
+.news-card-base {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .news-card-base img {
-  width: 100%;
-  height: 200px; /* Uburebure bw'ifoto kuri Desktop */
-  object-fit: cover;
-  display: block;
+  height: 180px !important;
+  width: 100% !important;
+  object-fit: cover !important;
 }
 
-/* =========================================
-   2. MOBILE LAYOUT (LIST STYLE: BIG PHOTO LEFT)
-   ========================================= */
-
+/* --- MOBILE: LIST STYLE (IFOTO NINI LEFT, TEXT RIGHT) --- */
 @media (max-width: 768px) {
-  .latest-news-grid {
-    grid-template-columns: 1fr !important; /* Umurongo umwe gusa */
-    gap: 15px;
+  .latest-news-grid-system {
+    grid-template-columns: 1fr !important; /* Umurongo umwe */
+    gap: 15px !important;
   }
 
-  /* Force Card kugaragara nka List kuri Mobile */
-  .news-card-base {
-    flex-direction: row !important; /* Ifoto ibumoso, Details iburyo */
-    height: 140px !important; /* Uburebure bwongerewe ngo ifoto ibe nini */
-    align-items: center;
-    border: none;
-    border-bottom: 1px solid #eee;
-    border-radius: 0;
-    box-shadow: none;
+  /* List Style nini n'inyandiko nini */
+  .latest-post-card-item .news-card-base {
+    flex-direction: row !important;
+    height: 130px !important;
+    align-items: center !important;
+    border: none !important;
+    border-bottom: 1px solid #eee !important;
   }
 
-  /* IFOTO KURI MOBILE: Twaguye ubugari (160px) ngo ibe nini cyane (Visible) */
-  .news-card-base img {
-    width: 160px !important; 
-    height: 120px !important; 
-    border-radius: 12px; /* Amfuruka areze (Rounded) */
-    margin: 0 10px;
-    flex-shrink: 0;
+  .latest-post-card-item .news-card-base img {
+    width: 150px !important; /* Ifoto nini ibumoso */
+    height: 110px !important;
+    border-radius: 8px !important;
+    margin: 0 10px !important;
+    flex-shrink: 0 !important;
   }
 
-  /* INYANDIKO KURI MOBILE (Right Side) */
-  .news-card-content, 
-  .news-card-base h3 {
-    padding: 0 10px !important;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-  }
-
-  .news-card-base h3 {
-    font-size: 17px !important; /* Text nini isomeka neza cyane */
-    font-weight: 700;
-    color: #1a202c;
-    line-height: 1.3;
-    margin: 0 !important;
-    /* Imirongo 3 ya title kuri mobile */
+  .latest-post-card-item .news-card-base h3 {
+    font-size: 16px !important; /* Text nini */
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+    padding-right: 10px !important;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  /* Kuraho amakuru adakenewe kuri mobile ngo bitabyigana */
-  .news-card-description, 
-  .news-card-footer,
-  .slider-indicators {
+  /* Kuraho amakuru adasomeka neza kuri mobile list */
+  .news-card-description, .news-card-footer, .slider-indicators {
     display: none !important;
   }
 }
 
 /* Tablet (2 ku murongo) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .latest-news-grid {
+@media (min-width: 601px) and (max-width: 1024px) {
+  .latest-news-grid-system {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
