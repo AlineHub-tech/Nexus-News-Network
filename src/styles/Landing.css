@@ -1,44 +1,87 @@
-/* 1. KOSORA CENTER COLUMN (SLIDE) VISIBILITY */
-.latest-center-col {
-  display: grid !important; /* Kwemeza ko igaragara */
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  min-height: 400px; /* Bituma itaba ubusa */
-  visibility: visible !important;
-  opacity: 1 !important;
+/* --- Global Reset --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* 2. KOSORA SLIDE ITEMS (Kwemeza ko 'active' item igaragara) */
-.latest-center-col .slide-item {
-  display: none; /* Bisanzwe biba bihishe */
+body {
+  background: #c1c1e6;
+  padding-top: 0 !important; /* Kuraho ya padding-top kuko Header ari sticky */
+}
+
+/* --- 1. MAIN HEADER WRAPPER (STICKY) --- */
+.main-site-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+  background: white;
+  display: flex;
+  flex-direction: column; /* Bituma Navbar, Ads, na Ticker bikurikirana */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- 2. NAVBAR --- */
+.navbar-container {
+  position: relative !important; /* Kuraho fixed */
+  width: 100%;
+  background: #0a1930;
+}
+
+/* --- 3. TOP ADS (Munsi ya Navbar) --- */
+.top-sticky-ads-container {
+  position: relative !important; /* Kuraho fixed */
+  width: 100%;
+  min-height: 90px;
+  height: auto; /* Bituma text yose igaragara */
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+}
+
+/* --- 4. TRENDING TICKER (Munsi ya Ads) --- */
+.trending {
+  position: relative !important; /* Kuraho fixed */
+  width: 100%;
+  height: 40px;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+/* --- 5. MAIN CONTENT (SLIDE FIX) --- */
+.main-content-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1450px;
+  margin: 10px auto !important; /* Gap duto munsi ya Ticker */
+}
+
+/* Kwemeza ko slide zo hagati zigaragara */
+.latest-center-col {
+  display: grid !important;
+  min-height: 400px;
 }
 
 .latest-center-col .slide-item.active {
-  display: block !important; /* Igaragaza gusa inkuru iriho */
-  width: 100%;
-  animation: fadeIn 0.8s ease-in-out;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-/* 3. KUKURAHO KWA KUPFUKANA (OVERLAP) */
-.main-content-layout {
-  position: relative !important;
-  z-index: 1 !important;
-  /* Sunika inkuru hasi neza kugira ngo itaza munsi ya Ticker */
-  margin-top: 30px !important; 
-  padding-top: 20px !important;
+/* Animation ya Ticker */
+.trending span {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker-move 20s linear infinite;
 }
 
-/* 4. KOSORA GRID SYSTEM KURI DESKTOP */
-@media (min-width: 1024px) {
-  .latest-news-grid-section {
-    display: grid !important;
-    grid-template-columns: repeat(12, 1fr) !important;
-    gap: 20px;
-  }
-}
-
-/* Animation Fix */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes ticker-move {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
