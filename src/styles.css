@@ -2,13 +2,13 @@
 :root {
   --primary-dark: #0a1930;
   --bg: #c1c1e6;
-  --nav-h: 65px;
-  --ads-h: 90px; /* Adjust bitewe n'uburebure bwa Ads */
+  --nav-h: 65px; /* Uburebure bwa Logo section */
 }
 
-/* --- Global Reset (Hano niho hari ikibazo) --- */
+/* --- Global Reset (KOSORA HANO) --- */
 * {
   box-sizing: border-box;
+  /* Kuraho margin !important kuko yangiza grid y'inkuru */
 }
 
 body, html {
@@ -16,67 +16,76 @@ body, html {
   padding: 0;
   width: 100%;
   overflow-x: hidden;
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   background: var(--bg);
 }
 
-/* 
-   Icyitonderwa: Kuraho padding-top ya Body kuko tugiye gukoresha 
-   uburyo bwa 'Sticky Header Wrapper' muri Landing.jsx 
-*/
-body {
-  padding-top: 0 !important; 
-}
-
-/* --- HEADER WRAPPER --- */
-/* Ibi bituma Ads + Navbar + Ticker bigumana hejuru bidapfukana */
+/* --- STICKY HEADER WRAPPER --- */
+/* Ibi bituma Navbar -> Ads -> Ticker bigumana hejuru */
 .main-site-header {
   position: sticky;
   top: 0;
-  z-index: 10000;
   width: 100%;
+  z-index: 10000;
   background: white;
   display: flex;
   flex-direction: column;
 }
 
-/* --- NAVBAR --- */
+/* --- NAVBAR (Fixed to top of the header) --- */
 .navbar-container {
   width: 100%;
-  background-color: var(--primary-dark);
-  z-index: 1000;
+  background: var(--primary-dark);
+  z-index: 1003;
 }
 
-/* --- TOP ADS (Ino niyo ya Ads yawe nshya) --- */
+/* --- TOP ADS (Munsi ya Navbar) --- */
 .top-sticky-ads-container {
   width: 100%;
   background: #ffffff;
   border-bottom: 1px solid #ddd;
+  z-index: 1002;
+  min-height: 85px;
+  height: auto; /* Bituma text zose zigaragara */
   display: flex;
   align-items: center;
-  padding: 8px 0;
 }
 
-/* --- TRENDING TICKER --- */
+/* --- TRENDING TICKER (Munsi ya Ads) --- */
 .trending {
   background: black;
   color: #fff;
-  padding: 10px 0;
+  height: 40px;
   width: 100%;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
 
-/* --- CONTENT AREA (Inkuru) --- */
+/* --- MAIN CONTENT (Inkuru) --- */
 .main-content-layout {
   width: 100%;
   max-width: 1400px;
-  margin: 20px auto !important; /* Hano niho inkuru itangirira */
+  margin: 20px auto; /* Isunika inkuru munsi ya ticker neza */
   padding: 0 15px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Animation ya Ticker */
+.trending span {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker-move 20s linear infinite;
+}
+
+@keyframes ticker-move {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
 /* --- MOBILE --- */
 @media (max-width: 768px) {
-  .main-content-layout {
-    margin-top: 10px !important;
-  }
+  .main-content-layout { margin-top: 10px; }
 }
