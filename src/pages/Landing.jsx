@@ -1,6 +1,7 @@
-import React, { useContext, useState, useEffect, useMemo, useCallback } from "react";
+import React, { useContext, useState, useEffect, useMemo } from "react";
 import axios from 'axios';
 import "../styles/Landing.css";
+// Components
 import LatestNews from "../components/LatestNews";
 import RegularNews from "../components/RegularNews";
 import PopularNews from "../components/PopularNews";
@@ -12,26 +13,14 @@ import TrendingTicker from '../components/TrendingTicker';
 import LoadingScreen from "../components/LoadingScreen";
 import { NewsContext } from '../context/NewsContext';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://nexus-news-network-backend.onrender.com';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
 
 const Landing = () => {
   const { newsList, videosList, loading, error } = useContext(NewsContext);
   const [ads, setAds] = useState([]);
   const [isAdsLoading, setIsAdsLoading] = useState(true);
 
-  const formatMediaList = useCallback((list) => {
-    if (!list || list.length === 0) return [];
-    return list.map(item => {
-      let finalUrl = item.mediaUrl || "";
-      if (finalUrl && !finalUrl.startsWith('http')) {
-          const base = API_BASE_URL.replace(/\/+$/, "");
-          const path = finalUrl.replace(/^\/+/, "");
-          finalUrl = `${base}/${path}`;
-      }
-      return { ...item, mediaUrl: finalUrl };
-    });
-  }, []);
-
+  // Fetch Ads - Gusa tugumana amamatayo yo hejuru
   useEffect(() => {
     const fetchAdsData = async () => {
         try {
@@ -46,12 +35,10 @@ const Landing = () => {
     fetchAdsData();
   }, []);
 
-  const formattedNews = useMemo(() => formatMediaList(newsList), [newsList, formatMediaList]);
-  const formattedVideos = useMemo(() => formatMediaList(videosList), [videosList, formatMediaList]);
-
-  const latestNews8 = useMemo(() => formattedNews.slice(0, 8), [formattedNews]);
-  const regularNewsSliced = useMemo(() => formattedNews.slice(8), [formattedNews]);
-  const popularNewsSliced = useMemo(() => formattedNews.slice(0, 8), [formattedNews]);
+  // Gutunganya inkuru (Gukoresha newsList imereye nk'uko iri muri Context)
+  const latestNews8 = useMemo(() => newsList.slice(0, 8), [newsList]);
+  const regularNewsSliced = useMemo(() => newsList.slice(8), [newsList]);
+  const popularNewsSliced = useMemo(() => newsList.slice(0, 8), [newsList]);
 
   if (loading || isAdsLoading) return <LoadingScreen />;
 
@@ -69,16 +56,17 @@ const Landing = () => {
 
   return (
     <div className="landing-container">
-      {/* HEADER SECTION - IBI NIBYO BIGUMA HEJURU ARIKO BIDAPFUKA INKURU */}
+      {/* HEADER SECTION - Ibi biguma hejuru icyarimwe bidapfuka inkuru */}
       <header className="main-sticky-header">
         <Navbar />
         <TopStickyAds ads={ads} />
         <TrendingTicker />
       </header>
 
-      {/* MAIN CONTENT - INKURU ZITANGIRIRA MUNSI YA HEADER NEZA */}
+      {/* MAIN CONTENT - Isunikwa hasi na Header Automatically */}
       <main className="main-content-layout">
         <section className="latest-news-section-container">
+           {/* Slide ubu izagaragara neza kuko header itayipfuka */}
            <LatestNews news={latestNews8} />
         </section>
 
@@ -91,7 +79,7 @@ const Landing = () => {
         </section>
 
         <section className="tv-ads-grid">
-          <TV videos={formattedVideos} />
+          <TV videos={videosList} />
         </section>
       </main>
 
