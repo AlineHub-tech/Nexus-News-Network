@@ -88,12 +88,9 @@ const Landing = () => {
       <Navbar />
 
       {/* 2. WRAPPER FOR STICKY ELEMENTS: 
-          Nashyizemo amabara na z-index ihamye kugira ngo bidatwikirana */}
-      <div style={{ marginTop: "65px", position: "fixed", top: "0", left: "0", width: "100%", zIndex: "9000" }}>
-          {/* Iyi div ifasha kureba ko Ads ziri munsi ya Navbar neza */}
-          <div style={{ marginTop: "65px" }}>
-            <TopStickyAds ads={ads} />
-          </div>
+          Ibi bituma ibintu byose byigerera hejuru bidatwikiriye content */}
+      <div style={{ marginTop: "65px", position: "relative", zIndex: "500" }}>
+          <TopStickyAds ads={ads} />
           
           {/* Trending Ticker munsi ya Ads neza */}
           <div style={{ position: "relative", zIndex: "100", background: "#000" }}>
@@ -102,28 +99,26 @@ const Landing = () => {
       </div>
 
       {/* 3. MAIN CONTENT: 
-          Padding-top nini (240px) kugira ngo inkuru za LatestNews 
-          zimanuke hanze ya Sticky Navbar/Ads/Ticker
-      */}
-      <main className="main-content-layout" style={{ paddingTop: "240px", paddingBottom: "50px" }}>
+          Nashyizemo marginTop na padding kugira ngo LATEST NEWS igaragara neza hagati */}
+      <main className="main-content-layout" style={{ marginTop: "30px", paddingBottom: "50px" }}>
         
         {/* LATEST NEWS: Ifite grid 2-4-2 (Side-Slider-Side) */}
-        <section className="latest-news-section-container" style={{ position: "relative", zIndex: "10", display: "block" }}>
+        <section className="latest-news-section-container" style={{ position: "relative", zIndex: "10" }}>
            <LatestNews news={latestNews8} />
         </section>
 
         {/* REGULAR NEWS SECTION */}
-        <section className="regular-news-section" style={{ marginTop: "60px", padding: "0 15px" }}>
+        <section className="regular-news-section" style={{ marginTop: "50px" }}>
           <RegularNews newsList={regularNewsSliced} />
         </section>
 
         {/* POPULAR NEWS SECTION */}
-        <section className="popular-news-section" style={{ marginTop: "60px", padding: "0 15px" }}>
+        <section className="popular-news-section" style={{ marginTop: "50px" }}>
           <PopularNews newsList={popularNewsSliced} />
         </section>
 
-        {/* TV SECTION */}
-        <section className="tv-ads-grid" style={{ gridTemplateColumns: "1fr", marginTop: "60px", padding: "0 15px" }}>
+        {/* TV SECTION (One Column layout) */}
+        <section className="tv-ads-grid" style={{ gridTemplateColumns: "1fr", marginTop: "50px" }}>
           <TV videos={formattedVideos} />
         </section>
 
@@ -136,3 +131,4 @@ const Landing = () => {
 };
 
 export default Landing;
+
