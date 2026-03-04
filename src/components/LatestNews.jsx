@@ -4,7 +4,8 @@ import "../styles/LatestNews.css";
 
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const latest8 = news?.slice(0, 8) || [];
+
+  const latest8 = news || [];
   
   const leftNews = latest8.slice(0, 2);   
   const centerNews = latest8.slice(2, 6); 
@@ -14,16 +15,18 @@ const LatestNews = ({ news }) => {
     if (centerNews.length > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % centerNews.length);
-      }, 5000); 
+      }, 4000); 
       return () => clearInterval(timer);
     }
   }, [centerNews.length]);
 
-  if (!latest8.length) return null;
+  if (!news || news.length === 0) return <div className="news-loading">Loading news...</div>;
 
   return (
     <div className="latest-news-section-wrapper">
       <div className="latest-news-grid">
+        
+        {/* LEFT COLUMN */}
         <div className="news-side-column left-side">
           {leftNews.map((post) => (
             <div key={post._id} className="side-item-wrapper">
@@ -32,19 +35,26 @@ const LatestNews = ({ news }) => {
           ))}
         </div>
 
+        {/* MIDDLE COLUMN: Slider */}
         <div className="news-center-slider">
           <div className="slider-container">
             {centerNews.map((post, index) => (
               <div 
-                key={`slide-${post._id}`} 
+                key={post._id} 
                 className={`slide-item ${index === currentSlide ? "active" : ""}`}
               >
                 <NewsCard post={post} extraClass="featured-card" />
               </div>
             ))}
           </div>
+          <div className="slider-indicators">
+            {centerNews.map((_, i) => (
+              <span key={i} className={`indicator ${i === currentSlide ? "active" : ""}`} />
+            ))}
+          </div>
         </div>
 
+        {/* RIGHT COLUMN */}
         <div className="news-side-column right-side">
           {rightNews.map((post) => (
             <div key={post._id} className="side-item-wrapper">
@@ -52,6 +62,7 @@ const LatestNews = ({ news }) => {
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );
