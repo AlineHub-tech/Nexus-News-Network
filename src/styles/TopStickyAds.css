@@ -1,44 +1,30 @@
-/* 1. Main Container - Iba "Auto" kugira ngo inyandiko n'uburebure bwazo byose bigarapare */
 .top-sticky-ads-container {
-  position: relative; /* Bituma isunika ibindi bice hasi neza */
+  /* Koresha relative kugira ngo isunike ibindi bice hasi aho kubipfuka */
+  position: relative; 
   width: 100%;
-  min-height: 100px; /* Uburebure fatizo bushobora kwaguka */
-  height: auto; 
   background: #ffffff;
-  border-bottom: 2px solid #f1f1f1;
+  border-bottom: 3px solid #f0f0f0;
   display: flex;
-  align-items: center;
-  z-index: 1001;
-  /* Kuraho hejuru hapfutse */
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow: visible; 
+  flex-direction: column;
+  z-index: 10;
+  padding: 10px 0;
 }
 
 .ad-wrapper-flex {
   display: flex;
   width: 100%;
-  height: 100%;
   align-items: center;
   justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* 2. Text Section (Ibumoso) - Inyandiko zose zigaragare */
+/* Text Part - Kwaguka bitewe n'uburebure bwa text */
 .ad-text-part {
-  flex: 1.5; 
-  padding-left: 20px;
-  padding-right: 10px;
+  flex: 1.5;
+  padding: 0 15px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.sponsored-label {
-  font-size: 10px;
-  color: #d32f2f;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-bottom: 4px;
 }
 
 .ad-title-full {
@@ -46,79 +32,49 @@
   font-weight: 800;
   color: #111;
   margin: 0;
-  line-height: 1.3;
-  /* Kwemeza ko inyandiko yose igaragara (Nta tudomo ...) */
-  white-space: normal;
-  overflow: visible;
-}
-
-.ad-desc-row {
-  margin-top: 6px;
+  line-height: 1.2;
+  white-space: normal; /* Inyandiko yose igaragara */
 }
 
 .ad-full-desc {
   font-size: 13px;
   color: #444;
+  margin: 5px 0;
   line-height: 1.4;
-  margin-bottom: 8px;
-  /* Kwemeza ko inyandiko yose igaragara */
-  white-space: normal;
-  overflow: visible;
+  white-space: normal; /* Inyandiko yose igaragara */
 }
 
-.call-btn-action {
-  display: inline-block;
-  font-size: 12px;
-  background: #2563eb;
-  color: white !important;
-  padding: 5px 15px;
-  border-radius: 4px;
-  font-weight: bold;
-  text-decoration: none;
-  width: fit-content;
-}
-
-/* 3. Vertical Line */
-.ad-vertical-divider {
-  width: 2px;
-  background: #ddd;
-  height: 70px;
-  margin: 0 10px;
-}
-
-/* 4. Photo Section (Iburyo) */
+/* Photo Part - Kugaragara neza */
 .ad-media-part {
   flex: 1;
-  height: 100%;
   display: flex;
   justify-content: flex-end;
-  background: #f9f9f9;
 }
 
 .ad-media-part img {
-  height: 110px; /* Size nini nk'uko ubishaka */
-  width: 200px;
+  height: 100px; /* Size ihoraho kuri desktop */
+  width: 180px;
   object-fit: cover;
-  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
 }
 
-/* --- MOBILE OPTIMIZATION --- */
-@media (max-width: 600px) {
+/* --- MOBILE FIX --- */
+@media (max-width: 768px) {
   .top-sticky-ads-container {
-    min-height: 90px;
+    padding: 5px 0;
   }
   
   .ad-title-full {
-    font-size: 14px;
+    font-size: 13px;
   }
   
-  .ad-full-desc {
-    font-size: 11px;
-    margin-bottom: 5px;
-  }
-
   .ad-media-part img {
-    width: 130px;
-    height: 100px;
+    height: 80px;
+    width: 120px;
+  }
+  
+  /* Kuraho description kuri mobile ntoya niba ikibyigana */
+  .ad-full-desc {
+    display: none; 
   }
 }
