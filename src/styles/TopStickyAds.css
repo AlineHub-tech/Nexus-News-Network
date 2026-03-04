@@ -1,13 +1,13 @@
-/* 1. Container - Igomba kuba ifite Height ihagije (Auto) */
+/* 1. Main Container */
 .top-sticky-ads-container {
-  position: relative;
+  position: relative; /* Bituma isunika ibindi bice munsi yayo aho kubipfuka */
   width: 100%;
-  min-height: 90px; /* Yakura bitewe na text */
+  min-height: 80px; /* Height nkeya kuri Mobile */
   background: #ffffff;
-  border-bottom: 2px solid #f1f1f1;
+  border-bottom: 2px solid #eee;
   display: flex;
-  align-items: stretch; /* Bituma ifoto na text bingana ubugari */
   z-index: 1001;
+  overflow: hidden;
 }
 
 .ad-wrapper-flex {
@@ -16,96 +16,88 @@
   align-items: center;
 }
 
-/* 2. Text Section (Ibumoso) - Kwagura text ikaba yose */
+/* 2. Text Section (Ibumoso) */
 .ad-text-part {
-  flex: 1.2;
-  padding: 10px 15px;
+  flex: 1.3;
+  padding: 8px 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden; /* Kwemeza ko bitarenga height ya container */
 }
 
-.sponsored-label {
-  font-size: 10px;
-  color: #d32f2f;
-  font-weight: 800;
-  text-transform: uppercase;
-  margin-bottom: 3px;
-}
-
-/* Hano ntabwo tugishyiraho 'nowrap' kugira ngo yisimbure */
 .ad-title-full {
-  font-size: 15px;
+  font-size: 13px; /* Size ntoya kuri Mobile */
   font-weight: 700;
-  color: #111;
+  color: #d32f2f;
   margin: 0;
-  line-height: 1.3;
-  /* Kuraho utudomo (...) */
-  overflow: visible; 
-  white-space: normal; 
-}
-
-.ad-desc-row {
-  margin-top: 5px;
-  display: block; /* Bituma button ijyera munsi niba text ari ndende */
+  line-height: 1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Igaragaza imirongo 2 gusa ngo idapfuka inkuru */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .ad-full-desc {
-  font-size: 13px;
-  color: #444;
-  margin-bottom: 5px;
-  line-height: 1.4;
-  /* Kuraho utudomo (...) */
-  overflow: visible;
-  white-space: normal;
+  font-size: 11px;
+  color: #555;
+  margin-top: 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Umurongo umwe gusa kuri desc */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* 3. Button - Ibe igaragara neza */
 .call-btn-action {
   display: inline-block;
-  font-size: 11px;
+  font-size: 10px;
   background: #2563eb;
   color: white !important;
-  padding: 4px 12px;
-  border-radius: 5px;
-  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-top: 4px;
   text-decoration: none;
-  margin-top: 5px;
 }
 
-/* 4. Vertical Divider */
+/* 3. Divider */
 .ad-vertical-divider {
-  width: 1.5px;
+  width: 1px;
   background: #ddd;
-  align-self: center;
-  height: 60px;
-  margin: 0 10px;
+  height: 40px;
 }
 
-/* 5. Photo Section (Iburyo) - Size nshya */
+/* 4. Photo Section (Iburyo) */
 .ad-media-part {
   flex: 1;
+  height: 80px; /* Iba fixed kugira ngo idakura cyane */
   display: flex;
   justify-content: flex-end;
-  background: #f9f9f9;
 }
 
 .ad-media-part img {
-  height: 100%; /* Ifata height ya text container */
-  width: 180px; /* Size nini kurushaho nk'uko ubishaka */
+  height: 100%;
+  width: 130px; /* Size nshya kuri mobile */
   object-fit: cover;
-  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
 }
 
-/* --- MOBILE --- */
-@media (max-width: 640px) {
-  .ad-media-part img {
-    width: 120px;
+/* --- MOBILE SPECIFIC FIX --- */
+@media (max-width: 600px) {
+  .top-sticky-ads-container {
+    height: 80px; /* Height ihoraho kuri Mobile ngo itarya inkuru */
   }
+  
   .ad-title-full {
-    font-size: 13px;
+    font-size: 12px;
+    -webkit-line-clamp: 2;
   }
+
   .ad-full-desc {
-    font-size: 11px;
+    display: none; /* Kuri Mobile, description tuyikureho ngo title igaragare yose */
+  }
+
+  .ad-media-part img {
+    width: 100px;
   }
 }
