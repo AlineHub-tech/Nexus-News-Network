@@ -9,7 +9,7 @@ import AdsSection from "../components/AdsSection";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import TrendingTicker from '../components/TrendingTicker';
-import SloganAnimation from '../components/SloganAnimation';
+import TopStickyAds from "../components/TopStickyAds"; 
 import LoadingScreen from "../components/LoadingScreen"; // Loading screen yawe
 import { NewsContext } from '../context/NewsContext';
 
@@ -90,9 +90,8 @@ const Landing = () => {
   return (
     <div className="landing-container">
       <Navbar />
+      <TopStickyAds />
       <TrendingTicker />
-      <SloganAnimation />
-
       <main className="main-content-layout">
         <section className="latest-news-section-container">
            <LatestNews news={latestNews8} />
@@ -108,8 +107,7 @@ const Landing = () => {
 
         <section className="tv-ads-grid">
           <TV videos={formattedVideos} />
-          <AdsSection ads={ads} />
-        </section>
+          </section>
       </main>
 
       <Footer />
