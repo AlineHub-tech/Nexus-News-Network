@@ -1,122 +1,159 @@
-/* =========================================
-   1. DESKTOP LAYOUT (4 HEJURU, 4 MUNSI)
-   ========================================= */
-
+/* --- GRID SYSTEM --- */
 .latest-news-section-wrapper {
   max-width: 1450px;
-  margin: 0 auto;
-  padding: 20px 10px;
+  /* margin: 20px auto;
+  padding: 0 15px; */
+  margin-top:0%;
 }
 
-/* Force Grid 4x2 kuri Desktop */
 .latest-news-grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important; 
-  gap: 25px;
-  width: 100%;
+  display: grid;
+  /* 1.2fr - 3.5fr - 1.2fr ituma hagati haba hanini, impande zikaringanira */
+  grid-template-columns: 1.2fr 3.5fr 1.2fr; 
+  gap: 20px;
+  align-items: stretch; /* Ibi bituma zose zingana uburebure */
 }
 
-/* Kuraho amacolumn ya kera (Left, Center, Right) kuko ubu byose ni grid imwe */
-.news-side-column, 
-.news-center-slider,
-.left-side,
-.right-side {
-  display: contents !important; 
-}
-
-/* --- CARD STYLE (Ibi nibyo bituma zisa neza) --- */
-.news-card-base { 
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  background-color: #ffffff;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+/* SIDE COLUMNS (Kurenganiza left na right) */
+.news-side-column {
+  display: grid;
+  grid-template-rows: 1fr 1fr; /* Card 2 zingana 50/50 */
+  gap: 15px; /* Space ntoya hagati y'inkuru 2 */
   height: 100%;
+}
+
+.news-center-slider {
+  position: relative;
+  height: 520px; 
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  /* Kuraho ibintu biza iyo ukanze kuri slide */
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Kuraho imyitwarire mibi kuri Link n'iza Slider */
+.news-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  outline: none; /* Kuraho ya blue border iyo ukanzeho */
+}
+
+
+
+/* --- KOSORA SIDE CARDS (LEFT & RIGHT) --- */
+.side-item-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.side-item-wrapper .news-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  border: 1px solid #f0f0f0;
+  /* border-radius: 10px; */
+  background: #fff;
+}
+
+/* Ibi bituma ifoto igaragara kuri side cards */
+.side-item-wrapper .news-media-container {
+  position: relative !important;
+  width: 100% !important;
+  height: 160px !important; /* Uburebure bw'ifoto kuri side */
+  padding-top: 0 !important; 
+  overflow: hidden;
+}
+
+.side-item-wrapper .news-card-image {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* Details za side cards */
+.side-item-wrapper .news-info {
+  padding: 12px !important;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  opacity: 1 !important;
-  visibility: visible !important;
+  justify-content: space-between;
 }
 
-.news-card-base:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+.side-item-wrapper .news-title {
+  font-size: 1.05rem !important;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 5px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.news-card-base img {
-  width: 100%;
-  height: 200px; /* Uburebure bw'ifoto kuri Desktop */
+/* --- FEATURED CARD (SLIDER) --- */
+.featured-card {
+  height: 100% !important;
+}
+
+.featured-card .news-media-container {
+  position: absolute !important;
+  inset: 0;
+  height: 100% !important;
+  padding-top: 0 !important;
+}
+
+.featured-card .news-card-image {
+  height: 100% !important;
   object-fit: cover;
-  display: block;
 }
 
-/* =========================================
-   2. MOBILE LAYOUT (LIST STYLE: BIG PHOTO LEFT)
-   ========================================= */
+.featured-card .news-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  padding: 40px 20px;
+  color: white;
+  z-index: 2;
+}
 
-@media (max-width: 768px) {
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 992px) {
   .latest-news-grid {
-    grid-template-columns: 1fr !important; /* Umurongo umwe gusa */
-    gap: 15px;
-  }
-
-  /* Force Card kugaragara nka List kuri Mobile */
-  .news-card-base {
-    flex-direction: row !important; /* Ifoto ibumoso, Details iburyo */
-    height: 140px !important; /* Uburebure bwongerewe ngo ifoto ibe nini */
-    align-items: center;
-    border: none;
-    border-bottom: 1px solid #eee;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  /* IFOTO KURI MOBILE: Twaguye ubugari (160px) ngo ibe nini cyane (Visible) */
-  .news-card-base img {
-    width: 160px !important; 
-    height: 120px !important; 
-    border-radius: 12px; /* Amfuruka areze (Rounded) */
-    margin: 0 10px;
-    flex-shrink: 0;
-  }
-
-  /* INYANDIKO KURI MOBILE (Right Side) */
-  .news-card-content, 
-  .news-card-base h3 {
-    padding: 0 10px !important;
-    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: left;
   }
 
-  .news-card-base h3 {
-    font-size: 17px !important; /* Text nini isomeka neza cyane */
-    font-weight: 700;
-    color: #1a202c;
-    line-height: 1.3;
-    margin: 0 !important;
-    /* Imirongo 3 ya title kuri mobile */
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .news-center-slider {
+    order: 1;
+    height: 300px;
+    margin-bottom: 20px;
   }
 
-  /* Kuraho amakuru adakenewe kuri mobile ngo bitabyigana */
-  .news-card-description, 
-  .news-card-footer,
-  .slider-indicators {
-    display: none !important;
+  .side-item-wrapper .news-card {
+    flex-direction: row !important; /* Ifoto ibumoso kuri Mobile */
+    height: 110px !important;
+  }
+
+  .side-item-wrapper .news-media-container {
+    width: 120px !important;
+    height: 100% !important;
   }
 }
 
-/* Tablet (2 ku murongo) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .latest-news-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
+
+
+
+
+
+
