@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/TopStickyAds.css";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000";
-
 const TopStickyAds = ({ ads }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -14,7 +12,7 @@ const TopStickyAds = ({ ads }) => {
     if (total > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % total);
-      }, 7000); // 7 seconds ngo basome description yose
+      }, 6000); 
       return () => clearInterval(timer);
     }
   }, [mediaAds.length, textAds.length]);
@@ -22,7 +20,8 @@ const TopStickyAds = ({ ads }) => {
   const getMediaUrl = (url) => {
     if (!url) return "";
     if (url.startsWith("http")) return url;
-    const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+    // Koresha https link ya backend yawe hano
+    const base = "https://nexus-news-network-backend.onrender.com"; 
     return `${base}${url.startsWith('/') ? url : '/' + url}`;
   };
 
@@ -34,33 +33,24 @@ const TopStickyAds = ({ ads }) => {
   return (
     <div className="top-sticky-ads-container">
       <div className="ad-wrapper-flex">
-        
-        {/* LEFT: PHOTO (Large & Clear) */}
         <div className="ad-media-part">
           {currentMediaAd && (
-            <div className="media-box-fixed">
-               <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Nexus Ad" />
-            </div>
+             <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Nexus Ad" />
           )}
         </div>
 
-        {/* MIDDLE: VERTICAL DIVIDER (Ihishwa kuri mobile) */}
         <div className="ad-vertical-divider"></div>
 
-        {/* RIGHT: TEXT (Full & Readable) */}
         <div className="ad-text-part">
-          <div className="text-slide-content">
-            <span className="sponsored-label">PROMOTED</span>
-            <h4 className="ad-title-full">{currentTextAd?.title}</h4>
-            <div className="ad-desc-row">
-               <p className="ad-full-desc">{currentTextAd?.description}</p>
-               <a href={`tel:${currentTextAd?.description?.match(/\d+/)}`} className="call-btn-action">
-                 📞 CALL
-               </a>
-            </div>
+          <span className="sponsored-label">PROMOTED</span>
+          <h4 className="ad-title-full">{currentTextAd?.title}</h4>
+          <div className="ad-desc-row">
+            <p className="ad-full-desc">{currentTextAd?.description}</p>
+            <a href={`tel:${currentTextAd?.description?.match(/\d+/)}`} className="call-btn-action">
+              📞 CALL
+            </a>
           </div>
         </div>
-
       </div>
     </div>
   );
