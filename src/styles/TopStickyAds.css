@@ -1,141 +1,118 @@
-/* TopStickyAds.css */
-
+/* Container yose */
 .top-sticky-ads-container {
   position: sticky;
-  top: 78px; /* Munsi ya Navbar */
-  z-index: 990;
+  top: 0;
+  z-index: 1000;
   background: #ffffff;
-  width: 100%;
-  min-height: 100px;
-  padding: 10px 0;
-  border-bottom: 2px solid #0a1930;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  height: 85px; /* Height nkeya kugira ngo idatwara umwanya munini */
+  border-bottom: 1px solid #ddd;
   display: flex;
   align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .ad-wrapper-flex {
   display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 15px;
-  gap: 20px;
-}
-
-/* --- PHOTO PART --- */
-.ad-media-part {
-  width: 250px; /* Ifoto nini kuri desktop */
-  height: 90px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #000;
-}
-
-.ad-media-part img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* --- DIVIDER --- */
-.ad-vertical-divider {
-  width: 2px;
-  height: 70px;
-  background: #e2e8f0;
-  flex-shrink: 0;
-}
-
-/* --- TEXT PART --- */
+/* Text Part (Ibumoso) */
 .ad-text-part {
-  flex-grow: 1;
+  flex: 1;
+  padding: 5px 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sponsored-label {
-  font-size: 0.6rem;
-  font-weight: 900;
-  color: #e63946;
-  text-transform: uppercase;
+  font-size: 9px;
+  color: #777;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .ad-title-full {
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #0a1930;
-}
-
-.ad-desc-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin-top: 5px;
+  font-size: 14px;
+  margin: 2px 0;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Bituma text itarenga umurongo */
 }
 
 .ad-full-desc {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #475569;
-  line-height: 1.4;
-  white-space: normal; /* Amagambo amanuka mu mirongo */
+  font-size: 11px;
+  color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Umurongo umwe gusa kuri Mobile */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
+/* Vertical Divider */
+.ad-vertical-divider {
+  width: 1px;
+  background: #eee;
+  height: 60%;
+}
+
+/* Media Part (Iburyo) */
+.ad-media-part {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fafafa;
+}
+
+.ad-media-part img {
+  max-height: 80%;
+  max-width: 90%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+/* Call Button - Inyuma ya Description */
 .call-btn-action {
-  background: #16a34a;
-  color: white;
+  font-size: 10px;
+  color: #007bff;
+  font-weight: bold;
   text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  white-space: nowrap;
+  border: 1px solid #007bff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+  width: fit-content;
+  transition: 0.3s;
 }
 
-/* =========================================
-   MOBILE FIX (The Major Correction)
-   ========================================= */
+.call-btn-action:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+/* --- MOBILE OPTIMIZATION --- */
 @media (max-width: 600px) {
   .top-sticky-ads-container {
-    min-height: 160px; /* Twongereye height ngo byose bikwire */
-    top: 55px; /* Navbar ya mobile */
-    padding: 12px 0;
+    height: 75px; /* Bigabanuke kuri Mobile */
   }
-
-  .ad-wrapper-flex {
-    flex-direction: column; /* Ifoto hejuru, Amagambo munsi */
-    align-items: center;
-    gap: 10px;
-    text-align: center;
+  
+  .ad-title-full {
+    font-size: 12px;
   }
-
-  .ad-media-part {
-    width: 100%; /* Ifoto yuzura ubugari kuri phone */
-    max-width: 320px;
-    height: 100px;
-  }
-
-  .ad-vertical-divider {
-    display: none; /* Ukureho umurongo kuri mobile kuko zikurikirana */
-  }
-
-  .ad-desc-row {
-    flex-direction: column;
-    gap: 10px;
-  }
-
+  
   .ad-full-desc {
-    font-size: 0.8rem;
-    padding: 0 10px;
+    display: none; /* Kuraho description kuri mobile ntoya kugira ngo bitabyigana */
   }
-
+  
   .call-btn-action {
-    width: 80%; /* Buto nini kuri phone ngo bakande borohewe */
+    padding: 1px 5px;
+    font-size: 9px;
   }
 }
-
-/* Animation */
-.text-slide-content { animation: fadeIn 0.8s ease-in-out; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
