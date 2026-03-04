@@ -1,3 +1,33 @@
+/* --- Variables zawe --- */
+:root {
+  --nav-h: 65px;
+  --explorer-h: 40px;
+  --ads-h: 110px; 
+  --ticker-h: 40px;
+  --bg: #c1c1e6;
+  --primary-dark: #0a1930;
+}
+
+/* --- Global Reset (IKOSORE HANO) --- */
+* {
+  box-sizing: border-box;
+  /* KURAKO margin: 0 !important; HANO kuko niyo yica slider */
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--bg);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Sunika inkuru hasi kugira ngo slide igarapare (Nav+Explorer+Ads+Ticker) */
+body {
+  padding-top: 260px !important; 
+}
+
 /* --- 1. NAVBAR (Fixed Top) --- */
 .navbar-container {
   position: fixed !important;
@@ -22,6 +52,7 @@
   background: #ffffff;
   border-bottom: 2px solid #ddd;
 }
+
 /* --- 3. TICKER (Fixed Munsi ya Ads) --- */
 .trending {
   position: fixed !important;
@@ -36,4 +67,44 @@
   align-items: center;
 }
 
+/* --- 4. CENTRAL SLIDE VISIBILITY (FIXED) --- */
+.main-content-layout {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1450px;
+  margin: 0 auto;
+}
 
+/* Ibi bituma inkuru zo hagati (Slide) zongera kugaragara */
+.latest-center-col {
+  display: block !important; /* Hindura hano niba grid yanze */
+  min-height: 450px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.latest-center-col .slide-item {
+  display: none;
+}
+
+.latest-center-col .slide-item.active {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  animation: slideFade 0.6s ease-in;
+}
+
+@keyframes slideFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+  body { padding-top: 220px !important; }
+  .explorer-navbar { display: none !important; }
+  .top-sticky-ads-container { top: 65px !important; }
+  .trending { top: 175px !important; }
+}
