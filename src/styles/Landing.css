@@ -18,6 +18,27 @@
   width: 100%;
   animation: fadeIn 0.8s ease-in-out;
 }
+/* Shyira iyi muri Landing.css */
+.latest-center-col {
+  background: transparent !important; /* Kuraho umukara niba ari background */
+  min-height: 400px;
+  display: block !important;
+  position: relative;
+}
+
+.latest-center-col img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover; /* Bituma ifoto yuzura neza */
+  display: block !important;
+}
+
+/* Kwemeza ko inkuru active igaragara */
+.slide-item.active {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
 
 /* 3. KUKURAHO KWA KUPFUKANA (OVERLAP) */
 .main-content-layout {
@@ -42,3 +63,4 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
