@@ -19,7 +19,7 @@ body, html {
   padding: 0;
   width: 100%;
   overflow-x: hidden;
-  background: var(--bg);
+  background: white;
   font-family: 'Inter', sans-serif;
 }
 
@@ -108,3 +108,4 @@ body {
   .top-sticky-ads-container { top: 65px !important; }
   .trending { top: 175px !important; }
 }
+
