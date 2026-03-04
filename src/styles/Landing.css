@@ -1,6 +1,6 @@
 /* 1. KOSORA CENTER COLUMN (SLIDE) VISIBILITY */
 .latest-center-col {
-  display: grid !important; /* Kwemeza ko igaragara */
+  display: grid; /* Kwemeza ko igaragara */
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   min-height: 400px; /* Bituma itaba ubusa */
@@ -42,3 +42,4 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
