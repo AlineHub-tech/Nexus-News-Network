@@ -1,128 +1,82 @@
 /* --- Variables --- */
 :root {
-  --dark: #0a2a66;
-  --accent: #00d4ff;
-  --muted: #6b7280;
-  --bg: #c1c1e6;
   --primary-dark: #0a1930;
+  --bg: #c1c1e6;
+  --nav-h: 65px;
+  --ads-h: 90px; /* Adjust bitewe n'uburebure bwa Ads */
 }
 
-/* --- Global Reset --- */
+/* --- Global Reset (Hano niho hari ikibazo) --- */
 * {
   box-sizing: border-box;
-  margin: 0 !important; /* Kuraho margins zose mu buryo bwa rusange */
-  padding: 0;
 }
 
-html, body {
-  margin: 0 !important;
-  padding: 0 !important;
+body, html {
+  margin: 0;
+  padding: 0;
   width: 100%;
   overflow-x: hidden;
   font-family: 'Inter', Arial, sans-serif;
   background: var(--bg);
 }
 
-/* Gufatanya Navbar na Content */
+/* 
+   Icyitonderwa: Kuraho padding-top ya Body kuko tugiye gukoresha 
+   uburyo bwa 'Sticky Header Wrapper' muri Landing.jsx 
+*/
 body {
-  /* Iyi padding igomba kungana n'uburebure bwa Navbar gusa */
-  padding-top: 110px !important; 
+  padding-top: 0 !important; 
 }
 
-/* --- NAVBAR (Fixed & Sticky) --- */
+/* --- HEADER WRAPPER --- */
+/* Ibi bituma Ads + Navbar + Ticker bigumana hejuru bidapfukana */
+.main-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  width: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- NAVBAR --- */
 .navbar-container {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0;
-  width: 100% !important;
-  z-index: 9999 !important;
-  background-color: #0a1930; 
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 100%;
+  background-color: var(--primary-dark);
+  z-index: 1000;
 }
 
-.navbar-top {
+/* --- TOP ADS (Ino niyo ya Ads yawe nshya) --- */
+.top-sticky-ads-container {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 5px 5%;
-  height: 65px; /* Uburebure bwa Logo section */
-}
-
-.explorer-navbar {
-  background-color: var(--primary-dark) !important;
   padding: 8px 0;
-  display: flex;
-  justify-content: center;
 }
 
-/* --- TRENDING TICKER (Yafatanye na Navbar) --- */
+/* --- TRENDING TICKER --- */
 .trending {
   background: black;
   color: #fff;
-  font-weight: 700;
   padding: 10px 0;
+  width: 100%;
   overflow: hidden;
-  white-space: nowrap;
+}
+
+/* --- CONTENT AREA (Inkuru) --- */
+.main-content-layout {
   width: 100%;
-  /* Ibi nibyo bituma yegera Navbar burundu */
-  margin-top: 0 !important; 
-  position: relative;
-  z-index: 10;
+  max-width: 1400px;
+  margin: 20px auto !important; /* Hano niho inkuru itangirira */
+  padding: 0 15px;
 }
 
-/* Animation ya Trending Ticker */
-.trending span {
-  display: inline-block;
-  padding-left: 100%;
-  animation: ticker-move 20s linear infinite;
-}
-
-@keyframes ticker-move {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
-}
-
-/* --- HERO SECTION --- */
-.hero {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 16px;
-  /* Space itangirira munsi ya Trending Ticker */
-  margin-top: 15px !important; 
-}
-
-/* --- MOBILE MENU --- */
-.nav-mobile-menu {
-  position: fixed !important;
-  top: 65px; /* Munsi ya navbar-top */
-  left: -100%;
-  width: 100%;
-  height: calc(100vh - 65px);
-  background-color: #0a1930 !important;
-  transition: 0.4s ease-in-out;
-  z-index: 9998;
-}
-
-.nav-mobile-menu.open {
-  left: 0 !important;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 992px) {
-  body {
-    padding-top: 65px !important; /* Kuri mobile explorer ivamo */
-  }
-  .explorer-navbar {
-    display: none !important;
-  }
-  .hero {
-    grid-template-columns: 1fr;
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+  .main-content-layout {
+    margin-top: 10px !important;
   }
 }
-
-@media (max-width: 480px) {
-  .site-name {
-    /* display: none; */
-  }
-}
-
