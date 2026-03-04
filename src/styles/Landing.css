@@ -1,81 +1,103 @@
+/* =========================================
+   1. GLOBAL CARD STYLE (NewsCard)
+   ========================================= */
 .news-card-base { 
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   background-color: #ffffff;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  height: 100%; /* Zose zingana mu burebure */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  height: 100%;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .news-card-base:hover {
-    transform: translateY(-5px); /* Animation nziza iyo umuntu ayikozaho */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Amafoto yuzuye neza */
 .news-card-base img {
   width: 100%;
-  height: 180px; /* Uburebure buhoraho bw'ifoto */
-  object-fit: cover; /* **Ibi nibyo bituma ifoto i-fit neza** */
+  height: 180px;
+  object-fit: cover;
   display: block;
 }
 
-/* --- SECTION 2: Layout yo Hejuru (Mobile, Tablet, Desktop) --- */
-
+/* =========================================
+   2. DESKTOP LAYOUT (4 Hejuru, 4 Munsi)
+   ========================================= */
 .latest-news-grid-section {
   display: grid;
-  gap: 20px;
-  padding: 10px;
+  gap: 25px;
+  padding: 20px 10px;
+  max-width: 1450px;
+  margin: 0 auto;
+  /* Kuri Desktop: Inkuru 4 kuri buri murongo (Grid 4x2) */
+  grid-template-columns: repeat(4, 1fr);
 }
 
-/* 1. Mobile (Default: Byose kuri column 1 bigahagararana) */
-.latest-news-grid-section {
-  grid-template-columns: 1fr;
-}
-
+/* Kuraho amacolumn ya kera (Side/Center) kuko ubu byose ni grid imwe */
 .latest-left-col, .latest-center-col, .latest-right-col {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: contents !important; 
 }
 
-
-/* 2. Tablet (min-width: 600px) */
-@media (min-width: 600px) {
-  /* Kuri tablet turashyiramo columns 2 */
+/* =========================================
+   3. MOBILE LAYOUT (List Style: Photo Left, Text Right)
+   ========================================= */
+@media (max-width: 767px) {
   .latest-news-grid-section {
-     grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr; /* Umurongo umwe gusa */
+    gap: 15px;
   }
 
-  /* Hagati (Center) igafata uburebure bwose bwa 2 kuri tablet */
-  .latest-center-col {
-    grid-column: span 2;
-    display: grid; /* Noneho Center nayo igira grid yayo */
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  /* Force Card kugaragara nka List kuri Mobile */
+  .news-card-base {
+    flex-direction: row !important; /* Ifoto ibumoso, Inyandiko iburyo */
+    height: 110px !important;
+    align-items: center;
+  }
+
+  /* Ifoto kuri Mobile (Hino) */
+  .news-card-base img {
+    width: 130px !important; /* Ubugari bw'ifoto */
+    height: 110px !important;
+    flex-shrink: 0;
+  }
+
+  /* Inyandiko kuri Mobile (Hirya) */
+  .news-card-content {
+    padding: 10px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* Titre y'inkuru kuri mobile (Imirongo 2 gusa) */
+  .news-card-content h3 {
+    font-size: 14px !important;
+    line-height: 1.3;
+    margin: 0 !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Kuraho ibisobanuro birambuye kuri mobile ngo bimeze neza */
+  .news-card-description, .news-card-footer {
+    display: none !important;
   }
 }
 
-/* 3. Desktop (min-width: 1024px): Layout ya 2-4-2 */
-@media (min-width: 1024px) {
+/* =========================================
+   4. TABLET LAYOUT (2 ku murongo)
+   ========================================= */
+@media (min-width: 600px) and (max-width: 1023px) {
   .latest-news-grid-section {
-    /* Columns 12 muri rusange: 3 (Left) + 6 (Center) + 3 (Right) */
-    grid-template-columns: repeat(12, 1fr); 
-  }
-
-  .latest-left-col {
-    grid-column: span 3; /* 25% */
-  }
-
-  .latest-center-col {
-    grid-column: span 6; /* 50% */
-    /* Muri center (4 articles), ubu zihagarara neza muri grid ya 2x2 */
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .latest-right-col {
-    grid-column: span 3; /* 25% */
   }
 }
