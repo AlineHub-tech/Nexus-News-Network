@@ -6,7 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000";
 const TopStickyAds = ({ ads }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Gufata Ads zifite ifoto/video
+  // Gufata Ads zifite amashusho (Photos/Videos)
   const mediaAds = ads?.filter(ad => ad.mediaUrl).slice(0, 10) || [];
   // Gufata Ads zifite amagambo gusa (cyangwa izo ari zo zose)
   const textAds = ads?.filter(ad => ad.title).slice(0, 10) || [];
@@ -16,7 +16,7 @@ const TopStickyAds = ({ ads }) => {
     if (total > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % total);
-      }, 5000);
+      }, 5000); // Guhinduranya buri masegonda 5
       return () => clearInterval(timer);
     }
   }, [mediaAds.length, textAds.length]);
@@ -30,37 +30,41 @@ const TopStickyAds = ({ ads }) => {
 
   if (!ads || ads.length === 0) return null;
 
+  // Iki nicyo bituma ifoto n'amagambo bihinduranya (Slider logic)
   const currentMediaAd = mediaAds[currentSlide % mediaAds.length];
-  const currentTextAd = textAds[(currentSlide + 1) % textAds.length]; // Slide itandukanye gato
+  const currentTextAd = textAds[currentSlide % textAds.length];
 
   return (
     <div className="top-sticky-ads-container">
       <div className="ad-wrapper-flex">
         
-        {/* LEFT: PHOTO ADS (Size yongerewe) */}
+        {/* IBURYO: PHOTO ADS (Yongerewe Size) */}
         <div className="ad-media-part">
-          {currentMediaAd?.mediaUrl && (
-            <div className="media-box">
-               <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Ads" />
-               <div className="media-info-overlay">
-                  <span>{currentMediaAd.title}</span>
-               </div>
+          {currentMediaAd && (
+            <div className="media-box-animation">
+               {currentMediaAd.mediaType === 'video' ? (
+                 <video autoPlay muted loop src={getMediaUrl(currentMediaAd.mediaUrl)} />
+               ) : (
+                 <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Ad" />
+               )}
             </div>
           )}
         </div>
 
-        {/* MIDDLE: VERTICAL LINE (Ihagaraye) */}
+        {/* HAGATI: VERTICAL LINE (Ihagaraye itandukanya impande zombi) */}
         <div className="ad-vertical-divider"></div>
 
-        {/* RIGHT: TEXT ADS (Zihinduranya) */}
+        {/* IBUMOSO: TEXT ADS (Zihinduranya) */}
         <div className="ad-text-part">
-          <span className="sponsored-label">PROMOTED</span>
-          <h4 className="slide-up-animation">{currentTextAd?.title}</h4>
-          <div className="ad-actions-row">
-             <p>{currentTextAd?.description?.substring(0, 40)}...</p>
-             <a href={`tel:${currentTextAd?.description?.match(/\d+/)}`} className="call-now-small">
-               📞 CALL
-             </a>
+          <div className="text-slide-animation">
+            <span className="sponsored-label">PROMOTED</span>
+            <h4 className="ad-title-limit">{currentTextAd?.title}</h4>
+            <div className="ad-action-row">
+               <p className="ad-desc-limit">{currentTextAd?.description?.substring(0, 45)}...</p>
+               <a href={`tel:${currentTextAd?.description?.match(/\d+/)}`} className="call-btn-small">
+                 📞 CALL
+               </a>
+            </div>
           </div>
         </div>
 
