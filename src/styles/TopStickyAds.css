@@ -1,103 +1,124 @@
-/* 1. Main Container */
+/* 1. Main Container - Iba "Auto" kugira ngo inyandiko n'uburebure bwazo byose bigarapare */
 .top-sticky-ads-container {
-  position: relative; /* Bituma isunika ibindi bice munsi yayo aho kubipfuka */
+  position: relative; /* Bituma isunika ibindi bice hasi neza */
   width: 100%;
-  min-height: 80px; /* Height nkeya kuri Mobile */
+  min-height: 100px; /* Uburebure fatizo bushobora kwaguka */
+  height: auto; 
   background: #ffffff;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid #f1f1f1;
   display: flex;
+  align-items: center;
   z-index: 1001;
-  overflow: hidden;
+  /* Kuraho hejuru hapfutse */
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: visible; 
 }
 
 .ad-wrapper-flex {
   display: flex;
   width: 100%;
+  height: 100%;
   align-items: center;
+  justify-content: space-between;
 }
 
-/* 2. Text Section (Ibumoso) */
+/* 2. Text Section (Ibumoso) - Inyandiko zose zigaragare */
 .ad-text-part {
-  flex: 1.3;
-  padding: 8px 12px;
+  flex: 1.5; 
+  padding-left: 20px;
+  padding-right: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden; /* Kwemeza ko bitarenga height ya container */
+}
+
+.sponsored-label {
+  font-size: 10px;
+  color: #d32f2f;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
 .ad-title-full {
-  font-size: 13px; /* Size ntoya kuri Mobile */
-  font-weight: 700;
-  color: #d32f2f;
+  font-size: 16px;
+  font-weight: 800;
+  color: #111;
   margin: 0;
-  line-height: 1.2;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Igaragaza imirongo 2 gusa ngo idapfuka inkuru */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  line-height: 1.3;
+  /* Kwemeza ko inyandiko yose igaragara (Nta tudomo ...) */
+  white-space: normal;
+  overflow: visible;
+}
+
+.ad-desc-row {
+  margin-top: 6px;
 }
 
 .ad-full-desc {
-  font-size: 11px;
-  color: #555;
-  margin-top: 2px;
-  display: -webkit-box;
-  -webkit-line-clamp: 1; /* Umurongo umwe gusa kuri desc */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  /* Kwemeza ko inyandiko yose igaragara */
+  white-space: normal;
+  overflow: visible;
 }
 
 .call-btn-action {
   display: inline-block;
-  font-size: 10px;
+  font-size: 12px;
   background: #2563eb;
   color: white !important;
-  padding: 2px 8px;
+  padding: 5px 15px;
   border-radius: 4px;
-  width: fit-content;
-  margin-top: 4px;
+  font-weight: bold;
   text-decoration: none;
+  width: fit-content;
 }
 
-/* 3. Divider */
+/* 3. Vertical Line */
 .ad-vertical-divider {
-  width: 1px;
+  width: 2px;
   background: #ddd;
-  height: 40px;
+  height: 70px;
+  margin: 0 10px;
 }
 
 /* 4. Photo Section (Iburyo) */
 .ad-media-part {
   flex: 1;
-  height: 80px; /* Iba fixed kugira ngo idakura cyane */
+  height: 100%;
   display: flex;
   justify-content: flex-end;
+  background: #f9f9f9;
 }
 
 .ad-media-part img {
-  height: 100%;
-  width: 130px; /* Size nshya kuri mobile */
+  height: 110px; /* Size nini nk'uko ubishaka */
+  width: 200px;
   object-fit: cover;
   clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
 }
 
-/* --- MOBILE SPECIFIC FIX --- */
+/* --- MOBILE OPTIMIZATION --- */
 @media (max-width: 600px) {
   .top-sticky-ads-container {
-    height: 80px; /* Height ihoraho kuri Mobile ngo itarya inkuru */
+    min-height: 90px;
   }
   
   .ad-title-full {
-    font-size: 12px;
-    -webkit-line-clamp: 2;
+    font-size: 14px;
   }
-
+  
   .ad-full-desc {
-    display: none; /* Kuri Mobile, description tuyikureho ngo title igaragare yose */
+    font-size: 11px;
+    margin-bottom: 5px;
   }
 
   .ad-media-part img {
-    width: 100px;
+    width: 130px;
+    height: 100px;
   }
 }
