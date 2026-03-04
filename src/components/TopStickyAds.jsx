@@ -14,7 +14,7 @@ const TopStickyAds = ({ ads }) => {
     if (total > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % total);
-      }, 6000); 
+      }, 7000); // 7 seconds ngo basome description yose
       return () => clearInterval(timer);
     }
   }, [mediaAds.length, textAds.length]);
@@ -35,26 +35,26 @@ const TopStickyAds = ({ ads }) => {
     <div className="top-sticky-ads-container">
       <div className="ad-wrapper-flex">
         
-        {/* LEFT: PHOTO (Large Size) */}
+        {/* LEFT: PHOTO (Large & Clear) */}
         <div className="ad-media-part">
           {currentMediaAd && (
-            <div className="media-box-animation">
-               <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Ad" />
+            <div className="media-box-fixed">
+               <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Nexus Ad" />
             </div>
           )}
         </div>
 
-        {/* MIDDLE: VERTICAL DIVIDER */}
+        {/* MIDDLE: VERTICAL DIVIDER (Ihishwa kuri mobile) */}
         <div className="ad-vertical-divider"></div>
 
-        {/* RIGHT: TEXT (Full Description) */}
+        {/* RIGHT: TEXT (Full & Readable) */}
         <div className="ad-text-part">
-          <div className="text-slide-animation">
-            <span className="sponsored-label">PROMOTED AD</span>
+          <div className="text-slide-content">
+            <span className="sponsored-label">PROMOTED</span>
             <h4 className="ad-title-full">{currentTextAd?.title}</h4>
-            <div className="ad-description-container">
+            <div className="ad-desc-row">
                <p className="ad-full-desc">{currentTextAd?.description}</p>
-               <a href={`tel:${currentTextAd?.description?.match(/\d+/)}`} className="call-btn-full">
+               <a href={`tel:${currentTextAd?.description?.match(/\d+/)}`} className="call-btn-action">
                  📞 CALL
                </a>
             </div>
