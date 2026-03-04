@@ -5,89 +5,87 @@
     box-sizing: border-box;
 }
 
-:root {
-    --nav-h: 75px;        /* Height ya Navbar-top */
-    --explorer-h: 45px;   /* Height ya Explorer categories */
-    --ticker-h: 42px;     /* Height ya Trending Ticker */
-    --primary-dark: #0a1930;
-}
-
 html, body {
     width: 100%;
     overflow-x: hidden;
+    margin: 0 !important;
 }
 
-/* --- 2. NAVBAR MAIN CONTAINER (STICKY TOP 0) --- */
+/* --- 2. NAVBAR CONTAINER (FIXED/STICKY) --- */
 .navbar-container {
     position: sticky; 
     top: 0;
     width: 100%;
-    z-index: 10000; /* Hejuru y'ibindi byose */
-    background-color: var(--primary-dark); 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+   background-color: #0a1930; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 4%;
-    height: var(--nav-h);
+    padding: 10px 3%; /* Yagabanyijwe gato ngo izina ribone umwanya */
+    height: 75px;
 }
 
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
-
-.site-logo {
-    height: 50px;
-    width: 50px;
-    border-radius: 50% !important;
-    object-fit: cover;
-    border: 1.5px solid rgba(255, 255, 255, 0.2);
-    flex-shrink: 0;
-}
-
-.site-name {
-    font-size: 18px;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-}
-
-.nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px !important;
-}
-
 .auth-icon-button {
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 18px; /* Size nshya */
     cursor: pointer;
-    color: #ffffff;
-    transition: 0.3s;
+    margin-left: 10px;
+    color: #ffffff; /* White color */
+}
+/* LOGO IBE IRI MU RUZIGA (CIRCLE) */
+.site-logo {
+    height: 48px;
+    width: 48px;
+    border-radius: 50% !important; /* Ibi nibyo biyigira uruziga */
+    object-fit: cover;
+    border: 1px solid #ddd;
+    flex-shrink: 0; /* Birinda ko yikunja kuri mobile */
 }
 
-/* --- 3. EXPLORER CATEGORIES (STICKY MUNSI YA NAV) --- */
-.explorer-navbar {
-    background-color: var(--primary-dark);
-    height: var(--explorer-h);
+/* IZINA RIGARAGARA KURI MOBILE NA DESKTOP */
+.site-name {
+    font-size: 16px; /* Font isomeka neza */
+    font-weight: bold;
+    color:white; /* White text on dark blue background */
+    margin-top: 0;
+    margin-left: 10px; /* Umwanya hagati ya logo na text */
+}
+.nav-actions {
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    position: sticky;
-    top: var(--nav-h); /* Iguma munsi ya Navbar-top */
-    z-index: 9999;
+}
+/* NAV ACTIONS (Gap hagati ya Flag, Login, na Menu) */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px !important; /* Iyi gap niyo itandukanya flag n'ibindi */
+}
+
+/* Ibi bitandukanya neza element ziri muri LangSwitch cyangwa SearchBar */
+.nav-actions > * {
+    margin-left: 5px; 
+}
+
+/* --- 3. DESKTOP CATEGORIES --- */
+.explorer-navbar {
+    background-color: #0a1930;
+    padding: 10px 0;
 }
 
 .categories-wrapper-desktop {
     display: flex;
-    gap: 25px;
+    justify-content: center;
+    gap: 20px;
 }
 
 .category-link {
@@ -96,54 +94,21 @@ html, body {
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
-    transition: 0.3s;
 }
 
-.category-link:hover {
-    color: #00d4ff;
-}
-
-/* --- 4. TRENDING TICKER (STICKY MUNSI YA EXPLORER) --- */
-.trending {
-    background: #000000;
-    color: #ffffff;
-    height: var(--ticker-h);
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    white-space: nowrap;
-    position: sticky;
-    /* Desktop: Nav(75) + Explorer(45) = 120px */
-    top: calc(var(--nav-h) + var(--explorer-h)); 
-    z-index: 9998;
-}
-
-.trending span {
-    display: inline-block;
-    padding-left: 100%;
-    font-weight: 700;
-    font-size: 0.9rem;
-    animation: ticker-move 25s linear infinite;
-}
-
-@keyframes ticker-move {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
-
-/* --- 5. MOBILE MENU --- */
+/* --- 4. MOBILE MENU (Background #0a1930) --- */
 .nav-mobile-menu {
     position: fixed;
-    top: var(--nav-h);
+    top: 75px;
     left: -100%;
     width: 85%;
-    height: calc(100vh - var(--nav-h));
-    background-color: var(--primary-dark);
+    height: calc(100vh - 75px);
+    background-color: #0a1930;
     display: flex;
     flex-direction: column;
     padding: 30px 20px;
     transition: 0.4s ease-in-out;
-    z-index: 10001; /* Iza hejuru ya sticky elements */
+    z-index: 9998;
 }
 
 .nav-mobile-menu.open {
@@ -158,13 +123,34 @@ html, body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* --- 6. RESPONSIVE --- */
+/* --- 5. TRENDING TICKER (Byatanyijwe na Navbar) --- */
+.trending {
+    background: black;
+    color: #fff;
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 0 !important;
+}
+
+.trending span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker-move 20s linear infinite;
+}
+
+@keyframes ticker-move {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* --- 6. RESPONSIVE DESIGN (Mobile & Tablet) --- */
 .menu-toggle {
     font-size: 1.8rem;
     background: none;
     border: none;
     cursor: pointer;
-    color: #ffffff;
+    color:#ffffff;
 }
 
 @media (max-width: 992px) {
@@ -172,25 +158,28 @@ html, body {
         display: none; 
     }
 
-    .trending {
-        /* Kuri Mobile Explorer ivamo, bityo Ticker izamuka kuri top 75px */
-        top: var(--nav-h); 
+    /* KUKURAHOM SEARCH BAR KURI MOBILE NGO IZINA RIBONE UMWANYA */
+    /* Simbuza ".search-bar-wrapper" izina rya class ya search bar yawe niba idahise ivamo */
+    .search-bar-container, 
+    .navbar-top input { 
+        display: none !important; 
     }
 
     .site-name {
-        font-size: 15px;
+        font-size: 0.9rem; /* Gabanya gato kuri mobile ntoya */
+    }
+
+    .nav-actions {
+        gap: 12px !important; /* Gap ihagije kuri mobile */
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 400px) {
     .site-name {
-        font-size: 13px;
+        font-size: 0.8rem; /* Kuri telefone ntoya cyane */
     }
     .site-logo {
         height: 40px;
         width: 40px;
-    }
-    .nav-actions {
-        gap: 12px !important;
     }
 }
