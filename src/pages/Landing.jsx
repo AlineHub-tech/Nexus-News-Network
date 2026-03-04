@@ -5,11 +5,12 @@ import LatestNews from "../components/LatestNews";
 import RegularNews from "../components/RegularNews";
 import PopularNews from "../components/PopularNews";
 import TV from "../components/TV";
-import TopStickyAds from "../components/TopStickyAds"; 
+import AdsSection from "../components/AdsSection";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import TrendingTicker from '../components/TrendingTicker';
-import LoadingScreen from "../components/LoadingScreen"; 
+import SloganAnimation from '../components/SloganAnimation';
+import LoadingScreen from "../components/LoadingScreen"; // Loading screen yawe
 import { NewsContext } from '../context/NewsContext';
 
 // API BASE URL
@@ -34,7 +35,7 @@ const Landing = () => {
     });
   }, []);
 
-  // Fetch Ads binyuze kuri Public API
+  // Fetch Ads muri useEffect
   useEffect(() => {
     const fetchAdsData = async () => {
         try {
@@ -51,13 +52,13 @@ const Landing = () => {
         } catch (err) {
             console.error("Error fetching ads:", err.message);
         } finally {
-            setIsAdsLoading(false); 
+            setIsAdsLoading(false); // Igaragaza ko Ads zirangiye, haba habaye error cyangwa success
         }
     };
     fetchAdsData();
   }, []);
 
-  // Gutunganya amadata yose (Memoized)
+  // Gutunganya inkuru zose zifite URL zikora (Memoized)
   const formattedNews = useMemo(() => formatMediaList(newsList), [newsList, formatMediaList]);
   const formattedVideos = useMemo(() => formatMediaList(videosList), [videosList, formatMediaList]);
 
@@ -65,9 +66,13 @@ const Landing = () => {
   const regularNewsSliced = useMemo(() => formattedNews.slice(8), [formattedNews]);
   const popularNewsSliced = useMemo(() => formattedNews.slice(0, 8), [formattedNews]);
 
-  // Handle Loading & Errors
-  if (loading || isAdsLoading) return <LoadingScreen />;
+  // --- KANDI HANO NIHO HAKEMURA KUDASIMBUKA KWA LOADING ---
+  // Iyo kimwe mu bintu bitaraza (News cyangwa Ads), LoadingScreen igumaho
+  if (loading || isAdsLoading) {
+    return <LoadingScreen />;
+  }
 
+  // Niba habaye error nyuma ya loading
   if (error) {
     return (
       <div className="landing-error-page">
@@ -83,52 +88,33 @@ const Landing = () => {
   }
 
   return (
-    <div className="landing-container" style={{ overflowX: "hidden", background: "#f4f4f4" }}>
-      {/* 1. NAVBAR (Fixed top: 0) */}
+    <div className="landing-container">
       <Navbar />
+      <TrendingTicker />
+      <SloganAnimation />
 
-      {/* 2. WRAPPER FOR STICKY ELEMENTS: 
-          Ibi bituma ibintu byose byigerera hejuru bidatwikiriye content */}
-      <div style={{ marginTop: "65px", position: "relative", zIndex: "500" }}>
-          <TopStickyAds ads={ads} />
-          
-          {/* Trending Ticker munsi ya Ads neza */}
-          <div style={{ position: "relative", zIndex: "100", background: "#000" }}>
-             <TrendingTicker />
-          </div>
-      </div>
-
-      {/* 3. MAIN CONTENT: 
-          Nashyizemo marginTop na padding kugira ngo LATEST NEWS igaragara neza hagati */}
-      <main className="main-content-layout" style={{ marginTop: "30px", paddingBottom: "50px" }}>
-        
-        {/* LATEST NEWS: Ifite grid 2-4-2 (Side-Slider-Side) */}
-        <section className="latest-news-section-container" style={{ position: "relative", zIndex: "10" }}>
+      <main className="main-content-layout">
+        <section className="latest-news-section-container">
            <LatestNews news={latestNews8} />
         </section>
 
-        {/* REGULAR NEWS SECTION */}
-        <section className="regular-news-section" style={{ marginTop: "50px" }}>
+        <section className="regular-news-section">
           <RegularNews newsList={regularNewsSliced} />
         </section>
 
-        {/* POPULAR NEWS SECTION */}
-        <section className="popular-news-section" style={{ marginTop: "50px" }}>
+        <section className="popular-news-section">
           <PopularNews newsList={popularNewsSliced} />
         </section>
 
-        {/* TV SECTION (One Column layout) */}
-        <section className="tv-ads-grid" style={{ gridTemplateColumns: "1fr", marginTop: "50px" }}>
+        <section className="tv-ads-grid">
           <TV videos={formattedVideos} />
+          <AdsSection ads={ads} />
         </section>
-
       </main>
 
-      {/* 4. FOOTER */}
       <Footer />
     </div>
   );
 };
 
 export default Landing;
-
