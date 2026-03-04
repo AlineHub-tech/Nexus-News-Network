@@ -14,7 +14,7 @@ const TopStickyAds = ({ ads }) => {
     if (total > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % total);
-      }, 7000); // Nahezeho igihe kirekire gato (7s) ngo babone umwanya wo gusoma description yose
+      }, 6000); 
       return () => clearInterval(timer);
     }
   }, [mediaAds.length, textAds.length]);
@@ -35,23 +35,19 @@ const TopStickyAds = ({ ads }) => {
     <div className="top-sticky-ads-container">
       <div className="ad-wrapper-flex">
         
-        {/* IBURYO: PHOTO ADS */}
+        {/* LEFT: PHOTO (Large Size) */}
         <div className="ad-media-part">
           {currentMediaAd && (
             <div className="media-box-animation">
-               {currentMediaAd.mediaType === 'video' ? (
-                 <video autoPlay muted loop src={getMediaUrl(currentMediaAd.mediaUrl)} />
-               ) : (
-                 <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Ad" />
-               )}
+               <img src={getMediaUrl(currentMediaAd.mediaUrl)} alt="Ad" />
             </div>
           )}
         </div>
 
-        {/* HAGATI: VERTICAL LINE */}
+        {/* MIDDLE: VERTICAL DIVIDER */}
         <div className="ad-vertical-divider"></div>
 
-        {/* IBUMOSO: TEXT ADS (Description isomeka neza) */}
+        {/* RIGHT: TEXT (Full Description) */}
         <div className="ad-text-part">
           <div className="text-slide-animation">
             <span className="sponsored-label">PROMOTED AD</span>
