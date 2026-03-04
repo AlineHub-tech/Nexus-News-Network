@@ -1,122 +1,120 @@
 /* =========================================
-   1. DESKTOP LAYOUT (GRID 4x2)
+   1. DESKTOP LAYOUT (4 HEJURU, 4 MUNSI)
    ========================================= */
+
 .latest-news-section-wrapper {
   max-width: 1450px;
   margin: 0 auto;
-  padding: 20px 15px;
-  background: transparent;
+  padding: 20px 10px;
 }
 
+/* Grid ikora 4 columns kuri Desktop */
 .latest-news-grid {
   display: grid !important;
-  /* Inkuru 4 ku murongo muremure (bituma 8 ziba 4 hejuru, 4 munsi) */
   grid-template-columns: repeat(4, 1fr) !important; 
-  gap: 20px;
+  gap: 25px;
   width: 100%;
 }
 
-/* Kuraho amacolumn ya kera (Side Column) kuko ubu byose ni grid imwe */
+/* Kuraho amacolumn ya kera (Left, Center, Right) kuko ubu byose ni grid imwe */
 .news-side-column, 
-.news-center-slider {
-  display: contents !important; /* Bituma NewsCard zose zigana grid imwe */
+.news-center-slider,
+.left-side,
+.right-side {
+  display: contents !important; 
 }
 
-/* KOSORA NEWSCARD KURI DESKTOP */
-.side-item-wrapper, .slide-item {
-  display: block !important;
-  position: relative !important;
+/* --- CARD STYLE KURI DESKTOP --- */
+.news-card-base { 
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background-color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  position: relative;
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+.news-card-base:hover {
+    transform: translateY(-5px);
+}
+
+.news-card-base img {
   width: 100%;
-  height: auto;
+  height: 190px; /* Uburebure bw'ifoto kuri Desktop */
+  object-fit: cover;
+  display: block;
 }
 
 /* =========================================
-   2. MOBILE LAYOUT (LIST: PHOTO LEFT, TEXT RIGHT)
+   2. MOBILE LAYOUT (LIST STYLE: BIG PHOTO LEFT)
    ========================================= */
+
 @media (max-width: 768px) {
   .latest-news-grid {
     grid-template-columns: 1fr !important; /* Umurongo umwe gusa */
     gap: 15px;
   }
 
-  /* Ibi nibyo bituma Ifoto ijyera hino (Left) n'inyandiko hirya (Right) */
-  .news-card {
-    display: flex !important;
-    flex-direction: row !important; 
+  /* Force Card kugaragara nka List kuri Mobile */
+  .news-card-base {
+    flex-direction: row !important; /* Ifoto ibumoso, Details iburyo */
+    height: 135px !important; /* Uburebure bwongerewe ngo ifoto ibe nini */
     align-items: center;
-    height: 110px !important;
-    background: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    margin-bottom: 5px;
-    width: 100%;
+    border: none;
+    border-bottom: 1px solid #eee;
+    border-radius: 0;
+    box-shadow: none;
   }
 
-  /* Size y'Ifoto kuri Mobile (Left) */
-  .news-card-image, 
-  .news-card img {
-    width: 130px !important;
-    height: 110px !important;
-    object-fit: cover !important;
+  /* IFOTO KURI MOBILE: Twaguye ubugari (150px) ngo ibe nini */
+  .news-card-base img {
+    width: 150px !important; 
+    height: 120px !important; /* Uburebure nabwo bwongerewe */
+    border-radius: 8px;
+    margin-left: 5px;
     flex-shrink: 0;
   }
 
-  /* Inyandiko kuri Mobile (Right) */
-  .news-card-content {
-    padding: 10px !important;
+  /* INYANDIKO KURI MOBILE (Right Side) */
+  .news-card-content, 
+  .news-card-base h3 {
+    padding: 0 15px !important;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 1;
-    overflow: hidden;
   }
 
-  /* Titre y'inkuru kuri mobile */
-  .news-card-content h3, 
-  .news-title {
-    font-size: 14px !important;
+  .news-card-base h3 {
+    font-size: 16px !important; /* Text nini isomeka neza */
+    font-weight: 700;
+    color: #1a202c;
     line-height: 1.3;
     margin: 0 !important;
-    color: #1a202c;
-    /* Imirongo 2 gusa kuri mobile */
+    /* Imirongo 3 ya title kuri mobile */
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  /* Kuraho description n'ibindi bitonzi kuri mobile ngo bimeze neza */
+  /* Kuraho amakuru adakenewe kuri mobile ngo bitabyigana */
   .news-card-description, 
-  .news-card-footer {
+  .news-card-footer,
+  .slider-indicators {
     display: none !important;
   }
 }
 
-/* TABLET VIEW (2 ku murongo) */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Tablet (2 ku murongo) */
+@media (min-width: 601px) and (max-width: 1024px) {
   .latest-news-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
-}
-
-/* =========================================
-   3. KUKURAHO BLACK SPACE & ANIMATIONS
-   ========================================= */
-.news-center-slider {
-  background: transparent !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
-.slide-item {
-  transform: none !important;
-  transition: none !important;
-}
-
-/* Kuraho utudomo twa slider kuko tutagikenewe */
-.slider-indicators {
-  display: none !important;
 }
