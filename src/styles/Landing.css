@@ -1,144 +1,44 @@
-/* =========================================
-   1. GLOBAL RESET (KOSORA MARGINS ZOSE)
-   ========================================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --nav-h: 65px;    /* Height ya Navbar */
-  --ads-h: 100px;   /* Height ya Ads (Ihinduka bitewe na text) */
-  --ticker-h: 40px; /* Height ya Ticker */
-}
-
-body {
-  background: #c1c1e6;
-  font-family: 'Inter', sans-serif;
-  /* Sunika content hasi kugira ngo slide igaragare (65+100+40 = 205px) */
-  padding-top: 210px !important; 
-}
-
-/* =========================================
-   2. STICKY HIERARCHY (NO OVERLAP)
-   ========================================= */
-
-/* Navbar: Top 0 */
-.navbar-container {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0;
-  width: 100% !important;
-  height: var(--nav-h);
-  z-index: 10000 !important;
-  background: #0a1930;
-}
-
-/* Ads: Top 65px (Munsi ya Navbar) */
-.top-sticky-ads-container {
-  position: fixed !important;
-  top: 65px !important; 
-  left: 0;
-  width: 100% !important;
-  min-height: var(--ads-h);
-  height: auto;
-  z-index: 9999 !important;
-  background: #ffffff;
-  border-bottom: 2px solid #0a1930;
-  display: flex;
-  align-items: center;
-  padding: 5px 0;
-}
-
-/* Ticker: Top 165px (Nav 65 + Ads 100) */
-.trending {
-  position: fixed !important;
-  top: 165px !important; 
-  left: 0;
-  width: 100% !important;
-  height: var(--ticker-h);
-  z-index: 9998 !important;
-  background: #000;
-  color: #fff;
-}
-
-/* =========================================
-   3. SLIDE (INKURU) VISIBILITY FIX
-   ========================================= */
-
-.main-content-layout {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1450px;
-  margin: 0 auto;
-}
-
-/* Kwemeza ko Center Slide items zigahita zigaragara */
+/* 1. KOSORA CENTER COLUMN (SLIDE) VISIBILITY */
 .latest-center-col {
-  display: grid !important;
+  display: grid !important; /* Kwemeza ko igaragara */
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-}
-
-.latest-center-col .slide-item.active {
-  display: block !important;
+  min-height: 400px; /* Bituma itaba ubusa */
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-/* =========================================
-   4. ADS CONTENT (TEXT & IMAGE)
-   ========================================= */
+/* 2. KOSORA SLIDE ITEMS (Kwemeza ko 'active' item igaragara) */
+.latest-center-col .slide-item {
+  display: none; /* Bisanzwe biba bihishe */
+}
 
-.ad-wrapper-flex {
-  display: flex;
+.latest-center-col .slide-item.active {
+  display: block !important; /* Igaragaza gusa inkuru iriho */
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 15px;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
-.ad-text-part {
-  flex: 1.5;
-  text-align: left;
+/* 3. KUKURAHO KWA KUPFUKANA (OVERLAP) */
+.main-content-layout {
+  position: relative !important;
+  z-index: 1 !important;
+  /* Sunika inkuru hasi neza kugira ngo itaza munsi ya Ticker */
+  margin-top: 30px !important; 
+  padding-top: 20px !important;
 }
 
-.ad-title-full {
-  font-size: 16px;
-  font-weight: 800;
-  color: #111;
-  white-space: normal; /* Kwemeza ko text yose igaragara */
-}
-
-.ad-full-desc {
-  font-size: 12px;
-  color: #444;
-  margin-top: 3px;
-  white-space: normal; /* Kwemeza ko text yose igaragara */
-}
-
-.ad-media-part img {
-  height: 90px;
-  width: 180px;
-  object-fit: cover;
-  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
-}
-
-/* =========================================
-   5. MOBILE RESPONSIVE
-   ========================================= */
-@media (max-width: 768px) {
-  body {
-    padding-top: 250px !important;
+/* 4. KOSORA GRID SYSTEM KURI DESKTOP */
+@media (min-width: 1024px) {
+  .latest-news-grid-section {
+    display: grid !important;
+    grid-template-columns: repeat(12, 1fr) !important;
+    gap: 20px;
   }
-  .trending {
-    top: 215px !important;
-  }
-  .ad-title-full { font-size: 13px; }
-  .ad-full-desc { display: none; }
-  .ad-media-part img { width: 110px; height: 75px; }
+}
+
+/* Animation Fix */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
