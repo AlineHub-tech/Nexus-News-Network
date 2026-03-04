@@ -20,12 +20,13 @@ const Landing = () => {
   const [isAdsLoading, setIsAdsLoading] = useState(true);
 
   const formatMediaList = useCallback((list) => {
-    if (!list) return [];
+    if (!list || list.length === 0) return [];
     return list.map(item => {
       let finalUrl = item.mediaUrl || "";
       if (finalUrl && !finalUrl.startsWith('http')) {
-          const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
-          finalUrl = `${base}${finalUrl.startsWith('/') ? finalUrl : '/' + finalUrl}`;
+          const base = API_BASE_URL.replace(/\/+$/, "");
+          const path = finalUrl.replace(/^\/+/, "");
+          finalUrl = `${base}/${path}`;
       }
       return { ...item, mediaUrl: finalUrl };
     });
@@ -68,14 +69,14 @@ const Landing = () => {
 
   return (
     <div className="landing-container">
-      {/* 1. STICKY HEADER SECTION */}
+      {/* HEADER SECTION - IBI NIBYO BIGUMA HEJURU ARIKO BIDAPFUKA INKURU */}
       <header className="main-sticky-header">
         <Navbar />
         <TopStickyAds ads={ads} />
         <TrendingTicker />
       </header>
 
-      {/* 2. MAIN CONTENT - Isunikwa hasi neza na header */}
+      {/* MAIN CONTENT - INKURU ZITANGIRIRA MUNSI YA HEADER NEZA */}
       <main className="main-content-layout">
         <section className="latest-news-section-container">
            <LatestNews news={latestNews8} />
