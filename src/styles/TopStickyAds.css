@@ -1,13 +1,14 @@
-/* --- 2. ADS (Fixed Munsi ya Navbar) --- */
 .top-sticky-ads-container {
-  position: fixed !important;
-  top: 105px !important; /* Nav(65) + Explorer(40) */
-  left: 0;
-  width: 100% !important;
-  min-height: var(--ads-h);
-  z-index: 9999 !important;
+  position: relative; 
+  width: 100%;
   background: #ffffff;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid #eeeeee;
+  display: flex;
+  align-items: center;
+  min-height: 90px;
+  height: auto; /* Kwaguka bitewe na text */
+  z-index: 1001;
+  padding: 10px 0;
 }
 
 .ad-wrapper-flex {
@@ -101,4 +102,4 @@
     height: 80px;
     width: 120px;
   }
-} reba niba ikibazo cyiri hano kiri gutuma itaguma hejuru
+}
