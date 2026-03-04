@@ -1,115 +1,128 @@
-/* --- Variables --- */
+/* --- Global Variables --- */
 :root {
-  --dark: #0a2a66;
-  --accent: #00d4ff;
-  --muted: #6b7280;
-  --bg: #c1c1e6;
   --primary-dark: #0a1930;
+  --accent-red: #e63946;
+  --bg-color: #c1c1e6;
+  --nav-height: 65px;
+  --ads-height-desktop: 110px;
+  --ads-height-mobile: 160px;
+  --ticker-height: 40px;
 }
 
 /* --- Global Reset --- */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
   width: 100%;
   overflow-x: hidden;
-  font-family: 'Inter', Arial, sans-serif;
-  background: var(--bg);
+  background: var(--bg-color);
+  font-family: 'Inter', sans-serif;
 }
 
 /* 
-   IMPORTANT: Body padding-top igomba kuba nini 
-   kugira ngo inkuru za mbere zanze kugaragara zize munsi ya sticky elements.
+   IMPORTANT: Body padding-top ikosora ibyerekeranye na Fixed Elements.
+   Desktop: 65(Nav) + 110(Ads) + 40(Ticker) = 215px
 */
-body {
-  padding-top: 180px !important; 
-}
+body { padding-top: 215px !important; }
 
-/* --- NAVBAR (Fixed Top 1) --- */
+/* 1. NAVBAR (Fixed Top) */
 .navbar-container {
   position: fixed !important;
   top: 0 !important;
   left: 0;
   width: 100% !important;
+  height: var(--nav-height);
   z-index: 10000 !important;
-  background-color: var(--primary-dark); 
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: var(--primary-dark);
 }
 
-/* --- ADS SECTION (Sticky Munsi ya Navbar) --- */
-/* Genzura ko iyi class ihura n'iyari muri TopStickyAds.css */
+/* 2. ADS SECTION (Fixed Munsi ya Navbar) */
 .top-sticky-ads-container {
   position: fixed !important;
-  top: 65px !important; /* Ingana na height ya Navbar yawe */
+  top: var(--nav-height) !important; 
   left: 0;
-  width: 100%;
+  width: 100% !important;
   z-index: 9999 !important;
   background: #ffffff;
+  min-height: var(--ads-height-desktop);
+  border-bottom: 2px solid var(--primary-dark);
 }
 
-/* --- TRENDING TICKER (Sticky Munsi ya Ads) --- */
+/* 3. TRENDING TICKER (Fixed Munsi ya Ads) */
 .ticker-fixed-wrapper {
   position: fixed !important;
-  top: 150px !important; /* Ingana na Height ya Navbar + Ads */
+  /* Desktop: 65px + 110px = 175px */
+  top: 175px !important; 
   left: 0;
-  width: 100%;
+  width: 100% !important;
   z-index: 9998 !important;
   background: #000;
+  height: var(--ticker-height);
 }
 
 .trending {
-  background: black;
+  background: #000;
   color: #fff;
   font-weight: 700;
   padding: 10px 0;
   overflow: hidden;
   white-space: nowrap;
-  width: 100%;
 }
 
-/* --- LATEST NEWS SECTION FIX --- */
-/* Ibi bituma inkuru zo hagati zigaragara neza */
+/* 4. LATEST NEWS SLIDER FIX (Kugarura inkuru zo hagati) */
 .latest-news-section-container {
   position: relative;
   z-index: 10;
   display: block !important;
   margin-top: 20px !important;
-  padding: 0 15px;
 }
 
-/* --- TICKER ANIMATION --- */
+/* Ibi bituma inkuru zo hagati muri slider zigaragara buri yose */
+.slide-item { display: none; opacity: 0; }
+.slide-item.active { 
+  display: block !important; 
+  opacity: 1 !important; 
+  position: relative !important;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (MOBILE FIX)
+   ========================================= */
+@media (max-width: 600px) {
+  /* Mobile Padding: 65(Nav) + 160(Ads) + 40(Ticker) = 265px */
+  body { padding-top: 265px !important; } 
+
+  .top-sticky-ads-container {
+    min-height: var(--ads-height-mobile) !important;
+  }
+
+  .ticker-fixed-wrapper {
+    /* Mobile: 65px + 160px = 225px */
+    top: 225px !important; 
+    display: block !important; 
+  }
+
+  .ad-wrapper-flex {
+    flex-direction: column !important; /* Photo hejuru, Text munsi */
+    text-align: center;
+    gap: 10px !important;
+  }
+
+  /* Ads Photo kuri Mobile: Large & Clear */
+  .ad-media-part {
+    width: 90% !important; 
+    height: 100px !important;
+    margin: 0 auto;
+  }
+}
+
+/* --- Ticker Animation --- */
 .trending span {
   display: inline-block;
   padding-left: 100%;
   animation: ticker-move 20s linear infinite;
 }
-
 @keyframes ticker-move {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
-}
-
-/* --- RESPONSIVE FIX (MOBILE) --- */
-@media (max-width: 992px) {
-  body {
-    padding-top: 160px !important;
-  }
-  
-  .top-sticky-ads-container {
-    top: 60px !important;
-  }
-  
-  .ticker-fixed-wrapper {
-    top: 135px !important;
-  }
-}
-
-@media (max-width: 600px) {
-  body {
-    padding-top: 220px !important; /* Kuri mobile Ads ziba ari ndende (Column) */
-  }
 }
