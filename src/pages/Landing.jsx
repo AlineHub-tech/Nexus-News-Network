@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect, useMemo, useCallback } from "react";
 import axios from 'axios';
 import "../styles/Landing.css";
-// Components
 import LatestNews from "../components/LatestNews";
 import RegularNews from "../components/RegularNews";
 import PopularNews from "../components/PopularNews";
@@ -14,7 +13,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import { NewsContext } from '../context/NewsContext';
 
 // API BASE URL
-const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://nexus-news-network-backend.onrender.com';
 
 const Landing = () => {
   const { newsList, videosList, loading, error } = useContext(NewsContext);
@@ -23,29 +22,29 @@ const Landing = () => {
 
   // Gukosora URL z'amafoto (Media URL Formatter)
   const formatMediaList = useCallback((list) => {
-    if (!list || list.length === 0) return [];
+    if (!list) return [];
     return list.map(item => {
       let finalUrl = item.mediaUrl || "";
       if (finalUrl && !finalUrl.startsWith('http')) {
-          const base = API_BASE_URL.replace(/\/+$/, "");
-          const path = finalUrl.replace(/^\/+/, "");
-          finalUrl = `${base}/${path}`;
+          const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+          const path = finalUrl.startsWith('/') ? finalUrl : '/' + finalUrl;
+          finalUrl = `${base}${path}`;
       }
       return { ...item, mediaUrl: finalUrl };
     });
   }, []);
 
-  // Fetch Ads muri useEffect
+  // Fetch Ads Data
   useEffect(() => {
     const fetchAdsData = async () => {
         try {
             const adsRes = await axios.get(`${API_BASE_URL}/api/public/ads`);
-            // Format ads media URLs properly
+            // Format ads media URLs properly before setting state
             const formattedAds = adsRes.data.map(ad => {
                 let url = ad.mediaUrl || "";
                 if (url && !url.startsWith('http')) {
-                    const base = API_BASE_URL.replace(/\/+$/, "");
-                    url = `${base}/${url.startsWith('/') ? url : '/' + url}`;
+                    const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
+                    url = `${base}${url.startsWith('/') ? url : '/' + url}`;
                 }
                 return { ...ad, mediaUrl: url };
             });
@@ -59,7 +58,7 @@ const Landing = () => {
     fetchAdsData();
   }, []);
 
-  // Gutunganya inkuru zose (Memoized)
+  // Gutunganya inkuru (Memoized)
   const formattedNews = useMemo(() => formatMediaList(newsList), [newsList, formatMediaList]);
   const formattedVideos = useMemo(() => formatMediaList(videosList), [videosList, formatMediaList]);
 
@@ -67,7 +66,7 @@ const Landing = () => {
   const regularNewsSliced = useMemo(() => formattedNews.slice(8), [formattedNews]);
   const popularNewsSliced = useMemo(() => formattedNews.slice(0, 8), [formattedNews]);
 
-  // Loading Screen
+  // Screen ya Loading (Kugira ngo Ads n'Inkuru baze rimwe)
   if (loading || isAdsLoading) {
     return <LoadingScreen />;
   }
@@ -77,10 +76,10 @@ const Landing = () => {
     return (
       <div className="landing-error-page">
         <Navbar />
-        <div className="error-container">
+        <div className="error-container" style={{ textAlign: 'center', padding: '50px' }}>
           <h2>Oops! Habaye ikibazo.</h2>
           <p>{error}</p>
-          <button onClick={() => window.location.reload()}>Ongera ugerageze</button>
+          <button onClick={() => window.location.reload()} className="retry-btn">Ongera ugerageze</button>
         </div>
         <Footer />
       </div>
@@ -89,16 +88,15 @@ const Landing = () => {
 
   return (
     <div className="landing-container">
-      {/* 1. STICKY HEADER SECTION (Navbar -> Ads -> Ticker) */}
-      <header className="main-sticky-header">
-        <Navbar />
+      {/* 1. TOP HEADER SECTION (Ads + Nav + Ticker) */}
+      <header className="main-site-header">
         <TopStickyAds ads={ads} />
+        <Navbar />
         <TrendingTicker />
       </header>
 
       {/* 2. MAIN CONTENT AREA */}
       <main className="main-content-layout">
-        {/* LatestNews section izisunika hasi neza bityo Slide igaragare 100% */}
         <section className="latest-news-section-container">
            <LatestNews news={latestNews8} />
         </section>
@@ -113,8 +111,7 @@ const Landing = () => {
 
         <section className="tv-ads-grid">
           <TV videos={formattedVideos} />
-          {/* Gufatanya TV na AdsSection niba ubishaka hasi nanone */}
-          {/* <AdsSection ads={ads} /> */}
+          {/* Hano AdsSection hakuweho kuko yagiye hejuru */}
         </section>
       </main>
 
