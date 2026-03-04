@@ -6,9 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000";
 const TopStickyAds = ({ ads }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Gufata Ads zifite amashusho (Photos/Videos)
   const mediaAds = ads?.filter(ad => ad.mediaUrl).slice(0, 10) || [];
-  // Gufata Ads zifite amagambo gusa (cyangwa izo ari zo zose)
   const textAds = ads?.filter(ad => ad.title).slice(0, 10) || [];
 
   useEffect(() => {
@@ -16,7 +14,7 @@ const TopStickyAds = ({ ads }) => {
     if (total > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % total);
-      }, 5000); // Guhinduranya buri masegonda 5
+      }, 7000); // Nahezeho igihe kirekire gato (7s) ngo babone umwanya wo gusoma description yose
       return () => clearInterval(timer);
     }
   }, [mediaAds.length, textAds.length]);
@@ -30,7 +28,6 @@ const TopStickyAds = ({ ads }) => {
 
   if (!ads || ads.length === 0) return null;
 
-  // Iki nicyo bituma ifoto n'amagambo bihinduranya (Slider logic)
   const currentMediaAd = mediaAds[currentSlide % mediaAds.length];
   const currentTextAd = textAds[currentSlide % textAds.length];
 
@@ -38,7 +35,7 @@ const TopStickyAds = ({ ads }) => {
     <div className="top-sticky-ads-container">
       <div className="ad-wrapper-flex">
         
-        {/* IBURYO: PHOTO ADS (Yongerewe Size) */}
+        {/* IBURYO: PHOTO ADS */}
         <div className="ad-media-part">
           {currentMediaAd && (
             <div className="media-box-animation">
@@ -51,17 +48,17 @@ const TopStickyAds = ({ ads }) => {
           )}
         </div>
 
-        {/* HAGATI: VERTICAL LINE (Ihagaraye itandukanya impande zombi) */}
+        {/* HAGATI: VERTICAL LINE */}
         <div className="ad-vertical-divider"></div>
 
-        {/* IBUMOSO: TEXT ADS (Zihinduranya) */}
+        {/* IBUMOSO: TEXT ADS (Description isomeka neza) */}
         <div className="ad-text-part">
           <div className="text-slide-animation">
-            <span className="sponsored-label">PROMOTED</span>
-            <h4 className="ad-title-limit">{currentTextAd?.title}</h4>
-            <div className="ad-action-row">
-               <p className="ad-desc-limit">{currentTextAd?.description?.substring(0, 45)}...</p>
-               <a href={`tel:${currentTextAd?.description?.match(/\d+/)}`} className="call-btn-small">
+            <span className="sponsored-label">PROMOTED AD</span>
+            <h4 className="ad-title-full">{currentTextAd?.title}</h4>
+            <div className="ad-description-container">
+               <p className="ad-full-desc">{currentTextAd?.description}</p>
+               <a href={`tel:${currentTextAd?.description?.match(/\d+/)}`} className="call-btn-full">
                  📞 CALL
                </a>
             </div>
