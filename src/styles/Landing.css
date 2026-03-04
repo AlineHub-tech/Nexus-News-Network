@@ -1,44 +1,65 @@
-/* 1. KOSORA CENTER COLUMN (SLIDE) VISIBILITY */
+/* =========================================
+   1. KOSORA CENTER COLUMN (SLIDE) VISIBILITY
+   ========================================= */
 .latest-center-col {
-  display: grid !important; /* Kwemeza ko igaragara */
-  grid-template-columns: repeat(2, 1fr);
+  display: grid !important; /* Kwemeza ko hagati hagumya kuba grid */
+  grid-template-columns: 1fr; /* Cyangwa repeat(2, 1fr) niba ariko grid yawe imeze */
   gap: 20px;
-  min-height: 400px; /* Bituma itaba ubusa */
+  min-height: 450px; /* Bituma slide idahungabana */
   visibility: visible !important;
   opacity: 1 !important;
+  position: relative;
+  z-index: 5;
 }
 
-/* 2. KOSORA SLIDE ITEMS (Kwemeza ko 'active' item igaragara) */
+/* 2. KOSORA SLIDE ITEMS (Kwemeza ko active slide igaragara) */
+/* Niba Slider yawe ikoresha class ya .slide-item */
 .latest-center-col .slide-item {
-  display: none; /* Bisanzwe biba bihishe */
+  display: none; /* Izitari active zirahishwa */
 }
 
+/* Iyi niyo ituma inkuru ihita igaragara */
 .latest-center-col .slide-item.active {
-  display: block !important; /* Igaragaza gusa inkuru iriho */
+  display: block !important; 
+  visibility: visible !important;
+  opacity: 1 !important;
   width: 100%;
-  animation: fadeIn 0.8s ease-in-out;
+  animation: slideFadeIn 0.8s ease-in-out;
 }
 
-/* 3. KUKURAHO KWA KUPFUKANA (OVERLAP) */
+/* 3. KUKURAHO KWA KUPFUKANA (LAYOUT FIX) */
 .main-content-layout {
   position: relative !important;
   z-index: 1 !important;
-  /* Sunika inkuru hasi neza kugira ngo itaza munsi ya Ticker */
-  margin-top: 30px !important; 
-  padding-top: 20px !important;
+  /* Isunika inkuru hasi neza munsi ya Ticker */
+  margin-top: 25px !important; 
+  padding: 0 15px;
+  display: block;
 }
 
-/* 4. KOSORA GRID SYSTEM KURI DESKTOP */
+/* Animation ya Slide */
+@keyframes slideFadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* =========================================
+   4. KOSORA GRID SYSTEM KURI DESKTOP (3-6-3)
+   ========================================= */
 @media (min-width: 1024px) {
   .latest-news-grid-section {
     display: grid !important;
     grid-template-columns: repeat(12, 1fr) !important;
     gap: 20px;
   }
-}
-
-/* Animation Fix */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  
+  .latest-center-col {
+    grid-column: span 6 !important; /* Ifata hagati hejuru */
+  }
 }
