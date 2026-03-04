@@ -5,15 +5,14 @@ import LatestNews from "../components/LatestNews";
 import RegularNews from "../components/RegularNews";
 import PopularNews from "../components/PopularNews";
 import TV from "../components/TV";
-import AdsSection from "../components/AdsSection";
+// Import agace gashya ka Ads
+import TopStickyAds from "../components/TopStickyAds"; 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import TrendingTicker from '../components/TrendingTicker';
-import SloganAnimation from '../components/SloganAnimation';
-import LoadingScreen from "../components/LoadingScreen"; // Loading screen yawe
+import LoadingScreen from "../components/LoadingScreen";
 import { NewsContext } from '../context/NewsContext';
 
-// API BASE URL
 const API_BASE_URL = import.meta.env.VITE_API_URL || '//localhost:5000';
 
 const Landing = () => {
@@ -21,7 +20,6 @@ const Landing = () => {
   const [ads, setAds] = useState([]);
   const [isAdsLoading, setIsAdsLoading] = useState(true);
 
-  // Logic yo gukosora URL z'amafoto (Cloudinary vs Local)
   const formatMediaList = useCallback((list) => {
     if (!list) return [];
     return list.map(item => {
@@ -35,30 +33,20 @@ const Landing = () => {
     });
   }, []);
 
-  // Fetch Ads muri useEffect
   useEffect(() => {
     const fetchAdsData = async () => {
         try {
             const adsRes = await axios.get(`${API_BASE_URL}/api/public/ads`);
-            const formattedAds = adsRes.data.map(ad => {
-                let url = ad.mediaUrl || "";
-                if (url && !url.startsWith('http')) {
-                    const base = API_BASE_URL.endsWith('/') ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
-                    url = `${base}${url.startsWith('/') ? url : '/' + url}`;
-                }
-                return { ...ad, mediaUrl: url };
-            });
-            setAds(formattedAds);
+            setAds(adsRes.data); // TopStickyAds izaba ifite logic ya URL ubwayo
         } catch (err) {
             console.error("Error fetching ads:", err.message);
         } finally {
-            setIsAdsLoading(false); // Igaragaza ko Ads zirangiye, haba habaye error cyangwa success
+            setIsAdsLoading(false);
         }
     };
     fetchAdsData();
   }, []);
 
-  // Gutunganya inkuru zose zifite URL zikora (Memoized)
   const formattedNews = useMemo(() => formatMediaList(newsList), [newsList, formatMediaList]);
   const formattedVideos = useMemo(() => formatMediaList(videosList), [videosList, formatMediaList]);
 
@@ -66,13 +54,10 @@ const Landing = () => {
   const regularNewsSliced = useMemo(() => formattedNews.slice(8), [formattedNews]);
   const popularNewsSliced = useMemo(() => formattedNews.slice(0, 8), [formattedNews]);
 
-  // --- KANDI HANO NIHO HAKEMURA KUDASIMBUKA KWA LOADING ---
-  // Iyo kimwe mu bintu bitaraza (News cyangwa Ads), LoadingScreen igumaho
   if (loading || isAdsLoading) {
     return <LoadingScreen />;
   }
 
-  // Niba habaye error nyuma ya loading
   if (error) {
     return (
       <div className="landing-error-page">
@@ -89,9 +74,13 @@ const Landing = () => {
 
   return (
     <div className="landing-container">
+      {/* 1. Ads zijya hejuru y'ibindi byose */}
+      <TopStickyAds ads={ads} />
+      
+      {/* 2. Navbar ikurikiraho (Zose zizaba sticky niba CSS yawe ibyemera) */}
       <Navbar />
+      
       <TrendingTicker />
-      <SloganAnimation />
 
       <main className="main-content-layout">
         <section className="latest-news-section-container">
@@ -108,7 +97,7 @@ const Landing = () => {
 
         <section className="tv-ads-grid">
           <TV videos={formattedVideos} />
-          <AdsSection ads={ads} />
+          {/* 3. Hano hakuweho AdsSection kuko zamaze kujya hejuru */}
         </section>
       </main>
 
