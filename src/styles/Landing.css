@@ -1,83 +1,203 @@
-/* --- Styling Rusange Kuri Cards Zose Muri Landing Page --- */
-
-/* Iyi class (urugero) igomba kuba iri muri NewsCard.jsx div nkuru */
-.news-card-base { 
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  height: 100%; /* Zose zingana mu burebure */
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease;
+/* =========================================
+   1. GLOBAL RESET & BODY (FIXES GAP & OVERLAP)
+   ========================================= */
+:root {
+  --primary-dark: #0a1930;
+  --accent-red: #e63946;
+  --bg-color: #c1c1e6;
+  --nav-h: 65px;
+  --ads-h: 110px; /* Uburebure bwa Ads kuri Desktop */
+  --ticker-h: 40px;
 }
 
-.news-card-base:hover {
-    transform: translateY(-5px); /* Animation nziza iyo umuntu ayikozaho */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Amafoto yuzuye neza */
-.news-card-base img {
+html, body {
   width: 100%;
-  height: 180px; /* Uburebure buhoraho bw'ifoto */
-  object-fit: cover; /* **Ibi nibyo bituma ifoto i-fit neza** */
-  display: block;
+  overflow-x: hidden;
+  background: var(--bg-color);
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 
-/* --- SECTION 2: Layout yo Hejuru (Mobile, Tablet, Desktop) --- */
+/* 
+   IMPORTANT: Body padding ikuraho ikibazo cy'ibintu byihisha munsi ya Navbar/Ads.
+   Desktop: 65(Nav) + 110(Ads) + 40(Ticker) = 215px
+*/
+body {
+  padding-top: 215px !important; 
+}
+
+@media (max-width: 768px) {
+  body {
+    /* Mobile ads ziba ari ndende, bityo padding yongerwa */
+    padding-top: 270px !important; 
+  }
+}
+
+/* =========================================
+   2. STICKY HIERARCHY (NAVBAR -> ADS -> TICKER)
+   ========================================= */
+
+.navbar-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0;
+  width: 100% !important;
+  height: var(--nav-h);
+  z-index: 10000 !important; /* Hejuru y'ibindi byose */
+  background: var(--primary-dark);
+}
+
+.top-sticky-ads-container {
+  position: fixed !important;
+  top: var(--nav-h) !important; 
+  left: 0;
+  width: 100% !important;
+  min-height: var(--ads-h);
+  z-index: 9999 !important;
+  background: #ffffff;
+  border-bottom: 2px solid var(--primary-dark);
+}
+
+.trending {
+  position: fixed !important;
+  /* Desktop: Nav(65) + Ads(110) = 175px */
+  top: 175px !important; 
+  left: 0;
+  width: 100% !important;
+  height: var(--ticker-h);
+  z-index: 9998 !important;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .trending {
+    /* Mobile: Nav(65) + Ads(160 approx) = 225px */
+    top: 225px !important; 
+  }
+}
+
+/* =========================================
+   3. LATEST NEWS GRID (2-4-2 LAYOUT)
+   ========================================= */
 
 .latest-news-grid-section {
   display: grid;
   gap: 20px;
   padding: 10px;
+  max-width: 1450px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
 }
 
-/* 1. Mobile (Default: Byose kuri column 1 bigahagararana) */
-.latest-news-grid-section {
-  grid-template-columns: 1fr;
-}
-
-.latest-left-col, .latest-center-col, .latest-right-col {
+/* News Cards Base */
+.news-card-base { 
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  background: #fff;
+  transition: transform 0.3s ease;
 }
 
-
-/* 2. Tablet (min-width: 600px) */
-@media (min-width: 600px) {
-  /* Kuri tablet turashyiramo columns 2 */
-  .latest-news-grid-section {
-     grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Hagati (Center) igafata uburebure bwose bwa 2 kuri tablet */
-  .latest-center-col {
-    grid-column: span 2;
-    display: grid; /* Noneho Center nayo igira grid yayo */
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
+.news-card-base:hover {
+    transform: translateY(-5px);
 }
 
-/* 3. Desktop (min-width: 1024px): Layout ya 2-4-2 */
+.news-card-base img {
+  width: 100%;
+  height: 180px; 
+  object-fit: cover;
+  display: block;
+}
+
+/* Desktop Grid (3-6-3 columns) */
 @media (min-width: 1024px) {
   .latest-news-grid-section {
-    /* Columns 12 muri rusange: 3 (Left) + 6 (Center) + 3 (Right) */
     grid-template-columns: repeat(12, 1fr); 
   }
 
   .latest-left-col {
-    grid-column: span 3; /* 25% */
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   .latest-center-col {
-    grid-column: span 6; /* 50% */
-    /* Muri center (4 articles), ubu zihagarara neza muri grid ya 2x2 */
+    grid-column: span 6;
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 
   .latest-right-col {
-    grid-column: span 3; /* 25% */
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
+}
+
+/* Tablet (2 columns) */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .latest-news-grid-section {
+     grid-template-columns: repeat(2, 1fr);
+  }
+  .latest-center-col {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile (1 column) */
+@media (max-width: 599px) {
+  .latest-news-grid-section {
+    grid-template-columns: 1fr;
+  }
+  .latest-center-col {
+    order: -1; /* Slider hejuru kuri mobile */
+  }
+}
+
+/* =========================================
+   4. CENTER SLIDER ANIMATION FIX
+   ========================================= */
+
+.latest-center-col .slide-item {
+  display: none;
+}
+
+.latest-center-col .slide-item.active {
+  display: block !important;
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ticker Animation */
+.trending span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker-move 20s linear infinite;
+}
+
+@keyframes ticker-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
