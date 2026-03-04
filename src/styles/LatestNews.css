@@ -1,26 +1,20 @@
-/* LatestNews.css - Final Fixed Version */
-
-/* --- GRID SYSTEM --- */
+/* LatestNews.css */
 .latest-news-section-wrapper {
   max-width: 1450px;
   margin: 0 auto;
   padding: 0 15px;
-  position: relative;
-  z-index: 10; /* Lower than Ads and Navbar */
 }
 
 .latest-news-grid {
   display: grid;
-  /* Desktop Layout: 1.2fr (Side) - 3.5fr (Slider) - 1.2fr (Side) */
-  grid-template-columns: 1.2fr 3.5fr 1.2fr; 
+  grid-template-columns: 1.2fr 3.5fr 1.2fr;
   gap: 20px;
-  align-items: stretch;
 }
 
-/* --- CENTER SLIDER (FIXED VISIBILITY) --- */
+/* --- CENTER SLIDER FIX --- */
 .news-center-slider {
   position: relative;
-  height: 520px; 
+  height: 520px;
   background: #000;
   border-radius: 12px;
   overflow: hidden;
@@ -32,152 +26,52 @@
   height: 100%;
 }
 
-/* Hide all slides by default */
+/* Force Hidden */
 .news-center-slider .slide-item {
-  display: none !important; 
-  opacity: 0;
-  width: 100%;
+  display: none !important;
   height: 100%;
-  transition: opacity 0.8s ease-in-out;
+  width: 100%;
 }
 
-/* ONLY show the active slide */
+/* Force Show */
 .news-center-slider .slide-item.active {
-  display: block !important; 
+  display: block !important;
   opacity: 1 !important;
-  position: relative !important; 
-  z-index: 5;
-}
-
-/* Ensure Featured News Image fills the slider */
-.featured-card {
-  height: 100%;
-  width: 100%;
-  position: relative;
-}
-
-.featured-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* --- SIDE COLUMNS (LEFT & RIGHT) --- */
-.news-side-column {
-  display: grid;
-  grid-template-rows: 1fr 1fr; /* 2 Cards per side */
-  gap: 15px;
-  height: 100%;
-}
-
-.side-item-wrapper {
-  height: 100%;
-  width: 100%;
-}
-
-.side-item-wrapper .news-card {
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  border: 1px solid #f0f0f0;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.side-item-wrapper .news-media-container {
   position: relative !important;
-  width: 100% !important;
-  height: 165px !important; /* Fixed image height for sides */
-  overflow: hidden;
 }
 
-.side-item-wrapper .news-card-image {
-  position: absolute !important;
-  top: 0;
-  left: 0;
-  width: 100% !important;
+/* --- FEATURED CARD OVERLAY --- */
+.featured-card {
   height: 100% !important;
-  object-fit: cover !important;
+  width: 100% !important;
 }
 
-/* --- SLIDER TEXT OVERLAY --- */
+.featured-card .news-media-container {
+  height: 100% !important;
+  padding-top: 0 !important;
+}
+
 .featured-card .news-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(transparent, rgba(0,0,0,0.9));
-  padding: 40px 20px;
-  color: white;
-  z-index: 10;
+  position: absolute !important;
+  bottom: 0 !important;
+  background: linear-gradient(transparent, rgba(0,0,0,0.95)) !important;
+  width: 100% !important;
+  padding: 40px 20px !important;
+  color: #fff !important;
 }
 
-.featured-card .news-info h5 {
-  font-size: 1.8rem;
-  font-weight: 800;
-  line-height: 1.2;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-/* --- SLIDER DOTS --- */
-.slider-dots {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 20;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  background: rgba(255,255,255,0.4);
-  border-radius: 50%;
-  transition: 0.3s;
-}
-
-.dot.active {
-  background: #fff;
-  width: 25px;
-  border-radius: 10px;
-}
-
-/* --- MOBILE RESPONSIVE (2-4-2 TO STACKED) --- */
+/* --- MOBILE & STICKY FIX --- */
 @media (max-width: 992px) {
   .latest-news-grid {
     display: flex;
     flex-direction: column;
-    gap: 20px;
   }
-
   .news-center-slider {
-    order: -1; /* Slider goes to the top on mobile */
     height: 350px;
+    order: -1; /* Slider hejuru kuri mobile */
   }
-
   .side-item-wrapper .news-card {
-    flex-direction: row-reverse !important; /* Image Right, Text Left */
+    flex-direction: row-reverse !important;
     height: 120px !important;
-    align-items: center;
-  }
-
-  .side-item-wrapper .news-media-container {
-    width: 38% !important;
-    height: 100% !important;
-  }
-
-  .side-item-wrapper .news-info {
-    width: 62% !important;
-    padding: 10px !important;
-  }
-
-  .featured-card .news-info h5 {
-    font-size: 1.2rem;
   }
 }
