@@ -1,11 +1,11 @@
 /* CENTER SLIDER */
 .news-center-slider {
   position: relative;
-  height: 500px;
-  background: #f0f0f0; /* Hindura umukara ube grey ngo umenye niba amakuru aza */
+  width: 100%;
+  height: 500px; /* Uburebure buhoraho kuri Desktop */
+  background: #f0f0f0; /* Kuraho umukara ushyireho grey ngo urebemo */
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .slider-container {
@@ -14,47 +14,40 @@
   position: relative;
 }
 
+/* KOSORA HANO: Kwemeza ko inkuru itihisha */
 .slide-item {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  
-  /* FIX: Kwemeza ko amakuru agaragara */
-  opacity: 0; 
-  visibility: hidden; /* Birinda ko amakuru adahari yigaragaza */
-  transition: opacity 0.8s ease-in-out;
+  display: none; /* Izitari active zibe zihishe burundu */
   z-index: 1;
 }
 
-/* IBI NIBYO BYEGERANYA INKURU (Visible State) */
+/* IBI NIBYO BYEREKANA INKURU (Active State) */
 .slide-item.active {
+  display: block !important; /* Vumbura inkuru hano */
   opacity: 1 !important;
-  visibility: visible !important;
-  z-index: 10 !important; /* Izamure hejuru y'umukara */
-  transform: scale(1);
+  z-index: 10;
+  animation: fadeInSlide 0.5s ease-in;
 }
 
-/* Kwemeza ko amashusho ya Slide yuzura neza */
 .slide-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  object-fit: cover; /* Bituma ifoto yuzura neza */
 }
 
-/* FIX KURI LANDING OVERLAP */
-.latest-news-section-wrapper {
-  position: relative;
-  z-index: 5;
-  /* Sunika hasi kugira ngo bitaza munsi ya Navbar/Ads/Ticker */
-  margin-top: 20px !important; 
+/* Animation yoroshye */
+@keyframes fadeInSlide {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* RESPONSIVE FIX KURI MOBILE */
+/* RESPONSIVE */
 @media (max-width: 767px) {
   .news-center-slider {
-    height: 300px; /* Gabanya height kuri mobile ngo yisanzure */
+    height: 300px; /* Gabanya height kuri mobile */
   }
 }
