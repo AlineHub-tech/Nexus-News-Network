@@ -1,14 +1,13 @@
+/* --- 2. ADS (Fixed Munsi ya Navbar) --- */
 .top-sticky-ads-container {
-  position: relative; 
-  width: 100%;
+  position: fixed !important;
+  top: 105px !important; /* Nav(65) + Explorer(40) */
+  left: 0;
+  width: 100% !important;
+  min-height: var(--ads-h);
+  z-index: 9999 !important;
   background: #ffffff;
-  border-bottom: 2px solid #eeeeee;
-  display: flex;
-  align-items: center;
-  min-height: 90px;
-  height: auto; /* Kwaguka bitewe na text */
-  z-index: 1001;
-  padding: 10px 0;
+  border-bottom: 2px solid #ddd;
 }
 
 .ad-wrapper-flex {
