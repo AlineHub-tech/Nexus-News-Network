@@ -8,7 +8,7 @@
   padding: 20px 10px;
 }
 
-/* Grid ikora 4 columns kuri Desktop */
+/* Force Grid 4x2 kuri Desktop */
 .latest-news-grid {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important; 
@@ -24,7 +24,7 @@
   display: contents !important; 
 }
 
-/* --- CARD STYLE KURI DESKTOP --- */
+/* --- CARD STYLE (Ibi nibyo bituma zisa neza) --- */
 .news-card-base { 
   border: 1px solid #e2e8f0;
   border-radius: 10px;
@@ -34,7 +34,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   opacity: 1 !important;
   visibility: visible !important;
@@ -42,11 +42,12 @@
 
 .news-card-base:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 .news-card-base img {
   width: 100%;
-  height: 190px; /* Uburebure bw'ifoto kuri Desktop */
+  height: 200px; /* Uburebure bw'ifoto kuri Desktop */
   object-fit: cover;
   display: block;
 }
@@ -64,7 +65,7 @@
   /* Force Card kugaragara nka List kuri Mobile */
   .news-card-base {
     flex-direction: row !important; /* Ifoto ibumoso, Details iburyo */
-    height: 135px !important; /* Uburebure bwongerewe ngo ifoto ibe nini */
+    height: 140px !important; /* Uburebure bwongerewe ngo ifoto ibe nini */
     align-items: center;
     border: none;
     border-bottom: 1px solid #eee;
@@ -72,27 +73,28 @@
     box-shadow: none;
   }
 
-  /* IFOTO KURI MOBILE: Twaguye ubugari (150px) ngo ibe nini */
+  /* IFOTO KURI MOBILE: Twaguye ubugari (160px) ngo ibe nini cyane (Visible) */
   .news-card-base img {
-    width: 150px !important; 
-    height: 120px !important; /* Uburebure nabwo bwongerewe */
-    border-radius: 8px;
-    margin-left: 5px;
+    width: 160px !important; 
+    height: 120px !important; 
+    border-radius: 12px; /* Amfuruka areze (Rounded) */
+    margin: 0 10px;
     flex-shrink: 0;
   }
 
   /* INYANDIKO KURI MOBILE (Right Side) */
   .news-card-content, 
   .news-card-base h3 {
-    padding: 0 15px !important;
+    padding: 0 10px !important;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: left;
   }
 
   .news-card-base h3 {
-    font-size: 16px !important; /* Text nini isomeka neza */
+    font-size: 17px !important; /* Text nini isomeka neza cyane */
     font-weight: 700;
     color: #1a202c;
     line-height: 1.3;
@@ -113,7 +115,7 @@
 }
 
 /* Tablet (2 ku murongo) */
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .latest-news-grid {
     grid-template-columns: repeat(2, 1fr) !important;
   }
