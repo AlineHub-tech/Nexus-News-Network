@@ -4,8 +4,6 @@ import "../styles/LatestNews.css";
 
 const LatestNews = ({ news }) => { 
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Gufata inkuru 8 gusa (2-4-2)
   const latest8 = news?.slice(0, 8) || [];
   
   const leftNews = latest8.slice(0, 2);   
@@ -16,19 +14,17 @@ const LatestNews = ({ news }) => {
     if (centerNews.length > 0) {
       const timer = setInterval(() => {
         setCurrentSlide((prev) => (prev + 1) % centerNews.length);
-      }, 5000); // 5 seconds is better for reading
+      }, 5000); 
       return () => clearInterval(timer);
     }
   }, [centerNews.length]);
 
-  if (!news || news.length === 0) return null;
+  if (!latest8.length) return null;
 
   return (
     <div className="latest-news-section-wrapper">
       <div className="latest-news-grid">
-        
-        {/* 1. LEFT COLUMN (2 Cards) */}
-        <div className="news-side-column side-left">
+        <div className="news-side-column left-side">
           {leftNews.map((post) => (
             <div key={post._id} className="side-item-wrapper">
               <NewsCard post={post} />
@@ -36,39 +32,26 @@ const LatestNews = ({ news }) => {
           ))}
         </div>
 
-        {/* 2. MIDDLE COLUMN (Slider - 4 Cards) */}
         <div className="news-center-slider">
           <div className="slider-container">
             {centerNews.map((post, index) => (
               <div 
-                key={post._id} 
+                key={`slide-${post._id}`} 
                 className={`slide-item ${index === currentSlide ? "active" : ""}`}
               >
-                {/* 
-                   IKI NICYO GIKEMURA KUZIMIRA: 
-                   Koresha extraClass='featured-card' nk'uko biri muri CSS 
-                */}
                 <NewsCard post={post} extraClass="featured-card" />
               </div>
             ))}
           </div>
-          
-          <div className="slider-dots">
-            {centerNews.map((_, i) => (
-              <span key={i} className={`dot ${i === currentSlide ? "active" : ""}`} />
-            ))}
-          </div>
         </div>
 
-        {/* 3. RIGHT COLUMN (2 Cards) */}
-        <div className="news-side-column side-right">
+        <div className="news-side-column right-side">
           {rightNews.map((post) => (
             <div key={post._id} className="side-item-wrapper">
               <NewsCard post={post} />
             </div>
           ))}
         </div>
-
       </div>
     </div>
   );
