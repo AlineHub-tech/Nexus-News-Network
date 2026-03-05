@@ -1,17 +1,23 @@
-/* --- CONTAINER --- */
+/* --- CONTAINER SETUP (FULL WIDTH - NO MARGINS) --- */
 .regular-news-section-container {
   width: 100%;
-  max-width: 1300px;
-  /* margin: 40px auto; */
   background: #ffffff;
+  margin: 50px 0;
+  padding: 0; /* Nta space hanze ya container */
 }
 
-/* --- MAIN LAYOUT (DESKTOP & TABLET) --- */
+.section-header-wrapper {
+  max-width: 1300px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+}
+
+/* --- MAIN GRID WRAPPER --- */
 .regular-news-main-wrapper {
   display: flex;
-  gap: 0; /* Gaps zizaza muri padding za columns */
-  border-top: 1px solid #f0f0f0;
-  position: relative;
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .news-column {
@@ -20,114 +26,116 @@
   flex-direction: column;
 }
 
-.left-col { padding-right: 25px; }
-.right-col { padding-left: 25px; }
-
-/* --- VERTICAL DIVIDER (PRO LOOK) --- */
+/* --- VERTICAL DIVIDER --- */
 .vertical-divider {
   width: 1px;
-  background: linear-gradient(to bottom, #f0f0f0, #d1d1d1, #f0f0f0);
-  margin: 20px 0;
+  background-color: #e0e0e0; /* Umurongo ugaragara neza hagati */
+  align-self: stretch;
 }
 
-/* --- NEWSCARD OVERRIDE (Muri iyi Section gusa) --- */
+/* --- NEWSCARD OVERRIDE (For 8x8 Layout) --- */
 .news-column .news-card {
-  flex-direction: row !important; /* Ifoto ibumoso, Text iburyo */
-  padding: 15px 0;
+  flex-direction: row !important; /* Ifoto hino, Text hirya */
+  padding: 25px; /* Space imbere ya card */
   border: none;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f0f0f0; /* Umurongo utandukanya inkuru */
   border-radius: 0;
-  gap: 15px; /* Aka gap gato hagati y'ifoto na text */
+  gap: 20px;
+  background: transparent;
+  transition: background 0.3s ease;
 }
 
+.news-column .news-card:hover {
+  background: #fcfcfc;
+}
+
+.news-column .news-card:last-child {
+  border-bottom: none;
+}
+
+/* --- MEDIA / IMAGE SIZE (PRO) --- */
 .news-column .news-media-container {
-  width: 150px !important; /* Size nziza y'ifoto */
-  height: 95px !important;
-  aspect-ratio: auto;
+  width: 190px !important; /* Ifoto nini isobanutse kuri Desktop */
+  height: 125px !important;
   flex-shrink: 0;
+  padding-top: 0 !important;
   border-radius: 4px;
+  overflow: hidden;
 }
 
+/* --- INFO SECTION --- */
 .news-column .news-info {
   padding: 0 !important;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .news-column .news-title {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  margin-bottom: 5px;
-  line-height: 1.25;
+  line-height: 1.3;
+  margin-bottom: 10px;
 }
 
 .news-column .read-more-btn {
-  padding: 4px 8px; /* Soma ibindi iba ntoya ho gato hano */
-  font-size: 0.65rem;
+  padding: 5px 12px;
+  font-size: 0.7rem;
 }
 
-/* --- MOBILE RESPONSIVE (THE "NO SPACE" LOOK) --- */
-@media (max-width: 768px) {
-  .regular-news-section-container {
-    padding: 0;
-  }
-
+/* --- MOBILE RESPONSIVE (EDGE-TO-EDGE) --- */
+@media (max-width: 850px) {
   .regular-news-main-wrapper {
     flex-direction: column;
-  }
-
-  .left-col, .right-col {
-    padding: 0; /* Kuraho space zose hirya no hino */
   }
 
   .vertical-divider {
     display: none;
   }
 
-  /* Kuri Mobile: Ifoto hejuru (Full Width), Text munsi */
+  /* Kuri Mobile: Full Width Image, Text Munsi */
   .news-column .news-card {
     flex-direction: column !important;
-    padding: 0 0 25px 0; /* Space munsi y'inkuru gusa */
-    margin-bottom: 20px;
+    padding: 0 0 30px 0; /* Nta side padding */
+    border-bottom: 3px solid #f5f5f5; /* Umurongo muremure utandukanya inkuru */
   }
 
   .news-column .news-media-container {
-    width: 100% !important; /* Ifoto yuzuye screen (No space) */
-    height: 220px !important;
-    border-radius: 0; /* Ifoto igera ku mpera za phone */
+    width: 100% !important; /* Ifoto yuzuye screen yose (No gaps) */
+    height: 240px !important;
+    border-radius: 0;
     margin: 0;
   }
 
   .news-column .news-info {
-    padding: 15px !important; /* Amagambo niyo agira space gusa */
+    padding: 20px !important; /* Amagambo niyo agira space gusa */
   }
 
   .news-column .news-title {
-    font-size: 1.2rem !important; /* Title iba nini kuri mobile isomeka neza */
+    font-size: 1.3rem !important;
   }
 }
 
-/* PAGINATION PRO */
+/* --- PAGINATION PRO --- */
 .pagination-controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px 0;
-  gap: 15px;
+  padding: 50px 20px;
+  gap: 20px;
 }
 
 .pag-btn {
   background: #000;
   color: #fff;
   border: none;
-  padding: 8px 18px;
-  border-radius: 2px;
+  padding: 10px 25px;
+  font-weight: 800;
   font-size: 0.8rem;
-  font-weight: 700;
+  letter-spacing: 1px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .pag-btn:disabled {
   background: #eee;
-  color: #999;
+  color: #aaa;
 }
-
