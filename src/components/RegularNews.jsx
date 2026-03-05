@@ -7,23 +7,23 @@ const RegularNews = ({ newsList }) => {
   const { paginate, currentPage, totalArticles, articlesPerPage } = useContext(NewsContext);
 
   if (!newsList || newsList.length === 0) {
-    return <p className="regular-news">Nta nkuru zisanzwe zibonetse ubu.</p>;
+    return <div className="regular-news-empty">Nta nkuru zindi zihari ubu.</div>;
   }
 
-  // 1. Fata inkuru zose guhera ku ya 9 (index 8) kugeza ku mpera ya newsList (30)
-  const remainingNews = newsList.slice(8); 
+  // --- LOGIC IKOSOYE ---
+  // Niba turi kuri Page 1, kura 8 za mbere (Latest). Niba turi kuri Page > 1, erekana zose 30.
+  const remainingNews = currentPage === 1 ? newsList.slice(8) : newsList;
 
-  // 2. Gabanya izo nkuru mu bice bibiri bingana (urugero: 11 hino, 11 hirya niba ari 22)
+  // Gabanya inkuru mu bice bibiri
   const half = Math.ceil(remainingNews.length / 2);
   const leftColumnNews = remainingNews.slice(0, half);
   const rightColumnNews = remainingNews.slice(half);
 
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
-  
   const handleScrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <div className="regular-news-section-container">
+    <section className="regular-news-section-container">
       <div className="section-title">
         <span className="badge">NEWS</span>
         <h2 className="title">IZINDI NKURU</h2>
@@ -31,17 +31,15 @@ const RegularNews = ({ newsList }) => {
       </div>
 
       <div className="regular-news-main-wrapper">
-        {/* COLUMN YA MBERE (Ibumoso) */}
         <div className="news-column">
           {leftColumnNews.map((post) => (
             <NewsCard key={post._id} post={post} />
           ))}
         </div>
 
-        {/* UMURONGO URI HAGATI */}
-        <div className="vertical-divider"></div>
+        {/* Umurongo ugaragara gusa niba hari inkuru mu kigice cy'iburyo */}
+        {rightColumnNews.length > 0 && <div className="vertical-divider"></div>}
 
-        {/* COLUMN YA KABIRI (Iburyo) */}
         <div className="news-column">
           {rightColumnNews.map((post) => (
             <NewsCard key={post._id} post={post} />
@@ -53,15 +51,15 @@ const RegularNews = ({ newsList }) => {
       {totalPages > 1 && (
         <div className="pagination-controls">
           <button className="pag-btn" onClick={() => { if(currentPage > 1) { paginate(currentPage - 1); handleScrollToTop(); }}} disabled={currentPage === 1}>
-            <i className="fas fa-chevron-left"></i> Prev
+            PREV
           </button>
-          <span className="page-info"> Page <strong>{currentPage}</strong> of {totalPages} </span>
+          <span className="page-info"> Page {currentPage} of {totalPages} </span>
           <button className="pag-btn" onClick={() => { if(currentPage < totalPages) { paginate(currentPage + 1); handleScrollToTop(); }}} disabled={currentPage === totalPages}>
-            Next <i className="fas fa-chevron-right"></i>
+            NEXT
           </button>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 
