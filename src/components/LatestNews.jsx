@@ -3,20 +3,16 @@ import NewsCard from "./NewsCard";
 import "../styles/LatestNews.css";
 
 const LatestNews = ({ news }) => { 
-  // Twizere ko twakiriye inkuru 8 gusa
+  // Twatunganyije inkuru 8 gusa zifatanye
   const latest8 = news ? news.slice(0, 8) : [];
 
-  if (latest8.length === 0) {
-    return <div className="news-loading">Loading news...</div>;
-  }
+  if (latest8.length === 0) return null;
 
   return (
-    <section className="latest-news-wrapper">
-      <div className="news-container-grid">
+    <section className="latest-news-section">
+      <div className="news-ultra-grid">
         {latest8.map((post) => (
-          <div key={post._id} className="news-card-item">
-            <NewsCard post={post} />
-          </div>
+          <NewsCard key={post._id} post={post} />
         ))}
       </div>
     </section>
