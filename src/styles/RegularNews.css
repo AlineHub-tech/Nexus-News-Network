@@ -1,13 +1,16 @@
+/* --- CONTAINER --- */
 .regular-news-section-container {
-  max-width: 1250px;
+  width: 100%;
+  max-width: 1300px;
   margin: 40px auto;
-  padding: 0 20px;
+  background: #ffffff;
 }
 
-/* MAIN WRAPPER: Icyatanya amakoloni abiri */
+/* --- MAIN LAYOUT (DESKTOP & TABLET) --- */
 .regular-news-main-wrapper {
   display: flex;
-  gap: 30px; /* Space hagati y'amakoloni */
+  gap: 0; /* Gaps zizaza muri padding za columns */
+  border-top: 1px solid #f0f0f0;
   position: relative;
 }
 
@@ -17,98 +20,113 @@
   flex-direction: column;
 }
 
-/* UMURONGO URI HAGATI */
+.left-col { padding-right: 25px; }
+.right-col { padding-left: 25px; }
+
+/* --- VERTICAL DIVIDER (PRO LOOK) --- */
 .vertical-divider {
   width: 1px;
-  background-color: #eeeeee;
-  align-self: stretch;
+  background: linear-gradient(to bottom, #f0f0f0, #d1d1d1, #f0f0f0);
+  margin: 20px 0;
 }
 
-/* --- RE-STYLLING NEWSCARD FOR REGULAR NEWS --- */
-/* Tugomba kwemeza ko muri iyi section, newscard ihinduka horizontal */
-.regular-news-main-wrapper .news-card {
-  flex-direction: row !important; /* Ifoto hino, Details hirya */
-  border: none;
-  border-bottom: 1px solid #f0f0f0;
+/* --- NEWSCARD OVERRIDE (Muri iyi Section gusa) --- */
+.news-column .news-card {
+  flex-direction: row !important; /* Ifoto ibumoso, Text iburyo */
   padding: 15px 0;
+  border: none;
+  border-bottom: 1px solid #f5f5f5;
   border-radius: 0;
-  background: transparent;
+  gap: 15px; /* Aka gap gato hagati y'ifoto na text */
 }
 
-.regular-news-main-wrapper .news-media-container {
-  width: 160px !important; /* Ifoto nini isobanutse */
-  height: 100px !important;
+.news-column .news-media-container {
+  width: 150px !important; /* Size nziza y'ifoto */
+  height: 95px !important;
+  aspect-ratio: auto;
   flex-shrink: 0;
-  padding-top: 0 !important;
   border-radius: 4px;
 }
 
-.regular-news-main-wrapper .news-info {
-  padding: 0 0 0 20px !important;
+.news-column .news-info {
+  padding: 0 !important;
+  justify-content: center;
 }
 
-.regular-news-main-wrapper .news-title {
-  font-size: 1.05rem !important;
-  -webkit-line-clamp: 2;
-  margin-bottom: 8px !important;
+.news-column .news-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+  line-height: 1.25;
 }
 
-/* --- MOBILE VIEW (Max-width: 768px) --- */
-@media (max-width: 850px) {
+.news-column .read-more-btn {
+  padding: 4px 8px; /* Soma ibindi iba ntoya ho gato hano */
+  font-size: 0.65rem;
+}
+
+/* --- MOBILE RESPONSIVE (THE "NO SPACE" LOOK) --- */
+@media (max-width: 768px) {
+  .regular-news-section-container {
+    padding: 0;
+  }
+
   .regular-news-main-wrapper {
-    flex-direction: column; /* Inkuru zose zijya mu murongo umwe */
-    gap: 0;
+    flex-direction: column;
+  }
+
+  .left-col, .right-col {
+    padding: 0; /* Kuraho space zose hirya no hino */
   }
 
   .vertical-divider {
-    display: none; /* Kuraho umurongo kuri mobile */
+    display: none;
   }
 
-  /* Kuri Mobile: Ifoto Hejuru, Detail Munsi */
-  .regular-news-main-wrapper .news-card {
+  /* Kuri Mobile: Ifoto hejuru (Full Width), Text munsi */
+  .news-column .news-card {
     flex-direction: column !important;
-    padding: 20px 0;
+    padding: 0 0 25px 0; /* Space munsi y'inkuru gusa */
+    margin-bottom: 20px;
   }
 
-  .regular-news-main-wrapper .news-media-container {
-    width: 100% !important;
-    height: 200px !important;
-    margin-bottom: 15px;
+  .news-column .news-media-container {
+    width: 100% !important; /* Ifoto yuzuye screen (No space) */
+    height: 220px !important;
+    border-radius: 0; /* Ifoto igera ku mpera za phone */
+    margin: 0;
   }
 
-  .regular-news-main-wrapper .news-info {
-    padding: 0 !important;
+  .news-column .news-info {
+    padding: 15px !important; /* Amagambo niyo agira space gusa */
+  }
+
+  .news-column .news-title {
+    font-size: 1.2rem !important; /* Title iba nini kuri mobile isomeka neza */
   }
 }
 
-/* PAGINATION STYLES */
+/* PAGINATION PRO */
 .pagination-controls {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 2px solid #f5f5f5;
+  padding: 30px 0;
+  gap: 15px;
 }
 
 .pag-btn {
   background: #000;
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 18px;
+  border-radius: 2px;
+  font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
-  border-radius: 4px;
-  transition: 0.3s;
 }
 
 .pag-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-.page-info {
-  font-size: 0.9rem;
-  color: #555;
+  background: #eee;
+  color: #999;
 }
