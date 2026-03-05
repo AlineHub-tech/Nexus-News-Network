@@ -2,23 +2,22 @@
 .top-sticky-ads-container {
   position: relative; 
   width: 100%;
-  
   /* 1. KUGENA AMABARA (Dark Blue, White, na Sky Blue) */
-  /* Nashyizemo #010142 (Dark Blue), #ffffff (White), na #87ceeb (Sky Blue) */
   background: linear-gradient(-45deg, #010142, #ffffff, #87ceeb, #ffffff);
   background-size: 400% 400%;
   
   /* 2. KUGENA ANIMATION (Umuvuduko utuje - 15 seconds) */
   animation: adGradientShift 15s ease infinite;
   
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   min-height: 95px;
   height: auto;
   z-index: 1001;
   padding: 10px 0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: all 0.5s ease;
 }
 
 /* LOGIC Y'UKO AMABARA AZENGERUKA (Keyframes) */
@@ -28,8 +27,6 @@
   100% { background-position: 0% 50%; }
 }
 
-/* --- GLASSMORPHISM EFFECT --- */
-/* Ibi bituma amagambo asomeka neza kuri background ihinduranya amabara */
 .ad-wrapper-flex {
   display: flex;
   width: 100%;
@@ -37,11 +34,11 @@
   margin: 0 auto;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.4); /* Umweru ubona (Transparent) */
-  backdrop-filter: blur(10px); /* Icyitegererezo cya kinyamwange */
+  /* Bituma amagambo asomeka neza kuri background ihinduranya amabara */
+  background: rgba(255, 255, 255, 0.45); 
+  backdrop-filter: blur(8px); /* Professional Glassmorphism effect */
   border-radius: 12px;
   padding: 8px 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .ad-text-part {
@@ -53,7 +50,7 @@
 
 .sponsored-label {
   font-size: 10px;
-  color: #ad2530; 
+  color: #ad2530; /* Accent Red yawe */
   font-weight: 900;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -63,31 +60,39 @@
 .ad-title-full {
   font-size: 18px;
   font-weight: 800;
-  color: #010142; /* Dark blue kugira ngo isomeke neza buri gihe */
+  color: #010142; /* Dark Blue kuri title kugira ngo ibe bold cyane */
   margin: 0;
   line-height: 1.2;
+  font-family: 'Inter', sans-serif;
 }
 
 .ad-full-desc {
   font-size: 14px;
-  color: #111;
+  color: #222;
   margin: 5px 0;
   line-height: 1.4;
   font-weight: 500;
+  white-space: normal;
 }
 
 .call-btn-action {
   font-size: 11px;
   background: #010142;
   color: white !important;
-  padding: 8px 18px;
+  padding: 7px 18px;
   border-radius: 4px;
   font-weight: 800;
   text-decoration: none;
   width: fit-content;
   margin-top: 8px;
   text-transform: uppercase;
-  transition: transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.call-btn-action:hover {
+  transform: translateY(-2px);
+  background: #000066;
 }
 
 .ad-vertical-divider {
@@ -97,7 +102,7 @@
   margin: 0 15px;
 }
 
-/* --- MEDIA SECTION --- */
+/* --- MEDIA / IMAGE SECTION --- */
 .ad-media-part {
   flex: 0.8;
   display: flex;
@@ -106,25 +111,70 @@
 }
 
 .ad-media-part img {
-  height: 95px;
-  width: 170px;
+  height: 100px;
+  width: 180px;
   object-fit: cover;
   border-radius: 8px;
+  /* Pro clip-path ikoze neza */
   clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease;
 }
 
-/* --- MOBILE RESPONSIVE --- */
+.ad-media-part img:hover {
+  transform: scale(1.03);
+}
+
+/* --- MOBILE RESPONSIVE (Yakosowe neza) --- */
 @media (max-width: 768px) {
   .top-sticky-ads-container {
     min-height: 85px;
     padding: 12px 10px;
   }
+  
   .ad-wrapper-flex {
     background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
   }
-  .ad-title-full { font-size: 14px; }
-  .ad-full-desc { font-size: 12px; }
-  .ad-media-part img { height: 75px; width: 115px; }
+
+  .ad-text-part {
+    padding: 0 10px;
+  }
+
+  .ad-title-full {
+    font-size: 14px;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .ad-full-desc {
+    font-size: 12px;
+    line-height: 1.2;
+    margin: 3px 0;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .ad-media-part img {
+    height: 75px;
+    width: 115px;
+    border-radius: 4px;
+  }
+
+  .call-btn-action {
+    padding: 4px 10px;
+    font-size: 9px;
+    margin-top: 4px;
+  }
+
+  .ad-vertical-divider {
+    height: 45px;
+    margin: 0 10px;
+  }
 }
