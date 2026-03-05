@@ -11,22 +11,22 @@ const PopularNews = ({ newsList }) => {
     .slice(0, 10);
 
   return (
-    <section className="popular-news-section">
-        <div className="section-title">
+    <section className="popular-news-container">
+      <div className="section-title">
         <span className="badge">TREND NEWS</span>
-        <h2 className="title">INKURU ZIKUZWE</h2>
+        <h2 className="title">INKURU ZIKUNZWE</h2>
         <div className="line"></div>
       </div>
 
-      <div className="ticker-container">
+      <div className="ticker-viewport">
         <div className="ticker-track">
-          {/* 1. Inkuru za mbere */}
+          {/* 1. Original items */}
           {trendingNews.map((post) => (
             <div className="ticker-item" key={`orig-${post._id}`}>
               <NewsCard post={post} /> 
             </div>
           ))}
-          {/* 2. Clone zazo zituma loop idahagarara */}
+          {/* 2. Clone items for infinite loop */}
           {trendingNews.map((post) => (
             <div className="ticker-item" key={`clone-${post._id}`}>
               <NewsCard post={post} /> 
@@ -39,5 +39,3 @@ const PopularNews = ({ newsList }) => {
 };
 
 export default PopularNews;
-
-
