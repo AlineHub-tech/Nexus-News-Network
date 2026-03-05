@@ -1,93 +1,177 @@
-/* Container padding */
-.latest-news-wrapper {
-  padding: 20px;
-  max-width: 1200px;
+/* --- CONTAINER SETUP --- */
+.latest-news-section {
+  width: 100%;
+  background: #ffffff;
+  padding: 0;
   margin: 0 auto;
 }
 
-/* Grid System */
-.news-container-grid {
+.news-ultra-grid {
   display: grid;
-  gap: 20px;
-  /* Kuri Desktop: Izaba ari 4 kuri buri murongo (row) */
+  /* DESKTOP: 4 columns zifatanye neza */
   grid-template-columns: repeat(4, 1fr);
+  gap: 1px; /* Kadomo gatandukanya cards gusa */
+  background: #eeeeee; /* Ibara rya border riri hagati yazo */
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
 }
 
-/* Tablet: Izaba ari 2 kuri buri murongo (row) - Izatuma biba 2x4 */
+/* --- TABLET: 2 columns (2x4 layout) --- */
 @media (max-width: 1024px) {
-  .news-container-grid {
+  .news-ultra-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Mobile: Inkuru imwe ku murongo, ifoto ibumoso amagambo iburyo */
-@media (max-width: 600px) {
-  .news-container-grid {
-    grid-template-columns: 1fr; /* Inyuranyije n'izindi */
+/* --- MOBILE: 1 column (Image Left, Text Right) --- */
+@media (max-width: 640px) {
+  .news-ultra-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: transparent;
   }
-
-  /* Ibi nibyo bituma kuri Mobile ifoto ijya hino amagambo hirya */
-  .news-card-item .news-card { 
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 15px;
-    height: 120px; /* Adjusta uburebure bitewe n'ifoto */
-  }
-
-  .news-card-item .news-card img {
-    width: 120px; /* Ifoto igira size nto kuri mobile */
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
-  .news-card-item .news-card-content {
-    flex: 1;
-  }
-
-  .news-card-item .news-card-title {
-    font-size: 14px;
-    line-height: 1.2;
-    margin-bottom: 5px;
-    /* Ibi bituma title yose igaragara */
-    display: block; 
+  
+  .latest-news-section {
+    padding: 0 10px; /* Space ntoya ku mpande za mobile */
   }
 }
 
-/* Stylings za Card kuri Desktop (Kugira ngo igarukane isura nziza) */
+/* --- NEWS CARD BASE STYLES --- */
+.news-card-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: block;
+  background: #ffffff;
+}
+
 .news-card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 .news-card:hover {
-  transform: translateY(-5px);
+  background: #fafafa;
+  z-index: 2;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.news-card img {
+/* --- IMAGE AREA (16:9 Aspect Ratio) --- */
+.news-media-container {
   width: 100%;
-  height: 180px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  position: relative;
+}
+
+.news-card-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
-.news-card-content {
+.news-card:hover .news-card-image {
+  transform: scale(1.05);
+}
+
+.card-category-tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #ad2530;
+  color: #fff;
+  padding: 4px 12px;
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  z-index: 5;
+}
+
+/* --- TEXT AREA --- */
+.news-info {
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.news-card-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 10px;
-  line-height: 1.4;
+.post-full-date {
+  font-size: 11px;
+  color: #990909; /* Darkred */
+  font-weight: 800;
+  margin-bottom: 6px;
+  display: block;
 }
 
-.news-card-details {
-  font-size: 13px;
-  color: #666;
+.news-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.15rem; /* Nini isomeka neza */
+  font-weight: 800;
+  line-height: 1.3;
+  color: #000000;
+  margin: 0 0 12px 0;
+  /* Kuri Desktop Title igaragara yose (up to 3 lines) */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-meta-bottom {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f5f5f5;
+  padding-top: 10px;
+  font-size: 12px;
+}
+
+.author-name {
+  color: #010142; /* Darkblue */
+  font-weight: 900;
+}
+
+.post-time {
+  color: #990909;
+  font-weight: 600;
+}
+
+/* --- MOBILE SPECIFIC (IMAGE LEFT, TEXT RIGHT) --- */
+@media (max-width: 640px) {
+  .news-card {
+    flex-direction: row !important;
+    padding: 15px 0;
+    border-bottom: 1px solid #eeeeee;
+    align-items: flex-start;
+  }
+
+  .news-media-container {
+    width: 145px !important; /* Ifoto nini kuri Mobile */
+    height: 100px !important;
+    aspect-ratio: auto;
+    flex-shrink: 0;
+    border-radius: 4px;
+  }
+
+  .news-info {
+    padding: 0 0 0 15px !important;
+    justify-content: flex-start;
+  }
+
+  .news-title {
+    font-size: 1rem !important;
+    -webkit-line-clamp: 3; /* Title igaragara neza kuri mobile */
+    margin-bottom: 5px !important;
+  }
+
+  .news-meta-bottom {
+    border: none;
+    padding-top: 0;
+    justify-content: flex-start;
+    gap: 15px;
+  }
 }
