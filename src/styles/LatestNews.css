@@ -1,145 +1,93 @@
-/* ============================================================
-   BYTEFLOW LTD - ULTIMATE NEWS GRID SYSTEM
-   Features: 4-Column Desktop | 2-Column Tablet | Mobile List
-   ============================================================ */
-
-/* 1. THE MAIN CONTAINER */
-.latest-news-grid-system {
-  display: grid !important;
-  /* Ihatira Desktop kugira inkuru 4 gusa ku murongo */
-  grid-template-columns: repeat(4, 1fr) !important; 
-  gap: 25px !important;
-  width: 100% !important;
-  max-width: 1400px !important; 
-  margin: 30px auto !important;
-  padding: 0 20px !important;
-  box-sizing: border-box !important;
-  /* Kuraho amabara n'akajagari bya slider */
-  background: transparent !important;
+/* Container padding */
+.latest-news-wrapper {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* 2. RESET WRAPPERS (Kuraho ibyo template yitiranya) */
-.news-side-column, 
-.news-center-slider, 
-.slider-container, 
-.left-side, 
-.right-side, 
-.side-item-wrapper, 
-.slide-item,
-.latest-post-card-item {
-  display: contents !important; 
-  position: static !important;
-  height: auto !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+/* Grid System */
+.news-container-grid {
+  display: grid;
+  gap: 20px;
+  /* Kuri Desktop: Izaba ari 4 kuri buri murongo (row) */
+  grid-template-columns: repeat(4, 1fr);
 }
 
-/* 3. BASE CARD STYLE (DESKTOP) */
-.news-card-base {
-  width: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  background: #ffffff !important;
-  border-radius: 12px !important;
-  overflow: hidden !important;
-  border: 1px solid #eeeeee !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+/* Tablet: Izaba ari 2 kuri buri murongo (row) - Izatuma biba 2x4 */
+@media (max-width: 1024px) {
+  .news-container-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.news-card-base:hover {
-  transform: translateY(-8px) !important;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+/* Mobile: Inkuru imwe ku murongo, ifoto ibumoso amagambo iburyo */
+@media (max-width: 600px) {
+  .news-container-grid {
+    grid-template-columns: 1fr; /* Inyuranyije n'izindi */
+  }
+
+  /* Ibi nibyo bituma kuri Mobile ifoto ijya hino amagambo hirya */
+  .news-card-item .news-card { 
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 15px;
+    height: 120px; /* Adjusta uburebure bitewe n'ifoto */
+  }
+
+  .news-card-item .news-card img {
+    width: 120px; /* Ifoto igira size nto kuri mobile */
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .news-card-item .news-card-content {
+    flex: 1;
+  }
+
+  .news-card-item .news-card-title {
+    font-size: 14px;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    /* Ibi bituma title yose igaragara */
+    display: block; 
+  }
 }
 
-/* 4. IMAGE SETTINGS */
-.news-card-base img {
-  height: 190px !important; /* Height ihamye kuri Desktop */
-  width: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
-  border-bottom: 1px solid #f5f5f5 !important;
+/* Stylings za Card kuri Desktop (Kugira ngo igarukane isura nziza) */
+.news-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  height: 100%;
 }
 
-/* 5. TEXT CONTENT SETTINGS */
+.news-card:hover {
+  transform: translateY(-5px);
+}
+
+.news-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
 .news-card-content {
-  padding: 18px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  flex-grow: 1 !important;
+  padding: 15px;
 }
 
-.news-card-base h3 {
-  font-family: 'Inter', sans-serif !important;
-  font-size: 17px !important;
-  font-weight: 700 !important;
-  line-height: 1.4 !important;
-  color: #1a1a1a !important;
-  margin: 0 0 12px 0 !important;
-  display: -webkit-box !important;
-  -webkit-line-clamp: 2 !important; /* Imirongo 2 kuri Desktop */
-  -webkit-box-orient: vertical !important;
-  overflow: hidden !important;
+.news-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 10px;
+  line-height: 1.4;
 }
 
-/* 6. TABLET RESPONSIVE (2 KURI BURI MURONGO) */
-@media (min-width: 769px) and (max-width: 1100px) {
-  .latest-news-grid-system {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 20px !important;
-  }
-}
-
-/* 7. MOBILE RESPONSIVE (LIST STYLE: IFOTO LEFT, TEXT RIGHT) */
-@media (max-width: 768px) {
-  .latest-news-grid-system {
-    grid-template-columns: 1fr !important; /* Inkuru imwe ku murongo (Vertical list) */
-    gap: 15px !important;
-    padding: 10px !important;
-  }
-
-  .news-card-base {
-    flex-direction: row !important; /* Ifoto hino, Text hirya */
-    height: 140px !important; /* Ihatira height imwe kuri zose */
-    align-items: center !important;
-    border: none !important;
-    border-bottom: 1px solid #f0f0f0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-  
-  .news-card-base:hover {
-    transform: none !important;
-  }
-
-  .news-card-base img {
-    width: 140px !important; /* Ifoto nini ibumoso */
-    height: 120px !important;
-    border-radius: 10px !important;
-    margin: 0 15px 0 5px !important;
-    flex-shrink: 0 !important;
-    border: none !important;
-  }
-
-  .news-card-content {
-    padding: 0 !important;
-    justify-content: center !important;
-  }
-
-  .news-card-base h3 {
-    font-size: 16px !important; /* Text isomeka neza kuri Mobile */
-    line-height: 1.3 !important;
-    -webkit-line-clamp: 3 !important; /* Imirongo 3 kuri Mobile List */
-    margin: 0 !important;
-  }
-
-  /* Kuraho amakuru abangamira list style kuri mobile */
-  .news-card-description, 
-  .news-card-footer, 
-  .slider-indicators, 
-  .post-meta-data {
-    display: none !important;
-  }
+.news-card-details {
+  font-size: 13px;
+  color: #666;
 }
