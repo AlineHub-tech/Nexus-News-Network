@@ -42,13 +42,11 @@ const NewsCard = ({ post, extraClass = "" }) => {
             className="news-card-image" 
             loading="lazy"
           />
-          
           {post.mediaType === "video" && (
             <div className="video-icon-overlay">
               <i className="fas fa-play-circle"></i>
             </div>
           )}
-          
           {post.category && (
             <span className="card-category-tag">{post.category}</span>
           )}
@@ -63,6 +61,13 @@ const NewsCard = ({ post, extraClass = "" }) => {
 
           <h5 className="news-title">{post.title}</h5>
 
+          {/* READ MORE IZIBUYE MUNSI YA TITLE */}
+          <div className="read-more-wrapper">
+            <span className="read-more-btn">
+              Soma ibindi <i className="fas fa-arrow-right"></i>
+            </span>
+          </div>
+
           <div className="news-meta-bottom">
             <div className="author-info">
               <span className="author-prefix">Umwanditsi:</span>
@@ -70,13 +75,6 @@ const NewsCard = ({ post, extraClass = "" }) => {
             </div>
             <span className="post-time">
               <i className="far fa-clock"></i> {formatTimeAgo(post.createdAt)}
-            </span>
-          </div>
-
-          {/* --- READ MORE BUTTON --- */}
-          <div className="read-more-container">
-            <span className="read-more-btn">
-              Soma ibindi <i className="fas fa-arrow-right"></i>
             </span>
           </div>
         </div>
