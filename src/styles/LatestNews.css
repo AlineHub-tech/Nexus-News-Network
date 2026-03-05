@@ -1,25 +1,26 @@
 /* --- CONTAINER SETUP --- */
 .latest-news-section {
   width: 100%;
+  max-width: 1400px; /* Bituma zidatandukana cyane kuri screen nini */
   background: #ffffff;
-  padding: 0;
+  padding: 20px 0; /* Space gato hejuru na munsi */
   margin: 0 auto;
 }
 
 .news-ultra-grid {
   display: grid;
-  /* DESKTOP: 4 columns zifatanye neza */
+  /* DESKTOP: 4 columns zifite gap nziza */
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px; /* Kadomo gatandukanya cards gusa */
-  background: #eeeeee; /* Ibara rya border riri hagati yazo */
-  border-top: 1px solid #eeeeee;
-  border-bottom: 1px solid #eeeeee;
+  gap: 15px; /* Aka gap niko wasabye, gatandukanya cards neza */
+  background: transparent; /* Twakuzeho background y'imvi yatumaga zifatana */
+  padding: 0 15px;
 }
 
 /* --- TABLET: 2 columns (2x4 layout) --- */
 @media (max-width: 1024px) {
   .news-ultra-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
 }
 
@@ -27,12 +28,13 @@
 @media (max-width: 640px) {
   .news-ultra-grid {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 10px; /* Gap ntoya hagati y'imirongo kuri mobile */
     background: transparent;
+    padding: 0;
   }
   
   .latest-news-section {
-    padding: 0 10px; /* Space ntoya ku mpande za mobile */
+    padding: 0 10px; 
   }
 }
 
@@ -41,7 +43,6 @@
   text-decoration: none !important;
   color: inherit !important;
   display: block;
-  background: #ffffff;
 }
 
 .news-card {
@@ -49,13 +50,18 @@
   flex-direction: column;
   height: 100%;
   position: relative;
+  background: #ffffff;
+  border: 1px solid #f0f0f0; /* Akanyengeteri k'umurongo utuma card igaragara */
+  border-radius: 8px; /* Bituma biba pro kurushaho */
+  overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .news-card:hover {
-  background: #fafafa;
+  background: #ffffff;
   z-index: 2;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transform: translateY(-3px); /* Akantu ko kuzamuka gato */
 }
 
 /* --- IMAGE AREA (16:9 Aspect Ratio) --- */
@@ -79,15 +85,16 @@
 
 .card-category-tag {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
   background: #ad2530;
   color: #fff;
-  padding: 4px 12px;
+  padding: 3px 10px;
   font-size: 10px;
   font-weight: 900;
   text-transform: uppercase;
   z-index: 5;
+  border-radius: 3px;
 }
 
 /* --- TEXT AREA --- */
@@ -100,7 +107,7 @@
 
 .post-full-date {
   font-size: 11px;
-  color: #990909; /* Darkred */
+  color: #990909; 
   font-weight: 800;
   margin-bottom: 6px;
   display: block;
@@ -108,16 +115,30 @@
 
 .news-title {
   font-family: 'Inter', sans-serif;
-  font-size: 1.15rem; /* Nini isomeka neza */
+  font-size: 1.1rem;
   font-weight: 800;
   line-height: 1.3;
   color: #000000;
   margin: 0 0 12px 0;
-  /* Kuri Desktop Title igaragara yose (up to 3 lines) */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* --- SOMA IBINDI BUTTON --- */
+.read-more-wrapper {
+  margin-bottom: 12px;
+}
+.read-more-btn {
+  background: #ad2530;
+  color: white;
+  padding: 5px 12px;
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 4px;
+  text-transform: uppercase;
+  display: inline-block;
 }
 
 .news-meta-bottom {
@@ -127,11 +148,11 @@
   align-items: center;
   border-top: 1px solid #f5f5f5;
   padding-top: 10px;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .author-name {
-  color: #010142; /* Darkblue */
+  color: #010142; 
   font-weight: 900;
 }
 
@@ -144,34 +165,38 @@
 @media (max-width: 640px) {
   .news-card {
     flex-direction: row !important;
-    padding: 15px 0;
+    padding: 10px;
+    border: none;
     border-bottom: 1px solid #eeeeee;
     align-items: flex-start;
+    border-radius: 0;
+    gap: 12px;
   }
 
   .news-media-container {
-    width: 145px !important; /* Ifoto nini kuri Mobile */
-    height: 100px !important;
+    width: 130px !important;
+    height: 90px !important;
     aspect-ratio: auto;
     flex-shrink: 0;
-    border-radius: 4px;
+    border-radius: 6px;
   }
 
   .news-info {
-    padding: 0 0 0 15px !important;
-    justify-content: flex-start;
+    padding: 0 !important;
   }
 
   .news-title {
-    font-size: 1rem !important;
-    -webkit-line-clamp: 3; /* Title igaragara neza kuri mobile */
+    font-size: 0.95rem !important;
+    -webkit-line-clamp: 2;
     margin-bottom: 5px !important;
+  }
+
+  .read-more-wrapper {
+    margin-bottom: 5px;
   }
 
   .news-meta-bottom {
     border: none;
     padding-top: 0;
-    justify-content: flex-start;
-    gap: 15px;
   }
 }
