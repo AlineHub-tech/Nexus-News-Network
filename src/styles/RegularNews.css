@@ -40,7 +40,7 @@
   border: none;
   border-bottom: 1px solid #f0f0f0; /* Umurongo utandukanya inkuru */
   border-radius: 0;
-  gap: 20px;
+  gap: 15px;
   background: transparent;
   transition: background 0.3s ease;
 }
@@ -139,3 +139,4 @@
   background: #eee;
   color: #aaa;
 }
+
