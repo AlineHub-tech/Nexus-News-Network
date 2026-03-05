@@ -1,7 +1,7 @@
 /* --- CONTAINER --- */
 .popular-news-container {
   padding: 60px 0;
-  background-color: #f1f5f9; /* Gray yoroshye cyane ituma cards zera zishashagira */
+  background-color: #f1f5f9;
   overflow: hidden;
   width: 100%;
 }
@@ -17,13 +17,12 @@
 }
 
 .section-title .badge {
-  background: #010142; /* Dark Blue */
+  background: #010142;
   color: #fff;
   padding: 6px 14px;
   font-size: 0.7rem;
   font-weight: 900;
   border-radius: 3px;
-  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
@@ -31,7 +30,6 @@
   font-size: 1.5rem;
   font-weight: 900;
   color: #000;
-  white-space: nowrap;
   text-transform: uppercase;
 }
 
@@ -41,11 +39,10 @@
   background: linear-gradient(to right, #cbd5e1, transparent);
 }
 
-/* --- TICKER VIEWPORT (Professional Masking) --- */
+/* --- TICKER VIEWPORT --- */
 .ticker-viewport {
   width: 100%;
   position: relative;
-  /* Bituma inkuru zizimira buhoro buhoro ku mpande (Fade effect) */
   mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
@@ -62,76 +59,93 @@
   animation-play-state: paused;
 }
 
-/* --- TICKER ITEM (CARD PRO) --- */
+/* --- TICKER ITEM CARD --- */
 .ticker-item {
-  width: 340px; /* Width nziza ituma ifoto iba nini */
+  width: 340px;
   flex-shrink: 0;
   background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s ease;
   border: 1px solid #e2e8f0;
 }
 
-.ticker-item:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
-  border-color: #ad2530;
-}
-
-/* --- OVERRIDING NEWSCARD INSIDE TICKER --- */
-/* Ibi bituma NewsCard ihura neza n'imiterere ya Ticker */
+/* --- OVERRIDING NEWSCARD SPECIFICALLY FOR TICKER --- */
 .ticker-item .news-card {
+  display: flex !important;
+  flex-direction: column !important; /* Always column in ticker */
+  height: 100% !important;
   border: none !important;
-  box-shadow: none !important;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  background: #ffffff !important;
+  padding: 0 !important;
 }
 
 .ticker-item .news-media-container {
-  height: 190px !important; /* Ifoto nini isobanutse */
   width: 100% !important;
+  height: 190px !important;
   padding-top: 0 !important;
+  position: relative !important;
 }
 
 .ticker-item .news-info {
   padding: 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  overflow: visible !important; /* To show read more */
 }
 
 .ticker-item .news-title {
   font-size: 1.1rem !important;
-  -webkit-line-clamp: 3 !important; /* Title igaragara yose */
-  height: 4.2em; /* Bituma cards zose zingana uburebure */
+  -webkit-line-clamp: 3 !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  height: 4.2em !important; /* Keep alignment */
+  margin-bottom: 12px !important;
+}
+
+/* --- MOBILE SPECIFIC FIXES --- */
+@media (max-width: 768px) {
+  .ticker-item {
+    width: 280px; /* Thinner for mobile screens */
+    min-height: 400px; /* Force height so details fit */
+  }
+
+  .ticker-item .news-media-container {
+    height: 160px !important; /* Smaller image on mobile */
+  }
+
+  .ticker-item .news-info {
+    padding: 15px !important;
+  }
+
+  .ticker-item .news-title {
+    font-size: 1rem !important;
+    height: auto !important; /* Let it grow naturally */
+    max-height: 3.9em;
+  }
+
+  /* Force display of hidden metadata */
+  .ticker-item .news-date-row, 
+  .ticker-item .news-meta-bottom,
+  .ticker-item .read-more-wrapper {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin-top: 5px !important;
+  }
+
+  .ticker-item .news-meta-bottom {
+    border-top: 1px solid #f3f4f6 !important;
+    padding-top: 10px !important;
+    margin-top: auto !important;
+  }
 }
 
 /* --- ANIMATION --- */
 @keyframes scrollTicker {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
-}
-
-/* --- MOBILE RESPONSIVE --- */
-@media (max-width: 768px) {
-  .popular-news-container {
-    padding: 30px 0;
-  }
-
-  .section-title .title {
-    font-size: 1.1rem;
-  }
-
-  .ticker-item {
-    width: 290px; /* Card ntoya ho gato kuri mobile */
-  }
-
-  .ticker-item .news-media-container {
-    height: 160px !important;
-  }
-
-  .ticker-track {
-    gap: 15px;
-    animation-duration: 35s; /* Bihuta gato kuri mobile */
-  }
 }
