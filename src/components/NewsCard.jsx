@@ -7,7 +7,6 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || "//localhost:5000";
 const NewsCard = ({ post, extraClass = "" }) => {
   if (!post) return <div className="news-card-loading">Loading...</div>;
 
-  // 1. Logic yo kwerekana Igihe hashize (Time Ago)
   const formatTimeAgo = (dateString) => {
     const now = new Date();
     const past = new Date(dateString);
@@ -21,14 +20,13 @@ const NewsCard = ({ post, extraClass = "" }) => {
     return `Hashize iminsi ${diffInDays}`;
   };
 
-  // 2. Logic yo kwerekana Itariki nyirizina (Full Date)
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('rw-RW', options); // Mu Kinyarwanda
+    return new Date(dateString).toLocaleDateString('rw-RW', options);
   };
 
   const getMediaUrl = (url) => {
-    if (!url) return "/placeholder-image.jpg"; // Shyiramo ifoto isanzwe niba nta yihari
+    if (!url) return "/placeholder-image.jpg";
     if (url.startsWith("http")) return url;
     const base = API_BASE_URL.endsWith("/") ? API_BASE_URL.slice(0, -1) : API_BASE_URL;
     return `${base}${url.startsWith("/") ? url : "/" + url}`;
@@ -37,7 +35,6 @@ const NewsCard = ({ post, extraClass = "" }) => {
   return (
     <Link to={`/article/${post._id}`} className="news-card-link">
       <div className={`news-card ${extraClass}`}>
-        {/* IGICE CY'IFOTO/VIDEO */}
         <div className="news-media-container">
           <img 
             src={getMediaUrl(post.mediaUrl)} 
@@ -57,7 +54,6 @@ const NewsCard = ({ post, extraClass = "" }) => {
           )}
         </div>
 
-        {/* IGICE CY'AMAKURU */}
         <div className="news-info">
           <div className="news-date-row">
             <span className="post-full-date">
@@ -76,6 +72,13 @@ const NewsCard = ({ post, extraClass = "" }) => {
               <i className="far fa-clock"></i> {formatTimeAgo(post.createdAt)}
             </span>
           </div>
+
+          {/* --- READ MORE BUTTON --- */}
+          <div className="read-more-container">
+            <span className="read-more-btn">
+              Soma ibindi <i className="fas fa-arrow-right"></i>
+            </span>
+          </div>
         </div>
       </div>
     </Link>
@@ -83,4 +86,3 @@ const NewsCard = ({ post, extraClass = "" }) => {
 };
 
 export default NewsCard;
-
