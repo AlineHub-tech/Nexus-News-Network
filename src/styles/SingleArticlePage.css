@@ -107,7 +107,7 @@
     .article-main { padding: 20px 15px; }
     
     .article-title { font-size: 1.75rem; line-height: 1.2; }
-    .single-article-page{ margin-top:-14%;}
+    .single-article-page { margin-top:-14%; }
     .article-body-content {
         font-size: 1.15rem;
         line-height: 1.5;
@@ -131,5 +131,6 @@
     font-size: 1.2rem;
     color: #666;
 }
+
 
 
