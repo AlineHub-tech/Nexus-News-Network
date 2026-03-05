@@ -7,23 +7,24 @@ const RegularNews = ({ newsList }) => {
   const { paginate, currentPage, totalArticles, articlesPerPage } = useContext(NewsContext);
 
   if (!newsList || newsList.length === 0) {
-    return <div className="regular-news-empty">Nta nkuru zindi zihari ubu.</div>;
+    return <p className="regular-news-empty">Nta nkuru zindi zibonetse ubu.</p>;
   }
 
-  // --- LOGIC IKOSOYE ---
-  // Niba turi kuri Page 1, kura 8 za mbere (Latest). Niba turi kuri Page > 1, erekana zose 30.
-  const remainingNews = currentPage === 1 ? newsList.slice(8) : newsList;
+  // --- LOGIC IKOSOYE (Dynamic Slice) ---
+  // Page 1: Ifata inkuru kuva ku ya 9 (index 8 kugeza kuri 30)
+  // Page 2+: Ifata inkuru zose 30 uko zakabaye
+  const displayList = currentPage === 1 ? newsList.slice(8) : newsList;
 
-  // Gabanya inkuru mu bice bibiri
-  const half = Math.ceil(remainingNews.length / 2);
-  const leftColumnNews = remainingNews.slice(0, half);
-  const rightColumnNews = remainingNews.slice(half);
+  // Gabanya inkuru zisigaye mu bice bibiri (Split Columns)
+  const half = Math.ceil(displayList.length / 2);
+  const leftColumn = displayList.slice(0, half);
+  const rightColumn = displayList.slice(half);
 
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
   const handleScrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <section className="regular-news-section-container">
+    <div className="regular-news-section-container">
       <div className="section-title">
         <span className="badge">NEWS</span>
         <h2 className="title">IZINDI NKURU</h2>
@@ -32,34 +33,44 @@ const RegularNews = ({ newsList }) => {
 
       <div className="regular-news-main-wrapper">
         <div className="news-column">
-          {leftColumnNews.map((post) => (
+          {leftColumn.map((post) => (
             <NewsCard key={post._id} post={post} />
           ))}
         </div>
 
-        {/* Umurongo ugaragara gusa niba hari inkuru mu kigice cy'iburyo */}
-        {rightColumnNews.length > 0 && <div className="vertical-divider"></div>}
+        {/* Vertical divider igaragara gusa niba hari inkuru iburyo */}
+        {rightColumn.length > 0 && <div className="vertical-divider"></div>}
 
         <div className="news-column">
-          {rightColumnNews.map((post) => (
+          {rightColumn.map((post) => (
             <NewsCard key={post._id} post={post} />
           ))}
         </div>
       </div>
 
-      {/* PAGINATION */}
+      {/* PAGINATION SECTION */}
       {totalPages > 1 && (
         <div className="pagination-controls">
-          <button className="pag-btn" onClick={() => { if(currentPage > 1) { paginate(currentPage - 1); handleScrollToTop(); }}} disabled={currentPage === 1}>
-            PREV
+          <button 
+            className="pag-btn" 
+            onClick={() => { if(currentPage > 1) { paginate(currentPage - 1); handleScrollToTop(); }}} 
+            disabled={currentPage === 1}
+          >
+            <i className="fas fa-chevron-left"></i> PREV
           </button>
-          <span className="page-info"> Page {currentPage} of {totalPages} </span>
-          <button className="pag-btn" onClick={() => { if(currentPage < totalPages) { paginate(currentPage + 1); handleScrollToTop(); }}} disabled={currentPage === totalPages}>
-            NEXT
+          
+          <span className="page-info"> Page <strong>{currentPage}</strong> of {totalPages} </span>
+          
+          <button 
+            className="pag-btn" 
+            onClick={() => { if(currentPage < totalPages) { paginate(currentPage + 1); handleScrollToTop(); }}} 
+            disabled={currentPage === totalPages}
+          >
+            NEXT <i className="fas fa-chevron-right"></i>
           </button>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 
