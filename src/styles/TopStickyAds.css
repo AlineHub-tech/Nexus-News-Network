@@ -3,7 +3,7 @@
   position: relative; 
   width: 100%;
   /* 1. KUGENA AMABARA (Dark Blue, White, na Sky Blue) */
-  background: linear-gradient(-45deg, #010142, #ffffff, #87ceeb, #ffffff);
+ background: linear-gradient(-45deg, #010142, #f8fafc, #bae6fd, #ffffff);
   background-size: 400% 400%;
   
   /* 2. KUGENA ANIMATION (Umuvuduko utuje - 15 seconds) */
