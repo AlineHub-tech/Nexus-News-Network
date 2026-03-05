@@ -1,10 +1,12 @@
+/* --- CONTAINER --- */
 .popular-news-container {
   padding: 60px 0;
-  background-color: #f8fafc; /* Background itari umweru pure kugira ngo cards zizeho neza */
+  background-color: #f1f5f9; /* Gray yoroshye cyane ituma cards zera zishashagira */
   overflow: hidden;
+  width: 100%;
 }
 
-/* SECTION HEADER */
+/* --- SECTION HEADER --- */
 .section-title {
   display: flex;
   align-items: center;
@@ -15,19 +17,20 @@
 }
 
 .section-title .badge {
-  background: #00008b; /* Dark Blue nk'uko wayishakaga */
+  background: #010142; /* Dark Blue */
   color: #fff;
   padding: 6px 14px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  border-radius: 3px;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .section-title .title {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 900;
-  color: #111827;
+  color: #000;
   white-space: nowrap;
   text-transform: uppercase;
 }
@@ -35,72 +38,100 @@
 .section-title .line {
   height: 2px;
   flex-grow: 1;
-  background: linear-gradient(to right, #e2e8f0, transparent);
+  background: linear-gradient(to right, #cbd5e1, transparent);
 }
 
-/* TICKER VIEWPORT */
+/* --- TICKER VIEWPORT (Professional Masking) --- */
 .ticker-viewport {
   width: 100%;
-  padding: 20px 0 40px; /* Padding ya ruguru na hano hasi ituma shadow itaba cut */
   position: relative;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  /* Bituma inkuru zizimira buhoro buhoro ku mpande (Fade effect) */
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
 .ticker-track {
   display: flex;
   width: max-content;
-  gap: 30px;
-  animation: scrollTicker 60s linear infinite;
+  gap: 25px;
+  padding: 20px 0;
+  animation: scrollTicker 50s linear infinite;
 }
 
-/* Bihagarara iyo ushyizeho imbeba */
 .ticker-track:hover {
   animation-play-state: paused;
 }
 
-/* TICKER ITEM (CARD) */
+/* --- TICKER ITEM (CARD PRO) --- */
 .ticker-item {
-  width: 320px;
+  width: 340px; /* Width nziza ituma ifoto iba nini */
   flex-shrink: 0;
   background: #ffffff;
-  /* SHADOW: Ituma card itandukana na background neza */
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 
-              0 8px 10px -6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid #e2e8f0;
 }
 
 .ticker-item:hover {
-  transform: translateY(-8px);
+  transform: translateY(-10px) scale(1.02);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+  border-color: #ad2530;
 }
 
-/* ANIMATION */
+/* --- OVERRIDING NEWSCARD INSIDE TICKER --- */
+/* Ibi bituma NewsCard ihura neza n'imiterere ya Ticker */
+.ticker-item .news-card {
+  border: none !important;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ticker-item .news-media-container {
+  height: 190px !important; /* Ifoto nini isobanutse */
+  width: 100% !important;
+  padding-top: 0 !important;
+}
+
+.ticker-item .news-info {
+  padding: 18px !important;
+}
+
+.ticker-item .news-title {
+  font-size: 1.1rem !important;
+  -webkit-line-clamp: 3 !important; /* Title igaragara yose */
+  height: 4.2em; /* Bituma cards zose zingana uburebure */
+}
+
+/* --- ANIMATION --- */
 @keyframes scrollTicker {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-/* MOBILE RESPONSIVE */
+/* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
   .popular-news-container {
-    padding: 40px 0;
+    padding: 30px 0;
   }
 
   .section-title .title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .ticker-item {
-    width: 280px;
+    width: 290px; /* Card ntoya ho gato kuri mobile */
+  }
+
+  .ticker-item .news-media-container {
+    height: 160px !important;
   }
 
   .ticker-track {
-    gap: 20px;
-    animation-duration: 40s;
+    gap: 15px;
+    animation-duration: 35s; /* Bihuta gato kuri mobile */
   }
 }
-
