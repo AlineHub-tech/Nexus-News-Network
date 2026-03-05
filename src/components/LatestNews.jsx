@@ -3,22 +3,23 @@ import NewsCard from "./NewsCard";
 import "../styles/LatestNews.css";
 
 const LatestNews = ({ news }) => { 
-  // Niba nta nkuru zihari, funga agace kose
-  if (!news || news.length === 0) return null;
+  // Twizere ko twakiriye inkuru 8 gusa
+  const latest8 = news ? news.slice(0, 8) : [];
 
-  // Gufata inkuru 8 gusa nk'uko ubishaka
-  const latest8 = news.slice(0, 8);
+  if (latest8.length === 0) {
+    return <div className="news-loading">Loading news...</div>;
+  }
 
   return (
-    <div className="latest-news-section-wrapper">
-      <div className="latest-news-grid-display">
+    <section className="latest-news-wrapper">
+      <div className="news-container-grid">
         {latest8.map((post) => (
-          <div key={post._id} className="latest-post-item">
+          <div key={post._id} className="news-card-item">
             <NewsCard post={post} />
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
