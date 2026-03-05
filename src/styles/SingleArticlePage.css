@@ -1,8 +1,11 @@
+/* src/styles/SingleArticlePage.css */
+
 /* --- PAGE LAYOUT --- */
 .single-article-page {
     background-color: #ffffff;
     min-height: 100vh;
     display: flex;
+    margin-top:-10%;
     flex-direction: column;
 }
 
@@ -10,114 +13,121 @@
     flex: 1;
     display: flex;
     justify-content: center;
-    /* KOSORA HANO: Tugabanyije padding hejuru kuva kuri 40px ijya kuri 15px */
-    padding: 15px 20px 40px; 
+    padding: 40px 20px;
 }
 
 .article-container {
     width: 100%;
-    max-width: 800px;
-    margin-top: 0; /* Kuraho margin yose ya ruguru */
+    max-width: 800px; /* Optimal reading width */
 }
 
-/* --- HEADER SECTION --- */
-.article-header {
-    margin-bottom: 25px;
-}
-
+/* --- HEADER --- */
 .category-tag {
-    background: #ad2530; /* Umutuku wawe usanzwe */
+    background: #e63946;
     color: #fff;
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 800;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 700;
     text-transform: uppercase;
-    border-radius: 2px;
-    display: inline-block;
-    margin-bottom: 10px;
+    border-radius: 3px;
 }
 
 .article-title {
     font-family: 'Inter', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 2.6rem);
-    font-weight: 900;
-    line-height: 1.1; /* Title ifatane neza */
-    color: #000000;
-    margin: 5px 0 15px 0; /* Space ntoya hejuru y'umutwe */
-    letter-spacing: -1.5px;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111827;
+    margin: 15px 0;
+    letter-spacing: -1px;
 }
 
 .article-meta {
-    color: #64748b;
-    font-size: 0.85rem;
-    font-weight: 500;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.author-name {
-    color: #010142; /* Dark blue nka mbere */
-    font-weight: 800;
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
 }
 
 .meta-divider { 
-    color: #cbd5e1; 
+    margin: 0 10px; 
+    color: #d1d5db; 
 }
 
 /* --- MEDIA (IMAGE/VIDEO) --- */
 .article-media-wrapper {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
 .full-article-media {
     width: 100%;
     height: auto;
-    max-height: 500px;
+    max-height: 550px;
     object-fit: cover;
-    border-radius: 8px;
-    display: block;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* --- BODY TEXT (PRO TYPOGRAPHY) --- */
+/* --- BODY TEXT (Professional spacing) --- */
 .article-body-content {
-    font-family: 'Inter', -apple-system, sans-serif; /* Font ya kinyamwange isomeka neza */
-    font-size: 1.2rem;
-    line-height: 1.7;
-    color: #1a202c;
+    font-family: 'Charter', 'Georgia', serif;
+    font-size: 1.25rem;
+    line-height: 1.6;          /* Professional line spacing */
+    color: #2d3748;
+    white-space: normal;        /* Remove pre-line */
 }
 
+/* Paragraph spacing */
 .article-body-content p {
-    margin-bottom: 24px; /* Space nziza hagati y'uduce tw'inkuru */
+    margin: 0 0 16px 0;         /* Space between paragraphs */
 }
 
-/* --- MOBILE RESPONSIVE (EDGE-TO-EDGE) --- */
+.article-body-content p:last-child {
+    margin-bottom: 0;           /* Remove bottom space on last paragraph */
+}
+
+/* Optional inline styling */
+.article-body-content strong {
+    font-weight: 600;
+}
+
+.article-body-content em {
+    font-style: italic;
+}
+
+/* --- RESPONSIVE FIXES --- */
+
+/* Desktop & Tablet */
+@media (max-width: 1024px) {
+    .article-container { max-width: 90%; }
+}
+
+/* Mobile */
 @media (max-width: 600px) {
-    .article-main { 
-        padding: 10px 0; /* Kuraho padding yose ku mpande kuri mobile */
-    }
-
-    .article-header {
-        padding: 0 15px; /* Amagambo niyo agira space gusa */
-    }
+    .article-main { padding: 20px 15px; }
     
-    .article-title { 
-        font-size: 1.8rem; 
-        line-height: 1.2; 
-        letter-spacing: -0.5px;
-    }
+    .article-title { font-size: 1.75rem; line-height: 1.2; }
     
-    .full-article-media {
-        border-radius: 0; /* Ifoto yuzure screen yose nka kinyamwange */
-        width: 100%;
-    }
-
     .article-body-content {
-        padding: 0 15px; /* Amagambo agira space ku mpande */
-        font-size: 1.1rem;
-        line-height: 1.6;
+        font-size: 1.15rem;
+        line-height: 1.5;
     }
+
+    .article-body-content p {
+        margin-bottom: 12px;
+    }
+
+    .full-article-media {
+        border-radius: 8px;
+        width: calc(100% + 30px);
+        margin-left: -15px;
+    }
+}
+
+/* --- LOADING STATE --- */
+.loading-state {
+    text-align: center;
+    padding: 100px;
+    font-size: 1.2rem;
+    color: #666;
 }
