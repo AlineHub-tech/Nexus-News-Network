@@ -9,174 +9,135 @@
   --font-sans: 'Inter', -apple-system, sans-serif;
 }
 
-/* --- GRID CONTAINER (Cyo gicunga uko inkuru zitonze) --- */
+/* GRID SETUP - No Spaces */
 .news-grid-container {
   display: grid;
-  gap: 20px;
-  padding: 20px;
-  /* DESKTOP: Inkuru 4 kuri buri murongo */
+  gap: 1px;
+  background: #eeeeee;
   grid-template-columns: repeat(4, 1fr);
+  width: 100%;
 }
 
-/* --- BASE CARD STYLES --- */
 .news-card-link {
   text-decoration: none !important;
   color: inherit !important;
   display: block;
+  background: #fff;
 }
 
 .news-card {
-  background: var(--card-bg);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid var(--border-subtle);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .news-card-link:hover .news-card {
-  box-shadow: var(--hover-shadow);
-  transform: translateY(-5px);
+  background: #fafafa;
 }
 
-/* --- MEDIA CONTAINER --- */
+/* MEDIA */
 .news-media-container {
   position: relative;
   width: 100%;
-  padding-top: 60%; /* Aspect ratio nziza kuri Desktop/Tablet */
-  background-color: #f9fafb;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
 .news-card-image {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-.card-category-tag {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: var(--accent-red);
-  color: #ffffff;
-  padding: 3px 8px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  border-radius: 4px;
-  z-index: 2;
+.news-card-link:hover .news-card-image {
+  transform: scale(1.05);
 }
 
-/* --- INFO SECTION --- */
+/* INFO SECTION */
 .news-info {
-  padding: 12px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.post-full-date {
-  font-size: 0.7rem;
-  color: var(--date-time-red);
-  font-weight: 700;
-  margin-bottom: 5px;
-  display: block;
-}
-
 .news-title {
   font-family: var(--font-sans);
-  font-size: 1rem; /* Kuri Desktop isomeka neza */
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: 800;
   line-height: 1.3;
-  color: var(--text-title);
-  margin-bottom: 10px;
+  color: #000;
+  margin: 0 0 12px 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
+/* --- READ MORE BUTTON WITH BG --- */
+.read-more-wrapper {
+  margin-bottom: 15px;
+}
+
+.read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--accent-red);
+  color: #ffffff;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: background 0.3s;
+}
+
+.news-card-link:hover .read-more-btn {
+  background-color: #8b1e28;
+}
+
+/* META BOTTOM */
 .news-meta-bottom {
   margin-top: auto;
   display: flex;
   justify-content: space-between;
-  padding-top: 8px;
-  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
   font-size: 0.75rem;
 }
 
-.author-name {
-  font-weight: 800;
-  color: var(--author-blue);
-}
+.author-name { font-weight: 800; color: var(--author-blue); }
+.post-time { color: var(--date-time-red); font-weight: 700; }
 
-.post-time {
-  color: var(--date-time-red);
-  font-weight: 600;
-}
-
-/* --- TABLET RESPONSIVE (2 kuri buri murongo) --- */
-@media (max-width: 1024px) and (min-width: 601px) {
-  .news-grid-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* --- MOBILE RESPONSIVE (Uburyo bwa List/Hino na Hirya) --- */
-@media (max-width: 600px) {
-  .news-grid-container {
-    grid-template-columns: 1fr; /* Inkuru imwe imwe ijya hasi */
-    padding: 10px;
-    gap: 12px;
-  }
-
+/* MOBILE RESPONSIVE (140px Image Left) */
+@media (max-width: 640px) {
+  .news-grid-container { grid-template-columns: 1fr; gap: 0; }
+  
   .news-card {
-    flex-direction: row !important; /* Ifoto hino, Text hirya */
-    height: 110px;
-    align-items: center;
-    border: none;
-    border-bottom: 1px solid var(--border-subtle);
-    border-radius: 0;
+    flex-direction: row !important;
+    padding: 15px 10px;
+    border-bottom: 1px solid #eee;
   }
 
   .news-media-container {
-    width: 100px !important; /* Ifoto igaragara neza hino */
-    height: 90px !important;
-    padding-top: 0 !important;
+    width: 140px !important;
+    height: 100px !important;
+    aspect-ratio: auto;
     flex-shrink: 0;
-    margin-left: 10px;
-    border-radius: 6px;
   }
 
-  .news-info {
-    padding: 0 10px !important;
-    justify-content: center;
-  }
-
-  .news-title {
-    font-size: 0.9rem !important;
-    -webkit-line-clamp: 2;
-    margin-bottom: 4px;
-  }
-
-  .news-meta-bottom {
-    border-top: none;
-    padding-top: 0;
-    justify-content: flex-start;
-    gap: 10px;
-  }
+  .news-info { padding: 0 0 0 15px !important; }
   
-  .card-category-tag {
-    font-size: 0.5rem;
-    padding: 2px 5px;
-    top: 5px;
-    left: 5px;
+  .news-title { 
+    font-size: 1rem !important; 
+    margin-bottom: 8px !important; 
+    -webkit-line-clamp: 2;
   }
+
+  .read-more-btn { padding: 4px 10px; font-size: 0.65rem; }
+  
+  .news-meta-bottom { border: none; padding: 0; }
 }
