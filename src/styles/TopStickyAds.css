@@ -1,14 +1,30 @@
+/* --- CONTAINER SETUP WITH ANIMATED GRADIENT --- */
 .top-sticky-ads-container {
   position: relative; 
   width: 100%;
-  background: #ffffff;
-  border-bottom: 2px solid #eeeeee;
+  /* 1. KUGENA AMABARA (Dark Blue, White, na Sky Blue) */
+  background: linear-gradient(-45deg, #010142, #ffffff, #87ceeb, #ffffff);
+  background-size: 400% 400%;
+  
+  /* 2. KUGENA ANIMATION (Umuvuduko utuje - 15 seconds) */
+  animation: adGradientShift 15s ease infinite;
+  
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
-  min-height: 90px;
-  height: auto; /* Kwaguka bitewe na text */
+  min-height: 95px;
+  height: auto;
   z-index: 1001;
   padding: 10px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: all 0.5s ease;
+}
+
+/* LOGIC Y'UKO AMABARA AZENGERUKA (Keyframes) */
+@keyframes adGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .ad-wrapper-flex {
@@ -18,88 +34,147 @@
   margin: 0 auto;
   align-items: center;
   justify-content: space-between;
+  /* Bituma amagambo asomeka neza kuri background ihinduranya amabara */
+  background: rgba(255, 255, 255, 0.45); 
+  backdrop-filter: blur(8px); /* Professional Glassmorphism effect */
+  border-radius: 12px;
+  padding: 8px 0;
 }
 
 .ad-text-part {
-  flex: 1.4;
-  padding: 0 15px;
+  flex: 1.6;
+  padding: 0 25px;
   display: flex;
   flex-direction: column;
 }
 
 .sponsored-label {
   font-size: 10px;
-  color: #d32f2f;
-  font-weight: 800;
-  letter-spacing: 1px;
+  color: #ad2530; /* Accent Red yawe */
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
 }
 
 .ad-title-full {
-  font-size: 16px;
-  font-weight: 700;
-  color: #111;
-  margin: 2px 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #010142; /* Dark Blue kuri title kugira ngo ibe bold cyane */
+  margin: 0;
   line-height: 1.2;
-  white-space: normal; /* Inyandiko yose igaragara */
+  font-family: 'Inter', sans-serif;
 }
 
 .ad-full-desc {
-  font-size: 13px;
-  color: #444;
-  margin: 4px 0;
+  font-size: 14px;
+  color: #222;
+  margin: 5px 0;
   line-height: 1.4;
-  white-space: normal; /* Inyandiko yose igaragara */
+  font-weight: 500;
+  white-space: normal;
 }
 
 .call-btn-action {
   font-size: 11px;
-  background: #2563eb;
+  background: #010142;
   color: white !important;
-  padding: 4px 12px;
+  padding: 7px 18px;
   border-radius: 4px;
-  font-weight: bold;
+  font-weight: 800;
   text-decoration: none;
   width: fit-content;
-  margin-top: 5px;
+  margin-top: 8px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.call-btn-action:hover {
+  transform: translateY(-2px);
+  background: #000066;
 }
 
 .ad-vertical-divider {
   width: 1.5px;
-  background: #dddddd;
+  background: rgba(0, 0, 0, 0.1);
   height: 60px;
-  margin: 0 10px;
+  margin: 0 15px;
 }
 
+/* --- MEDIA / IMAGE SECTION --- */
 .ad-media-part {
-  flex: 1;
+  flex: 0.8;
   display: flex;
   justify-content: flex-end;
+  padding-right: 20px;
 }
 
 .ad-media-part img {
-  height: 100px; /* Size nziza kuri Desktop */
+  height: 100px;
   width: 180px;
   object-fit: cover;
+  border-radius: 8px;
+  /* Pro clip-path ikoze neza */
   clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease;
 }
 
-/* MOBILE FIX */
+.ad-media-part img:hover {
+  transform: scale(1.03);
+}
+
+/* --- MOBILE RESPONSIVE (Yakosowe neza) --- */
 @media (max-width: 768px) {
   .top-sticky-ads-container {
-    min-height: 80px;
+    min-height: 85px;
+    padding: 12px 10px;
   }
+  
+  .ad-wrapper-flex {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+  }
+
+  .ad-text-part {
+    padding: 0 10px;
+  }
+
   .ad-title-full {
-    font-size: 13px;
-  }
-  .ad-full-desc {
-    font-size: 11px;
+    font-size: 14px;
+    -webkit-line-clamp: 1;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Igaragaza imirongo 2 gusa kuri mobile ngo itaba nini cyane */
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  .ad-full-desc {
+    font-size: 12px;
+    line-height: 1.2;
+    margin: 3px 0;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .ad-media-part img {
-    height: 80px;
-    width: 120px;
+    height: 75px;
+    width: 115px;
+    border-radius: 4px;
+  }
+
+  .call-btn-action {
+    padding: 4px 10px;
+    font-size: 9px;
+    margin-top: 4px;
+  }
+
+  .ad-vertical-divider {
+    height: 45px;
+    margin: 0 10px;
   }
 }
