@@ -10,9 +10,13 @@ const RegularNews = ({ newsList }) => {
     return <p className="regular-news">Nta nkuru zisanzwe zibonetse ubu.</p>;
   }
 
-  // Gabanya inkuru 16 mu bice bibiri (8 hino, 8 hirya)
-  const leftColumnNews = newsList.slice(0, 8);
-  const rightColumnNews = newsList.slice(8, 16);
+  // 1. Fata inkuru zose guhera ku ya 9 (index 8) kugeza ku mpera ya newsList (30)
+  const remainingNews = newsList.slice(8); 
+
+  // 2. Gabanya izo nkuru mu bice bibiri bingana (urugero: 11 hino, 11 hirya niba ari 22)
+  const half = Math.ceil(remainingNews.length / 2);
+  const leftColumnNews = remainingNews.slice(0, half);
+  const rightColumnNews = remainingNews.slice(half);
 
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
   
@@ -27,17 +31,17 @@ const RegularNews = ({ newsList }) => {
       </div>
 
       <div className="regular-news-main-wrapper">
-        {/* COLUMN YA MBERE (8 Inkuru) */}
+        {/* COLUMN YA MBERE (Ibumoso) */}
         <div className="news-column">
           {leftColumnNews.map((post) => (
             <NewsCard key={post._id} post={post} />
           ))}
         </div>
 
-        {/* UMURONGO UGERA HASI (Vertical Divider) */}
+        {/* UMURONGO URI HAGATI */}
         <div className="vertical-divider"></div>
 
-        {/* COLUMN YA KABIRI (Izindi 8) */}
+        {/* COLUMN YA KABIRI (Iburyo) */}
         <div className="news-column">
           {rightColumnNews.map((post) => (
             <NewsCard key={post._id} post={post} />
