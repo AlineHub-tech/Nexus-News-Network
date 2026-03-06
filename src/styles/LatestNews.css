@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 1400px; /* Bituma zidatandukana cyane kuri screen nini */
   background: #ffffff;
-  padding: 20px 0; /* Space gato hejuru na munsi */
+  /* padding: 20px 0; */
   margin: 0 auto;
 }
 
@@ -200,3 +200,4 @@
     padding-top: 0;
   }
 }
+
