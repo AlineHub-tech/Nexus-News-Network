@@ -2,8 +2,8 @@
   --card-bg: #ffffff;
   --text-title: #000000;
   --author-blue: #010142;
-  --date-time-red: #990909;
-  --accent-red: #ad2530;
+  --date-time-red:#010142;
+  --accent-red:#010142;
   --border-subtle: #f3f4f6;
   --hover-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.15);
   --font-sans: 'Inter', -apple-system, sans-serif;
@@ -141,4 +141,5 @@
   
   .news-meta-bottom { border: none; padding: 0; }
 }
+
 
