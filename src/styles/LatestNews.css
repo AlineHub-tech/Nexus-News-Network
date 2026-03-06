@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 1400px; /* Bituma zidatandukana cyane kuri screen nini */
   background: #ffffff;
-  /* padding: 20px 0; */
+  padding: 20px 0;
   margin: 0 auto;
 }
 
@@ -34,7 +34,8 @@
   }
   
   .latest-news-section {
-    /* padding: 0 10px;  */
+    padding: 0 10px; 
+    margin-top:-10%;
   }
 }
 
@@ -200,5 +201,6 @@
     padding-top: 0;
   }
 }
+
 
 
