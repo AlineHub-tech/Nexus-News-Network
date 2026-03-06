@@ -3,7 +3,7 @@
     background-color: #ffffff;
     min-height: 100vh;
     display: flex;
-    margin-top:-40%;
+    margin-top:-26%;
       flex-direction: column;
 }
 
@@ -129,6 +129,7 @@
     font-size: 1.2rem;
     color: #666;
 }
+
 
 
 
