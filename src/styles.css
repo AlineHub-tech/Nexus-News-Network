@@ -77,8 +77,8 @@ body {
 }
 
 /* Ibi bituma inkuru zo hagati (Slide) zongera kugaragara */
-.latest-center-col {
-  display: block !important; /* Hindura hano niba grid yanze */
+/* .latest-center-col {
+  display: block !important; 
   min-height: 450px !important;
   visibility: visible !important;
   opacity: 1 !important;
@@ -86,8 +86,8 @@ body {
 
 .latest-center-col .slide-item {
   display: none;
-}
-
+} */
+/* 
 .latest-center-col .slide-item.active {
   display: block !important;
   visibility: visible !important;
@@ -99,7 +99,7 @@ body {
 @keyframes slideFade {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
+} */
 
 /* --- RESPONSIVE --- */
 @media (max-width: 992px) {
@@ -108,4 +108,5 @@ body {
   .top-sticky-ads-container { top: 65px !important; }
   .trending { top: 175px !important; }
 }
+
 
